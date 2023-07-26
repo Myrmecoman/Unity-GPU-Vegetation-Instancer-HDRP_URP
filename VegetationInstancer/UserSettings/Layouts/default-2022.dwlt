@@ -1,0 +1,2916 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12004, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixelRect:
+    serializedVersion: 2
+    x: 0
+    y: 43
+    width: 1920
+    height: 997
+  m_ShowMode: 4
+  m_Title: Scene
+  m_RootView: {fileID: 2}
+  m_MinSize: {x: 875, y: 300}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_Maximized: 1
+--- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12008, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 3}
+  - {fileID: 5}
+  - {fileID: 4}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1920
+    height: 997
+  m_MinSize: {x: 875, y: 300}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_UseTopView: 1
+  m_TopViewHeight: 30
+  m_UseBottomView: 1
+  m_BottomViewHeight: 20
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12011, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1920
+    height: 30
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  m_LastLoadedLayoutName: 
+--- !u!114 &4
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12042, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 977
+    width: 1920
+    height: 20
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+--- !u!114 &5
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 6}
+  - {fileID: 11}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 30
+    width: 1920
+    height: 947
+  m_MinSize: {x: 300, y: 100}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 41
+--- !u!114 &6
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 7}
+  - {fileID: 10}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1437
+    height: 947
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 42
+--- !u!114 &7
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 8}
+  - {fileID: 9}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1437
+    height: 649
+  m_MinSize: {x: 200, y: 50}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 43
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 310
+    height: 649
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 12}
+  m_Panes:
+  - {fileID: 12}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &9
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: SceneView
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 310
+    y: 0
+    width: 1127
+    height: 649
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 13}
+  m_Panes:
+  - {fileID: 13}
+  - {fileID: 14}
+  - {fileID: 15}
+  - {fileID: 16}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &10
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: ProjectBrowser
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 649
+    width: 1437
+    height: 298
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 17}
+  m_Panes:
+  - {fileID: 17}
+  - {fileID: 18}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: InspectorWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 1437
+    y: 0
+    width: 483
+    height: 947
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 19}
+  m_Panes:
+  - {fileID: 19}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12061, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Hierarchy
+    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 73
+    width: 309
+    height: 628
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SceneHierarchy:
+    m_TreeViewState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: fafaffff
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 8}
+      m_SearchString: 
+    m_ExpandedScenes: []
+    m_CurrenRootInstanceID: 0
+    m_LockTracker:
+      m_IsLocked: 0
+    m_CurrentSortingName: TransformSorting
+  m_WindowGUID: 4c969a2b90040154d917609493e03593
+--- !u!114 &13
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12013, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Scene
+    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 310
+    y: 73
+    width: 1125
+    height: 628
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData:
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: -171, y: -26}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 3
+      id: Tool Settings
+      index: 0
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 0
+      containerId: overlay-toolbar__top
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: -141, y: 149}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 1
+      id: unity-grid-and-snap-toolbar
+      index: 1
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: 0, y: 25}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: unity-scene-view-toolbar
+      index: 0
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-toolbar__top
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 1
+      id: unity-search-toolbar
+      index: 1
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 0
+      containerId: overlay-container--left
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: 0, y: 25}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: unity-transform-toolbar
+      index: 0
+      layout: 2
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 0
+      containerId: overlay-container--left
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: 0, y: 197}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: unity-component-tools
+      index: 1
+      layout: 2
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 0
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: 67.5, y: -123}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 2
+      id: Orientation
+      index: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Light Settings
+      index: 0
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: -544}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 2
+      id: Scene View/Camera
+      index: 1
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Cloth Constraints
+      index: 1
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Cloth Collisions
+      index: 2
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Navmesh Display
+      index: 4
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Agent Display
+      index: 5
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Obstacle Display
+      index: 6
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Occlusion Culling
+      index: 3
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Physics Debugger
+      index: 4
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Scene Visibility
+      index: 5
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Particles
+      index: 6
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Tilemap
+      index: 11
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Tilemap Palette Helper
+      index: 12
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: APV Overlay
+      index: 7
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/TrailRenderer
+      index: 8
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 1
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: UnityEditor.SceneViewCameraOverlay
+      index: 9
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Visual Effect Timeline Control
+      index: 9
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Visual Effect Model
+      index: 10
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Visual Effect
+      index: 11
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Scene View/Visual Effect Event Tester
+      index: 12
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    - dockPosition: 1
+      containerId: overlay-container--right
+      floating: 0
+      collapsed: 0
+      displayed: 0
+      snapOffset: {x: 48, y: 48}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      id: Cinemachine Tool Settings
+      index: 13
+      layout: 4
+      size: {x: 0, y: 0}
+      sizeOverriden: 0
+    m_OverlaysVisible: 1
+  m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
+  m_Gizmos: 1
+  m_OverrideSceneCullingMask: 6917529027641081856
+  m_SceneIsLit: 1
+  m_SceneLighting: 1
+  m_2DMode: 0
+  m_isRotationLocked: 0
+  m_PlayAudio: 0
+  m_AudioPlay: 0
+  m_Position:
+    m_Target: {x: -141.06833, y: 33.026703, z: 179.43344}
+    speed: 2
+    m_Value: {x: -141.06833, y: 33.026703, z: 179.43344}
+  m_RenderMode: 0
+  m_CameraMode:
+    drawMode: 0
+    name: Shaded
+    section: Shading Mode
+  m_ValidateTrueMetals: 0
+  m_DoValidateTrueMetals: 0
+  m_SceneViewState:
+    m_AlwaysRefresh: 1
+    showFog: 1
+    showSkybox: 1
+    showFlares: 1
+    showImageEffects: 1
+    showParticleSystems: 1
+    showVisualEffectGraphs: 1
+    m_FxEnabled: 1
+  m_Grid:
+    xGrid:
+      m_Fade:
+        m_Target: 0
+        speed: 2
+        m_Value: 0
+      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
+      m_Pivot: {x: 0, y: 0, z: 0}
+      m_Size: {x: 0, y: 0}
+    yGrid:
+      m_Fade:
+        m_Target: 0
+        speed: 2
+        m_Value: 0
+      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
+      m_Pivot: {x: 0, y: 0, z: 0}
+      m_Size: {x: 1, y: 1}
+    zGrid:
+      m_Fade:
+        m_Target: 0
+        speed: 2
+        m_Value: 0
+      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
+      m_Pivot: {x: 0, y: 0, z: 0}
+      m_Size: {x: 1, y: 1}
+    m_ShowGrid: 0
+    m_GridAxis: 1
+    m_gridOpacity: 0.5
+  m_Rotation:
+    m_Target: {x: -0.2223977, y: -0.64392376, z: 0.20368591, w: -0.70332164}
+    speed: 2
+    m_Value: {x: -0.22373119, y: -0.6424826, z: 0.20429108, w: -0.70386475}
+  m_Size:
+    m_Target: 23.39657
+    speed: 2
+    m_Value: 22.389063
+  m_Ortho:
+    m_Target: 0
+    speed: 2
+    m_Value: 0
+  m_CameraSettings:
+    m_Speed: 1.1204399
+    m_SpeedNormalized: 0.55999994
+    m_SpeedMin: 0.001
+    m_SpeedMax: 2
+    m_EasingEnabled: 1
+    m_EasingDuration: 0.4
+    m_AccelerationEnabled: 1
+    m_FieldOfViewHorizontalOrVertical: 60
+    m_NearClip: 0.03
+    m_FarClip: 200000
+    m_DynamicClip: 0
+    m_OcclusionCulling: 0
+  m_LastSceneViewRotation: {x: 0.02197902, y: -0.96605825, z: 0.25786754, w: 0.047444403}
+  m_LastSceneViewOrtho: 0
+  m_ReplacementShader: {fileID: 0}
+  m_ReplacementString: 
+  m_SceneVisActive: 1
+  m_LastLockedObject: {fileID: 0}
+  m_ViewIsLockedToObject: 0
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Game
+    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 310
+    y: 73
+    width: 1125
+    height: 628
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1920, y: 1080}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 1
+  m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -960
+    m_HBaseRangeMax: 960
+    m_VBaseRangeMin: -540
+    m_VBaseRangeMax: 540
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 0
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1125
+      height: 607
+    m_Scale: {x: 0.56203705, y: 0.56203705}
+    m_Translation: {x: 562.5, y: 303.5}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -1000.82367
+      y: -540
+      width: 2001.6473
+      height: 1080
+    m_MinimalGUI: 1
+  m_defaultScale: 0.56203705
+  m_LastWindowPixelSize: {x: 1125, y: 628}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
+--- !u!114 &15
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12070, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 900, y: 216}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Profiler
+    m_Image: {fileID: -1089619856830078684, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 310
+    y: 73
+    width: 1128
+    height: 628
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_Recording: 1
+  m_ActiveNativePlatformSupportModuleName: 
+  m_AllModules:
+  - rid: 5040890522175799296
+  - rid: 5040890522175799297
+  - rid: 5040890522175799298
+  - rid: 5040890522175799299
+  - rid: 5040890522175799300
+  - rid: 5040890522175799301
+  - rid: 5040890522175799302
+  - rid: 5040890522175799303
+  - rid: 5040890522175799304
+  - rid: 5040890522175799305
+  - rid: 5040890522175799306
+  - rid: 5040890522175799307
+  - rid: 1803262190194524160
+  - rid: 5040890522175799308
+  - rid: 5040890522175799309
+  - rid: 1803262190194524161
+  - rid: 1803262190194524162
+  m_CallstackRecordMode: 1
+  m_ClearOnPlay: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 1803262190194524160
+      type: {class: MemoryProfilerModule, ns: Unity.Entities.Editor, asm: Unity.Entities.Editor}
+      data:
+        m_Identifier: Unity.Entities.Editor.MemoryProfilerModule, Unity.Entities.Editor,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 1803262190194524161
+      type: {class: StructuralChangesProfilerModule, ns: Unity.Entities.Editor, asm: Unity.Entities.Editor}
+      data:
+        m_Identifier: Unity.Entities.Editor.StructuralChangesProfilerModule, Unity.Entities.Editor,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 1803262190194524162
+      type: {class: RuntimeContentManagerProfilerModule, ns: , asm: Unity.Entities.Editor}
+      data:
+        m_Identifier: RuntimeContentManagerProfilerModule, Unity.Entities.Editor,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - rid: 5040890522175799296
+      type: {class: CPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.CPUProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+        m_ViewType: 0
+        updateViewLive: 0
+        m_CurrentFrameIndex: -1
+        m_HierarchyOverruledThreadFromSelection: 0
+        m_ProfilerViewFilteringOptions: 1
+        m_FrameDataHierarchyView:
+          m_Serialized: 1
+          m_TreeViewState:
+            scrollPos: {x: 0, y: 0}
+            m_SelectedIDs: 
+            m_LastClickedID: 0
+            m_ExpandedIDs: 
+            m_RenameOverlay:
+              m_UserAcceptedRename: 0
+              m_Name: 
+              m_OriginalName: 
+              m_EditFieldRect:
+                serializedVersion: 2
+                x: 0
+                y: 0
+                width: 0
+                height: 0
+              m_UserData: 0
+              m_IsWaitingForDelay: 0
+              m_IsRenaming: 0
+              m_OriginalEventType: 11
+              m_IsRenamingFilename: 0
+              m_ClientGUIView: {fileID: 0}
+            m_SearchString: 
+          m_MultiColumnHeaderState:
+            m_Columns:
+            - width: 200
+              sortedAscending: 1
+              headerContent:
+                m_Text: Overview
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 200
+              maxWidth: 1000000
+              autoResize: 1
+              allowToggleVisibility: 0
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Total
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Self
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Calls
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: GC Alloc
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Time ms
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Self ms
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 25
+              sortedAscending: 0
+              headerContent:
+                m_Text: 
+                m_Image: {fileID: -5161429177145976760, guid: 0000000000000000d000000000000000,
+                  type: 0}
+                m_Tooltip: Warnings
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 25
+              maxWidth: 25
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            m_VisibleColumns: 0000000001000000020000000300000004000000050000000600000007000000
+            m_SortedColumns: 0100000005000000
+          m_ThreadIndexInThreadNames: 0
+          m_DetailedViewType: 0
+          m_DetailedViewSpliterState:
+            ID: 0
+            splitterInitialOffset: 0
+            currentActiveSplitter: -1
+            realSizes:
+            - 0
+            - 0
+            relativeSizes:
+            - 0.7
+            - 0.3
+            minSizes:
+            - 450
+            - 50
+            maxSizes:
+            - 0
+            - 0
+            lastTotalSize: 0
+            splitSize: 6
+            xOffset: 0
+            m_Version: 1
+            oldRealSizes: 
+            oldMinSizes: 
+            oldMaxSizes: 
+            oldSplitSize: 0
+          m_DetailedObjectsView:
+            m_SelectedID: -1
+            m_TreeViewState:
+              scrollPos: {x: 0, y: 0}
+              m_SelectedIDs: 
+              m_LastClickedID: 0
+              m_ExpandedIDs: 
+              m_RenameOverlay:
+                m_UserAcceptedRename: 0
+                m_Name: 
+                m_OriginalName: 
+                m_EditFieldRect:
+                  serializedVersion: 2
+                  x: 0
+                  y: 0
+                  width: 0
+                  height: 0
+                m_UserData: 0
+                m_IsWaitingForDelay: 0
+                m_IsRenaming: 0
+                m_OriginalEventType: 11
+                m_IsRenamingFilename: 0
+                m_ClientGUIView: {fileID: 0}
+              m_SearchString: 
+            m_MultiColumnHeaderState:
+              m_Columns: []
+              m_VisibleColumns: 
+              m_SortedColumns: 
+            m_VertSplit:
+              ID: 0
+              splitterInitialOffset: 0
+              currentActiveSplitter: 0
+              realSizes: []
+              relativeSizes: []
+              minSizes: []
+              maxSizes: []
+              lastTotalSize: 0
+              splitSize: 0
+              xOffset: 0
+              m_Version: 1
+              oldRealSizes: 
+              oldMinSizes: 
+              oldMaxSizes: 
+              oldSplitSize: 0
+          m_DetailedCallsView:
+            m_SelectedID: -1
+            m_VertSplit:
+              ID: 0
+              splitterInitialOffset: 0
+              currentActiveSplitter: 0
+              realSizes: []
+              relativeSizes: []
+              minSizes: []
+              maxSizes: []
+              lastTotalSize: 0
+              splitSize: 0
+              xOffset: 0
+              m_Version: 1
+              oldRealSizes: 
+              oldMinSizes: 
+              oldMaxSizes: 
+              oldSplitSize: 0
+            m_CalleesTreeView:
+              m_ViewState:
+                scrollPos: {x: 0, y: 0}
+                m_SelectedIDs: 
+                m_LastClickedID: 0
+                m_ExpandedIDs: 
+                m_RenameOverlay:
+                  m_UserAcceptedRename: 0
+                  m_Name: 
+                  m_OriginalName: 
+                  m_EditFieldRect:
+                    serializedVersion: 2
+                    x: 0
+                    y: 0
+                    width: 0
+                    height: 0
+                  m_UserData: 0
+                  m_IsWaitingForDelay: 0
+                  m_IsRenaming: 0
+                  m_OriginalEventType: 11
+                  m_IsRenamingFilename: 0
+                  m_ClientGUIView: {fileID: 0}
+                m_SearchString: 
+              m_ViewHeaderState:
+                m_Columns:
+                - width: 150
+                  sortedAscending: 1
+                  headerContent:
+                    m_Text: Called From
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 'Parents the selected function is called from
+
+
+                      (Press
+                      ''F'' for frame selection)'
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 150
+                  maxWidth: 1000000
+                  autoResize: 1
+                  allowToggleVisibility: 0
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Calls
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total number of calls in a selected frame
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: GC Alloc
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time ms
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total time the selected function spends within a parent
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time %
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Shows how often the selected function was called from
+                      the parent call
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                m_VisibleColumns: 0000000001000000020000000300000004000000
+                m_SortedColumns: 03000000
+            m_CallersTreeView:
+              m_ViewState:
+                scrollPos: {x: 0, y: 0}
+                m_SelectedIDs: 
+                m_LastClickedID: 0
+                m_ExpandedIDs: 
+                m_RenameOverlay:
+                  m_UserAcceptedRename: 0
+                  m_Name: 
+                  m_OriginalName: 
+                  m_EditFieldRect:
+                    serializedVersion: 2
+                    x: 0
+                    y: 0
+                    width: 0
+                    height: 0
+                  m_UserData: 0
+                  m_IsWaitingForDelay: 0
+                  m_IsRenaming: 0
+                  m_OriginalEventType: 11
+                  m_IsRenamingFilename: 0
+                  m_ClientGUIView: {fileID: 0}
+                m_SearchString: 
+              m_ViewHeaderState:
+                m_Columns:
+                - width: 150
+                  sortedAscending: 1
+                  headerContent:
+                    m_Text: Called From
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 'Parents the selected function is called from
+
+
+                      (Press
+                      ''F'' for frame selection)'
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 150
+                  maxWidth: 1000000
+                  autoResize: 1
+                  allowToggleVisibility: 0
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Calls
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total number of calls in a selected frame
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: GC Alloc
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time ms
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total time the selected function spends within a parent
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time %
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Shows how often the selected function was called from
+                      the parent call
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                m_VisibleColumns: 0000000001000000020000000300000004000000
+                m_SortedColumns: 03000000
+          m_FullThreadName: Main Thread
+          m_ThreadName: Main Thread
+          <threadId>k__BackingField: 35304
+          <threadIndex>k__BackingField: 0
+          m_GroupName: 
+    - rid: 5040890522175799297
+      type: {class: GPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.GPUProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+        m_ViewType: 0
+        updateViewLive: 0
+        m_CurrentFrameIndex: -1
+        m_HierarchyOverruledThreadFromSelection: 0
+        m_ProfilerViewFilteringOptions: 1
+        m_FrameDataHierarchyView:
+          m_Serialized: 1
+          m_TreeViewState:
+            scrollPos: {x: 0, y: 0}
+            m_SelectedIDs: 
+            m_LastClickedID: 0
+            m_ExpandedIDs: 
+            m_RenameOverlay:
+              m_UserAcceptedRename: 0
+              m_Name: 
+              m_OriginalName: 
+              m_EditFieldRect:
+                serializedVersion: 2
+                x: 0
+                y: 0
+                width: 0
+                height: 0
+              m_UserData: 0
+              m_IsWaitingForDelay: 0
+              m_IsRenaming: 0
+              m_OriginalEventType: 11
+              m_IsRenamingFilename: 0
+              m_ClientGUIView: {fileID: 0}
+            m_SearchString: 
+          m_MultiColumnHeaderState:
+            m_Columns:
+            - width: 200
+              sortedAscending: 1
+              headerContent:
+                m_Text: Overview
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 200
+              maxWidth: 1000000
+              autoResize: 1
+              allowToggleVisibility: 0
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: Total
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: DrawCalls
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            - width: 80
+              sortedAscending: 0
+              headerContent:
+                m_Text: GPU ms
+                m_Image: {fileID: 0}
+                m_Tooltip: 
+              contextMenuText: 
+              headerTextAlignment: 0
+              sortingArrowAlignment: 2
+              minWidth: 50
+              maxWidth: 1000000
+              autoResize: 0
+              allowToggleVisibility: 1
+              canSort: 1
+              userData: 0
+            m_VisibleColumns: 00000000010000000200000003000000
+            m_SortedColumns: 03000000
+          m_ThreadIndexInThreadNames: 0
+          m_DetailedViewType: 0
+          m_DetailedViewSpliterState:
+            ID: 0
+            splitterInitialOffset: 0
+            currentActiveSplitter: -1
+            realSizes:
+            - 0
+            - 0
+            relativeSizes:
+            - 0.7
+            - 0.3
+            minSizes:
+            - 450
+            - 50
+            maxSizes:
+            - 0
+            - 0
+            lastTotalSize: 0
+            splitSize: 6
+            xOffset: 0
+            m_Version: 1
+            oldRealSizes: 
+            oldMinSizes: 
+            oldMaxSizes: 
+            oldSplitSize: 0
+          m_DetailedObjectsView:
+            m_SelectedID: -1
+            m_TreeViewState:
+              scrollPos: {x: 0, y: 0}
+              m_SelectedIDs: 
+              m_LastClickedID: 0
+              m_ExpandedIDs: 
+              m_RenameOverlay:
+                m_UserAcceptedRename: 0
+                m_Name: 
+                m_OriginalName: 
+                m_EditFieldRect:
+                  serializedVersion: 2
+                  x: 0
+                  y: 0
+                  width: 0
+                  height: 0
+                m_UserData: 0
+                m_IsWaitingForDelay: 0
+                m_IsRenaming: 0
+                m_OriginalEventType: 11
+                m_IsRenamingFilename: 0
+                m_ClientGUIView: {fileID: 0}
+              m_SearchString: 
+            m_MultiColumnHeaderState:
+              m_Columns: []
+              m_VisibleColumns: 
+              m_SortedColumns: 
+            m_VertSplit:
+              ID: 0
+              splitterInitialOffset: 0
+              currentActiveSplitter: 0
+              realSizes: []
+              relativeSizes: []
+              minSizes: []
+              maxSizes: []
+              lastTotalSize: 0
+              splitSize: 0
+              xOffset: 0
+              m_Version: 1
+              oldRealSizes: 
+              oldMinSizes: 
+              oldMaxSizes: 
+              oldSplitSize: 0
+          m_DetailedCallsView:
+            m_SelectedID: -1
+            m_VertSplit:
+              ID: 0
+              splitterInitialOffset: 0
+              currentActiveSplitter: 0
+              realSizes: []
+              relativeSizes: []
+              minSizes: []
+              maxSizes: []
+              lastTotalSize: 0
+              splitSize: 0
+              xOffset: 0
+              m_Version: 1
+              oldRealSizes: 
+              oldMinSizes: 
+              oldMaxSizes: 
+              oldSplitSize: 0
+            m_CalleesTreeView:
+              m_ViewState:
+                scrollPos: {x: 0, y: 0}
+                m_SelectedIDs: 
+                m_LastClickedID: 0
+                m_ExpandedIDs: 
+                m_RenameOverlay:
+                  m_UserAcceptedRename: 0
+                  m_Name: 
+                  m_OriginalName: 
+                  m_EditFieldRect:
+                    serializedVersion: 2
+                    x: 0
+                    y: 0
+                    width: 0
+                    height: 0
+                  m_UserData: 0
+                  m_IsWaitingForDelay: 0
+                  m_IsRenaming: 0
+                  m_OriginalEventType: 11
+                  m_IsRenamingFilename: 0
+                  m_ClientGUIView: {fileID: 0}
+                m_SearchString: 
+              m_ViewHeaderState:
+                m_Columns:
+                - width: 150
+                  sortedAscending: 1
+                  headerContent:
+                    m_Text: Called From
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 'Parents the selected function is called from
+
+
+                      (Press
+                      ''F'' for frame selection)'
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 150
+                  maxWidth: 1000000
+                  autoResize: 1
+                  allowToggleVisibility: 0
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Calls
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total number of calls in a selected frame
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: GC Alloc
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time ms
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total time the selected function spends within a parent
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time %
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Shows how often the selected function was called from
+                      the parent call
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                m_VisibleColumns: 0000000001000000020000000300000004000000
+                m_SortedColumns: 03000000
+            m_CallersTreeView:
+              m_ViewState:
+                scrollPos: {x: 0, y: 0}
+                m_SelectedIDs: 
+                m_LastClickedID: 0
+                m_ExpandedIDs: 
+                m_RenameOverlay:
+                  m_UserAcceptedRename: 0
+                  m_Name: 
+                  m_OriginalName: 
+                  m_EditFieldRect:
+                    serializedVersion: 2
+                    x: 0
+                    y: 0
+                    width: 0
+                    height: 0
+                  m_UserData: 0
+                  m_IsWaitingForDelay: 0
+                  m_IsRenaming: 0
+                  m_OriginalEventType: 11
+                  m_IsRenamingFilename: 0
+                  m_ClientGUIView: {fileID: 0}
+                m_SearchString: 
+              m_ViewHeaderState:
+                m_Columns:
+                - width: 150
+                  sortedAscending: 1
+                  headerContent:
+                    m_Text: Called From
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 'Parents the selected function is called from
+
+
+                      (Press
+                      ''F'' for frame selection)'
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 150
+                  maxWidth: 1000000
+                  autoResize: 1
+                  allowToggleVisibility: 0
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Calls
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total number of calls in a selected frame
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: GC Alloc
+                    m_Image: {fileID: 0}
+                    m_Tooltip: 
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time ms
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Total time the selected function spends within a parent
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                - width: 60
+                  sortedAscending: 0
+                  headerContent:
+                    m_Text: Time %
+                    m_Image: {fileID: 0}
+                    m_Tooltip: Shows how often the selected function was called from
+                      the parent call
+                  contextMenuText: 
+                  headerTextAlignment: 0
+                  sortingArrowAlignment: 2
+                  minWidth: 60
+                  maxWidth: 1000000
+                  autoResize: 0
+                  allowToggleVisibility: 1
+                  canSort: 1
+                  userData: 0
+                m_VisibleColumns: 0000000001000000020000000300000004000000
+                m_SortedColumns: 03000000
+          m_FullThreadName: Main Thread
+          m_ThreadName: Main Thread
+          <threadId>k__BackingField: 66444
+          <threadIndex>k__BackingField: 0
+          m_GroupName: 
+    - rid: 5040890522175799298
+      type: {class: RenderingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.RenderingProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799299
+      type: {class: MemoryProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.MemoryProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+        m_ViewSplit:
+          ID: 0
+          splitterInitialOffset: 0
+          currentActiveSplitter: -1
+          realSizes:
+          - 0
+          - 0
+          relativeSizes:
+          - 0.7
+          - 0.3
+          minSizes:
+          - 450
+          - 50
+          maxSizes:
+          - 0
+          - 0
+          lastTotalSize: 0
+          splitSize: 6
+          xOffset: 0
+          m_Version: 1
+          oldRealSizes: 
+          oldMinSizes: 
+          oldMaxSizes: 
+          oldSplitSize: 0
+    - rid: 5040890522175799300
+      type: {class: AudioProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.AudioProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+        m_ShowInactiveDSPChains: 0
+        m_HighlightAudibleDSPChains: 1
+        m_DSPGraphZoomFactor: 1
+        m_DSPGraphHorizontalLayout: 0
+    - rid: 5040890522175799301
+      type: {class: VideoProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.VideoProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799302
+      type: {class: PhysicsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.PhysicsProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799303
+      type: {class: Physics2DProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.Physics2DProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799304
+      type: {class: UIProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.UIProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799305
+      type: {class: UIDetailsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.UIDetailsProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799306
+      type: {class: GlobalIlluminationProfilerModule, ns: UnityEditorInternal.Profiling,
+        asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.GlobalIlluminationProfilerModule,
+          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799307
+      type: {class: VirtualTexturingProfilerModule, ns: UnityEditorInternal.Profiling,
+        asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.VirtualTexturingProfilerModule,
+          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+        m_VTProfilerView:
+          rid: 5040890522175799310
+    - rid: 5040890522175799308
+      type: {class: FileIOProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.FileIOProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799309
+      type: {class: AssetLoadingProfilerModule, ns: UnityEditorInternal.Profiling,
+        asm: UnityEditor.CoreModule}
+      data:
+        m_Identifier: UnityEditorInternal.Profiling.AssetLoadingProfilerModule, UnityEditor.CoreModule,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        m_PaneScroll: {x: 0, y: 0}
+    - rid: 5040890522175799310
+      type: {class: VirtualTexturingProfilerView, ns: UnityEditor, asm: UnityEditor.CoreModule}
+      data:
+        m_SortAscending: 0
+        m_SortedColumn: -1
+--- !u!114 &16
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffabd1fbe2ab3d59a50128c0669b5791, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Burst Inspector
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 328
+    y: 73
+    width: 1152
+    height: 674
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  _targetCpu: 0
+  _disasmKind: 0
+  _oldDisasmKind: 0
+  _previousTargetIndex: -1
+  _safetyChecks: 0
+  _showBranchMarkers: 1
+  _enhancedDisassembly: 1
+  _searchFilterJobs: 
+  _showUnityNamespaceJobs: 0
+  _showDOTSGeneratedJobs: 0
+  _focusTargetJob: 1
+  _searchFilterAssembly: 
+  _sameTargetButDifferentAssemblyKind: 1
+  _scrollPos: {x: 0, y: 0}
+  _searchBarVisible: 1
+  _selectedItem: AstarJob - (IJob)
+  targetNames:
+  - PickVisibleChunksJob - (IJob)
+  - PositionsJob - (IJobParallelFor)
+  - TransformBakingSystem.BakedRuntimeTransformsJob - (IJobChunk)
+  - TransformBakingSystem.BakedRuntimeTransformsJob.IsUniformScale(Unity.Mathematics.float3&)
+  - Unity.Burst.Intrinsics.X86.DoGetCSRTrampoline()
+  - Unity.Burst.Intrinsics.X86.DoSetCSRTrampoline(int)
+  - Unity.Collections.AllocatorManager.SlabAllocator.Try(System.IntPtr, Unity.Collections.AllocatorManager.Block&)
+  - Unity.Collections.AllocatorManager.StackAllocator.Try(System.IntPtr, Unity.Collections.AllocatorManager.Block&)
+  - Unity.Collections.AutoFreeAllocator.Try(System.IntPtr, Unity.Collections.AllocatorManager.Block&)
+  - Unity.Collections.CollectionHelper.DummyJob - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeDisposeJob - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeParallelHashMapDataDisposeJob - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeParallelHashMapDisposeJob - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeStream.ConstructJob - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeStream.ConstructJobList - (IJob)
+  - Unity.Collections.LowLevel.Unsafe.UnsafeStream.DisposeJob - (IJob)
+  - Unity.Collections.NativeArrayDisposeJob - (IJob)
+  - Unity.Collections.NativeBitArrayDisposeJob - (IJob)
+  - Unity.Collections.NativeHashMapDisposeJob - (IJob)
+  - Unity.Collections.NativeListDisposeJob - (IJob)
+  - Unity.Collections.NativeQueueDisposeJob - (IJob)
+  - Unity.Collections.NativeReferenceDisposeJob - (IJob)
+  - Unity.Collections.NativeRingQueueDisposeJob - (IJob)
+  - Unity.Collections.NativeStream.ConstructJob - (IJob)
+  - Unity.Collections.NativeStream.ConstructJobList - (IJob)
+  - Unity.Collections.NativeStreamDisposeJob - (IJob)
+  - Unity.Collections.NativeTextDisposeJob - (IJob)
+  - Unity.Collections.RewindableAllocator.Try(System.IntPtr, Unity.Collections.AllocatorManager.Block&)
+  - Unity.Collections.UnsafeQueueDisposeJob - (IJob)
+  - Unity.Collections.xxHash3.Hash128Long(System.Byte*, System.Byte*, long, System.Byte*,
+    Unity.Mathematics.uint4&)
+  - Unity.Collections.xxHash3.Hash64Long(System.Byte*, System.Byte*, long, System.Byte*)
+  - Unity.Entities.BakedEntityData.ApplyActiveStaticStateJob - (IJobParallelFor)
+  - Unity.Entities.BakedEntityData.FindDeletedEntitiesJob - (IJob)
+  - Unity.Entities.BakedEntityData.UpdateReferencedEntitiesJob - (IJobChunk)
+  - Unity.Entities.Baking.BakeDependencies.AddDependencies(Unity.Entities.Baking.BakeDependencies&,
+    int, Unity.Entities.Baking.BakeDependencies.RecordedDependencies&)
+  - Unity.Entities.Baking.BakeDependencies.CalculateActiveDependenciesJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateAssetDependenciesJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateIsStaticDependenciesJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateObjectExistDiffsJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateReverseGameObjectPropertyChangeDependencyJob
+    - (IJob)
+  - Unity.Entities.Baking.BakeDependencies.CalculateReversePropertyChangeDependencyJob
+    - (IJob)
+  - Unity.Entities.Baking.BakeDependencies.CalculateStructuralGetComponentDependencyJob
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateStructuralGetComponentsDependencyJob
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateStructuralGetHierarchyDependencyJob
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.CalculateStructuralGetHierarchySingleDependencyJob
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.NonStructuralChangedAssetsJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.NonStructuralChangedComponentJob - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.NonStructuralChangedGameObjectPropertiesJob
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.BakeDependencies.PrepareAssetDataJob - (IJob)
+  - Unity.Entities.Baking.BakeDependencies.PrepareObjectExistJob - (IJob)
+  - Unity.Entities.Baking.BakeDependencies.ResetBakerDependencies(int, Unity.Entities.Baking.BakeDependencies&,
+    Unity.Entities.Baking.BakeDependencies.RecordedDependencies&)
+  - Unity.Entities.Baking.BakeDependencies.UpdateDependencies(Unity.Entities.Baking.BakeDependencies&,
+    int, Unity.Entities.Baking.BakeDependencies.RecordedDependencies&, Unity.Entities.Baking.BakeDependencies.RecordedDependencies&)
+  - Unity.Entities.Baking.UnsafeDependencyStream`1.ComposeHashSetJob[System.Int32]
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.UnsafeDependencyStream`1.ComposeHashSetJob[Unity.Entities.Entity]
+    - (IJobParallelFor)
+  - Unity.Entities.Baking.UnsafeDependencyStream`1.ResizeHashSetJob[System.Int32]
+    - (IJob)
+  - Unity.Entities.Baking.UnsafeDependencyStream`1.ResizeHashSetJob[Unity.Entities.Entity]
+    - (IJob)
+  - Unity.Entities.BlobAssetOwner.__codegen__Release(System.IntPtr)
+  - Unity.Entities.BlobAssetOwner.__codegen__Retain(System.IntPtr)
+  - Unity.Entities.ChunkBaseEntityIndexJob - (IJob)
+  - Unity.Entities.ChunkDataUtility.SwapComponents(Unity.Entities.Chunk*, int, Unity.Entities.Chunk*,
+    int, int, uint, uint)
+  - Unity.Entities.ChunkIterationUtility.CalculateBaseEntityIndexArray(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    int, Unity.Collections.NativeArray`1[System.Int32]&)
+  - Unity.Entities.ChunkIterationUtility.CalculateChunkCount(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    int)
+  - Unity.Entities.ChunkIterationUtility.CalculateEntityCount(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    int)
+  - Unity.Entities.ChunkIterationUtility.CalculateFilteredChunkIndexArray(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    int, Unity.Collections.NativeArray`1[System.Int32]&)
+  - Unity.Entities.ChunkIterationUtility.CopyComponentArrayToChunksWithFilter(System.Byte*,
+    Unity.Entities.TypeIndex, Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    Unity.Entities.UnsafeCachedChunkList&, uint)
+  - Unity.Entities.ChunkIterationUtility.CopyComponentArrayToChunksWithoutFilter(System.Byte*,
+    Unity.Entities.TypeIndex, Unity.Entities.UnsafeCachedChunkList&, Unity.Entities.UnsafeMatchingArchetypePtrList&,
+    uint)
+  - Unity.Entities.ChunkIterationUtility.GatherComponentDataWithFilter(System.Byte*,
+    Unity.Entities.TypeIndex, Unity.Entities.UnsafeCachedChunkList&, Unity.Entities.UnsafeMatchingArchetypePtrList&,
+    Unity.Entities.EntityQueryFilter&)
+  - Unity.Entities.ChunkIterationUtility.GatherComponentDataWithoutFilter(System.Byte*,
+    Unity.Entities.TypeIndex, Unity.Entities.UnsafeCachedChunkList&, Unity.Entities.UnsafeMatchingArchetypePtrList&)
+  - Unity.Entities.ChunkIterationUtility.GatherEntitiesWithFilter(Unity.Entities.Entity*,
+    Unity.Entities.EntityQueryFilter&, Unity.Entities.UnsafeCachedChunkList&, Unity.Entities.UnsafeMatchingArchetypePtrList&)
+  - Unity.Entities.ChunkIterationUtility.GatherEntitiesWithoutFilter(Unity.Entities.Entity*,
+    Unity.Entities.UnsafeCachedChunkList&, Unity.Entities.UnsafeMatchingArchetypePtrList&)
+  - Unity.Entities.ChunkIterationUtility.GetEnabledMask(Unity.Entities.Chunk*, Unity.Entities.MatchingArchetype*,
+    Unity.Burst.Intrinsics.v128&)
+  - Unity.Entities.ChunkIterationUtility.IsEmpty(Unity.Entities.EntityQueryImpl&,
+    Unity.Entities.EntityQueryFilter&)
+  - Unity.Entities.ChunkIterationUtility.SetEnabledBitsOnAllChunks(Unity.Entities.EntityQueryImpl&,
+    Unity.Entities.TypeIndex, bool)
+  - Unity.Entities.ChunkIterationUtility.ToArchetypeChunkList(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.UnsafeMatchingArchetypePtrList&, Unity.Entities.EntityQueryFilter&,
+    int, Unity.Collections.NativeList`1[Unity.Entities.ArchetypeChunk]&)
+  - Unity.Entities.CompanionGameObjectUpdateSystem.CompanionGameObjectUpdateSystem_14BD1F73_LambdaJob_0_Job
+    - (IJobChunk)
+  - Unity.Entities.CompanionGameObjectUpdateSystem.CompanionGameObjectUpdateSystem_14BD1F73_LambdaJob_1_Job
+    - (IJobChunk)
+  - Unity.Entities.CompanionGameObjectUpdateTransformSystem.CopyTransformJob - (IJobParallelForTransform)
+  - Unity.Entities.CompanionGameObjectUpdateTransformSystem.RemoveDestroyedEntities(Unity.Entities.CompanionGameObjectUpdateTransformSystem.RemoveDestroyedEntitiesArgs&)
+  - Unity.Entities.ComponentSystemSorter.FindConstraints(int, Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ComponentSystemSorter.SystemElement]*,
+    Unity.Collections.NativeHashMap`2[Unity.Entities.SystemTypeIndex,System.Int32]*,
+    Unity.Entities.TypeManager.SystemAttributeKind, Unity.Entities.TypeManager.SystemAttributeKind,
+    Unity.Collections.NativeHashSet`1[Unity.Entities.SystemTypeIndex]*)
+  - Unity.Entities.ComponentSystemSorter.SortInternal(Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ComponentSystemSorter.SystemElement]*,
+    Unity.Collections.NativeHashMap`2[Unity.Entities.SystemTypeIndex,System.Int32]*,
+    Unity.Collections.NativeList`1[Unity.Entities.SystemTypeIndex]*)
+  - Unity.Entities.Content.RuntimeContentManager.GetObjectHandle(Unity.Entities.Serialization.UntypedWeakReferenceId&,
+    System.Runtime.InteropServices.GCHandle&)
+  - Unity.Entities.Content.RuntimeContentManager.GetObjectLoadingStatus(Unity.Entities.Serialization.UntypedWeakReferenceId&)
+  - Unity.Entities.Content.RuntimeContentManager.LoadObjectAsync(Unity.Entities.Serialization.UntypedWeakReferenceId&)
+  - Unity.Entities.Content.RuntimeContentManager.LoadObjectsAsync(Unity.Entities.Serialization.UntypedWeakReferenceId*,
+    int)
+  - Unity.Entities.Content.RuntimeContentManager.ProcessQueuedCommands()
+  - Unity.Entities.Content.RuntimeContentManager.ReleaseObjectAsync(Unity.Entities.Serialization.UntypedWeakReferenceId&)
+  - Unity.Entities.Content.RuntimeContentManager.ReleaseObjects(Unity.Entities.Serialization.UntypedWeakReferenceId*,
+    int)
+  - Unity.Entities.Conversion.SceneHierarchyExtensions.CollectHierarchyInstanceIdsAndIndicesJob
+    - (IJob)
+  - Unity.Entities.Conversion.SceneHierarchyExtensions.CollectHierarchyInstanceIdsJob
+    - (IJob)
+  - Unity.Entities.CopyComponentArrayToChunksJob - (IJobChunk)
+  - Unity.Entities.CopyComponentListToChunksJob - (IJobChunk)
+  - Unity.Entities.CopyIndexedInt - (IJobParallelFor)
+  - Unity.Entities.DependencyTracker.CollectDependencies - (IJob)
+  - Unity.Entities.ECBInterop._mono_to_burst_ProcessChainChunk(System.IntPtr, int,
+    System.IntPtr, int, int)
+  - Unity.Entities.Editor.ArchetypesWindow.ArchetypesMemoryDataRecorder.Recorder.GetArchetypesDataJob
+    - (IJobParallelFor)
+  - Unity.Entities.Editor.ComponentDataDiffer.AllocateChunkShadowsJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.ComponentDataDiffer.BuildChangeSetJob - (IJob)
+  - Unity.Entities.Editor.ComponentDataDiffer.DisposeGatheredChangesJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.ComponentDataDiffer.GatherEntityAndComponentChangesJob
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.ComponentDataDiffer.GatherExistingChunks - (IJobParallelForDefer)
+  - Unity.Entities.Editor.ComponentDataDiffer.GatherRemovedChunks - (IJobParallelFor)
+  - Unity.Entities.Editor.ComponentDataDiffer.GatherRemovedEntitiesAndComponentsJob
+    - (IJob)
+  - Unity.Entities.Editor.ComponentDataDiffer.RemoveChunkShadowsJob - (IJob)
+  - Unity.Entities.Editor.ComponentDataDiffer.ResizeAndClearChunkListsJob - (IJob)
+  - Unity.Entities.Editor.ComponentDataDiffer.UpdateShadowChunksJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.AllocateChunkShadowsJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.BuildChangeSetJob - (IJob)
+  - Unity.Entities.Editor.EntityDiffer.DisposeGatheredChangesJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.GatherEntityChangesJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.GatherExistingChunksJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.GatherRemovedChunks - (IJobParallelForDefer)
+  - Unity.Entities.Editor.EntityDiffer.GatherRemovedEntitiesJob - (IJob)
+  - Unity.Entities.Editor.EntityDiffer.RemoveChunkShadowsJob - (IJob)
+  - Unity.Entities.Editor.EntityDiffer.ResizeAndClearChunkListsJob - (IJob)
+  - Unity.Entities.Editor.EntityDiffer.UpdateShadowChunksJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.HierarchyEntityChangeTracker.DistinctJob - (IJob)
+  - Unity.Entities.Editor.HierarchyGameObjectChangeTracker.MergeEventsJob - (IJob)
+  - Unity.Entities.Editor.HierarchyNodeStore.ExportImmutableEntitiesNodesBatchJob
+    - (IJob)
+  - Unity.Entities.Editor.HierarchyNodeStore.ExportImmutableHierarchyNodesBatchJob
+    - (IJob)
+  - Unity.Entities.Editor.HierarchyNodeStore.IntegrateEntityChangesJob - (IJob)
+  - Unity.Entities.Editor.HierarchyNodes.BuildExpandedNodes - (IJob)
+  - Unity.Entities.Editor.HierarchyNodes.BuildFilteredNodes - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.BuildEntityNameStoragePatternCacheLowerInvariant`1[Unity.Collections.FixedString64Bytes]
+    - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.FilterByEntityQuery(Unity.Collections.NativeBitArray&,
+    Unity.Entities.Editor.HierarchyNodeStore.Immutable&, Unity.Entities.EntityQueryMask&)
+  - Unity.Entities.Editor.HierarchySearch.FilterByIndex - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.FilterByKind - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.FilterByNameLowerInvariant`1[Unity.Collections.FixedString64Bytes]
+    - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.FilterByPrefabStage - (IJob)
+  - Unity.Entities.Editor.HierarchySearch.FilterIncludeSubScene - (IJob)
+  - Unity.Entities.Editor.SIMDSearch.FindMatchesJob`2[Unity.Collections.FixedString128Bytes,Unity.Collections.FixedString128Bytes]
+    - (IJobParallelFor)
+  - Unity.Entities.Editor.SIMDSearch.FindMatchesJob`2[Unity.Collections.FixedString64Bytes,Unity.Collections.FixedString64Bytes]
+    - (IJobParallelFor)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.AllocateNewShadowChunksJob -
+    (IJobParallelForDefer)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.ConcatResultsJob - (IJob)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.CopyStateToShadowChunksJob -
+    (IJob)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.DisposeResultsBuffers - (IJobParallelFor)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.GatherChangesJob - (IJobParallelForDefer)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.PrepareResultsJob - (IJob)
+  - Unity.Entities.Editor.SharedComponentDataDiffer.ResizeAndClearChunkListsJob -
+    (IJob)
+  - Unity.Entities.Editor.SystemsWindowTestSystem.SystemsWindowTestSystem_1515F730_LambdaJob_0_Job
+    - (IJobChunk)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.AllocateChunkShadowsJob
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.BuildChangeSetJob -
+    (IJob)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.CopyStateToShadowSharedComponentDataJob
+    - (IJob)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.DisposeGatheredChangesJob
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.GatherEntityChangesJob
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.GatherExistingChunks
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.GatherRemovedChunks
+    - (IJobParallelForDefer)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.GatherRemovedEntitiesJob
+    - (IJob)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.RemoveChunkShadowsJob
+    - (IJob)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.ResizeAndClearChunkListsJob
+    - (IJob)
+  - Unity.Entities.Editor.UnmanagedSharedComponentDataDiffer.UpdateShadowChunksJob
+    - (IJobParallelForDefer)
+  - Unity.Entities.EntitiesJournaling.FrameCountSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Entities.EntitiesJournaling.RecordViewArrayUtility.ConvertGetRWsToSets(Unity.Entities.EntitiesJournaling.RecordViewArray&)
+  - Unity.Entities.EntityChangeSetFormatter.BuildEntityGuidToEntityHashMap - (IJobChunk)
+  - Unity.Entities.EntityChangeSetFormatter.GatherNamesChangedEntities - (IJobParallelFor)
+  - Unity.Entities.EntityChangeSetFormatter.GatherNamesForComponentChanges - (IJobParallelFor)
+  - Unity.Entities.EntityCommandBuffer.DisposeInternal(Unity.Entities.EntityCommandBuffer&)
+  - Unity.Entities.EntityComponentStore.EntityBatchFromEntityChunkDataShared(Unity.Entities.EntityInChunk*&,
+    int, Unity.Entities.EntityBatchInChunk*, System.Int32*, int, System.Int32*)
+  - Unity.Entities.EntityComponentStore.GatherEntityInChunkForEntities(Unity.Entities.Entity*,
+    Unity.Entities.EntityInChunk*, Unity.Entities.EntityInChunk*, int)
+  - Unity.Entities.EntityComponentStore.GetOrCreateDestroyedEntitiesJob - (IJob)
+  - Unity.Entities.EntityComponentStore.SortEntityInChunk(Unity.Entities.EntityInChunk*,
+    int)
+  - Unity.Entities.EntityDataAccess.BuildSharedComponentMapForMoving(Unity.Collections.NativeHashMap`2[System.Int32,System.Int32]&,
+    Unity.Collections.NativeArray`1[Unity.Entities.ArchetypeChunk]&)
+  - Unity.Entities.EntityDataAccess.SetSharedComponentDataIndexWithBurst(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity&, Unity.Entities.ComponentType&, int)
+  - Unity.Entities.EntityDiffer.BuildChunkSequenceNumberMap - (IJobParallelForDefer)
+  - Unity.Entities.EntityDiffer.BuildEntityGuidToEntity - (IJob)
+  - Unity.Entities.EntityDiffer.ClearMissingReferencesJob - (IJobParallelForDefer)
+  - Unity.Entities.EntityDiffer.CollectSharedComponentIndices - (IJob)
+  - Unity.Entities.EntityDiffer.CopyChunkBuffers - (IJobFor)
+  - Unity.Entities.EntityDiffer.CreateNewChunks - (IJob)
+  - Unity.Entities.EntityDiffer.DestroyChunksJob - (IJob)
+  - Unity.Entities.EntityDiffer.GatherArchetypeChunkChanges - (IJob)
+  - Unity.Entities.EntityDiffer.GatherBlobAssetChanges - (IJob)
+  - Unity.Entities.EntityDiffer.GatherComponentChangesBuildPacked - (IJob)
+  - Unity.Entities.EntityDiffer.GatherComponentChangesJob - (IJob)
+  - Unity.Entities.EntityDiffer.GatherCreatedAndDestroyedBlobAssets - (IJob)
+  - Unity.Entities.EntityDiffer.GatherEntityChanges - (IJob)
+  - Unity.Entities.EntityDiffer.GatherEntityInChunkWithGuid - (IJobParallelFor)
+  - Unity.Entities.EntityDiffer.GetEntityNamesJob - (IJob)
+  - Unity.Entities.EntityDiffer.PatchAndAddClonedChunks - (IJobParallelFor)
+  - Unity.Entities.EntityDiffer.SortBlobAssetPtr - (IJob)
+  - Unity.Entities.EntityDiffer.SortEntityInChunk - (IJob)
+  - Unity.Entities.EntityManager.ChunkPatchEntities - (IJob)
+  - Unity.Entities.EntityManager.EntityManagerDebug.BuildInstanceIDToEntityIndex
+    - (IJobChunk)
+  - Unity.Entities.EntityManager.FreeAllChunksJob - (IJob)
+  - Unity.Entities.EntityManager.GatherAllManagedComponentIndicesJob - (IJob)
+  - Unity.Entities.EntityManager.GatherManagedComponentIndicesInChunkJob - (IJob)
+  - Unity.Entities.EntityManager.MoveAllChunksJob - (IJob)
+  - Unity.Entities.EntityManager.MoveChunksJob - (IJob)
+  - Unity.Entities.EntityManager.MoveFilteredChunksBetweenArchetypeJob - (IJob)
+  - Unity.Entities.EntityManager.RemapAllArchetypesJob - (IJobParallelFor)
+  - Unity.Entities.EntityManager.RemapAllChunksJob - (IJobParallelFor)
+  - Unity.Entities.EntityManager.RemapChunksFilteredJob - (IJobParallelFor)
+  - Unity.Entities.EntityManager.RemapChunksForFilteredMove(Unity.Collections.NativeArray`1[Unity.Entities.ArchetypeChunk]&,
+    Unity.Collections.NativeArray`1[Unity.Entities.EntityManager.RemapChunk]&, Unity.Collections.NativeArray`1[Unity.Entities.EntityRemapUtility.EntityRemapInfo]&,
+    Unity.Collections.NativeList`1[System.IntPtr]&, System.Int32&, Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityComponentStore*)
+  - Unity.Entities.EntityPatcher.ApplyAddComponentsJob - (IJobFor)
+  - Unity.Entities.EntityPatcher.ApplyCreateEntitiesWithArchetypes(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeArray`1[Unity.Entities.FilteredArchetype]&)
+  - Unity.Entities.EntityPatcher.ApplyDestroyEntities(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeArray`1[Unity.Entities.EntityGuid]&, Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    int)
+  - Unity.Entities.EntityPatcher.ApplyLinkedEntityGroupAdditions(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeArray`1[Unity.Entities.LinkedEntityGroupChange]&, Unity.Collections.NativeArray`1[Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.Entity]&)
+  - Unity.Entities.EntityPatcher.ApplyLinkedEntityGroupRemovals(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeArray`1[Unity.Entities.LinkedEntityGroupChange]&, Unity.Collections.NativeArray`1[Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.Entity]&)
+  - Unity.Entities.EntityPatcher.ApplyNamesJob - (IJob)
+  - Unity.Entities.EntityPatcher.ApplyRemoveComponents(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeArray`1[Unity.Entities.PackedComponent]&, Unity.Collections.NativeArray`1[Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeArray`1[Unity.Entities.ComponentType]&)
+  - Unity.Entities.EntityPatcher.ApplySetComponentsJob - (IJob)
+  - Unity.Entities.EntityPatcher.ApplySetSharedComponentsJob - (IJobFor)
+  - Unity.Entities.EntityPatcher.ApplyUnmanagedEntityPatches(Unity.Entities.EntityManager&,
+    Unity.Collections.NativeArray`1[Unity.Entities.EntityReferenceChange]&, Unity.Collections.NativeArray`1[Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.Entity]&,
+    Unity.Collections.NativeArray`1[Unity.Entities.ComponentType]&, Unity.Collections.NativeParallelMultiHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.EntityGuid]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.EntityGuid,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelHashMap`2[Unity.Entities.Entity,Unity.Entities.Entity]&,
+    Unity.Collections.NativeParallelMultiHashMap`2[System.Int32,Unity.Entities.EntityPatcher.EntityTargetPair]&)
+  - Unity.Entities.EntityPatcher.BuildComponentToEntityHashMap - (IJobChunk)
+  - Unity.Entities.EntityPatcher.BuildComponentToEntityMultiHashMap - (IJobChunk)
+  - Unity.Entities.EntityPatcher.BuildEntityToComponentHashMap - (IJobChunk)
+  - Unity.Entities.EntityPatcher.BuildLinkedEntityGroupHashMap - (IJobChunk)
+  - Unity.Entities.EntityPatcher.BuildPackedEntityLookupJob - (IJobParallelFor)
+  - Unity.Entities.EntityPatcher.BuildPackedTypeLookupJob - (IJobParallelFor)
+  - Unity.Entities.EntityPatcher.CalculateLinkedEntityGroupEntitiesLengthJob - (IJob)
+  - Unity.Entities.FastEquality.EqualsBlittable(System.Void*, System.Void*, Unity.Entities.FastEquality.TypeInfo&)
+  - Unity.Entities.FastEquality.GetHashCodeBlittable(System.Void*, Unity.Entities.FastEquality.TypeInfo&)
+  - Unity.Entities.FastEquality.Hash32(System.Byte*, int, int)
+  - Unity.Entities.FilteredChunkIndexJob - (IJob)
+  - Unity.Entities.GatherChunksJob - (IJob)
+  - Unity.Entities.GatherChunksToArrayJob - (IJobParallelFor)
+  - Unity.Entities.GatherChunksToArrayWithFilteringJob - (IJobParallelFor)
+  - Unity.Entities.GatherComponentDataJob - (IJobChunk)
+  - Unity.Entities.GatherComponentDataToArrayJob - (IJobChunk)
+  - Unity.Entities.GatherEntitiesJob - (IJobChunk)
+  - Unity.Entities.GatherEntitiesToArrayJob - (IJobChunk)
+  - Unity.Entities.Hybrid.Baking.AddLinkedEntityGroupBakingJob - (IJobChunk)
+  - Unity.Entities.Hybrid.Baking.BakingOnlyEntityAuthoringBakingSystem.BakingOnlyEntityAuthoringBakingSystem_26406ED9_LambdaJob_0_Job
+    - (IJobChunk)
+  - Unity.Entities.Internal.InternalCompilerInterface.MergeWith(Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ComponentType]&,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ComponentType]&)
+  - Unity.Entities.JoinChunksJob - (IJobParallelFor)
+  - Unity.Entities.MemoryProfiler.MemoryProfilerJob - (IJob)
+  - Unity.Entities.RetainBlobAssetSystem.RetainBlobAssetSystem_188E85F4_LambdaJob_3_Job
+    - (IJobChunk)
+  - Unity.Entities.RetainBlobAssetSystem.RetainBlobAssetSystem_188E85F4_LambdaJob_3_Job.RunWithoutJobSystem(Unity.Entities.EntityQuery&,
+    System.IntPtr)
+  - Unity.Entities.RetainBlobAssetSystem.RetainBlobAssetSystem_188E85F4_LambdaJob_4_Job
+    - (IJobChunk)
+  - Unity.Entities.RetainBlobAssetSystem.RetainBlobAssetSystem_188E85F4_LambdaJob_4_Job.RunWithoutJobSystem(Unity.Entities.EntityQuery&,
+    System.IntPtr)
+  - Unity.Entities.ScratchpadAllocator.Try(System.IntPtr, Unity.Collections.AllocatorManager.Block&)
+  - Unity.Entities.SegmentSortInt - (IJobParallelFor)
+  - Unity.Entities.SegmentSortMergeInt - (IJob)
+  - Unity.Entities.Serialization.SerializeUtilityInterop.AddExistingChunk(Unity.Entities.Chunk*,
+    System.Int32*, System.Byte*, System.Int32*)
+  - Unity.Entities.Serialization.SerializeUtilityInterop.AllocAndQueueReadChunkCommands(long,
+    int, Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.Serialization.SerializeUtility.MegaChunkInfo]*,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.IO.LowLevel.Unsafe.ReadCommand]*)
+  - Unity.Entities.Serialization.SerializeUtilityInterop.AllocateConsecutiveEntitiesForLoading(Unity.Entities.EntityComponentStore*,
+    int)
+  - Unity.Entities.Serialization.SerializeUtilityInterop.ImportChunks(Unity.Entities.Serialization.SerializeUtility.WorldDeserializationStatus*,
+    Unity.Entities.Serialization.BurstableMemoryBinaryReader&, Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.EntityArchetype]*,
+    System.Int32*, int, System.Int32*, Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ArchetypeChunk]*,
+    System.Byte*, System.Int32*, Unity.Entities.EntityComponentStore*, Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.ArchetypeChunk]*)
+  - Unity.Entities.StructuralChange.AddComponentChunks(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.ArchetypeChunk*, int, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.AddComponentEntitiesBatch(Unity.Entities.EntityComponentStore*,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.EntityBatchInChunk]*,
+    Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.AddComponentEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.AddComponentQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.AddComponentsEntitiesBatch(Unity.Entities.EntityComponentStore*,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.EntityBatchInChunk]*,
+    Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.AddComponentsEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.AddComponentsQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.AddSharedComponentChunks(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.ArchetypeChunk*, int, Unity.Entities.TypeIndex, int)
+  - Unity.Entities.StructuralChange.AddSharedComponentDataIndexWithBurst(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, int, Unity.Entities.ComponentType&, int)
+  - Unity.Entities.StructuralChange.AddSharedComponentQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.TypeIndex, int)
+  - Unity.Entities.StructuralChange.CreateEntity(Unity.Entities.EntityComponentStore*,
+    System.Void*, Unity.Entities.Entity*, int)
+  - Unity.Entities.StructuralChange.DestroyChunksQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.BufferTypeHandle`1[Unity.Entities.LinkedEntityGroup]&)
+  - Unity.Entities.StructuralChange.DestroyEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, int)
+  - Unity.Entities.StructuralChange.InstantiateEntities(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.Entity*, int, bool)
+  - Unity.Entities.StructuralChange.InstantiateEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.Entity*, int)
+  - Unity.Entities.StructuralChange.MoveEntityArchetype(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, System.Void*)
+  - Unity.Entities.StructuralChange.RemoveComponentChunks(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.ArchetypeChunk*, int, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.RemoveComponentEntitiesBatch(Unity.Entities.EntityComponentStore*,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.EntityBatchInChunk]*,
+    Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.RemoveComponentEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.RemoveComponentQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.RemoveComponentsEntitiesBatch(Unity.Entities.EntityComponentStore*,
+    Unity.Collections.LowLevel.Unsafe.UnsafeList`1[Unity.Entities.EntityBatchInChunk]*,
+    Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.RemoveComponentsEntity(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.RemoveComponentsQuery(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.ComponentTypeSet&)
+  - Unity.Entities.StructuralChange.SetChunkComponent(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.ArchetypeChunk*, int, System.Void*, Unity.Entities.TypeIndex)
+  - Unity.Entities.StructuralChange.SetSharedComponentDataIndexWithBurst(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.Entity*, int, Unity.Entities.ComponentType&, int)
+  - Unity.Entities.StructuralChange.SetSharedComponentDataIndexWithBurst(Unity.Entities.EntityComponentStore*,
+    Unity.Entities.EntityQueryImpl*, Unity.Entities.ComponentType&, int)
+  - Unity.Entities.TransformAuthoringBaking.BakeAdditionalEntityTransformAuthoringJob
+    - (IJobChunk)
+  - Unity.Entities.TransformAuthoringBaking.BakeToTransformAuthoringComponentJob
+    - (IJobFor)
+  - Unity.Entities.TransformAuthoringBaking.BakeToTransformAuthoringListJob - (IJobParallelForTransform)
+  - Unity.Entities.TransformAuthoringBaking.ForceTransformsOnParentsJob - (IJob)
+  - Unity.Entities.UnsafeCachedChunkList.Rebuild(Unity.Entities.UnsafeCachedChunkList&,
+    Unity.Entities.EntityQueryData&)
+  - Unity.Entities.WorldUnmanagedImpl.UnmanagedUpdate(System.Void*)
+  - Unity.Mathematics.GeneratePoints.PointsInSphere - (IJob)
+  - Unity.Physics.Authoring.BaseShapeBakingSystem.BasicBlobsJobHandleJob - (IJobChunk)
+  - Unity.Physics.Authoring.BaseShapeBakingSystem.BasicHashesJobHandleJob - (IJobChunk)
+  - Unity.Physics.Authoring.BaseShapeBakingSystem.DeduplicateJobHandleJob - (IJobChunk)
+  - Unity.Physics.Authoring.BaseShapeBakingSystem.MeshHashesJobHandleJob - (IJobChunk)
+  - Unity.Physics.Authoring.BuildCompoundCollidersBakingSystem.AddColliderKeyEntityPairBufferJob
+    - (IJobChunk)
+  - Unity.Physics.Authoring.BuildCompoundCollidersBakingSystem.BlobCalculationJobHandleJob
+    - (IJobChunk)
+  - Unity.Physics.Authoring.BuildCompoundCollidersBakingSystem.BlobContextUpdateJobHandleJob
+    - (IJobChunk)
+  - Unity.Physics.Authoring.BuildCompoundCollidersBakingSystem.ChildrenGatheringJobHandleJob
+    - (IJobChunk)
+  - Unity.Physics.Authoring.BuildCompoundCollidersBakingSystem.DeferredResolutionJobHandleJob
+    - (IJobChunk)
+  - Unity.Physics.Authoring.DisplayBroadphaseJob - (IJob)
+  - Unity.Physics.Authoring.DisplayColliderAabbsJob - (IJobParallelFor)
+  - Unity.Physics.Authoring.DisplayColliderAabbsSystem_Default.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayColliderAabbsSystem_Editor.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayColliderEdgesJob - (IJobParallelFor)
+  - Unity.Physics.Authoring.DisplayColliderFacesJob - (IJobParallelFor)
+  - Unity.Physics.Authoring.DisplayCollisionEventsSystem.DisplayCollisionEventsJob
+    - (Unity.Physics.ICollisionEventsJobBase)
+  - Unity.Physics.Authoring.DisplayCollisionEventsSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayContactsSystem.DisplayContactsJob - (Unity.Physics.IContactsJobBase)
+  - Unity.Physics.Authoring.DisplayContactsSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayJointsJob - (IJobParallelFor)
+  - Unity.Physics.Authoring.DisplayJointsSystem_Default.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayJointsSystem_Editor.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayMassPropertiesSystem.DisplayMassPropertiesJob
+    - (IJobParallelFor)
+  - Unity.Physics.Authoring.DisplayMassPropertiesSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.DisplayTriggerEventsSystem.DisplayTriggerEventsJob -
+    (Unity.Physics.ITriggerEventsJobBase)
+  - Unity.Physics.Authoring.DisplayTriggerEventsSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.HashableShapeInputs.HashableShapeInputsFromMeshJob -
+    (IJob)
+  - Unity.Physics.Authoring.MeshBlobsJob - (IJobParallelFor)
+  - Unity.Physics.Authoring.StaticOptimizeBakingSystem.GetUniqueRoots(Unity.Collections.NativeArray`1[Unity.Physics.Authoring.BakeStaticRoot]&,
+    Unity.Collections.NativeHashMap`2[Unity.Entities.Entity,Unity.Physics.Authoring.BakeStaticRoot]&)
+  - Unity.Physics.Authoring.StaticOptimizeBakingSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.StaticOptimizeBakingSystem.__codegen__OnDestroy(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Authoring.StaticOptimizeBakingSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.BoundingVolumeHierarchy.BuildBranchesJob - (IJobParallelForDefer)
+  - Unity.Physics.BoundingVolumeHierarchy.BuildFirstNLevelsJob - (IJob)
+  - Unity.Physics.BoundingVolumeHierarchy.FinalizeTreeJob - (IJob)
+  - Unity.Physics.Broadphase.AllocateDynamicVsStaticNodePairs - (IJob)
+  - Unity.Physics.Broadphase.BuildBroadphaseJob - (IJob)
+  - Unity.Physics.Broadphase.DynamicVsDynamicBuildBranchNodePairsJob - (IJob)
+  - Unity.Physics.Broadphase.DynamicVsDynamicFindOverlappingPairsJob - (IJobParallelForDefer)
+  - Unity.Physics.Broadphase.FindOverlapsJob - (IJob)
+  - Unity.Physics.Broadphase.PrepareDynamicBodyDataJob - (IJobParallelFor)
+  - Unity.Physics.Broadphase.PrepareNumStaticBodiesJob - (IJob)
+  - Unity.Physics.Broadphase.PrepareStaticBodyDataJob - (IJobParallelForDefer)
+  - Unity.Physics.Broadphase.StaticVsDynamicBuildBranchNodePairsJob - (IJob)
+  - Unity.Physics.Broadphase.StaticVsDynamicFindOverlappingPairsJob - (IJobParallelForDefer)
+  - Unity.Physics.CollisionWorld.UpdateDynamicLayerJob - (IJob)
+  - Unity.Physics.CollisionWorld.UpdateRigidBodyTransformsJob - (IJobParallelFor)
+  - Unity.Physics.DispatchPairSequencer.CreateDispatchPairPhasesJob - (IJob)
+  - Unity.Physics.DispatchPairSequencer.CreateDispatchPairsJobST - (IJob)
+  - Unity.Physics.DispatchPairSequencer.CreateUnsortedDispatchPairsJob - (IJob)
+  - Unity.Physics.DispatchPairSequencer.RadixSortPerBodyAJob - (IJob)
+  - Unity.Physics.DispatchPairSequencer.SolverSchedulerInfo.DisposeJob - (IJob)
+  - Unity.Physics.DispatchPairSequencer.SortSubArraysJob - (IJobParallelFor)
+  - Unity.Physics.GraphicsIntegration.BufferInterpolatedRigidBodiesMotion.UpdateInterpolationBuffersJob
+    - (IJobChunk)
+  - Unity.Physics.GraphicsIntegration.CopyPhysicsVelocityToSmoothing.CopyPhysicsVelocityJob
+    - (IJobChunk)
+  - Unity.Physics.GraphicsIntegration.SmoothRigidBodiesGraphicalMotion.SmoothMotionJob
+    - (IJobChunk)
+  - Unity.Physics.Integrator.IntegrateMotionsJob - (IJob)
+  - Unity.Physics.Integrator.ParallelIntegrateMotionsJob - (IJobParallelFor)
+  - Unity.Physics.NarrowPhase.CreateContactsJob - (IJob)
+  - Unity.Physics.NarrowPhase.ParallelCreateContactsJob - (IJobParallelForDefer)
+  - Unity.Physics.Solver.ApplyGravityAndCopyInputVelocitiesJob - (IJob)
+  - Unity.Physics.Solver.BuildJacobiansJob - (IJob)
+  - Unity.Physics.Solver.ParallelApplyGravityAndCopyInputVelocitiesJob - (IJobParallelFor)
+  - Unity.Physics.Solver.ParallelBuildJacobiansJob - (IJobParallelForDefer)
+  - Unity.Physics.Solver.ParallelSolverJob - (IJobParallelFor)
+  - Unity.Physics.Solver.SolverJob - (IJob)
+  - Unity.Physics.Solver.StabilizeVelocitiesJob - (IJobParallelFor)
+  - Unity.Physics.Systems.AnalyticsJobs.PhysicsBodiesAnalyticsJob - (IJob)
+  - Unity.Physics.Systems.AnalyticsJobs.PhysicsJointsAnalyticsJob - (IJob)
+  - Unity.Physics.Systems.BroadphaseSystem.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BroadphaseSystem.__codegen__OnDestroy(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BroadphaseSystem.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BuildPhysicsWorld.Jobs.RecordColliderIntegrity - (IJobChunk)
+  - Unity.Physics.Systems.BuildPhysicsWorld.Jobs.RecordDynamicBodyIntegrity - (IJobChunk)
+  - Unity.Physics.Systems.BuildPhysicsWorld.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BuildPhysicsWorld.__codegen__OnDestroy(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BuildPhysicsWorld.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.BuildPhysicsWorldDependencyResolver.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.BuildPhysicsWorldDependencyResolver.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.CreateJacobiansSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.CreateJacobiansSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.DummySimulationSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.DummySimulationSystem.__codegen__OnDestroy(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.DummySimulationSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.ExportPhysicsWorld.CheckColliderIntegrity - (IJobChunk)
+  - Unity.Physics.Systems.ExportPhysicsWorld.CheckDynamicBodyIntegrity - (IJobChunk)
+  - Unity.Physics.Systems.ExportPhysicsWorld.CheckTotalIntegrity - (IJob)
+  - Unity.Physics.Systems.ExportPhysicsWorld.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.ExportPhysicsWorld.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.NarrowphaseSystem.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.NarrowphaseSystem.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Physics.Systems.PhysicsSimulationPickerSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.PhysicsSimulationPickerSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.PhysicsWorldBuilder.Jobs.CheckStaticBodyChangesJob - (IJobChunk)
+  - Unity.Physics.Systems.PhysicsWorldBuilder.Jobs.CreateDefaultStaticRigidBody -
+    (IJob)
+  - Unity.Physics.Systems.PhysicsWorldBuilder.Jobs.CreateJoints - (IJobChunk)
+  - Unity.Physics.Systems.PhysicsWorldBuilder.Jobs.CreateMotions - (IJobChunk)
+  - Unity.Physics.Systems.PhysicsWorldBuilder.Jobs.CreateRigidBodies - (IJobChunk)
+  - Unity.Physics.Systems.PhysicsWorldExporter.ExportDynamicBodiesJob - (IJobChunk)
+  - Unity.Physics.Systems.SolveAndIntegrateSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.SolveAndIntegrateSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.SyncCustomPhysicsProxySystem.SyncCustomPhysicsProxy - (IJobChunk)
+  - Unity.Physics.Systems.SyncCustomPhysicsProxySystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Physics.Systems.SyncCustomPhysicsProxySystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Scenes.AsyncLoadSceneOperation.AsyncLoadSceneJob - (IJob)
+  - Unity.Scenes.AsyncLoadSceneOperation.FreeJob - (IJob)
+  - Unity.Scenes.LiveConversionPatcher.RemoveLiveConversionSceneState - (IJobChunk)
+  - Unity.Scenes.SceneHeaderUtility.DeserializeHeaderJob - (IJob)
+  - Unity.Scenes.SceneSectionStreamingSystem.ExtractEntityRemapRefs(Unity.Scenes.SceneSectionStreamingSystem.EntityRemapArgs&)
+  - Unity.Scenes.SceneSectionStreamingSystem.SceneSectionStreamingSystem_34D9617_LambdaJob_0_Job
+    - (IJobChunk)
+  - Unity.Scenes.SceneSectionStreamingSystem.SceneSectionStreamingSystem_34D9617_LambdaJob_0_Job.RunWithoutJobSystem(Unity.Entities.EntityQuery&,
+    System.IntPtr)
+  - Unity.Scenes.SceneSystem.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Scenes.WeakAssetReferenceLoadingSystem.__codegen__OnCreate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Scenes.WeakAssetReferenceLoadingSystem.__codegen__OnDestroy(System.IntPtr,
+    System.IntPtr)
+  - Unity.Scenes.WeakAssetReferenceLoadingSystem.__codegen__OnUpdate(System.IntPtr,
+    System.IntPtr)
+  - Unity.Serialization.Json.JsonSerialization.ReadJob - (IJob)
+  - Unity.Transforms.LocalToWorldSystem.ComputeChildLocalToWorldJob - (IJobChunk)
+  - Unity.Transforms.LocalToWorldSystem.ComputeRootLocalToWorldJob - (IJobChunk)
+  - Unity.Transforms.LocalToWorldSystem.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Transforms.LocalToWorldSystem.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Transforms.ParentSystem.FindMissingChild - (IJob)
+  - Unity.Transforms.ParentSystem.FixupChangedChildren - (IJob)
+  - Unity.Transforms.ParentSystem.GatherChangedParents - (IJobChunk)
+  - Unity.Transforms.ParentSystem.GatherChildEntities - (IJob)
+  - Unity.Transforms.ParentSystem.__codegen__OnCreate(System.IntPtr, System.IntPtr)
+  - Unity.Transforms.ParentSystem.__codegen__OnUpdate(System.IntPtr, System.IntPtr)
+  - Unity.Transforms.TransformHelpers.ComputeWorldTransformMatrix(Unity.Entities.Entity&,
+    Unity.Mathematics.float4x4&, Unity.Entities.ComponentLookup`1[Unity.Transforms.LocalTransform]&,
+    Unity.Entities.ComponentLookup`1[Unity.Transforms.Parent]&, Unity.Entities.ComponentLookup`1[Unity.Transforms.PostTransformMatrix]&)
+  - UnityEditor.PhysicsDebugWindow.ReadContactsJob - (IJob)
+  - UnityEditor.Rendering.HighDefinition.WaterAmplitudeEvaluator.ReductionStep -
+    (IJobParallelFor)
+  - UnityEngine.LightProbesQuery.LightProbesQueryDisposeJob - (IJob)
+  - UnityEngine.Rendering.HighDefinition.DecalSystem.UpdateJob - (IJobParallelForTransform)
+  - UnityEngine.Rendering.HighDefinition.HDGpuLightsBuilder.CreateGpuLightDataJob
+    - (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.HDProcessedVisibleLightsBuilder.ProcessVisibleLightJob
+    - (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.LTC.LTCTableGenerator.BRDFGeneratorJob -
+    (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.WaterCPUSimulation.EvaluateDispersion -
+    (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.WaterCPUSimulation.InverseFFT - (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.WaterCPUSimulation.PhillipsSpectrumInitialization
+    - (IJobParallelFor)
+  - UnityEngine.Rendering.HighDefinition.WaterSimulationSearchJob - (IJobParallelFor)
+  - UnityEngine.Rendering.ProbeGIBaking.CreateRayCastCommandsJob - (IJobParallelFor)
+  - UnityEngine.Rendering.ProbeGIBaking.PushOutGeometryJob - (IJobParallelFor)
+  - UnityEngine.UIElements.UIR.OpacityIdAccelerator.OpacityIdUpdateJob - (IJobParallelFor)
+  treeViewState:
+    scrollPos: {x: 0, y: 16}
+    m_SelectedIDs: 01000000
+    m_LastClickedID: 1
+    m_ExpandedIDs: bcffffffbdffffffbeffffffbfffffffc0ffffffc1ffffffc2ffffffc3ffffffc4ffffffc5ffffffc6ffffffc7ffffffc8ffffffc9ffffffcaffffffcbffffffccffffffcdffffffceffffffcfffffffd0ffffffd1ffffffd2ffffffd3ffffffd4ffffffd5ffffffd6ffffffd7ffffffd8ffffffd9ffffffdaffffffdbffffffdcffffffddffffffdeffffffdfffffffe0ffffffe1ffffffe2ffffffe3ffffffe4ffffffe5ffffffe6ffffffe7ffffffe8ffffffe9ffffffeaffffffebffffffecffffffedffffffeeffffffeffffffff0fffffff1fffffff2fffffff3fffffff4fffffff5fffffff6fffffff7fffffff8fffffff9fffffffafffffffbfffffffcfffffffdfffffffeffffffffffffff00000000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 0
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+  _isCompileError: 0
+  _prevWasCompileError: 0
+  _smellTest: 0
+--- !u!114 &17
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_TitleContent:
+    m_Text: Project
+    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 722
+    width: 1436
+    height: 277
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_SearchFilter:
+    m_NameFilter: 
+    m_ClassNames: []
+    m_AssetLabels: []
+    m_AssetBundleNames: []
+    m_VersionControlStates: []
+    m_SoftLockControlStates: []
+    m_ReferencingInstanceIDs: 
+    m_SceneHandles: 
+    m_ShowAllHits: 0
+    m_SkipHidden: 0
+    m_SearchArea: 1
+    m_Folders:
+    - Assets
+    m_Globs: []
+    m_OriginalText: 
+    m_ImportLogFlags: 0
+    m_FilterByTypeIntersection: 0
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: D:\GitHub\VegetationInstancer\VegetationSpawner
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: c0860000
+    m_LastClickedID: 34496
+    m_ExpandedIDs: 00000000728600007486000076860000788600007a8600007c8600007e86000080860000828600008486000086860000888600008a8600008c8600008e86000090860000928600009486000096860000988600009a8600009c8600009e860000a0860000a2860000a4860000a6860000a8860000aa860000ac860000ae860000b0860000b2860000b4860000b6860000b8860000ba860000bc860000be860000c286000000ca9a3b
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_AssetTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 00000000728600007486000076860000788600007a8600007c8600007e86000080860000828600008486000086860000888600008a8600008c8600008e86000090860000928600009486000096860000988600009a8600009c8600009e860000a0860000a2860000a4860000a6860000a8860000aa860000ac860000ae860000b0860000b2860000b4860000b6860000b8860000ba860000bc860000be860000c0860000c2860000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_ListAreaState:
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c62300000000000098aa0000c6e40000ec7f000058030000d2ac0000aef70000f0d8000040d90000c6b10000d0d8000000d90000d4b1000010d9000006b20000c0d8000030d9000020d90000e0d80000208b0000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 10}
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+    m_NewAssetIndexInList: -1
+    m_ScrollPosition: {x: 0, y: 0}
+    m_GridSize: 64
+  m_SkipHiddenPackages: 0
+  m_DirectoriesAreaWidth: 214
+--- !u!114 &18
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Console
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 722
+    width: 1436
+    height: 277
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+--- !u!114 &19
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Inspector
+    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000,
+      type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1437
+    y: 73
+    width: 482
+    height: 926
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_ObjectsLockedBeforeSerialization: []
+  m_InstanceIDsLockedBeforeSerialization: 
+  m_PreviewResizer:
+    m_CachedPref: 160
+    m_ControlHash: -371814159
+    m_PrefName: Preview_InspectorPreview
+  m_LastInspectedObjectInstanceID: -1
+  m_LastVerticalScrollValue: 0
+  m_GlobalObjectId: 
+  m_InspectorMode: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_PreviewWindow: {fileID: 0}
