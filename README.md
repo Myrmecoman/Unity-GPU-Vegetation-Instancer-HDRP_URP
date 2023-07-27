@@ -11,7 +11,11 @@ It consists in 2 main scripts :
 
 Note that this project only spawns vegetation objects without colliders at the moment.
 
-## Code explaination
+## How to use
+
+Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the variables.
+
+## Code explanation
 
 GrassInstancer and VegetationInstancer both use the same code to generate the objects positions at runtime using burst.   
 The positions are not constantly regenerated, but only if a new chunk enters the camera frustrum. Finding new chunks is done in PickVisibleChunkJob.cs. Due to this, no CPU computation is required when the camera does not move. When a new chunk enters the camera view, all positions inside it are generated in a dedicated burst job (PositionsJob.cs).   
