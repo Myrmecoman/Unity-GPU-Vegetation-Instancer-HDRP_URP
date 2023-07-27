@@ -38,3 +38,4 @@ All the code is commented and was made to be easily readable.
 GrassInstancer displays the material as pitch black at the moment. The shader probably has a bug.   
 Implement falloff.   
 Support multiple objects instantiation for VegetationInstancer.cs.
+Be able to place objects with a density lower than 1 object per meter.
