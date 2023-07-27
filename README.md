@@ -20,7 +20,7 @@ Note that this project only spawns vegetation objects without colliders at the m
 
 ## How to use
 
-Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the parameters.
+Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the parameters.   
 See below for the usage of VegetationInstancer.cs, GrassInstancer.cs is similar in it's parameters.
 
 ![Usage](./usage.png?raw=true "Usage")
@@ -37,5 +37,5 @@ All the code is commented and was made to be easily readable.
 
 GrassInstancer displays the material as pitch black at the moment. The shader probably has a bug.   
 Implement falloff.   
-Support multiple objects instantiation for VegetationInstancer.cs.
+Support multiple objects instantiation for VegetationInstancer.cs.   
 Be able to place objects with a density lower than 1 object per meter.
