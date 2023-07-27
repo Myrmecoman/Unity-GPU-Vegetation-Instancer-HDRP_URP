@@ -99,8 +99,8 @@ Material:
     m_Ints: []
     m_Floats:
     - Animation_Cutoff: 30
-    - Distance_Fade_End: 160
-    - Distance_Fade_Start: 130
+    - Distance_Fade_End: 230
+    - Distance_Fade_Start: 180
     - Dither_Scale: 2.108
     - Enable_Blend_Terrain_Color: 0
     - Terrain_Blend_A: 0
@@ -109,7 +109,7 @@ Material:
     - Terrain_Blend_R: 0
     - Vector1_593c5cea6c4a42e993ed03ced4685732: 2.01
     - Vector1_8651797e3e304e108dbd25f9d5a426ba: 0.575
-    - Vector1_a5b8b09028ce49a39f4d090894c89e22: 0.303
+    - Vector1_a5b8b09028ce49a39f4d090894c89e22: 0.26
     - Vector1_a6983181c8dc4691ba6a28a34c4223a6: 1
     - Wind_Blast: 0.05
     - Wind_Intensity: 0.1

@@ -1,5 +1,7 @@
 # HDRP-Vegetation-Instancer
 
+![Presentation](./presentation.png?raw=true "Presentation")
+
 ## Overview
 
 HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight.
@@ -7,7 +9,12 @@ HDRP vegetation instancer is a unity project whose goal is to bring vegetation d
 It consists in 2 main scripts :
 
 - GrassInstancer.cs :      in charge of displaying large amounts of grass (up to millions) using a custom shader and GPU indirect rendering.
+
+![GrassInstancer](./grassInstancer.png?raw=true "GrassInstancer")
+
 - VegetationInstancer.cs : in charge of displaying lower amounts of larger vegetation objects (ferns, bushes, etc...). This one works with any shader as long as GPU instancing is enabled, but is less optimized and can therefore work with fewer instances (about 10000).
+
+![VegetationInstancer](./vegetationInstancer.png?raw=true "VegetationInstancer")
 
 Note that this project only spawns vegetation objects without colliders at the moment.
 
