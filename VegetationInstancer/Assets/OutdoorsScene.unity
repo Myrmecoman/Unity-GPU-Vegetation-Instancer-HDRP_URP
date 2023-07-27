@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7113.0107, g: 7679.5166, b: 7177.1104, a: 1}
+  m_IndirectSpecularColor: {r: 7112.3955, g: 7678.5986, b: 7172.704, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -439,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341930908}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -126.38, y: 22.3, z: 208.7}
+  m_LocalPosition: {x: -27.4, y: 22.3, z: 198.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -711,16 +711,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461377153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be2e010951a4ec5429adea5ff37e3883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInEditor: 1
+  runInEditor: 0
   randomRotation: 1
   maxDisplacement: 1
   randomSize: 1.79
   maxSlope: 0.512
+  falloff: 0
   plants:
   - {fileID: 2085449277718671952, guid: 6629880e46886724fa0107d3035304e6, type: 3}
   plantsLOD:
@@ -748,6 +749,7 @@ MonoBehaviour:
   maxDisplacement: 0.5
   randomSize: 2.75
   maxSlope: 0.5
+  falloff: 0.328
   meshes:
   - {fileID: 4300000, guid: c8542799e804ef04eb35ba93777008a8, type: 2}
   meshesLOD:
@@ -758,7 +760,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 948426d59363b5447a1193696f550e56, type: 2}
   textureIndexes: 00000000
   cam: {fileID: 1823688466}
-  light: {fileID: 157207114}
+  lightP: {fileID: 157207114}
   chunkSize: 20
   viewDistance: 200
   viewDistanceLOD: 30

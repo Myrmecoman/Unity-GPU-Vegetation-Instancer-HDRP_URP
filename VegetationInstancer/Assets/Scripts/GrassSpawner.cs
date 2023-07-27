@@ -32,6 +32,9 @@ public class GrassSpawner : MonoBehaviour
     [Tooltip("Maximum slope to spawn plants on")]
     [Range(0, 1)]
     public float maxSlope = 0.5f;
+    [Tooltip("Maximum texture value until no object is spawned")]
+    [Range(0, 1)]
+    public float falloff = 1f;
 
     [Header("Objects to spawn")]
     public Mesh[] meshes;
@@ -45,7 +48,7 @@ public class GrassSpawner : MonoBehaviour
     [Tooltip("Camera")]
     public Camera cam;
     [Tooltip("Light")]
-    public Transform light;
+    public Transform lightP;
     [Tooltip("The X and Z size of the chunks. Y is determined as chunkSize * 4")]
     public int chunkSize = 20;
     [Tooltip("Maximum display range")]
@@ -221,6 +224,7 @@ public class GrassSpawner : MonoBehaviour
                 rotate = randomRotation,
                 displacement = maxDisplacement,
                 textureIndex = textureIndexes[0],
+                falloff = falloff,
             };
             positionsSampler.Schedule(totalChunkPlantsCount, 64).Complete();
         }
@@ -261,7 +265,7 @@ public class GrassSpawner : MonoBehaviour
             i += totalChunkPlantsCount;
         }
 
-        Vector3 lightDir = light.forward;
+        Vector3 lightDir = lightP.forward;
         matPlants[0].SetVector("_LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
 
         // don't do this every frame, for now it's ok for tests

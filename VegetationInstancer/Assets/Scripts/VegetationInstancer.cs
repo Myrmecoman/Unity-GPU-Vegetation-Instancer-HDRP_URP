@@ -29,6 +29,9 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Maximum slope to spawn plants on")]
     [Range(0, 1)]
     public float maxSlope = 0.5f;
+    [Tooltip("Maximum texture value until no object is spawned")]
+    [Range(0, 1)]
+    public float falloff = 1f;
 
     [Header("Objects to spawn")]
     [Tooltip("Plants to spawn")]
@@ -220,6 +223,7 @@ public class VegetationInstancer : MonoBehaviour
                 rotate = randomRotation,
                 displacement = maxDisplacement,
                 textureIndex = textureIndexes[0],
+                falloff = falloff,
             };
             positionsSampler.Schedule(totalChunkPlantsCount, 64).Complete();
         }

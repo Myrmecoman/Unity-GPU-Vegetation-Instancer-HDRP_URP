@@ -39,6 +39,8 @@ public struct PositionsJob : IJobParallelFor
     public float displacement;
     [ReadOnly]
     public int textureIndex;
+    [ReadOnly]
+    public float falloff;
 
 
     public void Execute(int index)
@@ -52,7 +54,8 @@ public struct PositionsJob : IJobParallelFor
         float y = terrainData.SampleHeight(new float2(x, z), out normal);
 
         // check texture
-        if (textureIndex != -1)
+        float texValueAtPos = terrainTex.GetTextureAtPos(new float2(x, z), textureIndex);
+        if (textureIndex != -1 && texValueAtPos < falloff)
         {
             int texIndexAtPos = terrainTex.GetTextureAtPos(new float2(x, z));
             if (textureIndex != texIndexAtPos)
@@ -74,6 +77,10 @@ public struct PositionsJob : IJobParallelFor
         if (rotate)
             q *= Quaternion.Euler(0, rnd.NextFloat(0, 360), 0);
         float newSize = rnd.NextFloat(1f/sizeChange, sizeChange);
+
+        if (texValueAtPos >= falloff)
+            newSize *= math.max(texValueAtPos, 0.1f);
+
         outputPlants[index] = Matrix4x4.TRS(pos, q, new float3(newSize, newSize, newSize));
     }
 
