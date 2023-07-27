@@ -20,7 +20,10 @@ Note that this project only spawns vegetation objects without colliders at the m
 
 ## How to use
 
-Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the variables.
+Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the parameters.
+See below for the usage of VegetationInstancer.cs, GrassInstancer.cs is similar in it's parameters.
+
+![Usage](./usage.png?raw=true "Usage")
 
 ## Code explanation
 

@@ -15,7 +15,7 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-60566
+56693
 Successfully changed project path to: D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [46064] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2484866705 [EditorId] 2484866705 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [41488] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3204673387 [EditorId] 3204673387 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [46064] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2484866705 [EditorId] 2484866705 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [41488] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3204673387 [EditorId] 3204673387 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 16.93 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 16.21 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.0f1 (fb119bb0b476)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/2022.3.0f1/Editor/Data/Resources/UnitySubsystems
@@ -69,44 +69,44 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditors/2022.3.0f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/2022.3.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/UnityEditors/2022.3.0f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56984
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56676
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditors/2022.3.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005194 seconds.
-- Loaded All Assemblies, in  0.319 seconds
+Registered in 0.003657 seconds.
+- Loaded All Assemblies, in  0.280 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.269 seconds
-Domain Reload Profiling: 588ms
-	BeginReloadAssembly (84ms)
+- Finished resetting the current domain, in  0.223 seconds
+Domain Reload Profiling: 503ms
+	BeginReloadAssembly (75ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (34ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (56ms)
-	LoadAllAssembliesAndSetupDomain (134ms)
-		LoadAssemblies (83ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (46ms)
+	LoadAllAssembliesAndSetupDomain (116ms)
+		LoadAssemblies (74ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (132ms)
-			TypeCache.Refresh (131ms)
-				TypeCache.ScanAssembly (118ms)
+		AnalyzeDomain (113ms)
+			TypeCache.Refresh (112ms)
+				TypeCache.ScanAssembly (103ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (1ms)
-	FinalizeReload (269ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (224ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (207ms)
+		SetupLoadedEditorAssemblies (174ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (9ms)
-			SetLoadedEditorAssemblies (7ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (136ms)
-			ProcessInitializeOnLoadMethodAttributes (53ms)
+			ProcessInitializeOnLoadAttributes (119ms)
+			ProcessInitializeOnLoadMethodAttributes (42ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -119,52 +119,52 @@ Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 - Loaded All Assemblies, in  0.930 seconds
-Refreshing native plugins compatible for Editor in 4.88 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 4.73 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Properties/Unity.Properties.Internals.asmref has no target assembly definition
-TypeManager.Initialize took: 306ms
+TypeManager.Initialize took: 290ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.107 seconds
-Domain Reload Profiling: 3037ms
-	BeginReloadAssembly (133ms)
+- Finished resetting the current domain, in  2.051 seconds
+Domain Reload Profiling: 2980ms
+	BeginReloadAssembly (113ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (7ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (23ms)
-	RebuildCommonClasses (32ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (27ms)
-	LoadAllAssembliesAndSetupDomain (726ms)
-		LoadAssemblies (346ms)
+		CreateAndSetChildDomain (21ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (26ms)
+	LoadAllAssembliesAndSetupDomain (750ms)
+		LoadAssemblies (337ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (440ms)
-			TypeCache.Refresh (398ms)
-				TypeCache.ScanAssembly (383ms)
-			ScanForSourceGeneratedMonoScriptInfo (32ms)
-			ResolveRequiredComponents (11ms)
-	FinalizeReload (2107ms)
+		AnalyzeDomain (469ms)
+			TypeCache.Refresh (425ms)
+				TypeCache.ScanAssembly (409ms)
+			ScanForSourceGeneratedMonoScriptInfo (33ms)
+			ResolveRequiredComponents (10ms)
+	FinalizeReload (2051ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1931ms)
+		SetupLoadedEditorAssemblies (1885ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (4ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (82ms)
-			ProcessInitializeOnLoadAttributes (805ms)
-			ProcessInitializeOnLoadMethodAttributes (1033ms)
-			AfterProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (764ms)
+			ProcessInitializeOnLoadMethodAttributes (1030ms)
+			AfterProcessingInitializeOnLoad (2ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
+		AwakeInstancesAfterBackupRestoration (5ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 4.70 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 5.00 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 8468 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 186 unused Assets / (4.9 MB). Loaded Objects now: 8922.
+Unloading 8469 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 186 unused Assets / (4.9 MB). Loaded Objects now: 8923.
 Memory consumption went from 360.7 MB to 355.8 MB.
-Total: 7.025900 ms (FindLiveObjects: 0.773000 ms CreateObjectMapping: 0.206600 ms MarkObjects: 4.867800 ms  DeleteObjects: 1.177400 ms)
+Total: 9.174500 ms (FindLiveObjects: 1.411400 ms CreateObjectMapping: 0.454900 ms MarkObjects: 5.497100 ms  DeleteObjects: 1.808800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEditor.Snap.SnapSettingsWindow: 5fb792d44d0bbc465fb792d44d0bbc46 -> 
@@ -408,6 +408,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.VFXBasicUpdateEditor: 32cff4998bcd9db732cff4998bcd9db7 -> 
   custom:DOTSType/UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInMetadata: 78d56c74584cef1178d56c74584cef11 -> 
   custom:DOTSType/UnityEditor.Graphs.ParameterControllerEditor: 8d1df144f0236d1c8d1df144f0236d1c -> 
+  custom:DOTSType/UnityEngine.Timeline.AnimationTrack: e804b62f712e753be804b62f712e753b -> 
   custom:DOTSType/UnityEngine.Rendering.HighDefinition.PaniniProjection: fc8267d958fac3ccfc8267d958fac3cc -> 
   custom:DOTSType/UnityEditor.LightAnchorEditorTool: 759a7ffb3ca61ef6759a7ffb3ca61ef6 -> 
   custom:DOTSType/UnityEditor.VFX.Block.PositionDepth: efd024e224421adbefd024e224421adb -> 
@@ -415,7 +416,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.Block.SubpixelAA: 4f41ed06a95a3aa34f41ed06a95a3aa3 -> 
   custom:DOTSType/UnityEditor.Search.ASIEI03: ae6d523238e8a9bbae6d523238e8a9bb -> 
   custom:DOTSType/UnityEditor.VFX.Block.ConformToSDF: cd68bd7d74da2dcccd68bd7d74da2dcc -> 
-  custom:DOTSType/UnityEngine.Timeline.AnimationTrack: e804b62f712e753be804b62f712e753b -> 
   custom:DOTSType/Unity.Burst.Editor.BurstInspectorGUI: 075603ac3632f647075603ac3632f647 -> 
   custom:DOTSType/UnityEditor.CustomRenderTextureEditor: 2beac6136de0b0242beac6136de0b024 -> 
   custom:DOTSType/Cinemachine.CinemachineSameAsFollowTarget: 85056980c8aedf6985056980c8aedf69 -> 
@@ -762,9 +762,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Search.ColumnEditor: 7bada86685b9efb77bada86685b9efb7 -> 
   custom:DOTSType/Unity.Entities.Serialization.DotsSerialization+FolderNode: 91c8e158cbb67e5891c8e158cbb67e58 -> 
   custom:DOTSType/UnityEditor.Rendering.LookDev.EnvironmentEditor: 294de7a56331916d294de7a56331916d -> 
+  custom:DOTSType/UnityEditor.StreamingControllerEditor: 25f1475a967e5c3725f1475a967e5c37 -> 
   custom:DOTSType/UnityEditor.ProfilerWindow: 410a464c42722d6a410a464c42722d6a -> 
   custom:DOTSType/UnityEditor.VFX.VFXGraphCompiledData+VFXImplicitContextOfExposedExpression: 92dce4eeb13b52fa92dce4eeb13b52fa -> 
-  custom:DOTSType/UnityEditor.StreamingControllerEditor: 25f1475a967e5c3725f1475a967e5c37 -> 
   custom:DOTSType/UnityEngine.UI.HorizontalLayoutGroup: 44486e8c2243819644486e8c22438196 -> 
   custom:DOTSType/Cinemachine.Editor.FollowOffsetTool: c7fabc23291df2f2c7fabc23291df2f2 -> 
   custom:DOTSType/UnityEditor.VFX.Operator.Floor: dad3a2634c66cfb2dad3a2634c66cfb2 -> 
@@ -962,6 +962,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.OcclusionCullingWindow: b3fa360b2548ba22b3fa360b2548ba22 -> 
   custom:DOTSType/UnityEditor.TerrainTools.ThermalErosionTool: dbaf9cd16b7276dedbaf9cd16b7276de -> 
   custom:DOTSType/UnityEditor.ShaderGraph.ShaderGraphImporterEditor: f1d0b3182054f6c3f1d0b3182054f6c3 -> 
+  custom:ProjectSettings/EntitiesClientSettings.asset: 57fa4463d8597ee36c3803b5983b6213 -> 
   custom:DOTSType/Unity.VisualScripting.UnityOnJointBreak2DMessageListener: a8b76952c6d9c48aa8b76952c6d9c48a -> 
   custom:DOTSType/Cinemachine.Editor.CinemachineOrbitalTransposerEditor: 06d8e3cda54b280806d8e3cda54b2808 -> 
   custom:DOTSType/UnityEditor.VFX.Operator.Epsilon: 242901fdd64670d2242901fdd64670d2 -> 
@@ -1347,10 +1348,10 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.VisualEffectControlTrackInspector: ec1ee9e18f6ee34eec1ee9e18f6ee34e -> 
   custom:DOTSType/Cinemachine.Editor.CinemachineBlenderSettingsEditor: 2d89a3ef85c05f972d89a3ef85c05f97 -> 
   custom:DOTSType/UnityEditor.ComputeShaderInspector: 1b0000d96f177b061b0000d96f177b06 -> 
-  custom:DOTSType/UnityEngine.Cloth: 097d32f178ba46b1097d32f178ba46b1 -> 
+  custom:DOTSType/UnityEditor.ImportActivityWindow: 769439dc29896697769439dc29896697 -> 
   custom:DOTSType/SdfBakerSettingsEditor: f1d89d7d285741f4f1d89d7d285741f4 -> 
   custom:DOTSType/Unity.Scenes.SceneSectionStreamingData: 637c7237907367be637c7237907367be -> 
-  custom:DOTSType/UnityEditor.ImportActivityWindow: 769439dc29896697769439dc29896697 -> 
+  custom:DOTSType/UnityEngine.Cloth: 097d32f178ba46b1097d32f178ba46b1 -> 
   custom:DOTSType/UnityEngine.Rendering.UI.DebugUIHandlerVector4: ef8d022604a9e20cef8d022604a9e20c -> 
   custom:DOTSType/UnityEditor.Rendering.HighDefinition.HDAdditionalReflectionDataEditor: 0bf5cc96f99f18dd0bf5cc96f99f18dd -> 
   custom:DOTSType/UnityEditor.VFX.Block.VelocitySpherical: 7fc5575fff52ad117fc5575fff52ad11 -> 
@@ -1388,8 +1389,8 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.UISystemPreviewWindow: 6b73786c73e236436b73786c73e23643 -> 
   custom:DOTSType/Unity.Entities.RetainBlobAssetBatchPtr: 14017b765908ee1d14017b765908ee1d -> 
   custom:DOTSType/Unity.VisualScripting.GlobalMessageListener: ce0992f13092fc49ce0992f13092fc49 -> 
-  custom:DOTSType/UnityEditor.Search.ASIEI09: 3004ec8dfc1fc27f3004ec8dfc1fc27f -> 
   custom:DOTSType/UnityEditor.VFX.VFXObject: a3a0d55fcb869675a3a0d55fcb869675 -> 
+  custom:DOTSType/UnityEditor.Search.ASIEI09: 3004ec8dfc1fc27f3004ec8dfc1fc27f -> 
   custom:DOTSType/UnityEditor.VFX.Block.CollisionAABox: 2ecb48f43674c9052ecb48f43674c905 -> 
   custom:DOTSType/Cinemachine.CinemachineFramingTransposer: ce9f56574835391bce9f56574835391b -> 
   custom:DOTSType/UnityEditor.Experimental.MultiArtifactTestImporter: e1d4b0b6e916944be1d4b0b6e916944b -> 
@@ -1535,10 +1536,10 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Snap.SnapIncrementSettingsWindow: fc1d9794ca51b341fc1d9794ca51b341 -> 
   custom:DOTSType/UnityEditor.VFX.UI.VFXAttachPanel: b5c8a0e6a8651e7cb5c8a0e6a8651e7c -> 
   custom:DOTSType/UnityEngine.Camera: 05394a3ae19adf4305394a3ae19adf43 -> 
+  custom:DOTSType/UnityEngine.VFX.Utility.VFXEnabledBinder: 9d6a2a2de9f93dfd9d6a2a2de9f93dfd -> 
   custom:DOTSType/Unity.VisualScripting.UnityOnInputFieldValueChangedMessageListener: 0e850322c46e2ffa0e850322c46e2ffa -> 
   custom:DOTSType/UnityEditor.VFX.Block.PositionLine: 2a4d345fe051df972a4d345fe051df97 -> 
   custom:DOTSType/UnityEditor.AvatarMaskInspector: 9866127dd3f3402c9866127dd3f3402c -> 
-  custom:DOTSType/UnityEngine.VFX.Utility.VFXEnabledBinder: 9d6a2a2de9f93dfd9d6a2a2de9f93dfd -> 
   custom:DOTSType/UnityEngine.Rendering.HighDefinition.Compositor.AlphaInjection: ae68041af49b30e5ae68041af49b30e5 -> 
   custom:DOTSType/Cinemachine.CinemachineFreeLookEditor: fe801d44ca279d54fe801d44ca279d54 -> 
   custom:DOTSType/UnityEditor.TerrainColliderEditor: 6210a698fc2301946210a698fc230194 -> 
@@ -2257,11 +2258,3 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Rendering.HighDefinition.HDReflectionProbeEditor: 6688f143bb3ba4e96688f143bb3ba4e9 -> 
   custom:DOTSType/UnityEditor.Search.ASIEI05: 443471f4b46f9067443471f4b46f9067 -> 
   custom:DOTSType/UnityEditor.VFX.HDRP.VFXHDRPSubOutput: 5665f73fd0c521065665f73fd0c52106 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 990419.094691 seconds.
-  path: Assets/Settings/SkyandFogSettingsProfile.asset
-  artifactKey: Guid(8ba92e2dd7f884a0f88b98fa2d235fe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/SkyandFogSettingsProfile.asset using Guid(8ba92e2dd7f884a0f88b98fa2d235fe7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '23628ccfd69425002d35900d9108907c') in 0.016425 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 10
