@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7112.3955, g: 7678.5986, b: 7172.704, a: 1}
+  m_IndirectSpecularColor: {r: 7112.1455, g: 7678.208, b: 7171.243, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -438,7 +438,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341930908}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: 0.2921622, z: -0, w: 0.95636886}
   m_LocalPosition: {x: -27.4, y: 22.3, z: 198.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -446,7 +446,7 @@ Transform:
   - {fileID: 1823688467}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 33.975, z: 0}
 --- !u!114 &341930913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +545,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 572600542}
-  - component: {fileID: 572600541}
   m_Layer: 0
   m_Name: Scene Data Manager
   m_TagString: Untagged
@@ -553,18 +552,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &572600541
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572600540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3d110399f708c46a33a1f10b2ec2fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &572600542
 Transform:
   m_ObjectHideFlags: 1
@@ -739,21 +726,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461377153}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d65d9a73565b4694083365c439dce000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInEditor: 0
+  runInEditor: 1
   randomRotation: 1
-  maxDisplacement: 0.5
+  maxDisplacement: 0.118
   randomSize: 2.75
   maxSlope: 0.5
   falloff: 0.328
   meshes:
-  - {fileID: 4300000, guid: c8542799e804ef04eb35ba93777008a8, type: 2}
+  - {fileID: 4300000, guid: 9a249c33299836d45ae597069d9324e2, type: 2}
   meshesLOD:
-  - {fileID: 4300000, guid: c8542799e804ef04eb35ba93777008a8, type: 2}
+  - {fileID: 4300000, guid: 9a249c33299836d45ae597069d9324e2, type: 2}
   matPlants:
   - {fileID: 2100000, guid: 948426d59363b5447a1193696f550e56, type: 2}
   matPlantsLOD:
@@ -762,9 +749,9 @@ MonoBehaviour:
   cam: {fileID: 1823688466}
   lightP: {fileID: 157207114}
   chunkSize: 20
-  viewDistance: 200
+  viewDistance: 300
   viewDistanceLOD: 30
-  plantDistanceInt: 3
+  plantDistanceInt: 2
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0

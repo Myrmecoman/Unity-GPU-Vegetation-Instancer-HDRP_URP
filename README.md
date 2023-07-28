@@ -35,6 +35,6 @@ All the code is commented and was made to be easily readable.
 
 ## Work in progress
 
-GrassInstancer displays the material as pitch black at the moment. The shader probably has a bug.   
+Better randomization, currently patterns can be recognized.
 Support multiple objects instantiation for VegetationInstancer.cs.   
 Be able to place objects with a density lower than 1 object per meter.

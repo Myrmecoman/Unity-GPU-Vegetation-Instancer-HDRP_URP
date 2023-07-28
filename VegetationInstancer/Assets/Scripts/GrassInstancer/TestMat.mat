@@ -215,7 +215,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Scale: 0
+    - _Scale: 0.51
     - _ShadowBrightness: 0.3
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -254,8 +254,8 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _WindNoiseScale: 0.64
-    - _WindStrength: 9.2
+    - _WindNoiseScale: 0.3
+    - _WindStrength: 17.46
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
@@ -264,7 +264,7 @@ Material:
     - Color_4a0326186f2d494ca13ebffd0037f737: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_228862aa249c49b280f3c886696f59e2: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_98e5333215b14d60950bddc38b6eb673: {r: 2, g: -3.73, b: 0, a: 0}
-    - _AOColor: {r: 0.18075727, g: 0.8490566, b: 0.14017442, a: 1}
+    - _AOColor: {r: 0.5637993, g: 0.8113208, b: 0.26406196, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,8 +275,8 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _PrimaryCol: {r: 0.35306808, g: 0.6132076, b: 0.118592024, a: 1}
-    - _SecondaryCol: {r: 0.2908101, g: 0.7924528, b: 0.13082945, a: 1}
+    - _PrimaryCol: {r: 0.37173417, g: 0.4056604, b: 0.09758811, a: 1}
+    - _SecondaryCol: {r: 0.31838596, g: 0.6509434, b: 0.21186365, a: 1}
     - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
@@ -285,7 +285,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-    - _WindSpeed: {r: -4.92, g: 3, b: 0, a: 0}
+    - _WindSpeed: {r: 5.01, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &181354533474061715
 MonoBehaviour:

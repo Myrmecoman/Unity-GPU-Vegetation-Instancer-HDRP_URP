@@ -85,12 +85,12 @@ public class GrassSpawner : MonoBehaviour
             chunkSize = 2;
         if (viewDistanceLOD <= 0)
             viewDistanceLOD = 1;
-        if (viewDistanceLOD > 300)
-            viewDistanceLOD = 300;
+        if (viewDistanceLOD > 500)
+            viewDistanceLOD = 500;
         if (viewDistance <= 0)
             viewDistance = 2;
-        if (viewDistance > 300)
-            viewDistance = 300;
+        if (viewDistance > 500)
+            viewDistance = 500;
 
         totalChunkPlantsCount = plantDistanceInt * chunkSize * plantDistanceInt * chunkSize;
     }
@@ -118,8 +118,8 @@ public class GrassSpawner : MonoBehaviour
 
         rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
 
-        allInstances = new NativeArray<Matrix4x4>(1000000, Allocator.Persistent);
-        trsBuffer = new ComputeBuffer(1000000, 4 * 4 * sizeof(float));
+        allInstances = new NativeArray<Matrix4x4>(3000000, Allocator.Persistent);
+        trsBuffer = new ComputeBuffer(3000000, 4 * 4 * sizeof(float));
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
 
         UpdateAllVariables(); // this is done in a separate function so that it can be called when RunInEditor changes
@@ -268,10 +268,9 @@ public class GrassSpawner : MonoBehaviour
         Vector3 lightDir = lightP.forward;
         matPlants[0].SetVector("_LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
 
-        // don't do this every frame, for now it's ok for tests
         uint[] args = new uint[5];
         args[0] = (uint)meshes[0].GetIndexCount(0);
-        args[1] = (uint)allInstances.Length;
+        args[1] = (uint)i;
         args[2] = (uint)meshes[0].GetIndexStart(0);
         args[3] = (uint)meshes[0].GetBaseVertex(0);
         args[4] = 0;
