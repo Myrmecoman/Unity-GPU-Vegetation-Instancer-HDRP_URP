@@ -37,10 +37,8 @@ public class GrassSpawner : MonoBehaviour
     public float falloff = 1f;
 
     [Header("Objects to spawn")]
-    public Mesh[] meshes;
-    public Mesh[] meshesLOD;
-    public Material[] matPlants;
-    public Material[] matPlantsLOD;
+    public GameObject plant;
+    public GameObject plantLOD;
     [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere.")]
     public int[] textureIndexes;
 
@@ -66,6 +64,11 @@ public class GrassSpawner : MonoBehaviour
     private TerrainTextures terrainTex;
     private int totalChunkPlantsCount;
     private Unity.Mathematics.Random rnd;
+
+    private Mesh mesh;
+    private Mesh meshLOD;
+    private Material mat;
+    private Material matLOD;
 
     private ComputeBuffer argsBuffer;
     private ComputeBuffer trsBuffer;
@@ -118,8 +121,13 @@ public class GrassSpawner : MonoBehaviour
 
         rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
 
-        allInstances = new NativeArray<Matrix4x4>(3000000, Allocator.Persistent);
-        trsBuffer = new ComputeBuffer(3000000, 4 * 4 * sizeof(float));
+        mesh = plant.GetComponent<MeshFilter>().sharedMesh;
+        meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
+        mat = plant.GetComponent<MeshRenderer>().sharedMaterial;
+        matLOD = plantLOD.GetComponent<MeshRenderer>().sharedMaterial;
+
+        allInstances = new NativeArray<Matrix4x4>(10000000, Allocator.Persistent);
+        trsBuffer = new ComputeBuffer(10000000, 4 * 4 * sizeof(float));
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
 
         UpdateAllVariables(); // this is done in a separate function so that it can be called when RunInEditor changes
@@ -266,20 +274,20 @@ public class GrassSpawner : MonoBehaviour
         }
 
         Vector3 lightDir = lightP.forward;
-        matPlants[0].SetVector("_LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
+        mat.SetVector("_LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
 
         uint[] args = new uint[5];
-        args[0] = (uint)meshes[0].GetIndexCount(0);
+        args[0] = (uint)mesh.GetIndexCount(0);
         args[1] = (uint)i;
-        args[2] = (uint)meshes[0].GetIndexStart(0);
-        args[3] = (uint)meshes[0].GetBaseVertex(0);
+        args[2] = (uint)mesh.GetIndexStart(0);
+        args[3] = (uint)mesh.GetBaseVertex(0);
         args[4] = 0;
         argsBuffer.SetData(args);
 
         trsBuffer.SetData(allInstances.GetSubArray(0, i - 1));
-        matPlants[0].SetBuffer("trsBuffer", trsBuffer);
+        mat.SetBuffer("trsBuffer", trsBuffer);
 
-        Graphics.DrawMeshInstancedIndirect(meshes[0], 0, matPlants[0], new Bounds(cam.transform.position, Vector3.one * cam.farClipPlane), argsBuffer, 0, null,
+        Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, new Bounds(cam.transform.position, Vector3.one * cam.farClipPlane), argsBuffer, 0, null,
         UnityEngine.Rendering.ShadowCastingMode.Off);
 
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;

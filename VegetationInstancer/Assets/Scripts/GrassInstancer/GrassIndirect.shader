@@ -105,12 +105,24 @@ Shader "Unlit/GrassBladeIndirect"
             float _WindStrength;
             float _WindNoiseScale;
 
+            float4 RotateAroundXInDegrees(float4 vertex, float degrees)
+            {
+                float alpha = degrees * UNITY_PI / 180.0;
+                float sina, cosa;
+                sincos(alpha, sina, cosa);
+                float2x2 m = float2x2(cosa, -sina, sina, cosa);
+                return float4(mul(m, vertex.yz), vertex.xw).zxyw;
+            }
+
             v2f vert (appdata v, uint instanceID : SV_InstanceID)
             {
                 v2f o;
     
                 //applying transformation matrix
                 float3 positionWorldSpace = mul(trsBuffer[instanceID], float4(v.vertex.xyz, 1));
+                float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
+                positionWorldSpace += localPosition.xyz;
+                positionWorldSpace.y += 0.6f;
 
                 //move world UVs by time
                 float4 worldPos = float4(positionWorldSpace, 1);
