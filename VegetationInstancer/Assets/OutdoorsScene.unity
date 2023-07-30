@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7112.9346, g: 7678.7197, b: 7176.3135, a: 1}
+  m_IndirectSpecularColor: {r: 7112.3643, g: 7678.536, b: 7172.087, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -438,7 +438,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341930908}
-  m_LocalRotation: {x: -0, y: 0.38432837, z: -0, w: 0.9231965}
+  m_LocalRotation: {x: -0, y: 0.46161863, z: -0, w: 0.8870785}
   m_LocalPosition: {x: -27.4, y: 22.3, z: 198.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -446,7 +446,7 @@ Transform:
   - {fileID: 1823688467}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 45.204, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 54.983, z: 0}
 --- !u!114 &341930913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
   chunkSize: 20
   viewDistance: 150
   viewDistanceLOD: 30
-  plantDistanceInt: 5
+  plantDistanceInt: 1
 --- !u!114 &1461377156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,10 +731,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65d9a73565b4694083365c439dce000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInEditor: 1
+  runInEditor: 0
   randomRotation: 1
   maxDisplacement: 0.118
-  randomSize: 2.75
+  randomSize: 1
   maxSlope: 0.5
   falloff: 0.328
   plant: {fileID: 5138664864039170994, guid: 85beea2c95ae0f8468d0c24e440b8633, type: 3}
@@ -744,7 +744,7 @@ MonoBehaviour:
   cam: {fileID: 1823688466}
   lightP: {fileID: 157207114}
   chunkSize: 20
-  viewDistance: 120
+  viewDistance: 500
   viewDistanceLOD: 30
   plantDistanceInt: 6
 --- !u!1 &1823688464

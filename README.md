@@ -8,7 +8,7 @@ HDRP vegetation instancer is a unity project whose goal is to bring vegetation d
 
 It consists in 2 main scripts :
 
-- GrassInstancer.cs : in charge of displaying large amounts of grass (up to millions) using a custom shader and GPU indirect rendering. Currently the shader is bugged. It comes from this repository : https://github.com/MangoButtermilch/Unity-Grass-Instancer
+- GrassInstancer.cs : in charge of displaying large amounts of grass (up to millions) using a custom shader and GPU indirect rendering. The shader comes from this repository (with slight changes) : https://github.com/MangoButtermilch/Unity-Grass-Instancer. Also thanks to Acerola for the code explanation here : https://github.com/GarrettGunnell/Grass.
 
 ![GrassInstancer](./grassInstancer.png?raw=true "GrassInstancer")
 
@@ -38,5 +38,4 @@ All the code is commented and was made to be easily readable.
 Better randomization, currently patterns can be recognized.
 Support multiple objects instantiation for VegetationInstancer.cs.   
 Be able to place objects with a density lower than 1 object per meter.
-Place grass using GPU.
 Distance culling for grass (this way chunks are no longer visible).

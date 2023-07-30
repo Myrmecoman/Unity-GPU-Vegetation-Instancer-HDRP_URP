@@ -93,7 +93,7 @@ Shader "Unlit/GrassBladeIndirect"
                 Out = t;
             }
 
-            StructuredBuffer<float4x4> trsBuffer;
+            StructuredBuffer<float4x4> matricesBuffer;
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _PrimaryCol, _SecondaryCol, _AOColor, _TipColor;
@@ -119,10 +119,10 @@ Shader "Unlit/GrassBladeIndirect"
                 v2f o;
     
                 //applying transformation matrix
-                float3 positionWorldSpace = mul(trsBuffer[instanceID], float4(v.vertex.xyz, 1));
+                float3 positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
                 float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
                 positionWorldSpace += localPosition.xyz;
-                positionWorldSpace.y += 0.6f;
+                positionWorldSpace.y += 0.5f;
 
                 //move world UVs by time
                 float4 worldPos = float4(positionWorldSpace, 1);
