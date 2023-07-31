@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7112.3643, g: 7678.536, b: 7172.087, a: 1}
+  m_IndirectSpecularColor: {r: 7112.9307, g: 7678.7197, b: 7176.282, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -705,8 +705,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runInEditor: 0
   randomRotation: 1
-  maxDisplacement: 1
-  randomSize: 1.79
+  maxDisplacement: 10.6
+  randomSize: 1.28
   maxSlope: 0.512
   falloff: 0
   plants:
@@ -716,9 +716,9 @@ MonoBehaviour:
   textureIndexes: 00000000
   cam: {fileID: 1823688466}
   chunkSize: 20
-  viewDistance: 150
+  viewDistance: 120
   viewDistanceLOD: 30
-  plantDistanceInt: 1
+  plantDistanceInt: 8
 --- !u!114 &1461377156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,27 +726,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461377153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d65d9a73565b4694083365c439dce000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   runInEditor: 0
   randomRotation: 1
-  maxDisplacement: 0.118
+  maxDisplacement: 1
   randomSize: 1
   maxSlope: 0.5
-  falloff: 0.328
+  falloff: 0.535
   plant: {fileID: 5138664864039170994, guid: 85beea2c95ae0f8468d0c24e440b8633, type: 3}
-  plantLOD: {fileID: 5138664864039170994, guid: 85beea2c95ae0f8468d0c24e440b8633,
-    type: 3}
   textureIndexes: 00000000
   cam: {fileID: 1823688466}
   lightP: {fileID: 157207114}
   chunkSize: 20
-  viewDistance: 500
-  viewDistanceLOD: 30
-  plantDistanceInt: 6
+  viewDistance: 50
+  plantDistanceInt: 100
 --- !u!1 &1823688464
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,11 +20,11 @@ public struct PositionsJob : IJobParallelFor
     [ReadOnly]
     public int3 chunkPos;
     [ReadOnly]
-    public int D1Size;
+    public float D1Size;
     [ReadOnly]
-    public int chunkSize;
+    public float chunkSize;
     [ReadOnly]
-    public int plantDistance;
+    public float plantDistance;
 
     // procedural parameters
     [ReadOnly]
@@ -49,8 +49,8 @@ public struct PositionsJob : IJobParallelFor
         float zDisplacement = rnd.NextFloat(-displacement, displacement);
 
         float3 normal;
-        float x = xDisplacement + chunkPos.x - chunkSize / 2 + (index / D1Size) * 1f / plantDistance;
-        float z = zDisplacement + chunkPos.z - chunkSize / 2 + (index % D1Size) * 1f / plantDistance;
+        float x = xDisplacement + chunkPos.x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
+        float z = zDisplacement + chunkPos.z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
         float y = terrainData.SampleHeight(new float2(x, z), out normal);
 
         // check texture

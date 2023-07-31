@@ -2,7 +2,6 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
-using Unity.Collections.LowLevel.Unsafe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +40,7 @@ public class GrassInstancer : MonoBehaviour
 
     [Header("Objects to spawn")]
     public GameObject plant;
-    public GameObject plantLOD;
+    //public GameObject plantLOD;
     [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere.")]
     public int[] textureIndexes;
 
@@ -55,9 +54,9 @@ public class GrassInstancer : MonoBehaviour
     [Tooltip("Maximum display range")]
     public int viewDistance = 50;
     [Tooltip("Distance from which low quality plants are spawned instead of normal plants")]
-    public int viewDistanceLOD = 30;
-    [Tooltip("Number of plants in a meter. 5 means one plant every 0.2 meter")]
-    [Range(1, 10)]
+    private int viewDistanceLOD = 30;
+    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
+    [Range(1, 300)]
     public int plantDistanceInt = 5;
 
 
@@ -71,7 +70,6 @@ public class GrassInstancer : MonoBehaviour
     private Mesh mesh;
     //private Mesh meshLOD;
     private Material mat;
-    //private Material matLOD;
 
     private uint[] args;
 
@@ -96,7 +94,6 @@ public class GrassInstancer : MonoBehaviour
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
         //meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
         mat = plant.GetComponent<MeshRenderer>().sharedMaterial;
-        //matLOD = plantLOD.GetComponent<MeshRenderer>().sharedMaterial;
 
         if (chunkSize < 2)
             chunkSize = 2;
@@ -109,11 +106,11 @@ public class GrassInstancer : MonoBehaviour
         if (viewDistance > 500)
             viewDistance = 500;
 
-        totalChunkPlantsCount = plantDistanceInt * chunkSize * plantDistanceInt * chunkSize;
+        totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
 
         args = new uint[5];
         args[0] = (uint)mesh.GetIndexCount(0);
-        args[1] = (uint)(plantDistanceInt * chunkSize * plantDistanceInt * chunkSize);
+        args[1] = (uint)totalChunkPlantsCount;
         args[2] = (uint)mesh.GetIndexStart(0);
         args[3] = (uint)mesh.GetBaseVertex(0);
         args[4] = 0;
@@ -178,15 +175,13 @@ public class GrassInstancer : MonoBehaviour
         chunk.positions = new NativeArray<Matrix4x4>(totalChunkPlantsCount, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
 
         chunk.argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-        //chunk.argsBufferLOD = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         chunk.argsBuffer.SetData(args);
-        //chunk.argsBufferLOD.SetData(argsLOD);
 
         chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
         chunk.culledPositionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
 
         // set positions
-        int D1Size = plantDistanceInt * chunkSize;
+        int D1Size = plantDistanceInt;
         uint seed = (uint)((center.x == 0 ? 1 : center.x) + (center.z * 10000 == 0 ? 1 : center.z * 10000));
         rnd.InitState(seed);
         var positionsSampler = new PositionsJob
@@ -215,7 +210,9 @@ public class GrassInstancer : MonoBehaviour
         Vector3 lightDir = lightP.forward;
         chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
         chunk.positionsBuffer.SetData(chunk.positions);
-        chunk.material.SetVector("_LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
+        chunk.material.SetFloat("ViewRangeSq", viewDistance * viewDistance);
+        chunk.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
+        chunk.material.SetVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
         chunk.material.SetBuffer("matricesBuffer", chunk.positionsBuffer);
 
         return chunk;
@@ -305,11 +302,12 @@ public class GrassInstancer : MonoBehaviour
         foreach (var e in chunksData)
         {
             GrassChunk g = e.Value;
+            g.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
             Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.Off);
         }
         
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
-        Debug.Log("Full loop time : " + chunkDrawing + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
+        //Debug.Log("Full loop time : " + chunkDrawing + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
     }
 
 
@@ -334,7 +332,6 @@ public class GrassInstancer : MonoBehaviour
 public struct GrassChunk
 {
     public ComputeBuffer argsBuffer;
-    //public ComputeBuffer argsBufferLOD;
     public ComputeBuffer positionsBuffer;
     public ComputeBuffer culledPositionsBuffer; // for later
     public Material material;

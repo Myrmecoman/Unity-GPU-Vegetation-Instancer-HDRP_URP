@@ -21,7 +21,7 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Random rotation")]
     public bool randomRotation = true;
     [Tooltip("Random displacement")]
-    [Range(0, 1)]
+    [Range(0, 100)]
     public float maxDisplacement = 0.5f;
     [Tooltip("Random size difference, 5 means it can go from size/5 to size*5")]
     [Range(1, 5)]
@@ -50,8 +50,8 @@ public class VegetationInstancer : MonoBehaviour
     public int viewDistance = 50;
     [Tooltip("Distance from which low quality plants are spawned instead of normal plants")]
     public int viewDistanceLOD = 30;
-    [Tooltip("Number of plants in a meter. 5 means one plant every 0.2 meter")]
-    [Range(1, 10)]
+    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
+    [Range(1, 100)]
     public int plantDistanceInt = 5;
 
 
@@ -101,7 +101,7 @@ public class VegetationInstancer : MonoBehaviour
             rpsPlantsLOD[i] = new RenderParams(plantsLOD[i].GetComponent<MeshRenderer>().sharedMaterial);
         }
 
-        totalChunkPlantsCount = plantDistanceInt * chunkSize * plantDistanceInt * chunkSize;
+        totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
     }
 
 
@@ -150,7 +150,7 @@ public class VegetationInstancer : MonoBehaviour
     {
         // find the chunks which appared on screen, and those which disappeared
         newChunks = new NativeList<int4>(Allocator.TempJob);
-        PickVisibleChunksJob chunksSampler = new PickVisibleChunksJob
+        var chunksSampler = new PickVisibleChunksJob
         {
             terrainData = terrainCpy,
             newChunks = newChunks,
@@ -200,7 +200,7 @@ public class VegetationInstancer : MonoBehaviour
     // once the function is done, the 2 jobs resulting struct contain each an array with the positions of the plants
     private void FillVisibleChunks()
     {
-        int D1Size = plantDistanceInt * chunkSize;
+        int D1Size = plantDistanceInt;
 
         for (int i = 0; i < newChunks.Length; i++)
         {

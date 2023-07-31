@@ -94,11 +94,14 @@ Shader "Unlit/GrassBladeIndirect"
             }
 
             StructuredBuffer<float4x4> matricesBuffer;
+            float4 LightDir;
+            float4 CamPos;
+            float ViewRangeSq;
+
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _PrimaryCol, _SecondaryCol, _AOColor, _TipColor;
             float _Scale;
-            float4 _LightDir;
             float _MeshDeformationLimitLow;
             float _MeshDeformationLimitTop;
             float4 _WindSpeed;
@@ -117,9 +120,23 @@ Shader "Unlit/GrassBladeIndirect"
             v2f vert (appdata v, uint instanceID : SV_InstanceID)
             {
                 v2f o;
-    
-                //applying transformation matrix
                 float3 positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
+    /*
+                if ((CamPos.x - matricesBuffer[instanceID]._11) * (CamPos.x - matricesBuffer[instanceID]._11) +
+                    (CamPos.y - matricesBuffer[instanceID]._12) * (CamPos.y - matricesBuffer[instanceID]._12) +
+                    (CamPos.z - matricesBuffer[instanceID]._13) * (CamPos.z - matricesBuffer[instanceID]._13) > ViewRangeSq)
+                    //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                    //o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
+                    //return o;
+    */
+    /*
+                if ((CamPos.x - matricesBuffer[instanceID]._11) == 0)
+                    o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
+                    return o;
+    */
+                //applying transformation matrix
+                positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
                 float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
                 positionWorldSpace += localPosition.xyz;
                 positionWorldSpace.y += 0.5f;
@@ -148,14 +165,13 @@ Shader "Unlit/GrassBladeIndirect"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                
                 float4 col = lerp(_PrimaryCol, _SecondaryCol, i.uv.y);
 
                 //from https://github.com/GarrettGunnell/Grass/blob/main/Assets/Shaders/ModelGrass.shader
-                float light = clamp(dot(_LightDir, normalize(float3(0, 1, 0))), 0 , 1);
+                float light = clamp(dot(LightDir, normalize(float3(0, 1, 0))), 0 , 1);
                 float4 ao = lerp(_AOColor, 1.0f, i.uv.y);
                 float4 tip = lerp(0.0f, _TipColor, i.uv.y * i.uv.y * (1.0f + _Scale));
-    float4 grassColor = (col + tip) * ao; // * light; // light needs to be fixed
+                float4 grassColor = (col + tip) * ao; // * light; // light needs to be fixed
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);

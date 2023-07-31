@@ -35,7 +35,6 @@ All the code is commented and was made to be easily readable.
 
 ## Work in progress
 
-Better randomization, currently patterns can be recognized.
+Better randomization, currently patterns can be recognized.   
 Support multiple objects instantiation for VegetationInstancer.cs.   
-Be able to place objects with a density lower than 1 object per meter.
-Distance culling for grass (this way chunks are no longer visible).
+Distance culling for grass (this way chunks are no longer visible).   
