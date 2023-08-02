@@ -38,3 +38,4 @@ All the code is commented and was made to be easily readable.
 Better randomization, currently patterns can be recognized.   
 Support multiple objects instantiation for VegetationInstancer.cs.   
 Distance culling for grass (this way chunks are no longer visible).   
+Support multiple terrains.

@@ -41,7 +41,7 @@ Shader "Unlit/BillboardGrass" {
             float4 CamPos;
             float ViewRangeSq;
 
-            sampler2D _MainTex, _HeightMap;
+            sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Rotation, _WindStrength, _CullingBias, _DisplacementStrength, _LODCutoff;
             

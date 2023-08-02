@@ -53,20 +53,11 @@ public struct PositionsJob : IJobParallelFor
         float z = zDisplacement + chunkPos.z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
         float y = terrainData.SampleHeight(new float2(x, z), out normal);
 
-        // check texture
+        // get max allowed texture value
         float texValueAtPos = terrainTex.GetTextureAtPos(new float2(x, z), textureIndex);
-        if (textureIndex != -1 && texValueAtPos < falloff)
-        {
-            int texIndexAtPos = terrainTex.GetTextureAtPos(new float2(x, z));
-            if (textureIndex != texIndexAtPos)
-            {
-                outputPlants[index] = Matrix4x4.TRS(new float3(0, -10000, 0), quaternion.identity, new float3(1, 1, 1));
-                return;
-            }
-        }
 
-        // check slope
-        if (normal.y < maxSlope)
+        // check slope and texture
+        if (texValueAtPos < falloff || normal.y < maxSlope)
         {
             outputPlants[index] = Matrix4x4.TRS(new float3(0, -10000, 0), quaternion.identity, new float3(1, 1, 1));
             return;
@@ -75,7 +66,7 @@ public struct PositionsJob : IJobParallelFor
         float3 pos = new float3(x, y, z);
         Quaternion q = Quaternion.FromToRotation(new float3(0, 1, 0), normal);
         if (rotate)
-            q *= Quaternion.Euler(0, rnd.NextFloat(0, 360), 0);
+            q *= Quaternion.Euler(0, (x * y * z * 9873)%360, 0);
         float newSize = rnd.NextFloat(1f/sizeChange, sizeChange);
 
         if (texValueAtPos >= falloff)

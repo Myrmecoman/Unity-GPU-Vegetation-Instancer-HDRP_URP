@@ -51,7 +51,7 @@ public struct TerrainTextures
 
     public float GetTextureAtPos(float2 worldPos, int texIndex)
     {
-        if (texIndex >= textureCount)
+        if (texIndex >= textureCount || texIndex < 0)
             return 0;
 
         // terrains cannot be rotated, so we don't have to worry about rotation

@@ -255,7 +255,7 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _WindNoiseScale: 0.3
-    - _WindStrength: 17.46
+    - _WindStrength: 25
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
@@ -275,12 +275,12 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _PrimaryCol: {r: 0.24001262, g: 0.3301887, b: 0.113697045, a: 1}
-    - _SecondaryCol: {r: 0.49076548, g: 0.7735849, b: 0.20069422, a: 1}
+    - _PrimaryCol: {r: 0.31832498, g: 0.4433962, b: 0.14431292, a: 1}
+    - _SecondaryCol: {r: 0.435478, g: 0.6037736, b: 0.12815951, a: 1}
     - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _TipColor: {r: 0.38035217, g: 0.5660378, b: 0.15752938, a: 1}
+    - _TipColor: {r: 0.2456283, g: 0.3490566, b: 0.12019401, a: 1}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
