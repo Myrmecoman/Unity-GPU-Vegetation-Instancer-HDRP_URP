@@ -2,8 +2,9 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
-using Unity.Collections.LowLevel.Unsafe;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 // /!\ ATTENTION : Vegetation instancer will only work with square and unrotated terrains. You should also not have holes in your terrain.
@@ -40,6 +41,8 @@ public class VegetationInstancer : MonoBehaviour
     public GameObject[] plantsLOD;
     [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere.")]
     public int[] textureIndexes;
+    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
+    public int[] plantDistanceInt;
 
     [Header("Settings")]
     [Tooltip("Camera")]
@@ -50,9 +53,6 @@ public class VegetationInstancer : MonoBehaviour
     public int viewDistance = 50;
     [Tooltip("Distance from which low quality plants are spawned instead of normal plants")]
     public int viewDistanceLOD = 30;
-    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
-    [Range(1, 100)]
-    public int plantDistanceInt = 5;
 
 
     private Mesh[] meshes;
@@ -63,30 +63,41 @@ public class VegetationInstancer : MonoBehaviour
     private FrustrumPlanes frustrumPlanes;
     private TerrainHeight terrainCpy;
     private TerrainTextures terrainTex;
-    private int totalChunkPlantsCount;
+    private int[] totalChunkPlantsCount;
     private Unity.Mathematics.Random rnd;
 
 
     // for both containers, int4 is real world position and 1 if LOD else 0
     private NativeList<int4> newChunks;
     // this contains all the chunks along with their positions data
-    private UnsafeHashMap<int4, NativeArray<Matrix4x4>> chunks;
+    private Dictionary<int4, NativeArray<Matrix4x4>[]> chunks;
 
 
     private void UpdateAllVariables()
     {
-        chunks.Clear();
+        FreeContainers();
+
+        // get terrain data
+        terrain = Terrain.activeTerrain;
+
+        frustrumPlanes = new FrustrumPlanes();
+        chunks = new Dictionary<int4, NativeArray<Matrix4x4>[]>();
+
+        terrainCpy = new TerrainHeight(terrain, Allocator.Persistent);
+        terrainTex = new TerrainTextures(terrain, Allocator.Persistent);
+
+        rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
 
         if (chunkSize < 2)
             chunkSize = 2;
         if (viewDistanceLOD <= 0)
             viewDistanceLOD = 1;
-        if (viewDistanceLOD > 300)
-            viewDistanceLOD = 300;
+        if (viewDistanceLOD > 500)
+            viewDistanceLOD = 500;
         if (viewDistance <= 0)
             viewDistance = 2;
-        if (viewDistance > 300)
-            viewDistance = 300;
+        if (viewDistance > 500)
+            viewDistance = 500;
 
         meshes = new Mesh[plants.Length];
         meshesLOD = new Mesh[plants.Length];
@@ -101,7 +112,9 @@ public class VegetationInstancer : MonoBehaviour
             rpsPlantsLOD[i] = new RenderParams(plantsLOD[i].GetComponent<MeshRenderer>().sharedMaterial);
         }
 
-        totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
+        totalChunkPlantsCount = new int[plants.Length];
+        for (int i = 0; i < plants.Length; i++)
+            totalChunkPlantsCount[i] = plantDistanceInt[i] * plantDistanceInt[i];
     }
 
 
@@ -116,32 +129,34 @@ public class VegetationInstancer : MonoBehaviour
             return;
         }
 
-        // get terrain data
-        terrain = Terrain.activeTerrain;
-
-        frustrumPlanes = new FrustrumPlanes();
-        chunks = new UnsafeHashMap<int4, NativeArray<Matrix4x4>>(1024, Allocator.Persistent);
-
-        terrainCpy = new TerrainHeight(terrain, Allocator.Persistent);
-        terrainTex = new TerrainTextures(terrain, Allocator.Persistent);
-
-        rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
-
         UpdateAllVariables(); // this is done in a separate function so that it can be called when RunInEditor changes
+    }
+
+
+    private void FreeContainers()
+    {
+        if (chunks != null)
+        {
+            foreach (var e in chunks)
+            {
+                foreach (var i in e.Value)
+                {
+                    if (i.IsCreated)
+                        i.Dispose();
+                }
+            }
+        }
+
+        if (terrainCpy.heightMap.IsCreated)
+            terrainCpy.Dispose();
+        if (terrainTex.textureMap.IsCreated)
+            terrainTex.Dispose();
     }
 
 
     private void OnDestroy()
     {
-        foreach (var e in chunks)
-        {
-            if (e.Value.IsCreated)
-                e.Value.Dispose();
-        }
-
-        chunks.Dispose();
-        terrainCpy.Dispose();
-        terrainTex.Dispose();
+        FreeContainers();
     }
 
 
@@ -156,7 +171,7 @@ public class VegetationInstancer : MonoBehaviour
             newChunks = newChunks,
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
             modifiedChunks = new NativeList<int4>(Allocator.TempJob),
-            existingChunks = chunks.GetKeyArray(Allocator.TempJob),
+            existingChunks = new NativeArray<int4>(chunks.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = frustrumPlanes,
             size1D = (int)terrain.terrainData.size.x,
             camPos = new int3((int)cam.transform.position.x, (int)cam.transform.position.y, (int)cam.transform.position.z),
@@ -169,12 +184,18 @@ public class VegetationInstancer : MonoBehaviour
 
         // add the chunks which appeared on view
         for (int i = 0; i < newChunks.Length; i++)
-            chunks.Add(newChunks[i], new NativeArray<Matrix4x4>(totalChunkPlantsCount, Allocator.Persistent, NativeArrayOptions.UninitializedMemory));
+        {
+            var array = new NativeArray<Matrix4x4>[plants.Length];
+            for (int j = 0; j < plants.Length; j++)
+                array[j] = new NativeArray<Matrix4x4>(totalChunkPlantsCount[j], Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+            chunks.Add(newChunks[i], array);
+        }
 
         // remove the chunks which disappeared from view
         for (int i = 0; i < chunksSampler.deletedChunks.Length; i++)
         {
-            chunks[chunksSampler.deletedChunks[i]].Dispose();
+            for (int j = 0; j < plants.Length; j++)
+                chunks[chunksSampler.deletedChunks[i]][j].Dispose();
             chunks.Remove(chunksSampler.deletedChunks[i]);
         }
 
@@ -200,32 +221,34 @@ public class VegetationInstancer : MonoBehaviour
     // once the function is done, the 2 jobs resulting struct contain each an array with the positions of the plants
     private void FillVisibleChunks()
     {
-        int D1Size = plantDistanceInt;
-
         for (int i = 0; i < newChunks.Length; i++)
         {
-            uint seed = (uint)((newChunks[i].x == 0 ? 1 : newChunks[i].x) + (newChunks[i].z * 10000 == 0 ? 1 : newChunks[i].z * 10000));
-            rnd.InitState(seed);
-            PositionsJob positionsSampler = new PositionsJob
+            for (int j = 0; j < plants.Length; j++)
             {
-                outputPlants = chunks[newChunks[i]],
-                terrainData = terrainCpy,
-                terrainTex = terrainTex,
-                chunkPos = new int3(newChunks[i].x, newChunks[i].y, newChunks[i].z),
-                D1Size = D1Size,
-                chunkSize = chunkSize,
-                plantDistance = plantDistanceInt,
+                int D1Size = plantDistanceInt[j];
+                uint seed = (uint)((newChunks[i].x + 1) + ((newChunks[i].z + 1) * 10000) + (j * 42));
+                rnd.InitState(seed);
+                PositionsJob positionsSampler = new PositionsJob
+                {
+                    outputPlants = chunks[newChunks[i]][j],
+                    terrainData = terrainCpy,
+                    terrainTex = terrainTex,
+                    chunkPos = new int3(newChunks[i].x, newChunks[i].y, newChunks[i].z),
+                    D1Size = D1Size,
+                    chunkSize = chunkSize,
+                    plantDistance = plantDistanceInt[j],
 
-                // procedural variables
-                rnd = rnd,
-                maxSlope = maxSlope,
-                sizeChange = randomSize,
-                rotate = randomRotation,
-                displacement = maxDisplacement,
-                textureIndex = textureIndexes[0],
-                falloff = falloff,
-            };
-            positionsSampler.Schedule(totalChunkPlantsCount, 64).Complete();
+                    // procedural variables
+                    rnd = rnd,
+                    maxSlope = maxSlope,
+                    sizeChange = randomSize,
+                    rotate = randomRotation,
+                    displacement = maxDisplacement,
+                    textureIndex = textureIndexes[j],
+                    falloff = falloff,
+                };
+                positionsSampler.Schedule(totalChunkPlantsCount[j], 64).Complete();
+            }
         }
         newChunks.Dispose();
     }
@@ -237,7 +260,7 @@ public class VegetationInstancer : MonoBehaviour
             return;
         if (!Application.isPlaying)
         {
-            if (runInEditor && !chunks.IsCreated)
+            if (runInEditor && chunks == null)
                 Awake();
             if (runInEditor)
                 UpdateAllVariables();
@@ -260,9 +283,15 @@ public class VegetationInstancer : MonoBehaviour
         foreach (var e in chunks)
         {
             if (e.Key.w == 0)
-                Graphics.RenderMeshInstanced(rpsPlants[0], meshes[0], 0, e.Value); // instanciating object with corresponding mesh and material
+            {
+                for (int j = 0; j < plants.Length; j++)
+                    Graphics.RenderMeshInstanced(rpsPlants[j], meshes[j], 0, e.Value[j]);
+            }
             else
-                Graphics.RenderMeshInstanced(rpsPlantsLOD[0], meshesLOD[0], 0, e.Value); // instanciating object with corresponding mesh and material
+            {
+                for (int j = 0; j < plants.Length; j++)
+                    Graphics.RenderMeshInstanced(rpsPlantsLOD[j], meshesLOD[j], 0, e.Value[j]);
+            }
         }
 
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
@@ -272,7 +301,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if ((!Application.isPlaying && !runInEditor) || !chunks.IsCreated)
+        if ((!Application.isPlaying && !runInEditor) || chunks == null)
             return;
 
         foreach (var e in chunks)

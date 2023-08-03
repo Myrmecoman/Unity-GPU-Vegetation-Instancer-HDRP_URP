@@ -66,7 +66,7 @@ public struct PositionsJob : IJobParallelFor
         float3 pos = new float3(x, y, z);
         Quaternion q = Quaternion.FromToRotation(new float3(0, 1, 0), normal);
         if (rotate)
-            q *= Quaternion.Euler(0, (x * y * z * 9873)%360, 0);
+            q *= Quaternion.Euler(0, rnd.NextFloat(0f, 360f), 0);
         float newSize = rnd.NextFloat(1f/sizeChange, sizeChange);
 
         if (texValueAtPos >= falloff)
