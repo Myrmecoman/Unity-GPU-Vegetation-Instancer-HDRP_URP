@@ -120,23 +120,18 @@ Shader "Unlit/GrassBladeIndirect"
             v2f vert (appdata v, uint instanceID : SV_InstanceID)
             {
                 v2f o;
+    
                 float3 positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
-    /*
-                if ((CamPos.x - matricesBuffer[instanceID]._11) * (CamPos.x - matricesBuffer[instanceID]._11) +
-                    (CamPos.y - matricesBuffer[instanceID]._12) * (CamPos.y - matricesBuffer[instanceID]._12) +
-                    (CamPos.z - matricesBuffer[instanceID]._13) * (CamPos.z - matricesBuffer[instanceID]._13) > ViewRangeSq)
-                    //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                    //o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
-                    //return o;
-    */
-    /*
-                if ((CamPos.x - matricesBuffer[instanceID]._11) == 0)
+                if ((CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
+                    (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
+                    (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z) > ViewRangeSq) // ViewRangeSq
+                {
                     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
+                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 1, positionWorldSpace.z, 1));
                     return o;
-    */
+                }
+    
                 //applying transformation matrix
-                positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
                 float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
                 positionWorldSpace += localPosition.xyz;
                 positionWorldSpace.y += 0.5f;
@@ -160,6 +155,7 @@ Shader "Unlit/GrassBladeIndirect"
                 o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
 
                 UNITY_TRANSFER_FOG(o,o.vertex);
+    
                 return o;
             }
 

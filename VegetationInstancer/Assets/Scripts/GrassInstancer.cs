@@ -211,7 +211,7 @@ public class GrassInstancer : MonoBehaviour
         Vector3 lightDir = lightP.forward;
         chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
         chunk.positionsBuffer.SetData(chunk.positions);
-        chunk.material.SetFloat("ViewRangeSq", viewDistance * viewDistance);
+        chunk.material.SetFloat("ViewRangeSq", (viewDistance - chunkSize/2) * (viewDistance - chunkSize / 2));
         chunk.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
         chunk.material.SetVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
         chunk.material.SetBuffer("matricesBuffer", chunk.positionsBuffer);
