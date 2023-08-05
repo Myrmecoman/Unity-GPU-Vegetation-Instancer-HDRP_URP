@@ -237,7 +237,8 @@ Shader "Unlit/GrassBladeIndirect"
                 float minMaxDist = max - min;
                 return min + fracVal * minMaxDist;
             }
-
+            
+            // which trs is the right one ?
             float4x4 trs(float3 t, float4 r, float3 s)
             {
                 float4x4 res;
@@ -260,6 +261,28 @@ Shader "Unlit/GrassBladeIndirect"
                 return res;
             }
 
+            float4x4 trs2(float3 t, float4 r, float3 s)
+            {
+                float4x4 res;
+                res._11 = (1.0 - 2.0 * (r.y * r.y + r.z * r.z)) * s.x;
+                res._12 = (r.x * r.y + r.z * r.w) * s.x * 2.0;
+                res._13 = (r.x * r.z - r.y * r.w) * s.x * 2.0;
+                res._14 = 0.0;
+                res._21 = (r.x * r.y - r.z * r.w) * s.y * 2.0;
+                res._22 = (1.0 - 2.0 * (r.x * r.x + r.z * r.z)) * s.y;
+                res._23 = (r.y * r.z + r.x * r.w) * s.y * 2.0;
+                res._24 = 0.0;
+                res._31 = (r.x * r.z + r.y * r.w) * s.z * 2.0;
+                res._32 = (r.y * r.z - r.x * r.w) * s.z * 2.0;
+                res._33 = (1.0 - 2.0 * (r.x * r.x + r.y * r.y)) * s.z;
+                res._34 = 0.0;
+                res._41 = t.x;
+                res._42 = t.y;
+                res._43 = t.z;
+                res._44 = 1.0;
+                return res;
+            }
+
             float4x4 GeneratePosRotScale(int index)
             {
                 float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
@@ -276,7 +299,7 @@ Shader "Unlit/GrassBladeIndirect"
 
                 // check slope and texture
                 if (texValueAtPos < falloff || normal.y < maxSlope)
-                    return trs(float3(0, -10000, 0), float4(1, 1, 1, 1), float3(1, 1, 1));
+                    return trs(float3(0, -10000, 0), float4(0, 0, 0, 1), float3(1, 1, 1));
     
                 float3 pos = float3(x, y, z);
     
