@@ -92,8 +92,210 @@ Shader "Unlit/GrassBladeIndirect"
 
                 Out = t;
             }
+            
+            // terrain height related variables and functions -------------------------
+            static StructuredBuffer<float> heightMap;
+            static int resolution;
+            static float4 sampleSize;
+            static float4 AABBMin;
+            static float4 AABBMax;
+            
+            struct Triangle
+            {
+                float3 V0;
+                float3 V1;
+                float3 V2;
+                float3 Normal;
+            };
 
-            StructuredBuffer<float4x4> matricesBuffer;
+            Triangle MakeTriangle(float3 v0, float3 v1, float3 v2)
+            {
+                Triangle tri;
+                tri.V0 = v0;
+                tri.V1 = v1;
+                tri.V2 = v2;
+                tri.Normal = normalize(cross(v1 - v0, v2 - v0));
+                return tri;
+            }
+
+            float TriSampleHeight(Triangle tri, float2 position)
+            {
+                    // plane formula: a(x - x0) + b(y - y0) + c(z - z0) = 0
+                    // <a,b,c> is a normal vector for the plane
+                    // (x,y,z) and (x0,y0,z0) are any points on the plane
+                return (-tri.Normal.x * (position.x - tri.V0.x) - tri.Normal.z * (position.y - tri.V0.z)) / tri.Normal.y + tri.V0.y;
+            }
+
+            bool IsWithinBounds(float2 worldPos)
+            {
+                return
+                        worldPos.x >= AABBMin.x &&
+                        worldPos.y >= AABBMin.z &&
+                        worldPos.x <= AABBMax.x &&
+                        worldPos.y <= AABBMax.z;
+            }
+
+            float3 GetWorldVertex(int2 heightMapCrds)
+            {
+                int i = heightMapCrds.x + heightMapCrds.y * resolution;
+                float3 vertexPercentages = float3
+                (
+                    (float) heightMapCrds.x / (resolution - 1),
+                    heightMap[heightMapCrds.x * resolution + heightMapCrds.y],
+                    (float) heightMapCrds.y / (resolution - 1)
+                );
+                return AABBMin.xyz + (AABBMax.xyz - AABBMin.xyz) * vertexPercentages;
+            }
+
+            Triangle GetTriAtPosition(float2 worldPosition)
+            {
+                float2 localPos =
+                float2(
+                        worldPosition.x - AABBMin.x,
+                        worldPosition.y - AABBMin.z);
+                float2 samplePos = localPos / sampleSize.xy;
+                int2 sampleFloor = int2(floor(samplePos.x), floor(samplePos.y));
+                float2 sampleDecimal = samplePos - sampleFloor;
+                bool upperLeftTri = sampleDecimal.y > sampleDecimal.x;
+                int2 v1Offset = upperLeftTri ? int2(0, 1) : int2(1, 1);
+                int2 v2Offset = upperLeftTri ? int2(1, 1) : int2(1, 0);
+                float3 v0 = GetWorldVertex(sampleFloor);
+                float3 v1 = GetWorldVertex(sampleFloor + v1Offset);
+                float3 v2 = GetWorldVertex(sampleFloor + v2Offset);
+                return MakeTriangle(v0, v1, v2);
+            }
+
+            float4 SampleHeight(float2 worldPosition)
+            {
+                if (!IsWithinBounds(worldPosition)) // return crazy value instead of throwing an error
+                    return float4(-10000, 0, 0, 0);
+
+                Triangle tri = GetTriAtPosition(worldPosition);
+                return float4(TriSampleHeight(tri, worldPosition), tri.Normal.x, tri.Normal.y, tri.Normal.z);
+            }
+            // ------------------------------------------------------------------------
+            
+            // texture related variables and functions --------------------------------
+            static StructuredBuffer<float> textureMapAllTextures;
+            static int terrainPosX;
+            static int terrainPosY;
+            static float terrainSizeX;
+            static float terrainSizeY;
+            static int textureArraySizeX;
+            static int textureArraySizeY;
+            static int resolutionTex;
+            static int textureCount;
+
+            int round(float val)
+            {
+                if (val % 1 > 0.5)
+                    return (int) (val + 1);
+                return (int) (val);
+            }
+
+            float GetTextureAtPos(float2 worldPos, int texIndex)
+            {
+                if (texIndex >= textureCount || texIndex < 0)
+                    return 0;
+
+                // terrains cannot be rotated, so we don't have to worry about rotation
+                float2 relativePosition = worldPos - float2(terrainPosX, terrainPosY);
+                int2 pos = int2
+                (
+                    (int) round((relativePosition.x / terrainSizeX) * textureArraySizeX),
+                    (int) round((relativePosition.y / terrainSizeY) * textureArraySizeY)
+                );
+
+                if (pos.x > textureArraySizeX)
+                    pos.x = textureArraySizeX - 1;
+                if (pos.y > textureArraySizeY)
+                    pos.y = textureArraySizeY - 1;
+
+                return textureMapAllTextures[pos.x + resolutionTex * (pos.y + textureCount * texIndex)];
+            }
+            // ---------------------------------------------------------------------
+
+            // generation related variables and function ------------------------------
+            int chunkPosX;
+            int chunkPosZ;
+            static float randomSeed;
+            static float D1Size;
+            static float chunkSize;
+            static float plantDistance;
+            static float maxSlope;
+            static float sizeChange;
+            static int rotate;
+            static float displacement;
+            static int textureIndex;
+            static float falloff;
+            
+            // generates random value between min and max
+            float GenerateRandom(float index, float min, float max)
+            {
+                float seed = randomSeed * index * 0.193728912263;
+                float fracVal = frac(sin(seed) * 43758.5453);
+                float minMaxDist = max - min;
+                return min + fracVal * minMaxDist;
+            }
+
+            float4x4 trs(float3 t, float4 r, float3 s)
+            {
+                float4x4 res;
+                res._11 = (1.0-2.0*(r.y*r.y+r.z*r.z))*s.x;
+                res._21 = (r.x*r.y+r.z*r.w)*s.x*2.0;
+                res._31 = (r.x*r.z-r.y*r.w)*s.x*2.0;
+                res._41 = 0.0;
+                res._12 = (r.x*r.y-r.z*r.w)*s.y*2.0;
+                res._22 = (1.0-2.0*(r.x*r.x+r.z*r.z))*s.y;
+                res._32 = (r.y*r.z+r.x*r.w)*s.y*2.0;
+                res._42 = 0.0;
+                res._13 = (r.x*r.z+r.y*r.w)*s.z*2.0;
+                res._23 = (r.y*r.z-r.x*r.w)*s.z*2.0;
+                res._33 = (1.0-2.0*(r.x*r.x+r.y*r.y))*s.z;
+                res._43 = 0.0;
+                res._14 = t.x;
+                res._24 = t.y;
+                res._34 = t.z;
+                res._44 = 1.0;
+                return res;
+            }
+
+            float4x4 GeneratePosRotScale(int index)
+            {
+                float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
+                float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
+    
+                float x = xDisplacement + chunkPosX - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
+                float z = zDisplacement + chunkPosZ - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
+                float4 yAndNormal = SampleHeight(float2(x, z));
+                float y = yAndNormal.x;
+                float3 normal = yAndNormal.yzw;
+
+                // get max allowed texture value
+                float texValueAtPos = GetTextureAtPos(float2(x, z), textureIndex);
+
+                // check slope and texture
+                if (texValueAtPos < falloff || normal.y < maxSlope)
+                    return trs(float3(0, -10000, 0), float4(1, 1, 1, 1), float3(1, 1, 1));
+    
+                float3 pos = float3(x, y, z);
+    
+                /*
+                Quaternion q = Quaternion.FromToRotation(float3(0, 1, 0), normal);
+                if (rotate == 1)
+                    q *= Quaternion.Euler(0, GenerateRandom(index * 0.0983633, 0f, 360f), 0);
+                */
+    
+                float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
+                if (texValueAtPos >= falloff)
+                    newSize *= max(texValueAtPos, 0.1);
+                
+                //return trs(pos, q, newSize);
+                return trs(float3(pos.x, 0, pos.z), float4(0, 0, 0, 1), float3(100, 100, 100));
+            }
+            // ------------------------------------------------------------------------
+            
+            // material variables and functions ------------------------------------
             float4 LightDir;
             float4 CamPos;
             float ViewRangeSq;
@@ -120,8 +322,9 @@ Shader "Unlit/GrassBladeIndirect"
             v2f vert (appdata v, uint instanceID : SV_InstanceID)
             {
                 v2f o;
-    
-                float3 positionWorldSpace = mul(matricesBuffer[instanceID], float4(v.vertex.xyz, 1));
+                
+                float4x4 PosRotSizeMatrix = GeneratePosRotScale(instanceID);
+                float3 positionWorldSpace = mul(PosRotSizeMatrix, float4(v.vertex.xyz, 1));
                 if ((CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
                     (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
                     (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z) > ViewRangeSq) // ViewRangeSq

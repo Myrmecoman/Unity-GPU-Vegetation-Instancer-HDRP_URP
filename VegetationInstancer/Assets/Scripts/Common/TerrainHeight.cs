@@ -10,8 +10,8 @@ using UnityEngine;
 public struct TerrainHeight
 {
     public NativeArray<float> heightMap;
-    int resolution;
-    float2 sampleSize;
+    public int resolution;
+    public float2 sampleSize;
     public AABB AABB { get; private set; }
     public bool IsValid => heightMap.IsCreated;
     int QuadCount => resolution - 1;

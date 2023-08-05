@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7112.9834, g: 7679.247, b: 7179.29, a: 1}
+  m_IndirectSpecularColor: {r: 7111.9697, g: 7678.4736, b: 7191.9854, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -735,8 +735,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runInEditor: 0
   randomRotation: 1
-  maxDisplacement: 0.396
-  randomSize: 1.31
+  maxDisplacement: 0
+  randomSize: 1
   maxSlope: 0.5
   falloff: 0.166
   plant: {fileID: 5138664864039170994, guid: 85beea2c95ae0f8468d0c24e440b8633, type: 3}

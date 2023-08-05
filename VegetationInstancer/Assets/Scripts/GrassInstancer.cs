@@ -20,7 +20,7 @@ public class GrassInstancer : MonoBehaviour
     public static GrassInstancer instance;
 
     [Header("Visuals")]
-    [Tooltip("Run vegetation instancer in editor")]
+    [Tooltip("Run vegetation instancer in editor. This makes memory leaks so use carrefuly.")]
     public bool runInEditor = false;
 
     [Header("Procedural parameters")]
@@ -66,7 +66,9 @@ public class GrassInstancer : MonoBehaviour
     private TerrainHeight terrainCpy;
     private TerrainTextures terrainTex;
     private int totalChunkPlantsCount;
-    private Unity.Mathematics.Random rnd;
+
+    public ComputeBuffer heightBuffer;
+    public ComputeBuffer texBuffer;
 
     private Mesh mesh;
     //private Mesh meshLOD;
@@ -75,7 +77,7 @@ public class GrassInstancer : MonoBehaviour
     private uint[] args;
 
     // for both containers, int4 is real world position and 1 if LOD else 0
-    // this contains all the chunks along with their positions data
+    // this contains all the chunks data
     private Dictionary<int4, GrassChunk> chunksData;
 
 
@@ -89,8 +91,6 @@ public class GrassInstancer : MonoBehaviour
         chunksData = new Dictionary<int4, GrassChunk>(1024);
         terrainCpy = new TerrainHeight(terrain, Allocator.Persistent);
         terrainTex = new TerrainTextures(terrain, Allocator.Persistent);
-
-        rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
 
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
         //meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
@@ -115,6 +115,39 @@ public class GrassInstancer : MonoBehaviour
         args[2] = (uint)mesh.GetIndexStart(0);
         args[3] = (uint)mesh.GetBaseVertex(0);
         args[4] = 0;
+
+        mat.SetFloat("randomSeed", 873.304f);
+        mat.SetFloat("D1Size", plantDistanceInt);
+        mat.SetFloat("chunkSize", chunkSize);
+        mat.SetFloat("plantDistance", plantDistanceInt);
+        mat.SetFloat("maxSlope", maxSlope);
+        mat.SetFloat("sizeChange", randomSize);
+        mat.SetInt("rotate", randomRotation ? 1 : 0);
+        mat.SetFloat("displacement", maxDisplacement);
+        mat.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
+        mat.SetFloat("falloff", falloff);
+
+        heightBuffer = new ComputeBuffer(terrainCpy.heightMap.Length, sizeof(float));
+        heightBuffer.SetData(terrainCpy.heightMap.ToArray());
+        mat.SetBuffer("heightMap", heightBuffer);
+        mat.SetInteger("resolution", terrainCpy.resolution);
+        mat.SetVector("sampleSize", new Vector4(terrainCpy.sampleSize.x, terrainCpy.sampleSize.y, 0, 0));
+        mat.SetVector("AABBMin", new Vector4(terrainCpy.AABB.Min.x, terrainCpy.AABB.Min.y, terrainCpy.AABB.Min.z, 0));
+        mat.SetVector("AABBMax", new Vector4(terrainCpy.AABB.Max.x, terrainCpy.AABB.Max.y, terrainCpy.AABB.Max.z, 0));
+
+        texBuffer = new ComputeBuffer(terrainTex.textureMapAllTextures.Length, sizeof(float));
+        texBuffer.SetData(terrainTex.textureMapAllTextures.ToArray());
+        mat.SetBuffer("textureMapAllTextures", texBuffer);
+        mat.SetInteger("terrainPosX", terrainTex.terrainPos.x);
+        mat.SetInteger("terrainPosY", terrainTex.terrainPos.y);
+        mat.SetFloat("terrainSizeX", terrainTex.terrainSize.x);
+        mat.SetFloat("terrainSizeY", terrainTex.terrainSize.y);
+        mat.SetInteger("textureArraySizeX", terrainTex.textureArraySize.x);
+        mat.SetInteger("textureArraySizeY", terrainTex.textureArraySize.y);
+        mat.SetInteger("resolutionTex", terrainTex.resolution);
+        mat.SetInteger("textureCount", terrainTex.textureCount);
+
+        terrainTex.Dispose();
     }
 
 
@@ -142,30 +175,21 @@ public class GrassInstancer : MonoBehaviour
     private void FreeContainers()
     {
         if (chunksData != null)
-        {
-            foreach (var e in chunksData)
-            {
-                if (e.Value.positions.IsCreated)
-                    e.Value.positions.Dispose();
-            }
             chunksData.Clear();
-        }
 
         if (terrainCpy.heightMap.IsCreated)
             terrainCpy.Dispose();
         if (terrainTex.textureMap.IsCreated)
             terrainTex.Dispose();
+
+        heightBuffer?.Release();
+        texBuffer?.Release();
     }
 
 
     private void DisposeChunk(GrassChunk g)
     {
-        if (g.positions.IsCreated)
-            g.positions.Dispose();
-
         g.argsBuffer?.Release();
-        g.positionsBuffer?.Release();
-        g.culledPositionsBuffer?.Release();
     }
 
 
@@ -173,48 +197,15 @@ public class GrassInstancer : MonoBehaviour
     {
         var chunk = new GrassChunk();
 
-        chunk.positions = new NativeArray<Matrix4x4>(totalChunkPlantsCount, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
-
         chunk.argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         chunk.argsBuffer.SetData(args);
-
-        chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
-        chunk.culledPositionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
-
-        // set positions
-        int D1Size = plantDistanceInt;
-        uint seed = (uint)((center.x == 0 ? 1 : center.x) + (center.z * 10000 == 0 ? 1 : center.z * 10000));
-        rnd.InitState(seed);
-        var positionsSampler = new PositionsJob
-        {
-            outputPlants = chunk.positions,
-            terrainData = terrainCpy,
-            terrainTex = terrainTex,
-            chunkPos = new int3(center.x, center.y, center.z),
-            D1Size = D1Size,
-            chunkSize = chunkSize,
-            plantDistance = plantDistanceInt,
-
-            // procedural variables
-            rnd = rnd,
-            maxSlope = maxSlope,
-            sizeChange = randomSize,
-            rotate = randomRotation,
-            displacement = maxDisplacement,
-            textureIndex = textureIndexes[0],
-            falloff = falloff,
-        };
-        positionsSampler.Schedule(totalChunkPlantsCount, 64).Complete();
 
         chunk.material = new Material(mat);
 
         Vector3 lightDir = lightP.forward;
-        chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
-        chunk.positionsBuffer.SetData(chunk.positions);
         chunk.material.SetFloat("ViewRangeSq", (viewDistance - chunkSize/2) * (viewDistance - chunkSize / 2));
         chunk.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
         chunk.material.SetVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
-        chunk.material.SetBuffer("matricesBuffer", chunk.positionsBuffer);
 
         return chunk;
     }
@@ -304,6 +295,8 @@ public class GrassInstancer : MonoBehaviour
         {
             GrassChunk g = e.Value;
             g.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
+            g.material.SetInteger("chunkPosX", e.Key.x);
+            g.material.SetInteger("chunkPosZ", e.Key.z);
             Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.Off);
         }
         
@@ -333,8 +326,5 @@ public class GrassInstancer : MonoBehaviour
 public struct GrassChunk
 {
     public ComputeBuffer argsBuffer;
-    public ComputeBuffer positionsBuffer;
-    public ComputeBuffer culledPositionsBuffer; // for later
     public Material material;
-    public NativeArray<Matrix4x4> positions;
 }

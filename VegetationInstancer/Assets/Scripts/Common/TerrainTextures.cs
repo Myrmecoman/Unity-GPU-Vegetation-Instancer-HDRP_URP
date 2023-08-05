@@ -11,8 +11,8 @@ public struct TerrainTextures
 {
     public NativeArray<int> textureMap; // texture map is the array of most important textures at each index
     public NativeArray<float> textureMapAllTextures; // texture map all textures is the array of all textures, usefull for falloff
-    int resolution;
-    int textureCount;
+    public int resolution;
+    public int textureCount;
     public int2 textureArraySize;
     public int2 terrainPos;
     public float2 terrainSize;
@@ -30,6 +30,7 @@ public struct TerrainTextures
     }
 
 
+    /*
     public int GetTextureAtPos(float2 worldPos)
     {
         // terrains cannot be rotated, so we don't have to worry about rotation
@@ -47,7 +48,7 @@ public struct TerrainTextures
 
         return textureMap[pos.x * resolution + pos.y];
     }
-
+    */
 
     public float GetTextureAtPos(float2 worldPos, int texIndex)
     {
