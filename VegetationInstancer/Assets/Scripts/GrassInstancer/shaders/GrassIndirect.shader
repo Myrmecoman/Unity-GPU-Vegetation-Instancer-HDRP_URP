@@ -284,7 +284,8 @@ Shader "Unlit/GrassBladeIndirect"
             }
 
             float4x4 GeneratePosRotScale(int index)
-            {
+{
+                /*
                 float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
                 float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
     
@@ -303,18 +304,18 @@ Shader "Unlit/GrassBladeIndirect"
     
                 float3 pos = float3(x, y, z);
     
-                /*
                 Quaternion q = Quaternion.FromToRotation(float3(0, 1, 0), normal);
                 if (rotate == 1)
                     q *= Quaternion.Euler(0, GenerateRandom(index * 0.0983633, 0f, 360f), 0);
-                */
     
                 float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
                 if (texValueAtPos >= falloff)
                     newSize *= max(texValueAtPos, 0.1);
-                
+                */
                 //return trs(pos, q, newSize);
-                return trs(float3(pos.x, 0, pos.z), float4(0, 0, 0, 1), float3(100, 100, 100));
+                float x = chunkPosX - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
+                float z = chunkPosZ - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
+                return trs2(float3(x, 0, z), float4(0, 0, 0, 1), float3(1, 1, 1));
             }
             // ------------------------------------------------------------------------
             
