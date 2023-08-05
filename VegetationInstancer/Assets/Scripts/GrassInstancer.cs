@@ -165,7 +165,6 @@ public class GrassInstancer : MonoBehaviour
 
         g.argsBuffer?.Release();
         g.positionsBuffer?.Release();
-        g.culledPositionsBuffer?.Release();
     }
 
 
@@ -177,9 +176,6 @@ public class GrassInstancer : MonoBehaviour
 
         chunk.argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         chunk.argsBuffer.SetData(args);
-
-        chunk.positionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
-        chunk.culledPositionsBuffer = new ComputeBuffer(totalChunkPlantsCount, 4 * 4 * sizeof(float));
 
         // set positions
         int D1Size = plantDistanceInt;
@@ -334,7 +330,6 @@ public struct GrassChunk
 {
     public ComputeBuffer argsBuffer;
     public ComputeBuffer positionsBuffer;
-    public ComputeBuffer culledPositionsBuffer; // for later
     public Material material;
     public NativeArray<Matrix4x4> positions;
 }
