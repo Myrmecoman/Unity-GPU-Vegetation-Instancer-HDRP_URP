@@ -5,7 +5,6 @@ using Unity.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static UnityEditor.PlayerSettings;
 
 
 // /!\ ATTENTION : Vegetation instancer will only work with square and unrotated terrains. You should also not have holes in your terrain.

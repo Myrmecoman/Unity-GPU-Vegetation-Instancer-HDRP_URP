@@ -1,4 +1,4 @@
-Shader "Unlit/GrassBladeIndirect"
+Shader"Unlit/GrassBladeIndirect"
 {
     Properties
     {
@@ -13,6 +13,7 @@ Shader "Unlit/GrassBladeIndirect"
         _WindNoiseScale ("Wind Noise Scale", float) = 0.0
         _WindStrength ("Wind Strength", float) = 1.0
         _WindSpeed ("Wind Speed", Vector) = (0, 0, 0, 0)
+        _WindCutoff("Wind Cutoff", float) = 300.0
     }
     SubShader
     {
@@ -334,6 +335,7 @@ Shader "Unlit/GrassBladeIndirect"
             float4 _WindSpeed;
             float _WindStrength;
             float _WindNoiseScale;
+            float _WindCutoff;
 
             float4 RotateAroundXInDegrees(float4 vertex, float degrees)
             {
@@ -350,14 +352,18 @@ Shader "Unlit/GrassBladeIndirect"
                 
                 float4x4 PosRotSizeMatrix = GeneratePosRotScale(instanceID);
                 float3 positionWorldSpace = mul(PosRotSizeMatrix, float4(v.vertex.xyz, 1));
-                if ((CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
-                    (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
-                    (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z) > ViewRangeSq) // ViewRangeSq
+    
+                float distToCam = (CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
+                                  (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
+                                  (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z);
+    
+                if (distToCam > ViewRangeSq)
                 {
                     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                     o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 1, positionWorldSpace.z, 1));
                     return o;
                 }
+                float sqrWindCutoff = _WindCutoff * _WindCutoff;
     
                 //applying transformation matrix
                 float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
@@ -366,22 +372,23 @@ Shader "Unlit/GrassBladeIndirect"
 
                 //move world UVs by time
                 float4 worldPos = float4(positionWorldSpace, 1);
-                float2 worldUV = worldPos.xz + _WindSpeed * _Time.y; 
-
-                //creating noise from world UVs
-                float noise = 0;
-                Unity_SimpleNoise_float(worldUV, _WindNoiseScale, noise);
-                noise -= .5;
-
-                //to keep bottom part of mesh at its position
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                float smoothDeformation = smoothstep(_MeshDeformationLimitLow, _MeshDeformationLimitTop, o.uv.y);
-                float distortion = smoothDeformation * noise;
-
+                if (distToCam < sqrWindCutoff || instanceID%4 == 0) // if distance is higher than max wind dist, only animate 1/4 grass objects
+                {
+                    //creating noise from world UVs
+                    float2 worldUV = worldPos.xz + _WindSpeed * _Time.y;
+                    float noise = 0;
+                    Unity_SimpleNoise_float(worldUV, _WindNoiseScale, noise);
+                    noise -= .5;
+        
+                    //to keep bottom part of mesh at its position
+                    float smoothDeformation = smoothstep(_MeshDeformationLimitLow, _MeshDeformationLimitTop, o.uv.y);
+                    float distortion = smoothDeformation * noise;
+                    positionWorldSpace.xz += distortion * _WindStrength * normalize(_WindSpeed);
+                }
+                
                 //apply distortion
-                positionWorldSpace.xz += distortion * _WindStrength * normalize(_WindSpeed);
                 o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace, 1));
-
                 UNITY_TRANSFER_FOG(o,o.vertex);
     
                 return o;

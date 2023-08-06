@@ -254,6 +254,7 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
+    - _WindCutoff: 100
     - _WindNoiseScale: 0.3
     - _WindStrength: 25
     - _ZTestDepthEqualForOpaque: 3
