@@ -37,4 +37,5 @@ All the code is commented and was made to be easily readable.
 
 ## Work in progress
  
-Support multiple terrains.
+Support multiple terrains.   
+For the GrassInstancer, sometimes chunks seem to be drawn twice, to be fixed.

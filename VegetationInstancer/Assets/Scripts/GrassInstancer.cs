@@ -191,6 +191,7 @@ public class GrassInstancer : MonoBehaviour
     private void DisposeChunk(GrassChunk g)
     {
         g.argsBuffer?.Release();
+        Destroy(g.material);
     }
 
 
@@ -227,9 +228,7 @@ public class GrassInstancer : MonoBehaviour
 
         // add the chunks which appeared on view
         for (int i = 0; i < chunksSampler.newChunks.Length; i++)
-        {
             chunksData.Add(chunksSampler.newChunks[i], InitializeChunk(chunksSampler.newChunks[i]));
-        }
 
         // remove the chunks which disappeared from view
         for (int i = 0; i < chunksSampler.deletedChunks.Length; i++)
@@ -237,7 +236,7 @@ public class GrassInstancer : MonoBehaviour
             DisposeChunk(chunksData[chunksSampler.deletedChunks[i]]);
             chunksData.Remove(chunksSampler.deletedChunks[i]);
         }
-
+        /*
         // change the state of chunks which turned from non-LOD to LOD and vice versa
         for (int i = 0; i < chunksSampler.modifiedChunks.Length; i++)
         {
@@ -250,7 +249,7 @@ public class GrassInstancer : MonoBehaviour
                 math.abs(chunksSampler.modifiedChunks[i].w - 1)),
                 savedData);
         }
-
+        */
         chunksSampler.deletedChunks.Dispose();
         chunksSampler.modifiedChunks.Dispose();
         chunksSampler.existingChunks.Dispose();
@@ -295,7 +294,7 @@ public class GrassInstancer : MonoBehaviour
             GrassChunk g = e.Value;
             g.material.SetInteger("chunkPosX", e.Key.x);
             g.material.SetInteger("chunkPosZ", e.Key.z);
-            Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.Off);
+            Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On);
         }
         
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
@@ -307,7 +306,7 @@ public class GrassInstancer : MonoBehaviour
     {
         if ((!Application.isPlaying && !runInEditor) || chunksData == null)
             return;
-
+        /*
         foreach (var e in chunksData)
         {
             if (e.Key.w == 0)
@@ -317,6 +316,7 @@ public class GrassInstancer : MonoBehaviour
 
             Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
         }
+        */
     }
 }
 
