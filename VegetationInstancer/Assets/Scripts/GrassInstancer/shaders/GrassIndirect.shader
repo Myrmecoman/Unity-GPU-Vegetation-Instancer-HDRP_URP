@@ -94,11 +94,11 @@ Shader "Unlit/GrassBladeIndirect"
             }
             
             // terrain height related variables and functions -------------------------
-            static StructuredBuffer<float> heightMap;
-            static int resolution;
-            static float4 sampleSize;
-            static float4 AABBMin;
-            static float4 AABBMax;
+            uniform StructuredBuffer<float> heightMap;
+            uniform int resolution;
+            uniform float4 sampleSize;
+            uniform float4 AABBMin;
+            uniform float4 AABBMax;
             
             struct Triangle
             {
@@ -176,15 +176,15 @@ Shader "Unlit/GrassBladeIndirect"
             // ------------------------------------------------------------------------
             
             // texture related variables and functions --------------------------------
-            static StructuredBuffer<float> textureMapAllTextures;
-            static int terrainPosX;
-            static int terrainPosY;
-            static float terrainSizeX;
-            static float terrainSizeY;
-            static int textureArraySizeX;
-            static int textureArraySizeY;
-            static int resolutionTex;
-            static int textureCount;
+            uniform StructuredBuffer<float> textureMapAllTextures;
+            uniform int terrainPosX;
+            uniform int terrainPosY;
+            uniform float terrainSizeX;
+            uniform float terrainSizeY;
+            uniform int textureArraySizeX;
+            uniform int textureArraySizeY;
+            uniform int resolutionTex;
+            uniform int textureCount;
 
             int round(float val)
             {
@@ -218,16 +218,16 @@ Shader "Unlit/GrassBladeIndirect"
             // generation related variables and function ------------------------------
             int chunkPosX;
             int chunkPosZ;
-            static float randomSeed;
-            static float D1Size;
-            static float chunkSize;
-            static float plantDistance;
-            static float maxSlope;
-            static float sizeChange;
-            static int rotate;
-            static float displacement;
-            static int textureIndex;
-            static float falloff;
+            uniform float randomSeed;
+            uniform float D1Size;
+            uniform float chunkSize;
+            uniform float plantDistance;
+            uniform float maxSlope;
+            uniform float sizeChange;
+            uniform int rotate;
+            uniform float displacement;
+            uniform int textureIndex;
+            uniform float falloff;
             
             // generates random value between min and max
             float GenerateRandom(float index, float min, float max)
@@ -261,31 +261,35 @@ Shader "Unlit/GrassBladeIndirect"
                 return res;
             }
 
-            float4x4 trs2(float3 t, float4 r, float3 s)
+            float4 EulerToQuaternion(float3 euler)
             {
-                float4x4 res;
-                res._11 = (1.0 - 2.0 * (r.y * r.y + r.z * r.z)) * s.x;
-                res._12 = (r.x * r.y + r.z * r.w) * s.x * 2.0;
-                res._13 = (r.x * r.z - r.y * r.w) * s.x * 2.0;
-                res._14 = 0.0;
-                res._21 = (r.x * r.y - r.z * r.w) * s.y * 2.0;
-                res._22 = (1.0 - 2.0 * (r.x * r.x + r.z * r.z)) * s.y;
-                res._23 = (r.y * r.z + r.x * r.w) * s.y * 2.0;
-                res._24 = 0.0;
-                res._31 = (r.x * r.z + r.y * r.w) * s.z * 2.0;
-                res._32 = (r.y * r.z - r.x * r.w) * s.z * 2.0;
-                res._33 = (1.0 - 2.0 * (r.x * r.x + r.y * r.y)) * s.z;
-                res._34 = 0.0;
-                res._41 = t.x;
-                res._42 = t.y;
-                res._43 = t.z;
-                res._44 = 1.0;
-                return res;
+                float3 halfAngles = euler * 0.5;
+                float3 c = cos(halfAngles);
+                float3 s = sin(halfAngles);
+
+                float4 qx = float4(s.x, 0, 0, c.x);
+                float4 qy = float4(0, s.y, 0, c.y);
+                float4 qz = float4(0, 0, s.z, c.z);
+
+                float4 qxy = float4
+                (
+                    qx.w * qy.x + qx.x * qy.w + qx.y * qy.z - qx.z * qy.y,
+                    qx.w * qy.y - qx.x * qy.z + qx.y * qy.w + qx.z * qy.x,
+                    qx.w * qy.z + qx.x * qy.y - qx.y * qy.x + qx.z * qy.w,
+                    qx.w * qy.w - qx.x * qy.x - qx.y * qy.y - qx.z * qy.z
+                );
+
+                return float4
+                (
+                    qxy.w * qz.x + qxy.x * qz.w + qxy.y * qz.z - qxy.z * qz.y,
+                    qxy.w * qz.y - qxy.x * qz.z + qxy.y * qz.w + qxy.z * qz.x,
+                    qxy.w * qz.z + qxy.x * qz.y - qxy.y * qz.x + qxy.z * qz.w,
+                    qxy.w * qz.w - qxy.x * qz.x - qxy.y * qz.y - qxy.z * qz.z
+                );
             }
 
             float4x4 GeneratePosRotScale(int index)
-{
-                /*
+            {
                 float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
                 float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
     
@@ -294,7 +298,7 @@ Shader "Unlit/GrassBladeIndirect"
                 float4 yAndNormal = SampleHeight(float2(x, z));
                 float y = yAndNormal.x;
                 float3 normal = yAndNormal.yzw;
-
+    
                 // get max allowed texture value
                 float texValueAtPos = GetTextureAtPos(float2(x, z), textureIndex);
 
@@ -304,25 +308,22 @@ Shader "Unlit/GrassBladeIndirect"
     
                 float3 pos = float3(x, y, z);
     
-                Quaternion q = Quaternion.FromToRotation(float3(0, 1, 0), normal);
+                float4 q = float4(0, 0, 0, 1);
                 if (rotate == 1)
-                    q *= Quaternion.Euler(0, GenerateRandom(index * 0.0983633, 0f, 360f), 0);
+                    q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
     
                 float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
                 if (texValueAtPos >= falloff)
                     newSize *= max(texValueAtPos, 0.1);
-                */
-                //return trs(pos, q, newSize);
-                float x = chunkPosX - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
-                float z = chunkPosZ - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
-                return trs2(float3(x, 0, z), float4(0, 0, 0, 1), float3(1, 1, 1));
+    
+                return trs(pos, q, newSize);
             }
             // ------------------------------------------------------------------------
             
             // material variables and functions ------------------------------------
-            float4 LightDir;
-            float4 CamPos;
-            float ViewRangeSq;
+            uniform float4 LightDir;
+            uniform float4 CamPos;
+            uniform float ViewRangeSq;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;

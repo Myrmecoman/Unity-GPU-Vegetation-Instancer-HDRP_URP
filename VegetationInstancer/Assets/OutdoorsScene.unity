@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7117.493, g: 7685.204, b: 7168.415, a: 1}
+  m_IndirectSpecularColor: {r: 7112.999, g: 7679.509, b: 7179.923, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -733,10 +733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65d9a73565b4694083365c439dce000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runInEditor: 0
+  runInEditor: 1
   randomRotation: 1
-  maxDisplacement: 0
-  randomSize: 1
+  maxDisplacement: 0.18
+  randomSize: 1.35
   maxSlope: 0.5
   falloff: 0.166
   plant: {fileID: 5138664864039170994, guid: 85beea2c95ae0f8468d0c24e440b8633, type: 3}
@@ -744,7 +744,7 @@ MonoBehaviour:
   cam: {fileID: 1823688466}
   lightP: {fileID: 157207114}
   chunkSize: 20
-  viewDistance: 150
+  viewDistance: 500
   plantDistanceInt: 100
 --- !u!1 &1823688464
 GameObject:

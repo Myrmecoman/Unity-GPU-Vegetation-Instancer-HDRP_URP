@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Entities.UniversalDelegates;
+using UnityEditor.Rendering;
 
 
 // https://github.com/MangoButtermilch/Unity-Grass-Instancer/blob/main/GrassInstancerIndirect.cs
@@ -116,36 +117,36 @@ public class GrassInstancer : MonoBehaviour
         args[3] = (uint)mesh.GetBaseVertex(0);
         args[4] = 0;
 
-        mat.SetFloat("randomSeed", 873.304f);
-        mat.SetFloat("D1Size", plantDistanceInt);
-        mat.SetFloat("chunkSize", chunkSize);
-        mat.SetFloat("plantDistance", plantDistanceInt);
-        mat.SetFloat("maxSlope", maxSlope);
-        mat.SetFloat("sizeChange", randomSize);
-        mat.SetInt("rotate", randomRotation ? 1 : 0);
-        mat.SetFloat("displacement", maxDisplacement);
-        mat.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
-        mat.SetFloat("falloff", falloff);
+        Shader.SetGlobalFloat("randomSeed", 873.304f);
+        Shader.SetGlobalFloat("D1Size", plantDistanceInt);
+        Shader.SetGlobalFloat("chunkSize", chunkSize);
+        Shader.SetGlobalFloat("plantDistance", plantDistanceInt);
+        Shader.SetGlobalFloat("maxSlope", maxSlope);
+        Shader.SetGlobalFloat("sizeChange", randomSize);
+        Shader.SetGlobalInt("rotate", randomRotation ? 1 : 0);
+        Shader.SetGlobalFloat("displacement", maxDisplacement);
+        Shader.SetGlobalInt("textureIndex", textureIndexes[0]); // for now only support first texture
+        Shader.SetGlobalFloat("falloff", falloff);
 
         heightBuffer = new ComputeBuffer(terrainCpy.heightMap.Length, sizeof(float));
         heightBuffer.SetData(terrainCpy.heightMap.ToArray());
-        mat.SetBuffer("heightMap", heightBuffer);
-        mat.SetInteger("resolution", terrainCpy.resolution);
-        mat.SetVector("sampleSize", new Vector4(terrainCpy.sampleSize.x, terrainCpy.sampleSize.y, 0, 0));
-        mat.SetVector("AABBMin", new Vector4(terrainCpy.AABB.Min.x, terrainCpy.AABB.Min.y, terrainCpy.AABB.Min.z, 0));
-        mat.SetVector("AABBMax", new Vector4(terrainCpy.AABB.Max.x, terrainCpy.AABB.Max.y, terrainCpy.AABB.Max.z, 0));
+        Shader.SetGlobalBuffer("heightMap", heightBuffer);
+        Shader.SetGlobalInteger("resolution", terrainCpy.resolution);
+        Shader.SetGlobalVector("sampleSize", new Vector4(terrainCpy.sampleSize.x, terrainCpy.sampleSize.y, 0, 0));
+        Shader.SetGlobalVector("AABBMin", new Vector4(terrainCpy.AABB.Min.x, terrainCpy.AABB.Min.y, terrainCpy.AABB.Min.z, 0));
+        Shader.SetGlobalVector("AABBMax", new Vector4(terrainCpy.AABB.Max.x, terrainCpy.AABB.Max.y, terrainCpy.AABB.Max.z, 0));
 
         texBuffer = new ComputeBuffer(terrainTex.textureMapAllTextures.Length, sizeof(float));
         texBuffer.SetData(terrainTex.textureMapAllTextures.ToArray());
-        mat.SetBuffer("textureMapAllTextures", texBuffer);
-        mat.SetInteger("terrainPosX", terrainTex.terrainPos.x);
-        mat.SetInteger("terrainPosY", terrainTex.terrainPos.y);
-        mat.SetFloat("terrainSizeX", terrainTex.terrainSize.x);
-        mat.SetFloat("terrainSizeY", terrainTex.terrainSize.y);
-        mat.SetInteger("textureArraySizeX", terrainTex.textureArraySize.x);
-        mat.SetInteger("textureArraySizeY", terrainTex.textureArraySize.y);
-        mat.SetInteger("resolutionTex", terrainTex.resolution);
-        mat.SetInteger("textureCount", terrainTex.textureCount);
+        Shader.SetGlobalBuffer("textureMapAllTextures", texBuffer);
+        Shader.SetGlobalInteger("terrainPosX", terrainTex.terrainPos.x);
+        Shader.SetGlobalInteger("terrainPosY", terrainTex.terrainPos.y);
+        Shader.SetGlobalFloat("terrainSizeX", terrainTex.terrainSize.x);
+        Shader.SetGlobalFloat("terrainSizeY", terrainTex.terrainSize.y);
+        Shader.SetGlobalInteger("textureArraySizeX", terrainTex.textureArraySize.x);
+        Shader.SetGlobalInteger("textureArraySizeY", terrainTex.textureArraySize.y);
+        Shader.SetGlobalInteger("resolutionTex", terrainTex.resolution);
+        Shader.SetGlobalInteger("textureCount", terrainTex.textureCount);
 
         terrainTex.Dispose();
     }
@@ -196,17 +197,9 @@ public class GrassInstancer : MonoBehaviour
     private GrassChunk InitializeChunk(int4 center)
     {
         var chunk = new GrassChunk();
-
         chunk.argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         chunk.argsBuffer.SetData(args);
-
         chunk.material = new Material(mat);
-
-        Vector3 lightDir = lightP.forward;
-        chunk.material.SetFloat("ViewRangeSq", (viewDistance - chunkSize/2) * (viewDistance - chunkSize / 2));
-        chunk.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
-        chunk.material.SetVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
-
         return chunk;
     }
 
@@ -289,12 +282,17 @@ public class GrassInstancer : MonoBehaviour
 
         UpdateChunks();
 
-        // draw objects
+        // update some variables globaly
         var bounds = new Bounds(cam.transform.position, Vector3.one * cam.farClipPlane);
+        Vector3 lightDir = lightP.forward;
+        Shader.SetGlobalVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
+        Shader.SetGlobalVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
+        Shader.SetGlobalFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
+
+        // draw objects
         foreach (var e in chunksData)
         {
             GrassChunk g = e.Value;
-            g.material.SetVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
             g.material.SetInteger("chunkPosX", e.Key.x);
             g.material.SetInteger("chunkPosZ", e.Key.z);
             Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.Off);

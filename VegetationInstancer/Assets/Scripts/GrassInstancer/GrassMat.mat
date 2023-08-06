@@ -264,7 +264,7 @@ Material:
     - Color_4a0326186f2d494ca13ebffd0037f737: {r: 1, g: 1, b: 1, a: 0}
     - Vector2_228862aa249c49b280f3c886696f59e2: {r: 1, g: 1, b: 0, a: 0}
     - Vector2_98e5333215b14d60950bddc38b6eb673: {r: 2, g: -3.73, b: 0, a: 0}
-    - _AOColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+    - _AOColor: {r: 0.66595376, g: 0.8018868, b: 0.5182004, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,12 +275,12 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _PrimaryCol: {r: 0.31832498, g: 0.4433962, b: 0.14431292, a: 1}
-    - _SecondaryCol: {r: 0.435478, g: 0.6037736, b: 0.12815951, a: 1}
+    - _PrimaryCol: {r: 0.34691128, g: 0.4339623, b: 0.2272161, a: 1}
+    - _SecondaryCol: {r: 0.45450348, g: 0.5849056, b: 0.2179601, a: 1}
     - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _TipColor: {r: 0.2456283, g: 0.3490566, b: 0.12019401, a: 1}
+    - _TipColor: {r: 0.38032347, g: 0.5, b: 0.23820755, a: 1}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
