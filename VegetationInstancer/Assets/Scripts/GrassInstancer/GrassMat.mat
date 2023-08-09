@@ -276,8 +276,8 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _PrimaryCol: {r: 0.34691128, g: 0.4339623, b: 0.2272161, a: 1}
-    - _SecondaryCol: {r: 0.45450348, g: 0.5849056, b: 0.2179601, a: 1}
+    - _PrimaryCol: {r: 0.3052411, g: 0.38679248, b: 0.19886972, a: 1}
+    - _SecondaryCol: {r: 0.31852108, g: 0.41509432, b: 0.14293341, a: 1}
     - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}

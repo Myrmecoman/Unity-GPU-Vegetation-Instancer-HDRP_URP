@@ -357,7 +357,7 @@ Shader"Unlit/GrassBladeIndirect"
                                   (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
                                   (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z);
     
-                if (distToCam > ViewRangeSq)
+                if (distToCam > ViewRangeSq || GenerateRandom(instanceID, 0, ViewRangeSq) < distToCam) // second part gradually removes grass with distance
                 {
                     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                     o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 1, positionWorldSpace.z, 1));
