@@ -147,6 +147,7 @@ public class GrassInstancer : MonoBehaviour
         Shader.SetGlobalInteger("textureArraySizeY", terrainTex.textureArraySize.y);
         Shader.SetGlobalInteger("resolutionTex", terrainTex.resolution);
         Shader.SetGlobalInteger("textureCount", terrainTex.textureCount);
+        Shader.SetGlobalFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
 
         terrainTex.Dispose();
     }
@@ -286,7 +287,6 @@ public class GrassInstancer : MonoBehaviour
         Vector3 lightDir = lightP.forward;
         Shader.SetGlobalVector("LightDir", new Vector4(lightDir.x, lightDir.y, lightDir.z, 1));
         Shader.SetGlobalVector("CamPos", new Vector4(cam.transform.position.x, cam.transform.position.y, cam.transform.position.z, 1));
-        Shader.SetGlobalFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
 
         // draw objects
         foreach (var e in chunksData)
@@ -299,24 +299,6 @@ public class GrassInstancer : MonoBehaviour
         
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
         //Debug.Log("Full loop time : " + chunkDrawing + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        if ((!Application.isPlaying && !runInEditor) || chunksData == null)
-            return;
-        /*
-        foreach (var e in chunksData)
-        {
-            if (e.Key.w == 0)
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.yellow;
-
-            Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
-        }
-        */
     }
 }
 

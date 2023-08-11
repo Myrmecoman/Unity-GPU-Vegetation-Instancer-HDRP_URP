@@ -373,7 +373,7 @@ Shader"Unlit/GrassBladeIndirect"
                 //move world UVs by time
                 float4 worldPos = float4(positionWorldSpace, 1);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                if (distToCam < sqrWindCutoff || instanceID%4 == 0) // if distance is higher than max wind dist, only animate 1/4 grass objects
+                if (distToCam < sqrWindCutoff || instanceID%3 == 0) // if distance is higher than max wind dist, only animate 1/3 grass objects
                 {
                     //creating noise from world UVs
                     float2 worldUV = worldPos.xz + _WindSpeed * _Time.y;
@@ -394,15 +394,15 @@ Shader"Unlit/GrassBladeIndirect"
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag(v2f i) : SV_Target
             {
                 float4 col = lerp(_PrimaryCol, _SecondaryCol, i.uv.y);
 
                 //from https://github.com/GarrettGunnell/Grass/blob/main/Assets/Shaders/ModelGrass.shader
-                float light = clamp(dot(LightDir, normalize(float3(0, 1, 0))), 0 , 1);
+                float light = clamp(dot(-LightDir.xyz, normalize(float3(0, 1, 0))), 0, 1);
                 float4 ao = lerp(_AOColor, 1.0f, i.uv.y);
                 float4 tip = lerp(0.0f, _TipColor, i.uv.y * i.uv.y * (1.0f + _Scale));
-                float4 grassColor = (col + tip) * ao; // * light; // light needs to be fixed
+                float4 grassColor = (col + tip) * ao * light;
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
