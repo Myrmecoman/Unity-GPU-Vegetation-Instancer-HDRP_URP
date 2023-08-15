@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Collections;
 using Unity.Entities.UniversalDelegates;
 using Unity.Mathematics;
@@ -8,17 +11,83 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TerrainGetter : MonoBehaviour
 {
+    public static TerrainGetter instance;
+
     public Terrain[] terrains;
     public bool reloadTerrainData = false;
+
+    // structs for vegetation and grass instantiation
+    [HideInInspector] public TerrainHeight terrainHeight;
+    [HideInInspector] public TerrainTextures terrainTex;
+
+    // variables for heightmap
+    [HideInInspector] public int HeightResolution;
+    [HideInInspector] public float2 sampleSize;
+    [HideInInspector] public AABB aabb;
+    [HideInInspector] public float[] heightmap;
+
+    // variables for texturemap
+    [HideInInspector] public int texResolution;
+    [HideInInspector] public int textureCount;
+    [HideInInspector] public int2 textureArraySize;
+    [HideInInspector] public int2 terrainPos;
+    [HideInInspector] public float2 terrainSize;
+    [HideInInspector] public float[] textureMap;
+
+
+    private void Awake()
+    {
+        // make this a singleton
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        LoadTerrains();
+    }
 
 
     private void Update()
     {
-        if (!reloadTerrainData)
+        if (!reloadTerrainData || Application.isPlaying)
             return;
+
+        if (instance == null)
+            instance = this;
 
         reloadTerrainData = false;
         ReloadTerrains();
+        LoadTerrains();
+    }
+
+
+    private void OnDestroy()
+    {
+        if (terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated)
+            terrainHeight.Dispose();
+        if (terrainTex.textureMap != null && terrainTex.textureMap.IsCreated)
+            terrainTex.Dispose();
+    }
+
+
+    private void LoadTerrains()
+    {
+        // load data
+        var data = SaveSystemInstancer.LoadData();
+        if (data == null) // means there is no save
+            return;
+
+        if (terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated)
+            terrainHeight.Dispose();
+        if (terrainTex.textureMap != null && terrainTex.textureMap.IsCreated)
+            terrainTex.Dispose();
+
+        terrainHeight = new TerrainHeight(data.heightmap, data.HeightResolution, data.sampleSize, data.aabb);
+        terrainTex = new TerrainTextures(data.textureMap, data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
+
+        Debug.Log("Terrains data loaded");
     }
 
 
@@ -30,10 +99,10 @@ public class TerrainGetter : MonoBehaviour
         List<Terrain> newterrainsList = new List<Terrain>();
         while(terrainsList.Count > 0)
         {
-            int minX = -100000;
-            int minZ = -100000;
+            int minX = (int)terrainsList[0].GetPosition().x;
+            int minZ = (int)terrainsList[0].GetPosition().z;
             int savedIndex = 0;
-            for (int i = 0; i < terrainsList.Count; i++)
+            for (int i = 1; i < terrainsList.Count; i++)
             {
                 if (terrainsList[i].GetPosition().x <= minX && terrainsList[i].GetPosition().z <= minZ)
                 {
@@ -47,38 +116,18 @@ public class TerrainGetter : MonoBehaviour
         }
         
         // get first line length
-        int firstD1Size = 1;
-        int lastZ = (int)newterrainsList[0].GetPosition().z;
+        Dictionary<int, bool> xAxis = new Dictionary<int, bool>();
+        Dictionary<int, bool> zAxis = new Dictionary<int, bool>();
         for (int i = 1; i < newterrainsList.Count; i++)
         {
-            if ((int)newterrainsList[i].GetPosition().z == lastZ)
-                firstD1Size++;
-            else
-                break;
+            if (!xAxis.ContainsKey((int)newterrainsList[i].transform.position.x))
+                xAxis.Add((int)newterrainsList[i].transform.position.x, true);
+            if (!zAxis.ContainsKey((int)newterrainsList[i].transform.position.z))
+                zAxis.Add((int)newterrainsList[i].transform.position.z, true);
         }
 
-        // check that all lines have the same length
-        int D2Size = 1;
-        D1Size = 1;
-        for (int i = 1; i < newterrainsList.Count; i++)
-        {
-            if ((int)newterrainsList[i].GetPosition().z == lastZ)
-                D1Size++;
-            else
-            {
-                if (D1Size != firstD1Size)
-                {
-                    Debug.Log(D1Size + " " + firstD1Size);
-                    Debug.LogError("Terrain chunks are not square");
-                    return null;
-                }
-                lastZ = (int)newterrainsList[i].GetPosition().z;
-                D1Size = 0;
-                D2Size++;
-            }
-        }
-
-        if (firstD1Size != D2Size)
+        D1Size = xAxis.Count;
+        if (xAxis.Count != zAxis.Count)
         {
             Debug.LogError("Terrain chunks are not square");
             return null;
@@ -96,14 +145,16 @@ public class TerrainGetter : MonoBehaviour
         int2 textureArraySize = new int2(terrainsArray[0].terrainData.alphamapWidth, terrainsArray[0].terrainData.alphamapHeight);
         float2 terrainSize = new float2(terrainsArray[0].terrainData.size.x, terrainsArray[0].terrainData.size.z);
         int textureCount = terrainsArray[0].terrainData.alphamapLayers;
+        int height = (int)terrainsArray[0].transform.position.y;
 
-        for(int i = 1; i < terrainsArray.Length; i++)
+        for (int i = 1; i < terrainsArray.Length; i++)
         {
             int heightmapResTemp = terrainsArray[i].terrainData.heightmapResolution;
             float2 sampleSizeTemp = new float2(terrainsArray[i].terrainData.heightmapScale.x, terrainsArray[i].terrainData.heightmapScale.z);
             int2 textureArraySizeTemp = new int2(terrainsArray[i].terrainData.alphamapWidth, terrainsArray[i].terrainData.alphamapHeight);
             float2 terrainSizeTemp = new float2(terrainsArray[i].terrainData.size.x, terrainsArray[i].terrainData.size.z);
             int textureCountTemp = terrainsArray[i].terrainData.alphamapLayers;
+            int heightTemp = (int)terrainsArray[i].transform.position.y;
 
             if (heightmapRes != heightmapResTemp)
             {
@@ -130,45 +181,135 @@ public class TerrainGetter : MonoBehaviour
                 Debug.LogError("Terrains have different number of textures");
                 return false;
             }
+            if (height != heightTemp)
+            {
+                Debug.LogError("Terrains don't have the same height position");
+                return false;
+            }
         }
 
         return true;
     }
 
 
-    // return a merged heightmap for all terrains
-    private NativeArray<float> BuildNewHeightMap(Terrain[] terrainsArray, int D1Size)
+    private AABB GetTerrainAABB(Terrain[] terrainsArray, int D1Size)
     {
-        int resolution = terrainsArray[0].terrainData.heightmapResolution;
-        var heightList = new NativeArray<float>(resolution * D1Size * resolution * D1Size, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+        float3 pos = terrainsArray[0].transform.position;
+        float3 size = new float3(terrainsArray[0].terrainData.size.x * D1Size, terrainsArray[0].terrainData.size.y, terrainsArray[0].terrainData.size.z * D1Size);
+        for (int i = 1; i < terrainsArray.Length; i++)
+        {
+            if (terrainsArray[i].transform.position.x < pos.x)
+                pos.x = terrainsArray[i].transform.position.x;
+            if (terrainsArray[i].transform.position.y < pos.y)
+                pos.y = terrainsArray[i].transform.position.y;
+            if (terrainsArray[i].transform.position.z < pos.z)
+                pos.z = terrainsArray[i].transform.position.z;
+        }
+
+        float3 min = pos;
+        float3 max = min + size;
+        float3 extents = (max - min) / 2;
+        return new AABB() { Center = min + extents, Extents = extents };
+    }
+
+
+    // return a merged heightmap for all terrains
+    private float[] BuildNewHeightMap(Terrain[] terrainsArray, int D1Size)
+    {
+        HeightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size;
+        sampleSize = new float2(terrainsArray[0].terrainData.heightmapScale.x, terrainsArray[0].terrainData.heightmapScale.z);
+
+        int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
+        var heightList = new float[HeightResolution * HeightResolution];
+        float[,] arr = new float[HeightResolution, HeightResolution];
 
         List<float[,]> maps = new List<float[,]>();
         for(int i = 0; i < terrainsArray.Length; i++)
-            maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolution, resolution));
-
-        // TODO : merge row by row
-        /*
-        for (int y = 0; y < resolution; y++)
+            maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
+        // merge row by row
+        for (int y = 0; y < HeightResolution; y++)
         {
-            for (int x = 0; x < resolution; x++)
-                heightList[x * resolution + y] = map[y, x];
+            int arrY = y / resolutionSingle;
+            for (int x = 0; x < HeightResolution; x++)
+            {
+                int arrX = x / resolutionSingle;
+                arr[x, y] = maps[arrX + D1Size * arrY][x % resolutionSingle, y % resolutionSingle];
+            }
         }
-        */
+
+        // flatten the array
+        for (int y = 0; y < HeightResolution; y++)
+        {
+            for (int x = 0; x < HeightResolution; x++)
+                heightList[x * HeightResolution + y] = arr[y, x];
+        }
+
         return heightList;
     }
 
 
     // return a merged texture map for all terrains
-    private NativeArray<float> BuildNewTextureMap(Terrain[] terrainsArray, int D1Size)
+    private float[] BuildNewTextureMap(Terrain[] terrainsArray, int D1Size)
     {
-        // TODO
-        return new NativeArray<float>(1, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+        int texResolutionSingle = terrainsArray[0].terrainData.alphamapWidth;
+        texResolution = terrainsArray[0].terrainData.alphamapWidth * D1Size;
+        textureCount = terrainsArray[0].terrainData.alphamapLayers;
+        textureArraySize = new int2(terrainsArray[0].terrainData.alphamapWidth * D1Size, terrainsArray[0].terrainData.alphamapHeight * D1Size);
+        float2 pos = new float2(0, 0);
+        for (int i = 0; i < terrainsArray.Length; i++)
+        {
+            if (terrainsArray[i].transform.position.x < pos.x)
+                pos.x = terrainsArray[i].transform.position.x;
+            if (terrainsArray[i].transform.position.z < pos.y)
+                pos.y = terrainsArray[i].transform.position.z;
+        }
+        terrainPos = new int2((int)pos.x, (int)pos.y);
+        terrainSize = new float2(terrainsArray[0].terrainData.size.x * D1Size, terrainsArray[0].terrainData.size.z * D1Size);
+        float[,,] arr = new float[texResolution, texResolution, textureCount];
+
+        int resolutionX = terrainsArray[0].terrainData.alphamapWidth * D1Size;
+        int resolutionY = terrainsArray[0].terrainData.alphamapHeight * D1Size;
+        List<float[,,]> maps = new List<float[,,]>();
+        for (int i = 0; i < terrainsArray.Length; i++)
+            maps.Add(terrainsArray[i].terrainData.GetAlphamaps(0, 0, terrainsArray[0].terrainData.alphamapWidth, terrainsArray[0].terrainData.alphamapHeight));
+
+        // merge row by row
+        for (int y = 0; y < texResolution; y++)
+        {
+            int arrY = y / texResolutionSingle;
+            for (int x = 0; x < texResolution; x++)
+            {
+                int arrX = x / texResolutionSingle;
+                for (int z = 0; z < textureCount; z++)
+                    arr[x, y, z] = maps[arrX * D1Size + arrY][x % texResolutionSingle, y % texResolutionSingle, z];
+            }
+        }
+
+        var textureArray = new float[texResolution * texResolution * textureCount];
+
+        // flatten
+        for (int x = 0; x < resolutionX; x++)
+        {
+            for (int y = 0; y < resolutionY; y++)
+            {
+                for (int z = 0; z < textureCount; z++)
+                    textureArray[x + resolutionX * (y + textureCount * z)] = arr[y, x, z];
+            }
+        }
+
+        return textureArray;
     }
 
 
     private void ReloadTerrains()
     {
-        Debug.Log("Reloading terrains data");
+        Debug.Log("Reloading terrains data : starting...");
+
+        if (terrains == null || terrains.Length == 0)
+        {
+            Debug.LogError("No terrain provided");
+            return;
+        }
 
         int D1Size;
         var terrainsOrdered = CheckSquare(out D1Size);
@@ -178,6 +319,87 @@ public class TerrainGetter : MonoBehaviour
         if (!CheckSameParameters(terrainsOrdered))
             return;
 
+        aabb = GetTerrainAABB(terrainsOrdered, D1Size);
+        heightmap = BuildNewHeightMap(terrainsOrdered, D1Size);
+        textureMap = BuildNewTextureMap(terrainsOrdered, D1Size);
 
+        SaveSystemInstancer.SaveData();
+    }
+}
+
+
+[Serializable]
+public class InstancerData
+{
+    public int HeightResolution;
+    public float2 sampleSize;
+    public AABB aabb;
+    public float[] heightmap;
+
+    public int texResolution;
+    public int textureCount;
+    public int2 textureArraySize;
+    public int2 terrainPos;
+    public float2 terrainSize;
+    public float[] textureMap;
+
+
+    public InstancerData()
+    {
+        HeightResolution = TerrainGetter.instance.HeightResolution;
+        sampleSize = TerrainGetter.instance.sampleSize;
+        aabb = TerrainGetter.instance.aabb;
+        heightmap = TerrainGetter.instance.heightmap;
+
+        texResolution = TerrainGetter.instance.texResolution;
+        textureCount = TerrainGetter.instance.textureCount;
+        textureArraySize = TerrainGetter.instance.textureArraySize;
+        terrainPos = TerrainGetter.instance.terrainPos;
+        terrainSize = TerrainGetter.instance.terrainSize;
+        textureMap = TerrainGetter.instance.textureMap;
+    }
+}
+
+
+public class SaveSystemInstancer
+{
+    public static void SaveData()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/save.veg";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        var data = new InstancerData();
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+
+    public static InstancerData LoadData()
+    {
+        string path = Application.persistentDataPath + "/save.veg";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            var data = formatter.Deserialize(stream) as InstancerData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.Log("No save yet");
+            return null;
+        }
+    }
+
+
+    public static void DeleteData()
+    {
+        string path = Application.persistentDataPath + "/save.veg";
+        if (File.Exists(path))
+            File.Delete(path);
     }
 }

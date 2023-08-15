@@ -10,6 +10,7 @@ using System.Linq;
 // /!\ ATTENTION : Vegetation instancer will only work with square and unrotated terrains. You should also not have holes in your terrain.
 // So far this only works with 1 terrain using Terrain.activeTerrain to find it, but it should not be complicated to handle multiple terrains.
 [ExecuteInEditMode]
+[RequireComponent(typeof(TerrainGetter))]
 public class VegetationInstancer : MonoBehaviour
 {
     public static VegetationInstancer instance;
@@ -59,10 +60,7 @@ public class VegetationInstancer : MonoBehaviour
     private Mesh[] meshesLOD;
     private RenderParams[] rpsPlants;
     private RenderParams[] rpsPlantsLOD;
-    private Terrain terrain;
     private FrustrumPlanes frustrumPlanes;
-    private TerrainHeight terrainCpy;
-    private TerrainTextures terrainTex;
     private int[] totalChunkPlantsCount;
     private Unity.Mathematics.Random rnd;
 
@@ -77,14 +75,8 @@ public class VegetationInstancer : MonoBehaviour
     {
         FreeContainers();
 
-        // get terrain data
-        terrain = Terrain.activeTerrain;
-
         frustrumPlanes = new FrustrumPlanes();
         chunks = new Dictionary<int4, NativeArray<Matrix4x4>[]>();
-
-        terrainCpy = new TerrainHeight(terrain, Allocator.Persistent);
-        terrainTex = new TerrainTextures(terrain, Allocator.Persistent);
 
         rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
 
@@ -146,11 +138,6 @@ public class VegetationInstancer : MonoBehaviour
                 }
             }
         }
-
-        if (terrainCpy.heightMap.IsCreated)
-            terrainCpy.Dispose();
-        if (terrainTex.textureMap.IsCreated)
-            terrainTex.Dispose();
     }
 
 
@@ -167,15 +154,15 @@ public class VegetationInstancer : MonoBehaviour
         newChunks = new NativeList<int4>(Allocator.TempJob);
         var chunksSampler = new PickVisibleChunksJob
         {
-            terrainData = terrainCpy,
+            terrainData = TerrainGetter.instance.terrainHeight,
             newChunks = newChunks,
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
             modifiedChunks = new NativeList<int4>(Allocator.TempJob),
             existingChunks = new NativeArray<int4>(chunks.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = frustrumPlanes,
-            size1D = (int)terrain.terrainData.size.x,
+            size1D = (int)TerrainGetter.instance.terrainTex.terrainSize.x,
             camPos = new int3((int)cam.transform.position.x, (int)cam.transform.position.y, (int)cam.transform.position.z),
-            terrainPos = new int3((int)terrain.transform.position.x, (int)terrain.transform.position.y, (int)terrain.transform.position.z),
+            terrainPos = new int3(TerrainGetter.instance.terrainTex.terrainPos.x, (int)TerrainGetter.instance.terrainHeight.AABB.Min.y, TerrainGetter.instance.terrainTex.terrainPos.y),
             chunkSize = chunkSize,
             viewDistanceLODSq = viewDistanceLOD * viewDistanceLOD,
             viewDistanceSq = viewDistance * viewDistance,
@@ -231,8 +218,8 @@ public class VegetationInstancer : MonoBehaviour
                 PositionsJob positionsSampler = new PositionsJob
                 {
                     outputPlants = chunks[newChunks[i]][j],
-                    terrainData = terrainCpy,
-                    terrainTex = terrainTex,
+                    terrainData = TerrainGetter.instance.terrainHeight,
+                    terrainTex = TerrainGetter.instance.terrainTex,
                     chunkPos = new int3(newChunks[i].x, newChunks[i].y, newChunks[i].z),
                     D1Size = D1Size,
                     chunkSize = chunkSize,

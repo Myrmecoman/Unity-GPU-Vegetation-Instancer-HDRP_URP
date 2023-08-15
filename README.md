@@ -22,7 +22,8 @@ Note that this project only spawns vegetation objects without colliders at the m
 
 ## How to use
 
-Put the GrassInstancer.cs and VegetationInstancer.cs on an empty GameObject and fill in the parameters.   
+Put the TerrainGetter.cs, GrassInstancer.cs, VegetationInstancer.cs on an empty GameObject and fill in the parameters.   
+The TerrainGetter is in charge of generating the data needed by GrassInstancer and VegetationInstancer. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld for example.   
 See below for the usage of VegetationInstancer.cs, GrassInstancer.cs is similar in it's parameters.
 
 ![Usage](./usage.png?raw=true "Usage")
@@ -37,5 +38,4 @@ All the code is commented and was made to be easily readable.
 
 ## Work in progress
  
-Support multiple terrains.   
-For the GrassInstancer, sometimes chunks seem to be drawn twice, to be fixed.
+Billboard texture grass.

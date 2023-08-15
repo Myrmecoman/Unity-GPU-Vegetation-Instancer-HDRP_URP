@@ -26,6 +26,15 @@ public struct TerrainHeight
     }
 
 
+    public TerrainHeight(float[] heightMapT, int resolutionT, float2 sampleSizeT, AABB aabbT)
+    {
+        heightMap = new NativeArray<float>(heightMapT, Allocator.Persistent);
+        resolution = resolutionT;
+        sampleSize = sampleSizeT;
+        AABB = aabbT;
+    }
+
+
     /// <summary>
     /// Returns world height of terrain at x and z position values.
     /// </summary>

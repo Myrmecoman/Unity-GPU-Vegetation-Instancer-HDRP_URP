@@ -30,6 +30,18 @@ public struct TerrainTextures
     }
 
 
+    public TerrainTextures(float[] textureMapAllTexturesT, int resolutionT, int textureCountT, int2 textureArraySizeT, int2 terrainPosT, float2 terrainSizeT)
+    {
+        textureMap = new NativeArray<int>(0, Allocator.Persistent, NativeArrayOptions.UninitializedMemory); // dummy initialize
+        textureMapAllTextures = new NativeArray<float>(textureMapAllTexturesT, Allocator.Persistent);
+        resolution = resolutionT;
+        textureCount = textureCountT;
+        textureArraySize = textureArraySizeT;
+        terrainPos = terrainPosT;
+        terrainSize = terrainSizeT;
+    }
+
+
     /*
     public int GetTextureAtPos(float2 worldPos)
     {

@@ -5,8 +5,6 @@ using Unity.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Entities.UniversalDelegates;
-using UnityEditor.Rendering;
 
 
 // https://github.com/MangoButtermilch/Unity-Grass-Instancer/blob/main/GrassInstancerIndirect.cs
@@ -16,6 +14,7 @@ using UnityEditor.Rendering;
 // /!\ ATTENTION : will only work with square and unrotated terrains. You should also not have holes in your terrain.
 // So far this only works with 1 terrain using Terrain.activeTerrain to find it, but it should not be complicated to handle multiple terrains.
 [ExecuteInEditMode]
+[RequireComponent(typeof(TerrainGetter))]
 public class GrassInstancer : MonoBehaviour
 {
     public static GrassInstancer instance;
@@ -62,10 +61,7 @@ public class GrassInstancer : MonoBehaviour
     public int plantDistanceInt = 5;
 
 
-    private Terrain terrain;
     private FrustrumPlanes frustrumPlanes;
-    private TerrainHeight terrainCpy;
-    private TerrainTextures terrainTex;
     private int totalChunkPlantsCount;
 
     public ComputeBuffer heightBuffer;
@@ -87,11 +83,8 @@ public class GrassInstancer : MonoBehaviour
         FreeContainers();
 
         // get terrain data
-        terrain = Terrain.activeTerrain;
         frustrumPlanes = new FrustrumPlanes();
         chunksData = new Dictionary<int4, GrassChunk>(1024);
-        terrainCpy = new TerrainHeight(terrain, Allocator.Persistent);
-        terrainTex = new TerrainTextures(terrain, Allocator.Persistent);
 
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
         //meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
@@ -128,28 +121,26 @@ public class GrassInstancer : MonoBehaviour
         Shader.SetGlobalInt("textureIndex", textureIndexes[0]); // for now only support first texture
         Shader.SetGlobalFloat("falloff", falloff);
 
-        heightBuffer = new ComputeBuffer(terrainCpy.heightMap.Length, sizeof(float));
-        heightBuffer.SetData(terrainCpy.heightMap.ToArray());
+        heightBuffer = new ComputeBuffer(TerrainGetter.instance.terrainHeight.heightMap.Length, sizeof(float));
+        heightBuffer.SetData(TerrainGetter.instance.terrainHeight.heightMap.ToArray());
         Shader.SetGlobalBuffer("heightMap", heightBuffer);
-        Shader.SetGlobalInteger("resolution", terrainCpy.resolution);
-        Shader.SetGlobalVector("sampleSize", new Vector4(terrainCpy.sampleSize.x, terrainCpy.sampleSize.y, 0, 0));
-        Shader.SetGlobalVector("AABBMin", new Vector4(terrainCpy.AABB.Min.x, terrainCpy.AABB.Min.y, terrainCpy.AABB.Min.z, 0));
-        Shader.SetGlobalVector("AABBMax", new Vector4(terrainCpy.AABB.Max.x, terrainCpy.AABB.Max.y, terrainCpy.AABB.Max.z, 0));
+        Shader.SetGlobalInteger("resolution", TerrainGetter.instance.terrainHeight.resolution);
+        Shader.SetGlobalVector("sampleSize", new Vector4(TerrainGetter.instance.terrainHeight.sampleSize.x, TerrainGetter.instance.terrainHeight.sampleSize.y, 0, 0));
+        Shader.SetGlobalVector("AABBMin", new Vector4(TerrainGetter.instance.terrainHeight.AABB.Min.x, TerrainGetter.instance.terrainHeight.AABB.Min.y, TerrainGetter.instance.terrainHeight.AABB.Min.z, 0));
+        Shader.SetGlobalVector("AABBMax", new Vector4(TerrainGetter.instance.terrainHeight.AABB.Max.x, TerrainGetter.instance.terrainHeight.AABB.Max.y, TerrainGetter.instance.terrainHeight.AABB.Max.z, 0));
 
-        texBuffer = new ComputeBuffer(terrainTex.textureMapAllTextures.Length, sizeof(float));
-        texBuffer.SetData(terrainTex.textureMapAllTextures.ToArray());
+        texBuffer = new ComputeBuffer(TerrainGetter.instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
+        texBuffer.SetData(TerrainGetter.instance.terrainTex.textureMapAllTextures.ToArray());
         Shader.SetGlobalBuffer("textureMapAllTextures", texBuffer);
-        Shader.SetGlobalInteger("terrainPosX", terrainTex.terrainPos.x);
-        Shader.SetGlobalInteger("terrainPosY", terrainTex.terrainPos.y);
-        Shader.SetGlobalFloat("terrainSizeX", terrainTex.terrainSize.x);
-        Shader.SetGlobalFloat("terrainSizeY", terrainTex.terrainSize.y);
-        Shader.SetGlobalInteger("textureArraySizeX", terrainTex.textureArraySize.x);
-        Shader.SetGlobalInteger("textureArraySizeY", terrainTex.textureArraySize.y);
-        Shader.SetGlobalInteger("resolutionTex", terrainTex.resolution);
-        Shader.SetGlobalInteger("textureCount", terrainTex.textureCount);
+        Shader.SetGlobalInteger("terrainPosX", TerrainGetter.instance.terrainTex.terrainPos.x);
+        Shader.SetGlobalInteger("terrainPosY", TerrainGetter.instance.terrainTex.terrainPos.y);
+        Shader.SetGlobalFloat("terrainSizeX", TerrainGetter.instance.terrainTex.terrainSize.x);
+        Shader.SetGlobalFloat("terrainSizeY", TerrainGetter.instance.terrainTex.terrainSize.y);
+        Shader.SetGlobalInteger("textureArraySizeX", TerrainGetter.instance.terrainTex.textureArraySize.x);
+        Shader.SetGlobalInteger("textureArraySizeY", TerrainGetter.instance.terrainTex.textureArraySize.y);
+        Shader.SetGlobalInteger("resolutionTex", TerrainGetter.instance.terrainTex.resolution);
+        Shader.SetGlobalInteger("textureCount", TerrainGetter.instance.terrainTex.textureCount);
         Shader.SetGlobalFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
-
-        terrainTex.Dispose();
     }
 
 
@@ -179,11 +170,6 @@ public class GrassInstancer : MonoBehaviour
         if (chunksData != null)
             chunksData.Clear();
 
-        if (terrainCpy.heightMap.IsCreated)
-            terrainCpy.Dispose();
-        if (terrainTex.textureMap.IsCreated)
-            terrainTex.Dispose();
-
         heightBuffer?.Release();
         texBuffer?.Release();
     }
@@ -212,15 +198,15 @@ public class GrassInstancer : MonoBehaviour
         // find the chunks which appared on screen, and those which disappeared
         var chunksSampler = new PickVisibleChunksJob
         {
-            terrainData = terrainCpy,
+            terrainData = TerrainGetter.instance.terrainHeight,
             newChunks = new NativeList<int4>(Allocator.TempJob),
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
             modifiedChunks = new NativeList<int4>(Allocator.TempJob),
             existingChunks = new NativeArray<int4>(chunksData.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = frustrumPlanes,
-            size1D = (int)terrain.terrainData.size.x,
+            size1D = (int)TerrainGetter.instance.terrainTex.terrainSize.x,
             camPos = new int3((int)cam.transform.position.x, (int)cam.transform.position.y, (int)cam.transform.position.z),
-            terrainPos = new int3((int)terrain.transform.position.x, (int)terrain.transform.position.y, (int)terrain.transform.position.z),
+            terrainPos = new int3(TerrainGetter.instance.terrainTex.terrainPos.x, (int)TerrainGetter.instance.terrainHeight.AABB.Min.y, TerrainGetter.instance.terrainTex.terrainPos.y),
             chunkSize = chunkSize,
             viewDistanceLODSq = viewDistanceLOD * viewDistanceLOD,
             viewDistanceSq = viewDistance * viewDistance,
