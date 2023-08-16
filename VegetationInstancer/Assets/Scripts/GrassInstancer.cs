@@ -12,7 +12,6 @@ using System.Linq;
 
 
 // /!\ ATTENTION : will only work with square and unrotated terrains. You should also not have holes in your terrain.
-// So far this only works with 1 terrain using Terrain.activeTerrain to find it, but it should not be complicated to handle multiple terrains.
 [ExecuteInEditMode]
 [RequireComponent(typeof(TerrainGetter))]
 public class GrassInstancer : MonoBehaviour
@@ -27,7 +26,7 @@ public class GrassInstancer : MonoBehaviour
     [Tooltip("Random rotation")]
     public bool randomRotation = true;
     [Tooltip("Random displacement")]
-    [Range(0, 1)]
+    [Range(0, 5)]
     public float maxDisplacement = 0.5f;
     [Tooltip("Random size difference, 5 means it can go from size/5 to size*5")]
     [Range(1, 5)]
@@ -144,7 +143,7 @@ public class GrassInstancer : MonoBehaviour
     }
 
 
-    private void Awake()
+    private void Start()
     {
         // make this a singleton
         if (instance == null)
@@ -250,8 +249,8 @@ public class GrassInstancer : MonoBehaviour
             return;
         if (!Application.isPlaying)
         {
-            if (runInEditor && chunksData == null)
-                Awake();
+            if (runInEditor && instance == null)
+                Start();
             if (runInEditor)
                 UpdateAllVariables();
         }

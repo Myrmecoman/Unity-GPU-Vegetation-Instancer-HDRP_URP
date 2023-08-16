@@ -8,7 +8,6 @@ using System.Linq;
 
 
 // /!\ ATTENTION : Vegetation instancer will only work with square and unrotated terrains. You should also not have holes in your terrain.
-// So far this only works with 1 terrain using Terrain.activeTerrain to find it, but it should not be complicated to handle multiple terrains.
 [ExecuteInEditMode]
 [RequireComponent(typeof(TerrainGetter))]
 public class VegetationInstancer : MonoBehaviour
@@ -110,7 +109,7 @@ public class VegetationInstancer : MonoBehaviour
     }
 
 
-    private void Awake()
+    private void Start()
     {
         // make this a singleton
         if (instance == null)
@@ -247,8 +246,8 @@ public class VegetationInstancer : MonoBehaviour
             return;
         if (!Application.isPlaying)
         {
-            if (runInEditor && chunks == null)
-                Awake();
+            if (runInEditor && instance == null)
+                Start();
             if (runInEditor)
                 UpdateAllVariables();
         }

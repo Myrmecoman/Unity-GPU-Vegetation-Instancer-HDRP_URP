@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Unity.Collections;
-using Unity.Entities.UniversalDelegates;
 using Unity.Mathematics;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class TerrainGetter : MonoBehaviour
 {
     public static TerrainGetter instance;
@@ -39,13 +37,12 @@ public class TerrainGetter : MonoBehaviour
     {
         // make this a singleton
         if (instance == null)
-            instance = this;
-        else
         {
-            Destroy(gameObject);
-            return;
+            instance = this;
+            LoadTerrains();
         }
-        LoadTerrains();
+        else
+            Destroy(gameObject);
     }
 
 
@@ -65,10 +62,10 @@ public class TerrainGetter : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated)
-            terrainHeight.Dispose();
-        if (terrainTex.textureMap != null && terrainTex.textureMap.IsCreated)
-            terrainTex.Dispose();
+        if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
+            instance.terrainHeight.Dispose();
+        if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
+            instance.terrainTex.Dispose();
     }
 
 
@@ -79,13 +76,13 @@ public class TerrainGetter : MonoBehaviour
         if (data == null) // means there is no save
             return;
 
-        if (terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated)
-            terrainHeight.Dispose();
-        if (terrainTex.textureMap != null && terrainTex.textureMap.IsCreated)
-            terrainTex.Dispose();
+        if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
+            instance.terrainHeight.Dispose();
+        if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
+            instance.terrainTex.Dispose();
 
-        terrainHeight = new TerrainHeight(data.heightmap, data.HeightResolution, data.sampleSize, data.aabb);
-        terrainTex = new TerrainTextures(data.textureMap, data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
+        instance.terrainHeight = new TerrainHeight(data.heightmap, data.HeightResolution, data.sampleSize, data.aabb);
+        instance.terrainTex = new TerrainTextures(data.textureMap, data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
 
         Debug.Log("Terrains data loaded");
     }
