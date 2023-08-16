@@ -12,8 +12,6 @@ using System.Linq;
 [RequireComponent(typeof(TerrainGetter))]
 public class VegetationInstancer : MonoBehaviour
 {
-    public static VegetationInstancer instance;
-
     [Header("Visuals")]
     [Tooltip("Run vegetation instancer in editor")]
     public bool runInEditor = false;
@@ -24,6 +22,9 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Random displacement")]
     [Range(0, 100)]
     public float maxDisplacement = 0.5f;
+    [Tooltip("Changes the medium size of the objects")]
+    [Range(0.01f, 3f)]
+    public float sizeBias = 1f;
     [Tooltip("Random size difference, 5 means it can go from size/5 to size*5")]
     [Range(1, 5)]
     public float randomSize = 0.5f;
@@ -111,15 +112,6 @@ public class VegetationInstancer : MonoBehaviour
 
     private void Start()
     {
-        // make this a singleton
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         UpdateAllVariables(); // this is done in a separate function so that it can be called when RunInEditor changes
     }
 
@@ -227,6 +219,7 @@ public class VegetationInstancer : MonoBehaviour
                     // procedural variables
                     rnd = rnd,
                     maxSlope = maxSlope,
+                    sizeBias = sizeBias,
                     sizeChange = randomSize,
                     rotate = randomRotation,
                     displacement = maxDisplacement,
@@ -246,7 +239,7 @@ public class VegetationInstancer : MonoBehaviour
             return;
         if (!Application.isPlaying)
         {
-            if (runInEditor && instance == null)
+            if (runInEditor && chunks == null)
                 Start();
             if (runInEditor)
                 UpdateAllVariables();

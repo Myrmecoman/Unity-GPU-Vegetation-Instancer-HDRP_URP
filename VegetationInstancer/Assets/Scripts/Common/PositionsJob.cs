@@ -32,6 +32,8 @@ public struct PositionsJob : IJobParallelFor
     [ReadOnly]
     public float maxSlope;
     [ReadOnly]
+    public float sizeBias;
+    [ReadOnly]
     public float sizeChange;
     [ReadOnly]
     public bool rotate;
@@ -67,25 +69,11 @@ public struct PositionsJob : IJobParallelFor
         Quaternion q = Quaternion.FromToRotation(new float3(0, 1, 0), normal);
         if (rotate)
             q *= Quaternion.Euler(0, rnd.NextFloat(0f, 360f), 0);
-        float newSize = rnd.NextFloat(1f/sizeChange, sizeChange);
+        float newSize = rnd.NextFloat(sizeBias / sizeChange, sizeBias * sizeChange);
 
         if (texValueAtPos >= falloff)
             newSize *= math.max(texValueAtPos, 0.1f);
 
         outputPlants[index] = Matrix4x4.TRS(pos, q, new float3(newSize, newSize, newSize));
     }
-
-
-    /*
-    private bool IsCulled(float3 pos)
-    {
-        // -1 here is the vegetation object negative radius
-        return frustrumPlanes.p1.GetDistanceToPoint(pos) < -1 ||
-               frustrumPlanes.p2.GetDistanceToPoint(pos) < -1 ||
-               frustrumPlanes.p3.GetDistanceToPoint(pos) < -1 ||
-               frustrumPlanes.p4.GetDistanceToPoint(pos) < -1 ||
-               frustrumPlanes.p5.GetDistanceToPoint(pos) < -1 ||
-               frustrumPlanes.p6.GetDistanceToPoint(pos) < -1;
-    }
-    */
 }

@@ -225,10 +225,10 @@ Shader"Unlit/GrassBladeIndirect"
             uniform float plantDistance;
             uniform float maxSlope;
             uniform float sizeChange;
-            uniform int rotate;
             uniform float displacement;
             uniform int textureIndex;
             uniform float falloff;
+            uniform float sizeBias;
             
             // generates random value between min and max
             float GenerateRandom(float index, float min, float max)
@@ -310,14 +310,13 @@ Shader"Unlit/GrassBladeIndirect"
                 float3 pos = float3(x, y, z);
     
                 float4 q = float4(0, 0, 0, 1);
-                if (rotate == 1)
-                    q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
+                q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
     
                 float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
                 if (texValueAtPos >= falloff)
                     newSize *= max(texValueAtPos, 0.1);
     
-                return trs(pos, q, newSize);
+                return trs(pos, q, newSize * sizeBias);
             }
             // ------------------------------------------------------------------------
             
@@ -346,6 +345,15 @@ Shader"Unlit/GrassBladeIndirect"
                 return float4(mul(m, vertex.yz), vertex.xw).zxyw;
             }
 
+            float4 RotateAroundYInDegrees(float4 vertex, float degrees)
+            {
+                float alpha = degrees * UNITY_PI / 180.0;
+                float sina, cosa;
+                sincos(alpha, sina, cosa);
+                float2x2 m = float2x2(cosa, -sina, sina, cosa);
+                return float4(mul(m, vertex.xz), vertex.yw).xzyw;
+            }
+
             v2f vert (appdata v, uint instanceID : SV_InstanceID)
             {
                 v2f o;
@@ -367,7 +375,8 @@ Shader"Unlit/GrassBladeIndirect"
     
                 //applying transformation matrix
                 float4 localPosition = RotateAroundXInDegrees(v.vertex, 90.0f);
-                positionWorldSpace += localPosition.xyz;
+                float3 localRotation = RotateAroundYInDegrees(v.vertex, GenerateRandom(instanceID * 0.0983633, 0, 360)).xyz;
+                positionWorldSpace += localPosition.xyz + localRotation;
                 positionWorldSpace.y += 0.5f;
 
                 //move world UVs by time

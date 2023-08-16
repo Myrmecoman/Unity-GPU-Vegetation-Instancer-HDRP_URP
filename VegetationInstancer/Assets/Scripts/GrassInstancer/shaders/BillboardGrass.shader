@@ -163,10 +163,10 @@ Shader"Unlit/BillboardGrass" {
             uniform float plantDistance;
             uniform float maxSlope;
             uniform float sizeChange;
-            uniform int rotate;
             uniform float displacement;
             uniform int textureIndex;
             uniform float falloff;
+            uniform float sizeBias;
             
                         // generates random value between min and max
             float GenerateRandom(float index, float min, float max)
@@ -248,14 +248,13 @@ Shader"Unlit/BillboardGrass" {
                 float3 pos = float3(x, y, z);
     
                 float4 q = float4(0, 0, 0, 1);
-                if (rotate == 1)
-                    q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
+                q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
     
                 float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
                 if (texValueAtPos >= falloff)
                     newSize *= max(texValueAtPos, 0.1);
     
-                return trs(pos, q, newSize);
+                return trs(pos, q, newSize * sizeBias);
             }
             // ------------------------------------------------------------------------
             uniform float4 LightDir;
@@ -279,12 +278,11 @@ Shader"Unlit/BillboardGrass" {
             {
                 v2f o;
             
-                float3 localPosition = RotateAroundYInDegrees(v.vertex, 0).xyz;
+                float3 localPosition = RotateAroundYInDegrees(v.vertex, GenerateRandom(instanceID * 0.0983633, 0, 360)).xyz;
                 float localWindVariance = min(max(0.4f, randValue(instanceID)), 0.75f);
     
                 float4x4 PosRotSizeMatrix = GeneratePosRotScale(instanceID);
                 float3 positionWorldSpace = mul(PosRotSizeMatrix, float4(v.vertex.xyz, 1));
-                float4 grassPosition = float4(positionWorldSpace, 1);
     
                 float distToCam = (CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
                                   (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
@@ -298,22 +296,21 @@ Shader"Unlit/BillboardGrass" {
                 
                 float cosTime;
                 if (localWindVariance > 0.6f)
-                    cosTime = cos(_Time.y * (_WindStrength - (grassPosition.w - 1.0f)));
+                    cosTime = cos(_Time.y * _WindStrength);
                 else
-                    cosTime = cos(_Time.y * ((_WindStrength - (grassPosition.w - 1.0f)) + localWindVariance * 0.1f));
-                    
+                    cosTime = cos(_Time.y * (_WindStrength + localWindVariance * 0.1f));
                 float trigValue = ((cosTime * cosTime) * 0.65f) - localWindVariance * 0.5f;
                 
-                localPosition.x += v.uv.y * trigValue * grassPosition.w * localWindVariance * 0.6f;
-                localPosition.z += v.uv.y * trigValue * grassPosition.w * 0.4f;
-                localPosition.y *= v.uv.y * (0.5f + grassPosition.w);
+                localPosition.x += v.uv.y * trigValue * localWindVariance * 0.6f;
+                localPosition.y *= v.uv.y;
+                localPosition.z += v.uv.y * trigValue * 0.4f;
                 
-                float4 worldPosition = float4(grassPosition.xyz + localPosition, 1.0f);
-                worldPosition.y += 0.5;
-
-                o.vertex = mul(UNITY_MATRIX_VP, worldPosition);
+                positionWorldSpace.y +=sizeBias/2;
+                float4 worldPosition = float4(positionWorldSpace.xyz + localPosition, 1.0f);
+    
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.saturationLevel = 1.0 - ((grassPosition.w - 1.0f) / 1.5f);
+                o.vertex = mul(UNITY_MATRIX_VP, worldPosition);
+                o.saturationLevel = 1.0;
                 o.saturationLevel = max(o.saturationLevel, 0.5f);
                 
                 return o;
