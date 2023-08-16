@@ -285,6 +285,16 @@ Shader"Unlit/BillboardGrass" {
                 float4x4 PosRotSizeMatrix = GeneratePosRotScale(instanceID);
                 float3 positionWorldSpace = mul(PosRotSizeMatrix, float4(v.vertex.xyz, 1));
                 float4 grassPosition = float4(positionWorldSpace, 1);
+    
+                float distToCam = (CamPos.x - positionWorldSpace.x) * (CamPos.x - positionWorldSpace.x) +
+                                  (CamPos.y - positionWorldSpace.y) * (CamPos.y - positionWorldSpace.y) +
+                                  (CamPos.z - positionWorldSpace.z) * (CamPos.z - positionWorldSpace.z);
+                if (distToCam > ViewRangeSq || GenerateRandom(instanceID, 0, ViewRangeSq) < distToCam) // second part gradually removes grass with distance
+                {
+                    o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 2, positionWorldSpace.z, 1));
+                    return o;
+                }
                 
                 float cosTime;
                 if (localWindVariance > 0.6f)

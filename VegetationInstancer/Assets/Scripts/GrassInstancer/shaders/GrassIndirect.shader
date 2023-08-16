@@ -360,7 +360,7 @@ Shader"Unlit/GrassBladeIndirect"
                 if (distToCam > ViewRangeSq || GenerateRandom(instanceID, 0, ViewRangeSq) < distToCam) // second part gradually removes grass with distance
                 {
                     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 1, positionWorldSpace.z, 1));
+                    o.vertex = mul(UNITY_MATRIX_VP, float4(positionWorldSpace.x, positionWorldSpace.y - 2, positionWorldSpace.z, 1));
                     return o;
                 }
                 float sqrWindCutoff = _WindCutoff * _WindCutoff;

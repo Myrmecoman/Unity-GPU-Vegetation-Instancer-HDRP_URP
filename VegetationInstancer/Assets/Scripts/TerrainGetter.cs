@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-[ExecuteAlways]
+[ExecuteInEditMode]
 public class TerrainGetter : MonoBehaviour
 {
     public static TerrainGetter instance;
@@ -62,6 +62,9 @@ public class TerrainGetter : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (instance == null)
+            return;
+
         if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
             instance.terrainHeight.Dispose();
         if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
