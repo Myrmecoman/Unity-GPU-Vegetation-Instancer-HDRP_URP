@@ -281,7 +281,7 @@ public class TerrainGetter : MonoBehaviour
             {
                 int arrX = x / texResolutionSingle;
                 for (int z = 0; z < textureCount; z++)
-                    arr[x, y, z] = maps[arrX * D1Size + arrY][x % texResolutionSingle, y % texResolutionSingle, z];
+                    arr[x, y, z] = maps[arrX + D1Size * arrY][x % texResolutionSingle, y % texResolutionSingle, z];
             }
         }
 
