@@ -3,6 +3,7 @@ Shader"Unlit/BillboardGrass"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _PrimaryCol ("Primary Color", Color) = (1, 1, 1)
         _AOColor ("AO Color", Color) = (1, 0, 1)
         _WindStrength ("Wind Strength", Range(0.5, 50.0)) = 1
     }
@@ -267,7 +268,7 @@ Shader"Unlit/BillboardGrass"
             uniform float ViewRangeSq;
 
             sampler2D _MainTex;
-            float4 _MainTex_ST, _AOColor;
+            float4 _MainTex_ST, _AOColor, _PrimaryCol;
             float _WindStrength;
             float _YRotation;
             
@@ -337,7 +338,7 @@ Shader"Unlit/BillboardGrass"
                 float3 light = -LightDir.xyz;
                 float ndotl = DotClamped(light, normalize(float3(0, 1, 0)));
                 
-                return col * ndotl * ao;
+                return col * ndotl * ao + _PrimaryCol;
             }
 
             ENDCG

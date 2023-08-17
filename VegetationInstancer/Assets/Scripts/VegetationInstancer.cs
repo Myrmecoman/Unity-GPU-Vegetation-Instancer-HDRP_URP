@@ -15,6 +15,7 @@ public class VegetationInstancer : MonoBehaviour
     [Header("Visuals")]
     [Tooltip("Run vegetation instancer in editor")]
     public bool runInEditor = false;
+    public bool displayChunks = false;
 
     [Header("Procedural parameters")]
     [Tooltip("Random rotation")]
@@ -280,7 +281,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if ((!Application.isPlaying && !runInEditor) || chunks == null)
+        if ((!Application.isPlaying && !runInEditor) || chunks == null || !displayChunks)
             return;
 
         foreach (var e in chunks)

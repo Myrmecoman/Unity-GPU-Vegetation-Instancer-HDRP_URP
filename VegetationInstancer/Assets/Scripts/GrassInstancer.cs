@@ -19,6 +19,7 @@ public class GrassInstancer : MonoBehaviour
     [Header("Visuals")]
     [Tooltip("Run vegetation instancer in editor. This makes memory leaks so use carrefuly.")]
     public bool runInEditor = false;
+    public bool displayChunks = false;
 
     [Header("Procedural parameters")]
     [Tooltip("Random displacement")]
@@ -272,6 +273,23 @@ public class GrassInstancer : MonoBehaviour
         
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
         //Debug.Log("Full loop time : " + chunkDrawing + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if ((!Application.isPlaying && !runInEditor) || chunksData == null || !displayChunks)
+            return;
+
+        foreach (var e in chunksData)
+        {
+            if (e.Key.w == 0)
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.yellow;
+
+            Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
+        }
     }
 }
 

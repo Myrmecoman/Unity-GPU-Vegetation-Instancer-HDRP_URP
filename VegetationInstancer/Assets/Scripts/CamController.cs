@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 
 namespace UnityTemplateProjects
@@ -53,6 +54,9 @@ namespace UnityTemplateProjects
 
         CameraState m_TargetCameraState = new CameraState();
         CameraState m_InterpolatingCameraState = new CameraState();
+
+        // fps text
+        public Text text;
 
         [Header("Movement Settings")]
         [Tooltip("Exponential boost factor on translation, controllable by mouse wheel.")]
@@ -109,6 +113,8 @@ namespace UnityTemplateProjects
 
         void Update()
         {
+            text.text = "FPS : " + (1f / Time.deltaTime);
+
             // Hide and lock cursor when right mouse button pressed
             if (Input.GetMouseButtonDown(1))
             {
