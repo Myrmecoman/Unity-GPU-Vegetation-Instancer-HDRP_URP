@@ -1,14 +1,19 @@
-Shader"Unlit/BillboardGrass" {
-    Properties {
+Shader"Unlit/BillboardGrass"
+{
+    Properties
+    {
         _MainTex ("Texture", 2D) = "white" {}
+        _AOColor ("AO Color", Color) = (1, 0, 1)
         _WindStrength ("Wind Strength", Range(0.5, 50.0)) = 1
     }
 
-    SubShader {
+    SubShader
+    {
         Cull Off
         Zwrite On
 
-        Pass {
+        Pass
+        {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -262,8 +267,9 @@ Shader"Unlit/BillboardGrass" {
             uniform float ViewRangeSq;
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float4 _MainTex_ST, _AOColor;
             float _WindStrength;
+            float _YRotation;
             
             float4 RotateAroundYInDegrees(float4 vertex, float degrees)
             {
@@ -278,7 +284,7 @@ Shader"Unlit/BillboardGrass" {
             {
                 v2f o;
             
-                float3 localPosition = RotateAroundYInDegrees(v.vertex, GenerateRandom(instanceID * 0.0983633, 0, 360)).xyz;
+                float3 localPosition = RotateAroundYInDegrees(v.vertex, GenerateRandom(instanceID * 0.0983633, 0, 360) + _YRotation).xyz;
                 float localWindVariance = min(max(0.4f, randValue(instanceID)), 0.75f);
     
                 float4x4 PosRotSizeMatrix = GeneratePosRotScale(instanceID);
@@ -318,8 +324,10 @@ Shader"Unlit/BillboardGrass" {
 
             fixed4 frag(v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                float4 col = tex2D(_MainTex, i.uv);
                 clip(-(0.5 - col.a));
+    
+                float4 ao = lerp(_AOColor, 2.0f, i.uv.y);
 
                 float luminance = LinearRgbToLuminance(col);
 
@@ -329,7 +337,7 @@ Shader"Unlit/BillboardGrass" {
                 float3 light = -LightDir.xyz;
                 float ndotl = DotClamped(light, normalize(float3(0, 1, 0)));
                 
-                return col * ndotl;
+                return col * ndotl * ao;
             }
 
             ENDCG

@@ -165,7 +165,10 @@ public class GrassInstancer : MonoBehaviour
     private void DisposeChunk(GrassChunk g)
     {
         g.argsBuffer?.Release();
-        Destroy(g.material);
+        if (g.material1 != null)
+            Destroy(g.material1);
+        if (g.material2 != null)
+            Destroy(g.material2);
     }
 
 
@@ -174,7 +177,8 @@ public class GrassInstancer : MonoBehaviour
         var chunk = new GrassChunk();
         chunk.argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         chunk.argsBuffer.SetData(args);
-        chunk.material = new Material(mat);
+        chunk.material1 = new Material(mat);
+        chunk.material2 = new Material(mat);
         return chunk;
     }
 
@@ -251,9 +255,19 @@ public class GrassInstancer : MonoBehaviour
         foreach (var e in chunksData)
         {
             GrassChunk g = e.Value;
-            g.material.SetInteger("chunkPosX", e.Key.x);
-            g.material.SetInteger("chunkPosZ", e.Key.z);
-            Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On);
+            g.material1.SetInteger("chunkPosX", e.Key.x);
+            g.material1.SetInteger("chunkPosZ", e.Key.z);
+
+            if (mat.shader.name == "Unlit/BillboardGrass") // if we picked the billboard shader, draw 2 instances rotated by 90 degrees
+            {
+                g.material1.SetFloat("_YRotation", 0f);
+                g.material2.SetInteger("chunkPosX", e.Key.x);
+                g.material2.SetInteger("chunkPosZ", e.Key.z);
+                g.material2.SetFloat("_YRotation", 90f);
+                Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material2, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On);
+            }
+
+            Graphics.DrawMeshInstancedIndirect(mesh, 0, g.material1, bounds, g.argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On);
         }
         
         double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
@@ -265,5 +279,6 @@ public class GrassInstancer : MonoBehaviour
 public struct GrassChunk
 {
     public ComputeBuffer argsBuffer;
-    public Material material;
+    public Material material1;
+    public Material material2;
 }
