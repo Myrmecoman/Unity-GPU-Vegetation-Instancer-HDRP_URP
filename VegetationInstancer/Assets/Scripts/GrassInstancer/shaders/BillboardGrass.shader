@@ -18,6 +18,7 @@ Shader"Unlit/BillboardGrass"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_fwdbase
             
             #pragma target 4.5
 
@@ -318,7 +319,6 @@ Shader"Unlit/BillboardGrass"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.vertex = mul(UNITY_MATRIX_VP, worldPosition);
                 o.saturationLevel = 1.0;
-                o.saturationLevel = max(o.saturationLevel, 0.5f);
                 
                 return o;
             }

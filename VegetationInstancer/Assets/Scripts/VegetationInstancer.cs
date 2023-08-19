@@ -5,23 +5,29 @@ using Unity.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Rendering;
 
 
-// /!\ ATTENTION : Vegetation instancer will only work with square and unrotated terrains. You should also not have holes in your terrain.
+// https://github.com/MangoButtermilch/Unity-Grass-Instancer/blob/main/GrassInstancerIndirect.cs
+// https://github.com/GarrettGunnell/Grass
+
+
+// /!\ ATTENTION : will only work with square and unrotated terrains. You should also not have holes in your terrain.
 [ExecuteInEditMode]
-[RequireComponent(typeof(TerrainGetter))]
+[RequireComponent(typeof(VegetationManager))]
 public class VegetationInstancer : MonoBehaviour
 {
     [Header("Visuals")]
-    [Tooltip("Run vegetation instancer in editor")]
+    [Tooltip("Run vegetation instancer in editor. Use carrefuly.")]
     public bool runInEditor = false;
+    [Tooltip("Display the chunks")]
     public bool displayChunks = false;
+    [Tooltip("The positions compute shader")]
+    public ComputeShader positionsComputeShader;
 
     [Header("Procedural parameters")]
-    [Tooltip("Random rotation")]
-    public bool randomRotation = true;
     [Tooltip("Random displacement")]
-    [Range(0, 100)]
+    [Range(0, 5)]
     public float maxDisplacement = 0.5f;
     [Tooltip("Changes the medium size of the objects")]
     [Range(0.01f, 3f)]
@@ -37,49 +43,53 @@ public class VegetationInstancer : MonoBehaviour
     public float falloff = 1f;
 
     [Header("Objects to spawn")]
-    [Tooltip("Plants to spawn")]
-    public GameObject[] plants;
-    [Tooltip("Low quality plants to spawn after viewDistanceLOD")]
-    public GameObject[] plantsLOD;
+    public GameObject plant;
     [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere.")]
     public int[] textureIndexes;
-    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
-    public int[] plantDistanceInt;
 
     [Header("Settings")]
-    [Tooltip("Camera")]
-    public Camera cam;
     [Tooltip("The X and Z size of the chunks. Y is determined as chunkSize * 4")]
     public int chunkSize = 20;
     [Tooltip("Maximum display range")]
     public int viewDistance = 50;
     [Tooltip("Distance from which low quality plants are spawned instead of normal plants")]
-    public int viewDistanceLOD = 30;
+    private int viewDistanceLOD = 30;
+    [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
+    [Range(1, 300)]
+    public int plantDistanceInt = 5;
 
 
-    private Mesh[] meshes;
-    private Mesh[] meshesLOD;
-    private RenderParams[] rpsPlants;
-    private RenderParams[] rpsPlantsLOD;
     private FrustrumPlanes frustrumPlanes;
-    private int[] totalChunkPlantsCount;
-    private Unity.Mathematics.Random rnd;
+    private int totalChunkPlantsCount;
 
+    private ComputeBuffer heightBuffer;
+    private ComputeBuffer texBuffer;
+    private ComputeBuffer argsBuffer;
+
+    private ComputeBuffer chunksBuffer;
+    private ComputeBuffer positionsBuffer;
+
+    private Mesh mesh;
+    private Material mat;
+
+    private uint[] args;
 
     // for both containers, int4 is real world position and 1 if LOD else 0
-    private NativeList<int4> newChunks;
-    // this contains all the chunks along with their positions data
-    private Dictionary<int4, NativeArray<Matrix4x4>[]> chunks;
+    // this contains all the chunks data
+    private Dictionary<int4, bool> chunksData;
 
 
     private void UpdateAllVariables()
     {
         FreeContainers();
 
+        // get terrain data
         frustrumPlanes = new FrustrumPlanes();
-        chunks = new Dictionary<int4, NativeArray<Matrix4x4>[]>();
+        chunksData = new Dictionary<int4, bool>(1024);
 
-        rnd = Unity.Mathematics.Random.CreateFromIndex(4973);
+        mesh = plant.GetComponent<MeshFilter>().sharedMesh;
+        //meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
+        mat = new Material(plant.GetComponent<MeshRenderer>().sharedMaterial);
 
         if (chunkSize < 2)
             chunkSize = 2;
@@ -92,22 +102,49 @@ public class VegetationInstancer : MonoBehaviour
         if (viewDistance > 500)
             viewDistance = 500;
 
-        meshes = new Mesh[plants.Length];
-        meshesLOD = new Mesh[plants.Length];
-        rpsPlants = new RenderParams[plants.Length];
-        rpsPlantsLOD = new RenderParams[plants.Length];
+        totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
 
-        for (int i = 0; i < plants.Length; i++)
-        {
-            meshes[i] = plants[i].GetComponent<MeshFilter>().sharedMesh;
-            meshesLOD[i] = plantsLOD[i].GetComponent<MeshFilter>().sharedMesh;
-            rpsPlants[i] = new RenderParams(plants[i].GetComponent<MeshRenderer>().sharedMaterial);
-            rpsPlantsLOD[i] = new RenderParams(plantsLOD[i].GetComponent<MeshRenderer>().sharedMaterial);
-        }
+        args = new uint[5];
+        args[0] = (uint)mesh.GetIndexCount(0);
+        args[1] = (uint)totalChunkPlantsCount;
+        args[2] = (uint)mesh.GetIndexStart(0);
+        args[3] = (uint)mesh.GetBaseVertex(0);
+        args[4] = 0;
 
-        totalChunkPlantsCount = new int[plants.Length];
-        for (int i = 0; i < plants.Length; i++)
-            totalChunkPlantsCount[i] = plantDistanceInt[i] * plantDistanceInt[i];
+        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+        argsBuffer.SetData(args);
+
+        positionsComputeShader.SetFloat("randomSeed", 873.304f);
+        positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
+        positionsComputeShader.SetFloat("chunkSize", chunkSize);
+        positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
+        positionsComputeShader.SetFloat("maxSlope", maxSlope);
+        positionsComputeShader.SetFloat("sizeChange", randomSize);
+        positionsComputeShader.SetFloat("displacement", maxDisplacement);
+        positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
+        positionsComputeShader.SetFloat("falloff", falloff);
+        positionsComputeShader.SetFloat("sizeBias", sizeBias);
+
+        heightBuffer = new ComputeBuffer(VegetationManager.instance.terrainHeight.heightMap.Length, sizeof(float));
+        heightBuffer.SetData(VegetationManager.instance.terrainHeight.heightMap.ToArray());
+        positionsComputeShader.SetBuffer(0, "heightMap", heightBuffer);
+        positionsComputeShader.SetInt("resolution", VegetationManager.instance.terrainHeight.resolution);
+        positionsComputeShader.SetVector("sampleSize", new Vector4(VegetationManager.instance.terrainHeight.sampleSize.x, VegetationManager.instance.terrainHeight.sampleSize.y, 0, 0));
+        positionsComputeShader.SetVector("AABBMin", new Vector4(VegetationManager.instance.terrainHeight.AABB.Min.x, VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainHeight.AABB.Min.z, 0));
+        positionsComputeShader.SetVector("AABBMax", new Vector4(VegetationManager.instance.terrainHeight.AABB.Max.x, VegetationManager.instance.terrainHeight.AABB.Max.y, VegetationManager.instance.terrainHeight.AABB.Max.z, 0));
+
+        texBuffer = new ComputeBuffer(VegetationManager.instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
+        texBuffer.SetData(VegetationManager.instance.terrainTex.textureMapAllTextures.ToArray());
+        positionsComputeShader.SetBuffer(0, "textureMapAllTextures", texBuffer);
+        positionsComputeShader.SetInt("terrainPosX", VegetationManager.instance.terrainTex.terrainPos.x);
+        positionsComputeShader.SetInt("terrainPosY", VegetationManager.instance.terrainTex.terrainPos.y);
+        positionsComputeShader.SetFloat("terrainSizeX", VegetationManager.instance.terrainTex.terrainSize.x);
+        positionsComputeShader.SetFloat("terrainSizeY", VegetationManager.instance.terrainTex.terrainSize.y);
+        positionsComputeShader.SetInt("textureArraySizeX", VegetationManager.instance.terrainTex.textureArraySize.x);
+        positionsComputeShader.SetInt("textureArraySizeY", VegetationManager.instance.terrainTex.textureArraySize.y);
+        positionsComputeShader.SetInt("resolutionTex", VegetationManager.instance.terrainTex.resolution);
+        positionsComputeShader.SetInt("textureCount", VegetationManager.instance.terrainTex.textureCount);
+        positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
     }
 
 
@@ -117,44 +154,39 @@ public class VegetationInstancer : MonoBehaviour
     }
 
 
-    private void FreeContainers()
-    {
-        if (chunks != null)
-        {
-            foreach (var e in chunks)
-            {
-                foreach (var i in e.Value)
-                {
-                    if (i.IsCreated)
-                        i.Dispose();
-                }
-            }
-        }
-    }
-
-
     private void OnDestroy()
     {
         FreeContainers();
     }
 
 
+    private void FreeContainers()
+    {
+        if (chunksData != null)
+            chunksData.Clear();
+
+        heightBuffer?.Release();
+        texBuffer?.Release();
+        positionsBuffer?.Release();
+        argsBuffer?.Release();
+    }
+
+
     // once this function is done, the chunks variable only contains the visible chunks, with info wether they are LOD or not
-    private void FindVisibleChunks()
+    private void UpdateChunks()
     {
         // find the chunks which appared on screen, and those which disappeared
-        newChunks = new NativeList<int4>(Allocator.TempJob);
         var chunksSampler = new PickVisibleChunksJob
         {
-            terrainData = TerrainGetter.instance.terrainHeight,
-            newChunks = newChunks,
+            terrainData = VegetationManager.instance.terrainHeight,
+            newChunks = new NativeList<int4>(Allocator.TempJob),
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
             modifiedChunks = new NativeList<int4>(Allocator.TempJob),
-            existingChunks = new NativeArray<int4>(chunks.Keys.ToArray(), Allocator.TempJob),
+            existingChunks = new NativeArray<int4>(chunksData.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = frustrumPlanes,
-            size1D = (int)TerrainGetter.instance.terrainTex.terrainSize.x,
-            camPos = new int3((int)cam.transform.position.x, (int)cam.transform.position.y, (int)cam.transform.position.z),
-            terrainPos = new int3(TerrainGetter.instance.terrainTex.terrainPos.x, (int)TerrainGetter.instance.terrainHeight.AABB.Min.y, TerrainGetter.instance.terrainTex.terrainPos.y),
+            size1D = (int)VegetationManager.instance.terrainTex.terrainSize.x,
+            camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
+            terrainPos = new int3(VegetationManager.instance.terrainTex.terrainPos.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainTex.terrainPos.y),
             chunkSize = chunkSize,
             viewDistanceLODSq = viewDistanceLOD * viewDistanceLOD,
             viewDistanceSq = viewDistance * viewDistance,
@@ -162,75 +194,37 @@ public class VegetationInstancer : MonoBehaviour
         chunksSampler.Schedule().Complete();
 
         // add the chunks which appeared on view
-        for (int i = 0; i < newChunks.Length; i++)
-        {
-            var array = new NativeArray<Matrix4x4>[plants.Length];
-            for (int j = 0; j < plants.Length; j++)
-                array[j] = new NativeArray<Matrix4x4>(totalChunkPlantsCount[j], Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
-            chunks.Add(newChunks[i], array);
-        }
+        for (int i = 0; i < chunksSampler.newChunks.Length; i++)
+            chunksData.Add(chunksSampler.newChunks[i], true);
 
         // remove the chunks which disappeared from view
         for (int i = 0; i < chunksSampler.deletedChunks.Length; i++)
-        {
-            for (int j = 0; j < plants.Length; j++)
-                chunks[chunksSampler.deletedChunks[i]][j].Dispose();
-            chunks.Remove(chunksSampler.deletedChunks[i]);
-        }
-
-        // change the state of chunks which turned from non-LOD to LOD and vice versa
-        for (int i = 0; i < chunksSampler.modifiedChunks.Length; i++)
-        {
-            var savedArray = chunks[chunksSampler.modifiedChunks[i]];
-            chunks.Remove(chunksSampler.modifiedChunks[i]);
-            chunks.Add(
-                new int4(chunksSampler.modifiedChunks[i].x,
-                chunksSampler.modifiedChunks[i].y,
-                chunksSampler.modifiedChunks[i].z,
-                math.abs(chunksSampler.modifiedChunks[i].w - 1)),
-                savedArray);
-        }
+            chunksData.Remove(chunksSampler.deletedChunks[i]);
 
         chunksSampler.deletedChunks.Dispose();
         chunksSampler.modifiedChunks.Dispose();
         chunksSampler.existingChunks.Dispose();
+        chunksSampler.newChunks.Dispose();
     }
 
 
-    // once the function is done, the 2 jobs resulting struct contain each an array with the positions of the plants
-    private void FillVisibleChunks()
+    private void RunpositionsComputeShader()
     {
-        for (int i = 0; i < newChunks.Length; i++)
-        {
-            for (int j = 0; j < plants.Length; j++)
-            {
-                int D1Size = plantDistanceInt[j];
-                uint seed = (uint)((newChunks[i].x + 1) + ((newChunks[i].z + 1) * 10000) + (j * 42));
-                rnd.InitState(seed);
-                PositionsJob positionsSampler = new PositionsJob
-                {
-                    outputPlants = chunks[newChunks[i]][j],
-                    terrainData = TerrainGetter.instance.terrainHeight,
-                    terrainTex = TerrainGetter.instance.terrainTex,
-                    chunkPos = new int3(newChunks[i].x, newChunks[i].y, newChunks[i].z),
-                    D1Size = D1Size,
-                    chunkSize = chunkSize,
-                    plantDistance = plantDistanceInt[j],
+        int totalPlants = plantDistanceInt * plantDistanceInt * chunksData.Count;
+        positionsBuffer?.Release();
+        positionsBuffer = null;
+        positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
-                    // procedural variables
-                    rnd = rnd,
-                    maxSlope = maxSlope,
-                    sizeBias = sizeBias,
-                    sizeChange = randomSize,
-                    rotate = randomRotation,
-                    displacement = maxDisplacement,
-                    textureIndex = textureIndexes[j],
-                    falloff = falloff,
-                };
-                positionsSampler.Schedule(totalChunkPlantsCount[j], 64).Complete();
-            }
-        }
-        newChunks.Dispose();
+        chunksBuffer?.Release();
+        chunksBuffer = null;
+        chunksBuffer = new ComputeBuffer(chunksData.Count, sizeof(int) * 4);
+        chunksBuffer.SetData(chunksData.Keys.ToArray());
+
+        positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
+        positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
+        
+        int groups = Mathf.CeilToInt(totalPlants / 1024f);
+        positionsComputeShader.Dispatch(0, groups, 1, 1);
     }
 
 
@@ -240,57 +234,42 @@ public class VegetationInstancer : MonoBehaviour
             return;
         if (!Application.isPlaying)
         {
-            if (runInEditor && chunks == null)
+            if (runInEditor && chunksData == null)
                 Start();
             if (runInEditor)
                 UpdateAllVariables();
         }
 
         double t = Time.realtimeSinceStartupAsDouble;
+        var planes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam));
 
-        var planes = GeometryUtility.CalculateFrustumPlanes(cam);
-        frustrumPlanes.p1 = planes[0];
-        frustrumPlanes.p2 = planes[1];
-        frustrumPlanes.p3 = planes[2];
-        frustrumPlanes.p4 = planes[3];
-        frustrumPlanes.p5 = planes[4];
-        frustrumPlanes.p6 = planes[5];
+        UpdateChunks();
+        RunpositionsComputeShader();
 
-        FindVisibleChunks();
-        FillVisibleChunks();
+        // recalculate bounds, and set positions buffer
+        var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);
+        mat.SetBuffer("GPUInstancedIndirectDataBuffer", positionsBuffer);
 
-        // draw objects
-        foreach (var e in chunks)
-        {
-            if (e.Key.w == 0)
-            {
-                for (int j = 0; j < plants.Length; j++)
-                    Graphics.RenderMeshInstanced(rpsPlants[j], meshes[j], 0, e.Value[j]);
-            }
-            else
-            {
-                for (int j = 0; j < plants.Length; j++)
-                    Graphics.RenderMeshInstanced(rpsPlantsLOD[j], meshesLOD[j], 0, e.Value[j]);
-            }
-        }
+        // draw objects and free positions
+        //Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On, true);
+        Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
 
-        double chunkDrawing = Time.realtimeSinceStartupAsDouble - t;
-        //Debug.Log("Full loop time : " + chunkDrawing);
+        double totalTime = Time.realtimeSinceStartupAsDouble - t;
+        //Debug.Log("Full loop time : " + totalTime + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
     }
 
 
     private void OnDrawGizmos()
     {
-        if ((!Application.isPlaying && !runInEditor) || chunks == null || !displayChunks)
+        if (!displayChunks || Application.isPlaying || chunksData == null)
             return;
 
-        foreach (var e in chunks)
+        foreach (var e in chunksData)
         {
             if (e.Key.w == 0)
                 Gizmos.color = Color.red;
             else
                 Gizmos.color = Color.yellow;
-
             Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
         }
     }
@@ -305,4 +284,15 @@ public struct FrustrumPlanes
     public Plane p4;
     public Plane p5;
     public Plane p6;
+
+
+    public FrustrumPlanes(Plane[] planes)
+    {
+        p1 = planes[0];
+        p2 = planes[1];
+        p3 = planes[2];
+        p4 = planes[3];
+        p5 = planes[4];
+        p6 = planes[5];
+    }
 }

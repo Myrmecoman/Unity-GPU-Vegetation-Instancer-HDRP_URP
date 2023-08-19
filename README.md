@@ -4,41 +4,31 @@
 
 ## Overview
 
-HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools.
+/!\ WORK IN PROGRESS /!\   
+
+HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools.   
 
 It consists in 2 main scripts :   
 
-- GrassInstancer.cs : in charge of displaying large amounts of grass (up to millions) using a custom shader and GPU indirect rendering. Everything from positioning, texture mapping, slope etc, is done on the GPU, leading to almost 0 CPU charge.   
-Both the model grass and billboard grass work with this instancer.   
-The shader comes from this repository (with lots of changes) : https://github.com/MangoButtermilch/Unity-Grass-Instancer.   
-Also thanks to Acerola for the code explanation here : https://github.com/GarrettGunnell/Grass.
+- VegetationManager.cs : this script sets up the terrain data required for full GPU positioning. Their can only be one instance of it, and is used by all the VegetationInstancers.   
 
-![GrassInstancer](./grassInstancer.png?raw=true "GrassInstancer")
+- VegetationInstancer.cs : in charge of displaying large amounts of vegetation (up to millions) using any shader implementing GPU indirect instancing rendering. Everything from positioning, texture mapping, slope etc, is done on the GPU, leading to almost 0 CPU charge.   
 
-![BillboardGrassInstancer](./billboardGrass.png?raw=true "BillboardGrassInstancer")
-
-- VegetationInstancer.cs : in charge of displaying lower amounts of larger vegetation objects (ferns, bushes, etc...). This one works with any shader as long as GPU instancing is enabled, but is less optimized and can therefore work with fewer instances (about 10000).
-
-![VegetationInstancer](./vegetationInstancer.png?raw=true "VegetationInstancer")
-
-Note that this project only spawns vegetation objects without colliders at the moment.
+Note that this project only spawns vegetation objects without colliders, and is reserved for small objects to populate your world.   
 
 ## How to use
 
-Put the TerrainGetter.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
-The TerrainGetter is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld for example. Only one TerrainGetter can exist so if you want severals instancers you need to put them on the same GameObject.   
-See below for the usage of VegetationInstancer.cs, GrassInstancer.cs is similar in the parameters.
-
-![Usage](./usage.png?raw=true "Usage")
+Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
+The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld for example. Only one VegetationManager can exist so if you want severals instancers you need to put them on the same GameObject.   
 
 ## Code explanation
 
-GrassInstancer and VegetationInstancer all use the same code to generate the chunks positions at runtime using burst. However GrassInstancer exclusively uses the GPU for grass positioning, whereas VegetationInstancer uses burst.   
-The positions are not constantly regenerated, but only if a new chunk enters the camera frustrum. Finding new chunks is done in PickVisibleChunkJob.cs. Due to this, no CPU computation is required when the camera does not move. When a new chunk enters the camera view, all positions inside it are generated in a dedicated burst job for VegetationInstancer (PositionsJob.cs).   
-TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers.
+VegetationInstancer generates the chunks positions at runtime using burst. It then exclusively uses the GPU for grass positioning.   
+TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers which are then passed to a compute shader to sample the positions of vegetation on the GPU.   
 
-All the code is commented and was made to be easily readable.
+All the code is commented and was made to be easily readable.   
 
-## Work in progress
- 
-Lit billboard grass.
+## How do I get GPU indirect instancing capable shaders ?
+
+All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
+Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provided the generated shader to the Vegetation Instancer.   
