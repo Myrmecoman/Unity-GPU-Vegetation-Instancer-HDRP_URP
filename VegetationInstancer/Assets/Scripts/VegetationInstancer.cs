@@ -8,10 +8,6 @@ using System.Linq;
 using UnityEngine.Rendering;
 
 
-// https://github.com/MangoButtermilch/Unity-Grass-Instancer/blob/main/GrassInstancerIndirect.cs
-// https://github.com/GarrettGunnell/Grass
-
-
 // /!\ ATTENTION : will only work with square and unrotated terrains. You should also not have holes in your terrain.
 [ExecuteInEditMode]
 [RequireComponent(typeof(VegetationManager))]
@@ -59,7 +55,6 @@ public class VegetationInstancer : MonoBehaviour
     public int plantDistanceInt = 5;
 
 
-    private FrustrumPlanes frustrumPlanes;
     private int totalChunkPlantsCount;
 
     private ComputeBuffer heightBuffer;
@@ -74,8 +69,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private uint[] args;
 
-    // for both containers, int4 is real world position and 1 if LOD else 0
-    // this contains all the chunks data
+    // int4 is real world position and 1 if LOD else 0, bool is not used
     private Dictionary<int4, bool> chunksData;
 
 
@@ -84,23 +78,21 @@ public class VegetationInstancer : MonoBehaviour
         FreeContainers();
 
         // get terrain data
-        frustrumPlanes = new FrustrumPlanes();
         chunksData = new Dictionary<int4, bool>(1024);
 
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
-        //meshLOD = plantLOD.GetComponent<MeshFilter>().sharedMesh;
         mat = new Material(plant.GetComponent<MeshRenderer>().sharedMaterial);
 
         if (chunkSize < 2)
             chunkSize = 2;
         if (viewDistanceLOD <= 0)
             viewDistanceLOD = 1;
-        if (viewDistanceLOD > 500)
-            viewDistanceLOD = 500;
+        if (viewDistanceLOD > 1000)
+            viewDistanceLOD = 1000;
         if (viewDistance <= 0)
             viewDistance = 2;
-        if (viewDistance > 500)
-            viewDistance = 500;
+        if (viewDistance > 1000)
+            viewDistance = 1000;
 
         totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
 
@@ -121,9 +113,9 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("maxSlope", maxSlope);
         positionsComputeShader.SetFloat("sizeChange", randomSize);
         positionsComputeShader.SetFloat("displacement", maxDisplacement);
-        positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
         positionsComputeShader.SetFloat("falloff", falloff);
         positionsComputeShader.SetFloat("sizeBias", sizeBias);
+        positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
 
         heightBuffer = new ComputeBuffer(VegetationManager.instance.terrainHeight.heightMap.Length, sizeof(float));
         heightBuffer.SetData(VegetationManager.instance.terrainHeight.heightMap.ToArray());
@@ -172,7 +164,7 @@ public class VegetationInstancer : MonoBehaviour
     }
 
 
-    // once this function is done, the chunks variable only contains the visible chunks, with info wether they are LOD or not
+    // once this function is done, the chunksData dictionary only contains the visible chunks, with info wether they are LOD or not
     private void UpdateChunks()
     {
         // find the chunks which appared on screen, and those which disappeared
@@ -183,7 +175,7 @@ public class VegetationInstancer : MonoBehaviour
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
             modifiedChunks = new NativeList<int4>(Allocator.TempJob),
             existingChunks = new NativeArray<int4>(chunksData.Keys.ToArray(), Allocator.TempJob),
-            frustrumPlanes = frustrumPlanes,
+            frustrumPlanes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam)),
             size1D = (int)VegetationManager.instance.terrainTex.terrainSize.x,
             camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
             terrainPos = new int3(VegetationManager.instance.terrainTex.terrainPos.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainTex.terrainPos.y),
@@ -210,7 +202,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void RunpositionsComputeShader()
     {
-        int totalPlants = plantDistanceInt * plantDistanceInt * chunksData.Count;
+        int totalPlants = totalChunkPlantsCount * chunksData.Count;
         positionsBuffer?.Release();
         positionsBuffer = null;
         positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
@@ -222,8 +214,8 @@ public class VegetationInstancer : MonoBehaviour
 
         positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
         positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
-        
-        int groups = Mathf.CeilToInt(totalPlants / 1024f);
+
+        int groups = Mathf.CeilToInt(totalPlants / 64f);
         positionsComputeShader.Dispatch(0, groups, 1, 1);
     }
 
@@ -241,17 +233,13 @@ public class VegetationInstancer : MonoBehaviour
         }
 
         double t = Time.realtimeSinceStartupAsDouble;
-        var planes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam));
 
         UpdateChunks();
         RunpositionsComputeShader();
 
-        // recalculate bounds, and set positions buffer
+        // draw objects
         var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);
         mat.SetBuffer("GPUInstancedIndirectDataBuffer", positionsBuffer);
-
-        // draw objects and free positions
-        //Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, UnityEngine.Rendering.ShadowCastingMode.On, true);
         Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
 
         double totalTime = Time.realtimeSinceStartupAsDouble - t;

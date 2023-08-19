@@ -133,9 +133,9 @@ float plantDistance;
 float maxSlope;
 float sizeChange;
 float displacement;
-int textureIndex;
 float falloff;
 float sizeBias;
+int textureIndex;
 
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
@@ -195,7 +195,7 @@ float4 EulerToQuaternion(float3 euler)
     );
 }
 
-float4x4 GeneratePosRotScale(int index, int chunkIndex)
+float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
 {
     float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
     float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
@@ -265,16 +265,17 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
     ItemInstanceData instanceItem;
     instanceItem.mat = mat;
     instanceItem.matInverse = inverse(mat);
-    instanceItem.infos = float4(1, 1, 1, 1);
+    instanceItem.infos = float4(D1Size, 1, 1, 1);
     return instanceItem;
 }
 
 // output
 RWStructuredBuffer<ItemInstanceData> positions;
 
-[numthreads(1024,1,1)]
+[numthreads(64,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    ItemInstanceData instanceItem = MakeItemInstanceData(GeneratePosRotScale((uint) (id.x % chunkSize), (uint) (id.x / chunkSize)));
+    float4x4 mat = GeneratePosRotScale(id.x % (uint) (D1Size * D1Size), id.x / (uint) (D1Size * D1Size));
+    ItemInstanceData instanceItem = MakeItemInstanceData(mat);
     positions[id.x] = instanceItem;
 }
