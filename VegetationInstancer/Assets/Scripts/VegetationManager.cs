@@ -55,7 +55,7 @@ public class VegetationManager : MonoBehaviour
 
     private void Update()
     {
-        if (!reloadTerrainData || Application.isPlaying)
+        if ((!reloadTerrainData || Application.isPlaying) && instance != null)
             return;
 
         if (instance == null)

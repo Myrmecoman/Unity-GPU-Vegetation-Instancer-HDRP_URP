@@ -69,7 +69,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private uint[] args;
 
-    // int4 is real world position and 1 if LOD else 0, bool is not used
+    // int4 is real world position and 1 if LOD else 0, the bool is not used
     private Dictionary<int4, bool> chunksData;
 
 
@@ -77,7 +77,6 @@ public class VegetationInstancer : MonoBehaviour
     {
         FreeContainers();
 
-        // get terrain data
         chunksData = new Dictionary<int4, bool>(1024);
 
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
@@ -107,9 +106,9 @@ public class VegetationInstancer : MonoBehaviour
         argsBuffer.SetData(args);
 
         positionsComputeShader.SetFloat("randomSeed", 873.304f);
-        positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
+        positionsComputeShader.SetInt("D1Size", plantDistanceInt);
         positionsComputeShader.SetFloat("chunkSize", chunkSize);
-        positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
+        positionsComputeShader.SetInt("plantDistance", plantDistanceInt);
         positionsComputeShader.SetFloat("maxSlope", maxSlope);
         positionsComputeShader.SetFloat("sizeChange", randomSize);
         positionsComputeShader.SetFloat("displacement", maxDisplacement);
@@ -215,7 +214,7 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
         positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
 
-        int groups = Mathf.CeilToInt(totalPlants / 64f);
+        int groups = Mathf.CeilToInt(totalPlants);// / 64f);
         positionsComputeShader.Dispatch(0, groups, 1, 1);
     }
 

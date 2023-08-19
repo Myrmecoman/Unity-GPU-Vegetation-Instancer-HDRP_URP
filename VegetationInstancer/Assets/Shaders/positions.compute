@@ -127,9 +127,9 @@ float GetTextureAtPos(float2 worldPos, int texIndex)
 // generation related variables and function ------------------------------
 StructuredBuffer<int4> chunksPositions;
 float randomSeed;
-float D1Size;
+uint D1Size;
 float chunkSize;
-float plantDistance;
+uint plantDistance;
 float maxSlope;
 float sizeChange;
 float displacement;
@@ -272,10 +272,10 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
 // output
 RWStructuredBuffer<ItemInstanceData> positions;
 
-[numthreads(64,1,1)]
+[numthreads(1,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    float4x4 mat = GeneratePosRotScale(id.x % (uint) (D1Size * D1Size), id.x / (uint) (D1Size * D1Size));
+    float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size));
     ItemInstanceData instanceItem = MakeItemInstanceData(mat);
     positions[id.x] = instanceItem;
 }
