@@ -3,11 +3,11 @@
 
 
 // terrain height related variables and functions -------------------------
-StructuredBuffer<float> heightMap;
-int resolution;
-float4 sampleSize;
-float4 AABBMin;
-float4 AABBMax;
+uniform StructuredBuffer<float> heightMap;
+uniform int resolution;
+uniform float4 sampleSize;
+uniform float4 AABBMin;
+uniform float4 AABBMax;
             
 struct Triangle
 {
@@ -85,15 +85,15 @@ float4 SampleHeight(float2 worldPosition)
 // ------------------------------------------------------------------------
             
 // texture related variables and functions --------------------------------
-StructuredBuffer<float> textureMapAllTextures;
-int terrainPosX;
-int terrainPosY;
-float terrainSizeX;
-float terrainSizeY;
-int textureArraySizeX;
-int textureArraySizeY;
-int resolutionTex;
-int textureCount;
+uniform StructuredBuffer<float> textureMapAllTextures;
+uniform int terrainPosX;
+uniform int terrainPosY;
+uniform float terrainSizeX;
+uniform float terrainSizeY;
+uniform int textureArraySizeX;
+uniform int textureArraySizeY;
+uniform int resolutionTex;
+uniform int textureCount;
 
 int round(float val)
 {
@@ -265,17 +265,21 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
     ItemInstanceData instanceItem;
     instanceItem.mat = mat;
     instanceItem.matInverse = inverse(mat);
-    instanceItem.infos = float4(D1Size, 1, 1, 1);
+    instanceItem.infos = float4(1, 1, 1, 1);
     return instanceItem;
 }
 
 // output
+uint positionsSize;
 RWStructuredBuffer<ItemInstanceData> positions;
 
-[numthreads(1,1,1)]
+[numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size));
-    ItemInstanceData instanceItem = MakeItemInstanceData(mat);
-    positions[id.x] = instanceItem;
+    if (id.x < positionsSize)
+    {
+        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size));
+        ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+        positions[id.x] = instanceItem;
+    }
 }

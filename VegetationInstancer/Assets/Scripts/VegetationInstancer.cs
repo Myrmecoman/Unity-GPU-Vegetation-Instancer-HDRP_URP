@@ -19,6 +19,7 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Display the chunks")]
     public bool displayChunks = false;
     [Tooltip("The positions compute shader")]
+    [SerializeField]
     public ComputeShader positionsComputeShader;
 
     [Header("Procedural parameters")]
@@ -55,7 +56,7 @@ public class VegetationInstancer : MonoBehaviour
     public int plantDistanceInt = 5;
 
 
-    private int totalChunkPlantsCount;
+    private int instancesPerChunk;
 
     private ComputeBuffer heightBuffer;
     private ComputeBuffer texBuffer;
@@ -93,17 +94,7 @@ public class VegetationInstancer : MonoBehaviour
         if (viewDistance > 1000)
             viewDistance = 1000;
 
-        totalChunkPlantsCount = plantDistanceInt * plantDistanceInt;
-
-        args = new uint[5];
-        args[0] = (uint)mesh.GetIndexCount(0);
-        args[1] = (uint)totalChunkPlantsCount;
-        args[2] = (uint)mesh.GetIndexStart(0);
-        args[3] = (uint)mesh.GetBaseVertex(0);
-        args[4] = 0;
-
-        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-        argsBuffer.SetData(args);
+        instancesPerChunk = plantDistanceInt * plantDistanceInt;
 
         positionsComputeShader.SetFloat("randomSeed", 873.304f);
         positionsComputeShader.SetInt("D1Size", plantDistanceInt);
@@ -201,20 +192,37 @@ public class VegetationInstancer : MonoBehaviour
 
     private void RunpositionsComputeShader()
     {
-        int totalPlants = totalChunkPlantsCount * chunksData.Count;
+        int totalPlants = instancesPerChunk * chunksData.Count;
+
+        // reset args because the number of instances probably changed
+        args = new uint[5];
+        args[0] = (uint)mesh.GetIndexCount(0);
+        args[1] = (uint)totalPlants;
+        args[2] = (uint)mesh.GetIndexStart(0);
+        args[3] = (uint)mesh.GetBaseVertex(0);
+        args[4] = 0;
+
+        argsBuffer?.Release();
+        argsBuffer = null;
+        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+        argsBuffer.SetData(args);
+
+        // output buffer for objects positions
         positionsBuffer?.Release();
         positionsBuffer = null;
         positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
+        // readonly buffer containing chunks positions
         chunksBuffer?.Release();
         chunksBuffer = null;
         chunksBuffer = new ComputeBuffer(chunksData.Count, sizeof(int) * 4);
         chunksBuffer.SetData(chunksData.Keys.ToArray());
 
+        positionsComputeShader.SetInt("positionsSize", totalPlants);
         positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
         positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
 
-        int groups = Mathf.CeilToInt(totalPlants);// / 64f);
+        int groups = Mathf.CeilToInt(totalPlants / 1024f);
         positionsComputeShader.Dispatch(0, groups, 1, 1);
     }
 
@@ -242,7 +250,7 @@ public class VegetationInstancer : MonoBehaviour
         Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
 
         double totalTime = Time.realtimeSinceStartupAsDouble - t;
-        //Debug.Log("Full loop time : " + totalTime + ", total objects spawned : " + totalChunkPlantsCount * chunksData.Count);
+        //Debug.Log("Full loop time : " + totalTime + ", total objects spawned : " + instancesPerChunk * chunksData.Count);
     }
 
 
