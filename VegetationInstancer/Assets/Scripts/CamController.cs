@@ -113,7 +113,7 @@ namespace UnityTemplateProjects
 
         void Update()
         {
-            text.text = "FPS : " + (1f / Time.deltaTime);
+            text.text = "FPS : " + (int)(1f / Time.deltaTime);
 
             // Hide and lock cursor when right mouse button pressed
             if (Input.GetMouseButtonDown(1))

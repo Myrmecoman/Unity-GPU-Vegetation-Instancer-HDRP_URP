@@ -27,7 +27,7 @@ public class VegetationInstancer : MonoBehaviour
     [Range(0, 5)]
     public float maxDisplacement = 0.5f;
     [Tooltip("Changes the medium size of the objects")]
-    [Range(0.01f, 3f)]
+    [Range(0.01f, 5f)]
     public float sizeBias = 1f;
     [Tooltip("Random size difference, 5 means it can go from size/5 to size*5")]
     [Range(1, 5)]

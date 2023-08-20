@@ -1002,7 +1002,6 @@
 0x7c99fb090e153e71 -    8978483348449345137 - UnityEngine.Rendering.HighDefinition.RenderPipelineMaterial
 0x7ca9ed1bc9025b3d -    8982971635359439677 - UnityEngine.Rendering.HighDefinition.WaterRendering
 0x7cc46c0abdfbf51c -    8990429549531231516 - UnityEditor.Animations.BlendTree
-0x7d111236e9652dff -    9012004356398329343 - GrassInstancer
 0x7d1e731cd2b430a9 -    9015770071673614505 - UnityEngine.Rendering.UI.DebugUIHandlerVector2
 0x7d2c0bb5bf2c6be5 -    9019597028940606437 - UnityEngine.Rendering.HighDefinition.SplitToning
 0x7d612c4f6b10252d -    9034551047092184365 - UnityEditor.VFX.Operator.SampleCurve
@@ -1108,6 +1107,7 @@
 0x884111efadbc6a63 -    9818148383754054243 - UnityEditor.TerrainTools.NoiseComponentEditor
 0x8865aa9136c6e3ab -    9828449302471959467 - UnityEditor.ClothInspector
 0x8869e066fdb725f4 -    9829634394660742644 - Unity.Physics.DummyColliderFakesComponent`1[[Unity.Physics.BoxCollider, Unity.Physics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+0x888558a73097f193 -    9837366436158763411 - VegetationManager
 0x88bef6b528d82672 -    9853584292667991666 - Unity.VisualScripting.UnityOnMouseDragMessageListener
 0x88e95e757cfa9f94 -    9865520317432766356 - UnityEditor.VFX.VFXSlotFloat4
 0x89098679c2be26a7 -    9874571515502929575 - UnityEditor.ProjectWindowCallback.DoCreateFolder
@@ -1147,7 +1147,6 @@
 0x8df0a9a13d4fdf95 -   10227861263741869973 - UnityEditor.AnchoredJoint2DEditor
 0x8e06c2869db56147 -   10234081086673346887 - UnityEditor.GUIViewDebuggerWindow
 0x8e1d0b81c3435732 -   10240353779665033010 - UnityEditor.Rendering.HighDefinition.HDCameraEditor
-0x8e507645fe314e3c -   10254826394512084540 - TerrainGetter
 0x8e524d902be89a52 -   10255344583083334226 - UnityEngine.ScriptableObject
 0x8e6d79493862fc42 -   10262992481232813122 - UnityEngine.FrictionJoint2D
 0x8eb235f5c8fff414 -   10282340228995740692 - UnityEngine.Collider

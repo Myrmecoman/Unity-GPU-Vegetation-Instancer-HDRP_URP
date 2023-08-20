@@ -4,8 +4,6 @@
 
 ## Overview
 
-/!\ WORK IN PROGRESS /!\   
-
 HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools.   
 
 It consists in 2 main scripts :   
@@ -23,12 +21,16 @@ The VegetationManager is in charge of generating the data needed by the instance
 
 ## Code explanation
 
-VegetationInstancer generates the chunks positions at runtime using burst. It then exclusively uses the GPU for grass positioning.   
+VegetationInstancer generates the chunks positions every frame using burst (takes about 2ms). It then exclusively uses the GPU for grass positioning.   
 TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers which are then passed to a compute shader to sample the positions of vegetation on the GPU.   
 
 All the code is commented and was made to be easily readable.   
 
-## How do I get GPU indirect instancing capable shaders ?
+## How to get GPU indirect instancing capable shaders ?
 
 All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
 Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provided the generated shader to the Vegetation Instancer.   
+
+## In the futur
+
+I need to adapt unity's grass shader to work with 2 quads, multiplying FPS by quite a bunch since current meshes are more than 100 vertices.   
