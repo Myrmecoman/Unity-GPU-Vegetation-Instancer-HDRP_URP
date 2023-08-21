@@ -44,6 +44,8 @@ public class VegetationInstancer : MonoBehaviour
     public int[] textureIndexes;
 
     [Header("Settings")]
+    [Tooltip("Set to true if you use a quad to render your grass, this way VegetationInstancer will spawn 2 quads rotated by 90 degrees")]
+    public bool billboardMode = false;
     [Tooltip("The X and Z size of the chunks. Y is determined as chunkSize * 4")]
     public int chunkSize = 20;
     [Tooltip("Maximum display range")]
@@ -99,6 +101,7 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("sizeBias", sizeBias);
         positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
+        positionsComputeShader.SetInt("billboardMode", billboardMode?1:0);
     }
 
 
@@ -164,7 +167,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void RunpositionsComputeShader()
     {
-        int totalPlants = instancesPerChunk * chunksData.Count;
+        int totalPlants = instancesPerChunk * chunksData.Count * (billboardMode?2:1);
 
         // reset args because the number of instances probably changed
         var args = new uint[5];

@@ -197,7 +197,7 @@ float4 EulerToQuaternion(float3 euler)
     );
 }
 
-float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
+float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
 {
     float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
     float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
@@ -216,7 +216,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
         return trs(float3(0, -10000, 0), float4(0, 0, 0, 1), float3(1, 1, 1));
     
     float3 pos = float3(x, y, z);
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360), 0));
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360) + rotation, 0));
     float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
     if (texValueAtPos >= falloff)
         newSize *= max(texValueAtPos, 0.1);
@@ -277,14 +277,30 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
 
 // output
 uint positionsSize;
+uint billboardMode;
 RWStructuredBuffer<ItemInstanceData> positions;
 
 [numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    if (id.x < positionsSize)
+    if (billboardMode == 1)
     {
-        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size));
+        if (id.x < positionsSize/2)
+        {
+            float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
+            ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+            positions[id.x] = instanceItem;
+        }
+        else
+        {
+            float4x4 mat = GeneratePosRotScale((id.x - positionsSize / 2) % (D1Size * D1Size), (id.x - positionsSize / 2) / (D1Size * D1Size), 90);
+            ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+            positions[id.x] = instanceItem;
+        }
+    }
+    else
+    {
+        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
         ItemInstanceData instanceItem = MakeItemInstanceData(mat);
         positions[id.x] = instanceItem;
     }
