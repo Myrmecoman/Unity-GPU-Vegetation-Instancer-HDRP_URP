@@ -39,6 +39,9 @@ public class VegetationManager : MonoBehaviour
     [HideInInspector] public float2 terrainSize;
     [HideInInspector] public float[] textureMap;
 
+    private ComputeBuffer heightBuffer;
+    private ComputeBuffer texBuffer;
+
 
     private void Awake()
     {
@@ -76,6 +79,11 @@ public class VegetationManager : MonoBehaviour
             instance.terrainHeight.Dispose();
         if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
             instance.terrainTex.Dispose();
+
+        heightBuffer?.Release();
+        heightBuffer = null;
+        texBuffer?.Release();
+        texBuffer = null;
     }
 
 
@@ -93,6 +101,26 @@ public class VegetationManager : MonoBehaviour
 
         instance.terrainHeight = new TerrainHeight(data.heightmap, data.HeightResolution, data.sampleSize, data.aabb);
         instance.terrainTex = new TerrainTextures(data.textureMap, data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
+
+        heightBuffer = new ComputeBuffer(instance.terrainHeight.heightMap.Length, sizeof(float));
+        heightBuffer.SetData(instance.terrainHeight.heightMap.ToArray());
+        Shader.SetGlobalBuffer("heightMap", heightBuffer);
+        Shader.SetGlobalInteger("resolution", instance.terrainHeight.resolution);
+        Shader.SetGlobalVector("sampleSize", new Vector4(instance.terrainHeight.sampleSize.x, instance.terrainHeight.sampleSize.y, 0, 0));
+        Shader.SetGlobalVector("AABBMin", new Vector4(instance.terrainHeight.AABB.Min.x, instance.terrainHeight.AABB.Min.y, instance.terrainHeight.AABB.Min.z, 0));
+        Shader.SetGlobalVector("AABBMax", new Vector4(instance.terrainHeight.AABB.Max.x, instance.terrainHeight.AABB.Max.y, instance.terrainHeight.AABB.Max.z, 0));
+
+        texBuffer = new ComputeBuffer(instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
+        texBuffer.SetData(instance.terrainTex.textureMapAllTextures.ToArray());
+        Shader.SetGlobalBuffer("textureMapAllTextures", texBuffer);
+        Shader.SetGlobalInteger("terrainPosX", instance.terrainTex.terrainPos.x);
+        Shader.SetGlobalInteger("terrainPosY", instance.terrainTex.terrainPos.y);
+        Shader.SetGlobalFloat("terrainSizeX", instance.terrainTex.terrainSize.x);
+        Shader.SetGlobalFloat("terrainSizeY", instance.terrainTex.terrainSize.y);
+        Shader.SetGlobalInteger("textureArraySizeX", instance.terrainTex.textureArraySize.x);
+        Shader.SetGlobalInteger("textureArraySizeY", instance.terrainTex.textureArraySize.y);
+        Shader.SetGlobalInteger("resolutionTex", instance.terrainTex.resolution);
+        Shader.SetGlobalInteger("textureCount", instance.terrainTex.textureCount);
 
         Debug.Log("Terrains data loaded");
     }

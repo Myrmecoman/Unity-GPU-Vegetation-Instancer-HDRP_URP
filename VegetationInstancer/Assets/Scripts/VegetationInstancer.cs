@@ -19,7 +19,6 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Display the chunks")]
     public bool displayChunks = false;
     [Tooltip("The positions compute shader")]
-    [SerializeField]
     public ComputeShader positionsComputeShader;
 
     [Header("Procedural parameters")]
@@ -57,18 +56,11 @@ public class VegetationInstancer : MonoBehaviour
 
 
     private int instancesPerChunk;
-
-    private ComputeBuffer heightBuffer;
-    private ComputeBuffer texBuffer;
-    private ComputeBuffer argsBuffer;
-
-    private ComputeBuffer chunksBuffer;
-    private ComputeBuffer positionsBuffer;
-
     private Mesh mesh;
     private Material mat;
-
-    private uint[] args;
+    private ComputeBuffer argsBuffer;
+    private ComputeBuffer chunksBuffer;
+    private ComputeBuffer positionsBuffer;
 
     // int4 is real world position and 1 if LOD else 0, the bool is not used
     private Dictionary<int4, bool> chunksData;
@@ -106,27 +98,8 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("falloff", falloff);
         positionsComputeShader.SetFloat("sizeBias", sizeBias);
         positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
-
-        heightBuffer = new ComputeBuffer(VegetationManager.instance.terrainHeight.heightMap.Length, sizeof(float));
-        heightBuffer.SetData(VegetationManager.instance.terrainHeight.heightMap.ToArray());
-        positionsComputeShader.SetBuffer(0, "heightMap", heightBuffer);
-        positionsComputeShader.SetInt("resolution", VegetationManager.instance.terrainHeight.resolution);
-        positionsComputeShader.SetVector("sampleSize", new Vector4(VegetationManager.instance.terrainHeight.sampleSize.x, VegetationManager.instance.terrainHeight.sampleSize.y, 0, 0));
-        positionsComputeShader.SetVector("AABBMin", new Vector4(VegetationManager.instance.terrainHeight.AABB.Min.x, VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainHeight.AABB.Min.z, 0));
-        positionsComputeShader.SetVector("AABBMax", new Vector4(VegetationManager.instance.terrainHeight.AABB.Max.x, VegetationManager.instance.terrainHeight.AABB.Max.y, VegetationManager.instance.terrainHeight.AABB.Max.z, 0));
-
-        texBuffer = new ComputeBuffer(VegetationManager.instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
-        texBuffer.SetData(VegetationManager.instance.terrainTex.textureMapAllTextures.ToArray());
-        positionsComputeShader.SetBuffer(0, "textureMapAllTextures", texBuffer);
-        positionsComputeShader.SetInt("terrainPosX", VegetationManager.instance.terrainTex.terrainPos.x);
-        positionsComputeShader.SetInt("terrainPosY", VegetationManager.instance.terrainTex.terrainPos.y);
-        positionsComputeShader.SetFloat("terrainSizeX", VegetationManager.instance.terrainTex.terrainSize.x);
-        positionsComputeShader.SetFloat("terrainSizeY", VegetationManager.instance.terrainTex.terrainSize.y);
-        positionsComputeShader.SetInt("textureArraySizeX", VegetationManager.instance.terrainTex.textureArraySize.x);
-        positionsComputeShader.SetInt("textureArraySizeY", VegetationManager.instance.terrainTex.textureArraySize.y);
-        positionsComputeShader.SetInt("resolutionTex", VegetationManager.instance.terrainTex.resolution);
-        positionsComputeShader.SetInt("textureCount", VegetationManager.instance.terrainTex.textureCount);
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
+        positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
     }
 
 
@@ -147,10 +120,10 @@ public class VegetationInstancer : MonoBehaviour
         if (chunksData != null)
             chunksData.Clear();
 
-        heightBuffer?.Release();
-        texBuffer?.Release();
         positionsBuffer?.Release();
+        positionsBuffer = null;
         argsBuffer?.Release();
+        argsBuffer = null;
     }
 
 
@@ -195,7 +168,7 @@ public class VegetationInstancer : MonoBehaviour
         int totalPlants = instancesPerChunk * chunksData.Count;
 
         // reset args because the number of instances probably changed
-        args = new uint[5];
+        var args = new uint[5];
         args[0] = (uint)mesh.GetIndexCount(0);
         args[1] = (uint)totalPlants;
         args[2] = (uint)mesh.GetIndexStart(0);
