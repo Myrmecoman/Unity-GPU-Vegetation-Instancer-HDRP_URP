@@ -99,7 +99,6 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("sizeBias", sizeBias);
         positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
-        positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
     }
 
 
@@ -191,6 +190,7 @@ public class VegetationInstancer : MonoBehaviour
         chunksBuffer = new ComputeBuffer(chunksData.Count, sizeof(int) * 4);
         chunksBuffer.SetData(chunksData.Keys.ToArray());
 
+        positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
         positionsComputeShader.SetInt("positionsSize", totalPlants);
         positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
         positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
