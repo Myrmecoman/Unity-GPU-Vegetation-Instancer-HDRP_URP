@@ -25,6 +25,9 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Random displacement")]
     [Range(0, 5)]
     public float maxDisplacement = 0.5f;
+    [Tooltip("Offset objects upwards, usefull when their center does not corresponds to their base.")]
+    [Range(0, 5)]
+    public float YPositionOffset = 0f;
     [Tooltip("Changes the medium size of the objects")]
     [Range(0.01f, 5f)]
     public float sizeBias = 1f;
@@ -91,9 +94,9 @@ public class VegetationInstancer : MonoBehaviour
         instancesPerChunk = plantDistanceInt * plantDistanceInt;
 
         positionsComputeShader.SetFloat("randomSeed", 873.304f);
-        positionsComputeShader.SetInt("D1Size", plantDistanceInt);
+        positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
         positionsComputeShader.SetFloat("chunkSize", chunkSize);
-        positionsComputeShader.SetInt("plantDistance", plantDistanceInt);
+        positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
         positionsComputeShader.SetFloat("maxSlope", maxSlope);
         positionsComputeShader.SetFloat("sizeChange", randomSize);
         positionsComputeShader.SetFloat("displacement", maxDisplacement);
@@ -102,6 +105,7 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
         positionsComputeShader.SetInt("billboardMode", billboardMode?1:0);
+        positionsComputeShader.SetFloat("positionOffset", YPositionOffset);
     }
 
 
@@ -119,9 +123,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void FreeContainers()
     {
-        if (chunksData != null)
-            chunksData.Clear();
-
+        chunksData?.Clear();
         positionsBuffer?.Release();
         positionsBuffer = null;
         argsBuffer?.Release();
@@ -235,14 +237,9 @@ public class VegetationInstancer : MonoBehaviour
         if (!displayChunks || Application.isPlaying || chunksData == null)
             return;
 
+        Gizmos.color = Color.yellow;
         foreach (var e in chunksData)
-        {
-            if (e.Key.w == 0)
-                Gizmos.color = Color.red;
-            else
-                Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
-        }
     }
 }
 

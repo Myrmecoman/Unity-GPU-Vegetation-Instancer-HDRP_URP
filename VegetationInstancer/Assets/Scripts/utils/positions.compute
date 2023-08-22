@@ -127,9 +127,9 @@ float GetTextureAtPos(float2 worldPos, int texIndex)
 // generation related variables and function ------------------------------
 StructuredBuffer<int4> chunksPositions;
 float randomSeed;
-uint D1Size;
+float D1Size;
 float chunkSize;
-uint plantDistance;
+float plantDistance;
 float maxSlope;
 float sizeChange;
 float displacement;
@@ -138,6 +138,7 @@ float sizeBias;
 int textureIndex;
 float4 camPos;
 float ViewRangeSq;
+float positionOffset;
 
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
@@ -199,11 +200,13 @@ float4 EulerToQuaternion(float3 euler)
 
 float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
 {
-    float xDisplacement = GenerateRandom(index * 0.904735, -displacement, displacement);
-    float zDisplacement = GenerateRandom(index * 0.290374, -displacement, displacement);
+    float baseX = chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
+    float baseZ = chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
+    float xDisplacement = GenerateRandom(baseX * 0.904735, -displacement, displacement);
+    float zDisplacement = GenerateRandom(baseX * 0.290374, -displacement, displacement);
     
-    float x = xDisplacement + chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
-    float z = zDisplacement + chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
+    float x = baseX + xDisplacement;
+    float z = baseZ + zDisplacement;
     float4 yAndNormal = SampleHeight(float2(x, z));
     float y = yAndNormal.x;
     float3 normal = yAndNormal.yzw;
@@ -213,17 +216,17 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
 
     // check slope and texture
     if (texValueAtPos < falloff || normal.y < maxSlope)
-        return trs(float3(0, -10000, 0), float4(0, 0, 0, 1), float3(1, 1, 1));
+        return trs(float3(x, y - 1, z), float4(0, 0, 0, 0), 0.01);
     
-    float3 pos = float3(x, y, z);
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(index * 0.0983633, 0, 360) + rotation, 0));
-    float newSize = GenerateRandom(index * 0.45729204, 1 / sizeChange, sizeChange);
+    float3 pos = float3(x, y + positionOffset, z);
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX * 0.0983633, 0, 360) + rotation, 0));
+    float newSize = GenerateRandom(baseX * 0.45729204, 1 / sizeChange, sizeChange);
     if (texValueAtPos >= falloff)
         newSize *= max(texValueAtPos, 0.1);
     
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq)//  || GenerateRandom(index * 0.34735, 0, 1) < dist / ViewRangeSq)
-        pos.y -= 10;
+    if (dist > ViewRangeSq)//  || GenerateRandom(baseX * 0.34735, 0, 1) < dist / ViewRangeSq)
+        return trs(float3(x, y - 1, z), float4(0, 0, 0, 0), 0.01);
     
     return trs(pos, q, newSize * sizeBias);
 }
@@ -285,21 +288,22 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 {
     if (billboardMode == 1)
     {
-        if (id.x < positionsSize/2)
-        {
-            float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
-            ItemInstanceData instanceItem = MakeItemInstanceData(mat);
-            positions[id.x] = instanceItem;
-        }
-        else
-        {
-            float4x4 mat = GeneratePosRotScale((id.x - positionsSize / 2) % (D1Size * D1Size), (id.x - positionsSize / 2) / (D1Size * D1Size), 90);
-            ItemInstanceData instanceItem = MakeItemInstanceData(mat);
-            positions[id.x] = instanceItem;
-        }
+        if (id.x * 2 >= positionsSize)
+            return;
+        
+        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
+        ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+        positions[id.x] = instanceItem;
+        
+        float4x4 matB = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 80);
+        ItemInstanceData instanceItemB = MakeItemInstanceData(matB);
+        positions[id.x * 2] = instanceItemB;
     }
     else
     {
+        if (id.x >= positionsSize)
+            return;
+        
         float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
         ItemInstanceData instanceItem = MakeItemInstanceData(mat);
         positions[id.x] = instanceItem;
