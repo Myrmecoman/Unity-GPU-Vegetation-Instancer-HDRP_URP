@@ -281,30 +281,24 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
 // output
 uint positionsSize;
 uint billboardMode;
+uint plantsPerChunk;
 RWStructuredBuffer<ItemInstanceData> positions;
 
 [numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    if (billboardMode == 1)
+    if (id.x >= positionsSize)
+        return;
+    
+    if (billboardMode != 1 || (billboardMode == 1 && id.x * 2 < positionsSize))
     {
-        if (id.x * 2 >= positionsSize)
-            return;
-        
-        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
+        float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, 0);
         ItemInstanceData instanceItem = MakeItemInstanceData(mat);
         positions[id.x] = instanceItem;
-        
-        float4x4 matB = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 80);
-        ItemInstanceData instanceItemB = MakeItemInstanceData(matB);
-        positions[id.x * 2] = instanceItemB;
     }
     else
     {
-        if (id.x >= positionsSize)
-            return;
-        
-        float4x4 mat = GeneratePosRotScale(id.x % (D1Size * D1Size), id.x / (D1Size * D1Size), 0);
+        float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, 80);
         ItemInstanceData instanceItem = MakeItemInstanceData(mat);
         positions[id.x] = instanceItem;
     }

@@ -124,6 +124,7 @@ public class VegetationInstancer : MonoBehaviour
     private void FreeContainers()
     {
         chunksData?.Clear();
+        chunksData = null;
         positionsBuffer?.Release();
         positionsBuffer = null;
         argsBuffer?.Release();
@@ -169,7 +170,11 @@ public class VegetationInstancer : MonoBehaviour
 
     private void RunpositionsComputeShader()
     {
-        int totalPlants = instancesPerChunk * chunksData.Count * (billboardMode?2:1);
+        int billboardNb = 1;
+        if (billboardMode)
+            billboardNb = 2;
+
+        int totalPlants = instancesPerChunk * chunksData.Count * billboardNb;
 
         // reset args because the number of instances probably changed
         var args = new uint[5];
@@ -177,7 +182,7 @@ public class VegetationInstancer : MonoBehaviour
         args[1] = (uint)totalPlants;
         args[2] = (uint)mesh.GetIndexStart(0);
         args[3] = (uint)mesh.GetBaseVertex(0);
-        args[4] = 0;
+        args[4] = (uint)0;
 
         argsBuffer?.Release();
         argsBuffer = null;
@@ -197,6 +202,7 @@ public class VegetationInstancer : MonoBehaviour
 
         positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
         positionsComputeShader.SetInt("positionsSize", totalPlants);
+        positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
         positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
         positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
 
