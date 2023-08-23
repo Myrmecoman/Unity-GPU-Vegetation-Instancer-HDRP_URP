@@ -19,8 +19,6 @@ public struct PickVisibleChunksJob : IJob
     public NativeList<int4> newChunks;
     [WriteOnly]
     public NativeList<int4> deletedChunks;
-    [WriteOnly]
-    public NativeList<int4> modifiedChunks;
     [ReadOnly]
     public NativeArray<int4> existingChunks;
     [ReadOnly]
@@ -45,7 +43,6 @@ public struct PickVisibleChunksJob : IJob
         // change alread existing chunks state
         for (int i = 0; i < existingChunks.Length; i++)
         {
-            bool isLOD = existingChunks[i].w != 0;
             int3 pos = new int3(existingChunks[i].x, existingChunks[i].y, existingChunks[i].z);
             float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
             
@@ -53,19 +50,6 @@ public struct PickVisibleChunksJob : IJob
             if (distance > viewDistanceSq || !isVisible(pos))
             {
                 deletedChunks.Add(existingChunks[i]);
-                continue;
-            }
-            // check if this chunk became an LOD chunk
-            if (distance > viewDistanceLODSq && !isLOD)
-            {
-                modifiedChunks.Add(existingChunks[i]);
-                continue;
-            }
-
-            // check if this chunk became a normal chunk
-            if (distance <= viewDistanceLODSq && isLOD)
-            {
-                modifiedChunks.Add(existingChunks[i]);
                 continue;
             }
         }

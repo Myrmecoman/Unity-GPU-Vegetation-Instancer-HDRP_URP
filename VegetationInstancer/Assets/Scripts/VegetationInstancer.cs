@@ -141,7 +141,6 @@ public class VegetationInstancer : MonoBehaviour
             terrainData = VegetationManager.instance.terrainHeight,
             newChunks = new NativeList<int4>(Allocator.TempJob),
             deletedChunks = new NativeList<int4>(Allocator.TempJob),
-            modifiedChunks = new NativeList<int4>(Allocator.TempJob),
             existingChunks = new NativeArray<int4>(chunksData.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam)),
             size1D = (int)VegetationManager.instance.terrainTex.terrainSize.x,
@@ -162,7 +161,6 @@ public class VegetationInstancer : MonoBehaviour
             chunksData.Remove(chunksSampler.deletedChunks[i]);
 
         chunksSampler.deletedChunks.Dispose();
-        chunksSampler.modifiedChunks.Dispose();
         chunksSampler.existingChunks.Dispose();
         chunksSampler.newChunks.Dispose();
     }
