@@ -53,8 +53,6 @@ public class VegetationInstancer : MonoBehaviour
     public int chunkSize = 20;
     [Tooltip("Maximum display range")]
     public int viewDistance = 50;
-    [Tooltip("Distance from which low quality plants are spawned instead of normal plants")]
-    private int viewDistanceLOD = 30;
     [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
     [Range(1, 300)]
     public int plantDistanceInt = 5;
@@ -82,12 +80,8 @@ public class VegetationInstancer : MonoBehaviour
 
         if (chunkSize < 2)
             chunkSize = 2;
-        if (viewDistanceLOD <= 0)
-            viewDistanceLOD = 1;
-        if (viewDistanceLOD > 1000)
-            viewDistanceLOD = 1000;
         if (viewDistance <= 0)
-            viewDistance = 2;
+            viewDistance = 1;
         if (viewDistance > 1000)
             viewDistance = 1000;
 
@@ -147,7 +141,6 @@ public class VegetationInstancer : MonoBehaviour
             camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
             terrainPos = new int3(VegetationManager.instance.terrainTex.terrainPos.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainTex.terrainPos.y),
             chunkSize = chunkSize,
-            viewDistanceLODSq = viewDistanceLOD * viewDistanceLOD,
             viewDistanceSq = viewDistance * viewDistance,
         };
         chunksSampler.Schedule().Complete();
@@ -213,13 +206,9 @@ public class VegetationInstancer : MonoBehaviour
     {
         if (!Application.isPlaying && !runInEditor)
             return;
-        if (!Application.isPlaying)
-        {
-            if (runInEditor && chunksData == null)
-                Start();
-            if (runInEditor)
-                UpdateAllVariables();
-        }
+        
+        if (!Application.isPlaying && runInEditor)
+            UpdateAllVariables();
 
         double t = Time.realtimeSinceStartupAsDouble;
 

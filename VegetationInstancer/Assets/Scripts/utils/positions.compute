@@ -274,7 +274,7 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
     ItemInstanceData instanceItem;
     instanceItem.mat = mat;
     instanceItem.matInverse = inverse(mat);
-    instanceItem.infos = float4(1, 1, 1, 1);
+    instanceItem.infos = float4(0, 0, 0, 0);
     return instanceItem;
 }
 

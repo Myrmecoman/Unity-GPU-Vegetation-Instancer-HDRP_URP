@@ -32,15 +32,13 @@ public struct PickVisibleChunksJob : IJob
     [ReadOnly]
     public int chunkSize;
     [ReadOnly]
-    public int viewDistanceLODSq;
-    [ReadOnly]
     public int viewDistanceSq;
 
 
     // find new visible chunks, but also remove the ones which are not visible anymore
     public void Execute()
     {
-        // change alread existing chunks state
+        // remove too far chunks
         for (int i = 0; i < existingChunks.Length; i++)
         {
             int3 pos = new int3(existingChunks[i].x, existingChunks[i].y, existingChunks[i].z);
@@ -80,14 +78,9 @@ public struct PickVisibleChunksJob : IJob
                 float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
                 if (distance <= viewDistanceSq && isVisible(pos))
                 {
-                    // the chunk is an LOD chunk if the distance from the camera to the chunk center is higher than the value we want
+                    // add chunk
                     if (!Contains(pos))
-                    {
-                        if (distance <= viewDistanceLODSq)
-                            newChunks.Add(new int4(pos.x, height, pos.z, 0));
-                        else
-                            newChunks.Add(new int4(pos.x, height, pos.z, 1));
-                    }
+                        newChunks.Add(new int4(pos.x, height, pos.z, 0));
                 }
             }
         }
