@@ -212,7 +212,9 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
     float3 normal = yAndNormal.yzw;
     
     // get max allowed texture value
-    float texValueAtPos = GetTextureAtPos(float2(x, z), textureIndex);
+    float texValueAtPos = 1;
+    if (textureIndex >= 0)
+        texValueAtPos = GetTextureAtPos(float2(x, z), textureIndex);
 
     // check slope and texture
     if (texValueAtPos < falloff || normal.y < maxSlope)
