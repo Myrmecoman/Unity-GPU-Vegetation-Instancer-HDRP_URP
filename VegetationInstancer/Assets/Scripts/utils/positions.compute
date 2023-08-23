@@ -125,7 +125,7 @@ float GetTextureAtPos(float2 worldPos, int texIndex)
 // ---------------------------------------------------------------------
 
 // generation related variables and function ------------------------------
-StructuredBuffer<int4> chunksPositions;
+StructuredBuffer<int3> chunksPositions;
 float randomSeed;
 float D1Size;
 float chunkSize;

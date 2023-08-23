@@ -16,11 +16,11 @@ public struct PickVisibleChunksJob : IJob
     [ReadOnly]
     public TerrainHeight terrainData;
     [WriteOnly]
-    public NativeList<int4> newChunks;
+    public NativeList<int3> newChunks;
     [WriteOnly]
-    public NativeList<int4> deletedChunks;
+    public NativeList<int3> deletedChunks;
     [ReadOnly]
-    public NativeArray<int4> existingChunks;
+    public NativeArray<int3> existingChunks;
     [ReadOnly]
     public FrustrumPlanes frustrumPlanes;
     [ReadOnly]
@@ -80,7 +80,7 @@ public struct PickVisibleChunksJob : IJob
                 {
                     // add chunk
                     if (!Contains(pos))
-                        newChunks.Add(new int4(pos.x, height, pos.z, 0));
+                        newChunks.Add(new int3(pos.x, height, pos.z));
                 }
             }
         }

@@ -65,15 +65,15 @@ public class VegetationInstancer : MonoBehaviour
     private ComputeBuffer chunksBuffer;
     private ComputeBuffer positionsBuffer;
 
-    // int4 is real world position and 1 if LOD else 0, the bool is not used
-    private Dictionary<int4, bool> chunksData;
+    // int4 is real world position, the bool is not used
+    private Dictionary<int3, bool> chunksData;
 
 
     private void UpdateAllVariables()
     {
         FreeContainers();
 
-        chunksData = new Dictionary<int4, bool>(1024);
+        chunksData = new Dictionary<int3, bool>(1024);
 
         mesh = plant.GetComponent<MeshFilter>().sharedMesh;
         mat = new Material(plant.GetComponent<MeshRenderer>().sharedMaterial);
@@ -133,9 +133,9 @@ public class VegetationInstancer : MonoBehaviour
         var chunksSampler = new PickVisibleChunksJob
         {
             terrainData = VegetationManager.instance.terrainHeight,
-            newChunks = new NativeList<int4>(Allocator.TempJob),
-            deletedChunks = new NativeList<int4>(Allocator.TempJob),
-            existingChunks = new NativeArray<int4>(chunksData.Keys.ToArray(), Allocator.TempJob),
+            newChunks = new NativeList<int3>(Allocator.TempJob),
+            deletedChunks = new NativeList<int3>(Allocator.TempJob),
+            existingChunks = new NativeArray<int3>(chunksData.Keys.ToArray(), Allocator.TempJob),
             frustrumPlanes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam)),
             size1D = (int)VegetationManager.instance.terrainTex.terrainSize.x,
             camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
@@ -188,7 +188,7 @@ public class VegetationInstancer : MonoBehaviour
         // readonly buffer containing chunks positions
         chunksBuffer?.Release();
         chunksBuffer = null;
-        chunksBuffer = new ComputeBuffer(chunksData.Count, sizeof(int) * 4);
+        chunksBuffer = new ComputeBuffer(chunksData.Count, sizeof(int) * 3);
         chunksBuffer.SetData(chunksData.Keys.ToArray());
 
         positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));

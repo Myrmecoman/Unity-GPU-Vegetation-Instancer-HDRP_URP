@@ -33,5 +33,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 
 ## In the futur
 
-I need to adapt unity's grass shader to work with 2 quads, multiplying FPS by quite a bunch since current meshes are more than 100 vertices.   
-Add LOD support.   
+Fix flickering issues.   
