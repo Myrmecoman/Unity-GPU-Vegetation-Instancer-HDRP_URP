@@ -10,7 +10,6 @@ using UnityEngine.Rendering;
 
 // /!\ ATTENTION : will only work with square and unrotated terrains. You should also not have holes in your terrain.
 [ExecuteInEditMode]
-[RequireComponent(typeof(VegetationManager))]
 public class VegetationInstancer : MonoBehaviour
 {
     [Header("Visuals")]
