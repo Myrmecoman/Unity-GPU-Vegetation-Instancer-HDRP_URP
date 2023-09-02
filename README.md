@@ -8,7 +8,7 @@ HDRP vegetation instancer is a unity project whose goal is to bring vegetation d
 
 It consists in 2 main scripts :   
 
-- VegetationManager.cs : this script sets up the terrain data required for full GPU positioning. Their can only be one instance of it, and is used by all the VegetationInstancers.   
+- VegetationManager.cs : this script sets up the terrain data required for full GPU positioning. There can only be one instance of it, and is used by all the VegetationInstancers.   
 
 - VegetationInstancer.cs : in charge of displaying large amounts of vegetation (up to millions) using any shader implementing GPU indirect instancing rendering. Everything from positioning, texture mapping, slope etc, is done on the GPU, leading to almost 0 CPU charge.   
 

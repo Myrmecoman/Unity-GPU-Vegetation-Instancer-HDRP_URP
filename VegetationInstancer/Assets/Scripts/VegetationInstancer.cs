@@ -59,6 +59,7 @@ public class VegetationInstancer : MonoBehaviour
 
 
     private int instancesPerChunk;
+    private int maxPositionsBufferInstances;
     private Mesh mesh;
     private Material mat;
     private ComputeBuffer argsBuffer;
@@ -166,6 +167,14 @@ public class VegetationInstancer : MonoBehaviour
             billboardNb = 2;
 
         int totalPlants = instancesPerChunk * chunksData.Count * billboardNb;
+        if (maxPositionsBufferInstances < totalPlants)
+        {
+            // output buffer for objects positions, only increase size if needed
+            maxPositionsBufferInstances = totalPlants;
+            positionsBuffer?.Release();
+            positionsBuffer = null;
+            positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+        }
 
         // reset args because the number of instances probably changed
         var args = new uint[5];
@@ -179,11 +188,6 @@ public class VegetationInstancer : MonoBehaviour
         argsBuffer = null;
         argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
         argsBuffer.SetData(args);
-
-        // output buffer for objects positions
-        positionsBuffer?.Release();
-        positionsBuffer = null;
-        positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
         // readonly buffer containing chunks positions
         chunksBuffer?.Release();
