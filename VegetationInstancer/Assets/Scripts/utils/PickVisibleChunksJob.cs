@@ -7,7 +7,7 @@ using UnityEngine;
 
 
 // https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling
-// This job is in charge of finding the visible chunks for this frame. It also tells if it is far enough to be an LOD chunk or not.
+// This job is in charge of finding the visible chunks for this frame. It also tells if it distant enough to be an LOD chunk or not.
 
 
 [BurstCompile(FloatPrecision = FloatPrecision.Low, FloatMode = FloatMode.Fast, DisableSafetyChecks = true, OptimizeFor = OptimizeFor.Performance), NoAlias]
@@ -16,11 +16,9 @@ public struct PickVisibleChunksJob : IJob
     [ReadOnly]
     public TerrainHeight terrainData;
     [WriteOnly]
-    public NativeList<int3> newChunks;
+    public NativeList<int3> normalChunks;
     [WriteOnly]
-    public NativeList<int3> deletedChunks;
-    [ReadOnly]
-    public NativeArray<int3> existingChunks;
+    public NativeList<int3> LODChunks;
     [ReadOnly]
     public FrustrumPlanes frustrumPlanes;
     [ReadOnly]
@@ -33,25 +31,13 @@ public struct PickVisibleChunksJob : IJob
     public int chunkSize;
     [ReadOnly]
     public int viewDistanceSq;
+    [ReadOnly]
+    public int LODviewDistanceSq;
 
 
     // find new visible chunks, but also remove the ones which are not visible anymore
     public void Execute()
     {
-        // remove too far chunks
-        for (int i = 0; i < existingChunks.Length; i++)
-        {
-            int3 pos = new int3(existingChunks[i].x, existingChunks[i].y, existingChunks[i].z);
-            float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
-            
-            // check if this chunk is no longer visible
-            if (distance > viewDistanceSq || !isVisible(pos))
-            {
-                deletedChunks.Add(existingChunks[i]);
-                continue;
-            }
-        }
-
         int halfChunk = chunkSize / 2;
 
         // this way instead of going through all chunks, we only check the ones in viewrange
@@ -76,12 +62,10 @@ public struct PickVisibleChunksJob : IJob
                 int height = (int)terrainData.SampleHeight(new float2(i, j));
                 int3 pos = new int3(i + halfChunk, height, j + halfChunk);
                 float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
-                if (distance <= viewDistanceSq && isVisible(pos))
-                {
-                    // add chunk
-                    if (!Contains(pos))
-                        newChunks.Add(new int3(pos.x, height, pos.z));
-                }
+                if (distance <= LODviewDistanceSq && isVisible(pos))
+                    normalChunks.Add(new int3(pos.x, height, pos.z));
+                else if (distance <= viewDistanceSq && isVisible(pos))
+                    LODChunks.Add(new int3(pos.x, height, pos.z));
             }
         }
     }
