@@ -79,6 +79,10 @@ public class VegetationInstancer : MonoBehaviour
     private List<int3> normalChunksList;
     private List<int3> LODChunksList;
 
+    // variables to not recompute everyframe if we stand still
+    private Vector3 lastPosition;
+    private Quaternion lastRotation;
+
 
     private void UpdateAllVariables()
     {
@@ -204,34 +208,36 @@ public class VegetationInstancer : MonoBehaviour
             positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
         }
 
-        // reset args because the number of instances probably changed
-        var args = new uint[5];
-        args[0] = (uint)mesh.GetIndexCount(0);
-        args[1] = (uint)totalPlants;
-        args[2] = (uint)mesh.GetIndexStart(0);
-        args[3] = (uint)mesh.GetBaseVertex(0);
-        args[4] = (uint)0;
+        if (totalPlants != 0)
+        {
+            // reset args because the number of instances probably changed
+            var args = new uint[5];
+            args[0] = (uint)mesh.GetIndexCount(0);
+            args[1] = (uint)totalPlants;
+            args[2] = (uint)mesh.GetIndexStart(0);
+            args[3] = (uint)mesh.GetBaseVertex(0);
+            args[4] = (uint)0;
 
-        argsBuffer?.Release();
-        argsBuffer = null;
-        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-        argsBuffer.SetData(args);
+            argsBuffer?.Release();
+            argsBuffer = null;
+            argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+            argsBuffer.SetData(args);
 
-        // readonly buffer containing chunks positions
-        chunksBuffer?.Release();
-        chunksBuffer = null;
-        chunksBuffer = new ComputeBuffer(normalChunksList.Count, sizeof(int) * 3);
-        chunksBuffer.SetData(normalChunksList.ToArray());
+            // readonly buffer containing chunks positions
+            chunksBuffer?.Release();
+            chunksBuffer = null;
+            chunksBuffer = new ComputeBuffer(normalChunksList.Count, sizeof(int) * 3);
+            chunksBuffer.SetData(normalChunksList.ToArray());
 
-        positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
-        positionsComputeShader.SetInt("positionsSize", totalPlants);
-        positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
-        positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
-        positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
+            positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
+            positionsComputeShader.SetInt("positionsSize", totalPlants);
+            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
+            positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
+            positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
 
-        int groups = Mathf.CeilToInt(totalPlants / 1024f);
-        positionsComputeShader.Dispatch(0, groups, 1, 1);
-
+            int groups = Mathf.CeilToInt(totalPlants / 1024f);
+            positionsComputeShader.Dispatch(0, groups, 1, 1);
+        }
 
         // run compute shader for LOD objects -----------------------------------------------------------
         int LODtotalPlants = instancesPerChunk * LODChunksList.Count * billboardNb;
@@ -244,33 +250,36 @@ public class VegetationInstancer : MonoBehaviour
             LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
         }
 
-        // reset args because the number of instances probably changed
-        args = new uint[5];
-        args[0] = (uint)mesh.GetIndexCount(0);
-        args[1] = (uint)LODtotalPlants;
-        args[2] = (uint)mesh.GetIndexStart(0);
-        args[3] = (uint)mesh.GetBaseVertex(0);
-        args[4] = (uint)0;
+        if (LODtotalPlants != 0)
+        {
+            // reset args because the number of instances probably changed
+            var args = new uint[5];
+            args[0] = (uint)mesh.GetIndexCount(0);
+            args[1] = (uint)LODtotalPlants;
+            args[2] = (uint)mesh.GetIndexStart(0);
+            args[3] = (uint)mesh.GetBaseVertex(0);
+            args[4] = (uint)0;
 
-        LODargsBuffer?.Release();
-        LODargsBuffer = null;
-        LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-        LODargsBuffer.SetData(args);
+            LODargsBuffer?.Release();
+            LODargsBuffer = null;
+            LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+            LODargsBuffer.SetData(args);
 
-        // readonly buffer containing chunks positions
-        LODchunksBuffer?.Release();
-        LODchunksBuffer = null;
-        LODchunksBuffer = new ComputeBuffer(LODChunksList.Count, sizeof(int) * 3);
-        LODchunksBuffer.SetData(LODChunksList.ToArray());
+            // readonly buffer containing chunks positions
+            LODchunksBuffer?.Release();
+            LODchunksBuffer = null;
+            LODchunksBuffer = new ComputeBuffer(LODChunksList.Count, sizeof(int) * 3);
+            LODchunksBuffer.SetData(LODChunksList.ToArray());
 
-        positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
-        positionsComputeShader.SetInt("positionsSize", LODtotalPlants);
-        positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
-        positionsComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
-        positionsComputeShader.SetBuffer(0, "chunksPositions", LODchunksBuffer);
+            positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
+            positionsComputeShader.SetInt("positionsSize", LODtotalPlants);
+            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
+            positionsComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
+            positionsComputeShader.SetBuffer(0, "chunksPositions", LODchunksBuffer);
 
-        int LODgroups = Mathf.CeilToInt(LODtotalPlants / 1024f);
-        positionsComputeShader.Dispatch(0, LODgroups, 1, 1);
+            int LODgroups = Mathf.CeilToInt(LODtotalPlants / 1024f);
+            positionsComputeShader.Dispatch(0, LODgroups, 1, 1);
+        }
     }
 
 
@@ -283,8 +292,14 @@ public class VegetationInstancer : MonoBehaviour
 
         double t = Time.realtimeSinceStartupAsDouble;
 
-        UpdateChunks();
-        RunpositionsComputeShader();
+        // if we did not move, no need to recompute everything
+        if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation)
+        {
+            UpdateChunks();
+            RunpositionsComputeShader();
+        }
+        lastPosition = VegetationManager.instance.cam.transform.position;
+        lastRotation = VegetationManager.instance.cam.transform.rotation;
 
         // draw objects
         var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);

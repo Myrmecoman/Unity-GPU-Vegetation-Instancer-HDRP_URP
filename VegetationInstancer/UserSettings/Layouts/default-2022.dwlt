@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -244,14 +244,14 @@ MonoBehaviour:
     y: 652
     width: 1437
     height: 295
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -415,8 +415,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
+      m_SelectedIDs: 6e860000
+      m_LastClickedID: 34414
       m_ExpandedIDs: fcfaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -850,9 +850,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -144.78738, y: -10.830534, z: 476.4516}
+    m_Target: {x: -152.61217, y: -61.7247, z: 436.63983}
     speed: 2
-    m_Value: {x: -144.78738, y: -10.830534, z: 476.4516}
+    m_Value: {x: -152.61217, y: -61.7247, z: 436.63983}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -898,13 +898,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.007982881, y: 0.9590548, z: -0.28288865, w: 0.029892197}
+    m_Target: {x: -0.02811472, y: 0.9348549, z: -0.3473461, w: -0.073326305}
     speed: 2
-    m_Value: {x: 0.007979812, y: 0.9586862, z: -0.2827799, w: 0.029880706}
+    m_Value: {x: -0.028103897, y: 0.9344951, z: -0.3472124, w: -0.07329808}
   m_Size:
-    m_Target: 25.404408
+    m_Target: 72.04633
     speed: 2
-    m_Value: 25.404408
+    m_Value: 72.04633
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2657,7 +2657,7 @@ MonoBehaviour:
   - UnityEngine.Rendering.ProbeGIBaking.PushOutGeometryJob - (IJobParallelFor)
   - UnityEngine.UIElements.UIR.OpacityIdAccelerator.OpacityIdUpdateJob - (IJobParallelFor)
   treeViewState:
-    scrollPos: {x: 0, y: 16}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 01000000
     m_LastClickedID: 1
     m_ExpandedIDs: bcffffffbdffffffbeffffffbfffffffc0ffffffc1ffffffc2ffffffc3ffffffc4ffffffc5ffffffc6ffffffc7ffffffc8ffffffc9ffffffcaffffffcbffffffccffffffcdffffffceffffffcfffffffd0ffffffd1ffffffd2ffffffd3ffffffd4ffffffd5ffffffd6ffffffd7ffffffd8ffffffd9ffffffdaffffffdbffffffdcffffffddffffffdeffffffdfffffffe0ffffffe1ffffffe2ffffffe3ffffffe4ffffffe5ffffffe6ffffffe7ffffffe8ffffffe9ffffffeaffffffebffffffecffffffedffffffeeffffffeffffffff0fffffff1fffffff2fffffff3fffffff4fffffff5fffffff6fffffff7fffffff8fffffff9fffffffafffffffbfffffffcfffffffdfffffffeffffffffffffff00000000
