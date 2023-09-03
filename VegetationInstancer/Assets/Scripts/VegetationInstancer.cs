@@ -175,11 +175,11 @@ public class VegetationInstancer : MonoBehaviour
 
         // add the chunks which appeared on view
         normalChunksList.Clear();
-        for (int i = 0; i < chunksSampler.normalChunks.Length)
+        for (int i = 0; i < chunksSampler.normalChunks.Length; i++)
             normalChunksList.Add(chunksSampler.normalChunks[i]);
 
         LODChunksList.Clear();
-        for (int i = 0; i < chunksSampler.LODChunks.Length)
+        for (int i = 0; i < chunksSampler.LODChunks.Length; i++)
             LODChunksList.Add(chunksSampler.LODChunks[i]);
 
         chunksSampler.normalChunks.Dispose();
@@ -195,7 +195,7 @@ public class VegetationInstancer : MonoBehaviour
 
         // run compute shader for non LOD objects -----------------------------------------------------------
         int totalPlants = instancesPerChunk * normalChunksList.Count * billboardNb;
-        if (maxPositionsBufferInstances < totalPlants)
+        if (maxPositionsBufferInstances < totalPlants || positionsBuffer == null)
         {
             // output buffer for objects positions, only increase size if needed
             maxPositionsBufferInstances = totalPlants;
@@ -235,7 +235,7 @@ public class VegetationInstancer : MonoBehaviour
 
         // run compute shader for LOD objects -----------------------------------------------------------
         int LODtotalPlants = instancesPerChunk * LODChunksList.Count * billboardNb;
-        if (LODmaxPositionsBufferInstances < LODtotalPlants)
+        if (LODmaxPositionsBufferInstances < LODtotalPlants || LODpositionsBuffer == null)
         {
             // output buffer for objects positions, only increase size if needed
             LODmaxPositionsBufferInstances = LODtotalPlants;
@@ -301,12 +301,15 @@ public class VegetationInstancer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!displayChunks || Application.isPlaying || chunksData == null)
+        if (!displayChunks || Application.isPlaying || normalChunksList == null)
             return;
 
+        Gizmos.color = Color.red;
+        foreach (var e in normalChunksList)
+            Gizmos.DrawWireCube(new float3(e.x, e.y, e.z), new float3(chunkSize, 1, chunkSize));
         Gizmos.color = Color.yellow;
-        foreach (var e in chunksData)
-            Gizmos.DrawWireCube(new float3(e.Key.x, e.Key.y, e.Key.z), new float3(chunkSize, 1, chunkSize));
+        foreach (var e in LODChunksList)
+            Gizmos.DrawWireCube(new float3(e.x, e.y, e.z), new float3(chunkSize, 1, chunkSize));
     }
 }
 

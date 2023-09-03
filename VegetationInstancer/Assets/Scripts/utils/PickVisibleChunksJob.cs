@@ -91,16 +91,4 @@ public struct PickVisibleChunksJob : IJob
         float r = chunkSize/2 * math.abs(p.normal.x) + chunkSize * 2 * math.abs(p.normal.y) + chunkSize/2 * math.abs(p.normal.z);
         return -r <= p.GetDistanceToPoint(new float3(pos.x, pos.y, pos.z)); ;
     }
-
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool Contains(int3 pos)
-    {
-        for (int i = 0; i < existingChunks.Length; i++)
-        {
-            if (existingChunks[i].x == pos.x && existingChunks[i].y == pos.y && existingChunks[i].z == pos.z)
-                return true;
-        }
-        return false;
-    }
 }
