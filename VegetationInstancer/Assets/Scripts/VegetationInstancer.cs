@@ -293,7 +293,7 @@ public class VegetationInstancer : MonoBehaviour
         double t = Time.realtimeSinceStartupAsDouble;
 
         // if we did not move, no need to recompute everything
-        if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation)
+        if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation || (!Application.isPlaying && runInEditor))
         {
             UpdateChunks();
             RunpositionsComputeShader();

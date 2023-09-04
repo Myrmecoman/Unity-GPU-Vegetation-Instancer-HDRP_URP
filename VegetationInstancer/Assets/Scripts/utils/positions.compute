@@ -218,7 +218,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
 
     // check slope and texture
     if (texValueAtPos < falloff || normal.y < maxSlope)
-        return trs(float3(x, y - 1, z), float4(0, 0, 0, 0), 0.01);
+        return trs(float3(x, y -10000, z), float4(0, 0, 0, 0), 1);
     
     float3 pos = float3(x, y + positionOffset, z);
     float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX * 0.0983633, 0, 360) + rotation, 0));
@@ -228,7 +228,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
     
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
     if (dist > ViewRangeSq)//  || GenerateRandom(baseX * 0.34735, 0, 1) < dist / ViewRangeSq)
-        return trs(float3(x, y - 1, z), float4(0, 0, 0, 0), 0.01);
+        return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
     return trs(pos, q, newSize * sizeBias);
 }

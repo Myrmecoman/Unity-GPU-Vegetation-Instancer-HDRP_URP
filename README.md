@@ -34,3 +34,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 ## In the futur
 
 Fix flickering issues.   
+Support true GPU culling. Currently objects which are invalid (too far, on unwanted texture etc...) are hidden below the terrain instead of not being displayed at all.   
