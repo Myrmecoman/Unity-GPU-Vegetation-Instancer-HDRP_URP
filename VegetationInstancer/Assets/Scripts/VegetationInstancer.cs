@@ -235,7 +235,7 @@ public class VegetationInstancer : MonoBehaviour
             chunksBuffer = new ComputeBuffer(normalChunksList.Count, sizeof(int) * 3);
             chunksBuffer.SetData(normalChunksList.ToArray());
 
-            positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
+            positionsComputeShader.SetVector("camPos", new float4((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z, 1f));
             positionsComputeShader.SetInt("positionsSize", totalPlants);
             positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
             positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
@@ -277,7 +277,7 @@ public class VegetationInstancer : MonoBehaviour
             LODchunksBuffer = new ComputeBuffer(LODChunksList.Count, sizeof(int) * 3);
             LODchunksBuffer.SetData(LODChunksList.ToArray());
 
-            positionsComputeShader.SetVector("camPos", new float4(VegetationManager.instance.cam.transform.position.x, VegetationManager.instance.cam.transform.position.y, VegetationManager.instance.cam.transform.position.z, 1f));
+            positionsComputeShader.SetVector("camPos", new float4((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z, 1f));
             positionsComputeShader.SetInt("positionsSize", LODtotalPlants);
             positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
             positionsComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
@@ -316,7 +316,7 @@ public class VegetationInstancer : MonoBehaviour
         Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
 
         double totalTime = Time.realtimeSinceStartupAsDouble - t;
-        //Debug.Log("Full loop time : " + totalTime + ", total objects spawned : " + instancesPerChunk * chunksData.Count);
+        //Debug.Log("Full loop time : " + totalTime);
     }
 
 
