@@ -87,8 +87,8 @@ public struct PickVisibleChunksJob : IJob
     private bool isOnOrForwardPlane(Plane p, int3 pos)
     {
         // Compute the projection interval radius of b onto L(t) = b.c + t * p.n
-        // size of bounding box is chunkSize, chunksize*4, chunksize // I overrided y to 100 instead of chunkSize*4 because of a strange bug which it seems to tackle
-        float r = chunkSize/2 * math.abs(p.normal.x) + chunkSize * 2 * math.abs(p.normal.y) + chunkSize/2 * math.abs(p.normal.z);
+        // size of bounding box is chunkSize, chunksize*10, chunksize
+        float r = chunkSize/2 * math.abs(p.normal.x) + chunkSize * 5 * math.abs(p.normal.y) + chunkSize/2 * math.abs(p.normal.z);
         return -r <= p.GetDistanceToPoint(new float3(pos.x, pos.y, pos.z)); ;
     }
 }

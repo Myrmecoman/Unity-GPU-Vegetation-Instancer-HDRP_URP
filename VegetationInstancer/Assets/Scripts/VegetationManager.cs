@@ -129,6 +129,25 @@ public class VegetationManager : MonoBehaviour
     // check that terrains are disposed as a square
     private Terrain[] CheckSquare(out int D1Size)
     {
+        // check that we have a meaningfull number of terrains
+        int terrainsNb = terrains.Length;
+        int found = 0;
+        for (int i = terrainsNb; i > 0; i--)
+        {
+            if (i * i == terrainsNb)
+            {
+                found = i;
+                break;
+            }
+        }
+        if (found == 0)
+        {
+            Debug.LogError("Terrains do not form a square");
+            D1Size = 0;
+            return null;
+        }
+        D1Size = found;
+
         // order terrain by X then by Z
         List<Terrain> terrainsList = new List<Terrain>(terrains);
         List<Terrain> newterrainsList = new List<Terrain>();
@@ -161,7 +180,6 @@ public class VegetationManager : MonoBehaviour
                 zAxis.Add((int)newterrainsList[i].transform.position.z, true);
         }
 
-        D1Size = xAxis.Count;
         if (xAxis.Count != zAxis.Count)
         {
             Debug.LogError("Terrain chunks are not square");
@@ -349,10 +367,16 @@ public class VegetationManager : MonoBehaviour
         int D1Size;
         var terrainsOrdered = CheckSquare(out D1Size);
         if (terrainsOrdered == null)
+        {
+            Debug.LogError("Terrain order error");
             return;
+        }
 
         if (!CheckSameParameters(terrainsOrdered))
+        {
+            Debug.LogError("Terrains don't have the same parameters");
             return;
+        }
 
         aabb = GetTerrainAABB(terrainsOrdered, D1Size);
         heightmap = BuildNewHeightMap(terrainsOrdered, D1Size);
