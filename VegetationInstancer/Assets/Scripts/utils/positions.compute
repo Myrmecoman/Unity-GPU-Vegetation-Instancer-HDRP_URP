@@ -139,6 +139,8 @@ int textureIndex;
 float4 camPos;
 float ViewRangeSq;
 float positionOffset;
+float maxHeight;
+float minHeight;
 
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
@@ -211,6 +213,10 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
     float y = yAndNormal.x;
     float3 normal = yAndNormal.yzw;
     
+    // check height is authorized
+    if (y < minHeight || y > maxHeight)
+        return trs(float3(x, y - 10000, z), float4(0, 0, 0, 0), 1);
+    
     // get max allowed texture value
     float texValueAtPos = 1;
     if (textureIndex >= 0)
@@ -227,7 +233,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
         newSize *= max(texValueAtPos, 0.1);
     
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq)//  || GenerateRandom(baseX * 0.34735, 0, 1) < dist / ViewRangeSq)
+    if (dist > ViewRangeSq || GenerateRandom(baseX * 0.34735, 0, 1) < dist / ViewRangeSq)
         return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
     return trs(pos, q, newSize * sizeBias);

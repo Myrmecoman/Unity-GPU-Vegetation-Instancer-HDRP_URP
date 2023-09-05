@@ -39,6 +39,10 @@ public class VegetationInstancer : MonoBehaviour
     [Tooltip("Maximum texture value until no object is spawned")]
     [Range(0, 1)]
     public float falloff = 1f;
+    [Tooltip("Maximum height where this object can live")]
+    public float maxHeight = 10000f;
+    [Tooltip("Minimum height where this object can live")]
+    public float minHeight = -10000f;
 
     [Header("Objects to spawn")]
     public GameObject plant;
@@ -124,6 +128,8 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
         positionsComputeShader.SetInt("billboardMode", billboardMode?1:0);
         positionsComputeShader.SetFloat("positionOffset", YPositionOffset);
+        positionsComputeShader.SetFloat("maxHeight", maxHeight);
+        positionsComputeShader.SetFloat("minHeight", minHeight);
     }
 
 
