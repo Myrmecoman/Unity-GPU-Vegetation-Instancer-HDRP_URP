@@ -51,8 +51,8 @@ public class VegetationInstancer : MonoBehaviour
     public int[] textureIndexes;
 
     [Header("Settings")]
-    [Tooltip("Set to true if you use a quad to render your grass, this way VegetationInstancer will spawn 2 quads rotated by 90 degrees")]
-    public bool billboardMode = false;
+    [Tooltip("Set to true if you use unity's quad to render your grass, because it is centered in the middle of the mesh instead of at the base.")]
+    public bool centeredMesh = false;
     [Tooltip("The X and Z size of the chunks. Y is determined as chunkSize * 4")]
     public int chunkSize = 20;
     [Tooltip("Maximum display range")]
@@ -125,7 +125,7 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("sizeBias", sizeBias);
         positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
         positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
-        positionsComputeShader.SetInt("billboardMode", billboardMode?1:0);
+        positionsComputeShader.SetInt("centeredMesh", centeredMesh ? 1:0);
         positionsComputeShader.SetFloat("positionOffset", YPositionOffset);
         positionsComputeShader.SetFloat("maxHeight", maxHeight);
         positionsComputeShader.SetFloat("minHeight", minHeight);
@@ -198,12 +198,8 @@ public class VegetationInstancer : MonoBehaviour
 
     private void RunpositionsComputeShader()
     {
-        int billboardNb = 1;
-        if (billboardMode)
-            billboardNb = 2;
-
         // run compute shader for non LOD objects -----------------------------------------------------------
-        int totalPlants = instancesPerChunk * normalChunksList.Count * billboardNb;
+        int totalPlants = instancesPerChunk * normalChunksList.Count;
         if (maxPositionsBufferInstances < totalPlants || positionsBuffer == null && totalPlants != 0)
         {
             // output buffer for objects positions, only increase size if needed
@@ -245,7 +241,7 @@ public class VegetationInstancer : MonoBehaviour
         }
 
         // run compute shader for LOD objects -----------------------------------------------------------
-        int LODtotalPlants = instancesPerChunk * LODChunksList.Count * billboardNb;
+        int LODtotalPlants = instancesPerChunk * LODChunksList.Count;
         if (LODmaxPositionsBufferInstances < LODtotalPlants || LODpositionsBuffer == null && LODtotalPlants != 0)
         {
             // output buffer for objects positions, only increase size if needed

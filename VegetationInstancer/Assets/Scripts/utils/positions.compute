@@ -141,8 +141,7 @@ float ViewRangeSq;
 float positionOffset;
 float maxHeight;
 float minHeight;
-
-uint billboardMode;
+uint centeredMesh;
 
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
@@ -235,7 +234,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
     
     // set position
     float3 pos = float3(x, y + positionOffset * sizeBias, z);
-    if (billboardMode == 1)
+    if (centeredMesh == 1)
         pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
@@ -307,16 +306,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     if (id.x >= positionsSize)
         return;
     
-    if (billboardMode != 1 || (billboardMode == 1 && id.x * 2 < positionsSize))
-    {
-        float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, 0);
-        ItemInstanceData instanceItem = MakeItemInstanceData(mat);
-        positions[id.x] = instanceItem;
-    }
-    else
-    {
-        float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, 80);
-        ItemInstanceData instanceItem = MakeItemInstanceData(mat);
-        positions[id.x] = instanceItem;
-    }
+    float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, 0);
+    ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+    positions[id.x] = instanceItem;
 }
