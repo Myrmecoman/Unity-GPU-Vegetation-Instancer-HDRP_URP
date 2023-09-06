@@ -129,6 +129,7 @@ public class VegetationInstancer : MonoBehaviour
         positionsComputeShader.SetFloat("positionOffset", YPositionOffset);
         positionsComputeShader.SetFloat("maxHeight", maxHeight);
         positionsComputeShader.SetFloat("minHeight", minHeight);
+        positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
     }
 
 
@@ -232,7 +233,6 @@ public class VegetationInstancer : MonoBehaviour
 
             positionsComputeShader.SetVector("camPos", new float4((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z, 1f));
             positionsComputeShader.SetInt("positionsSize", totalPlants);
-            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
             positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
             positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
 
@@ -274,7 +274,6 @@ public class VegetationInstancer : MonoBehaviour
 
             positionsComputeShader.SetVector("camPos", new float4((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z, 1f));
             positionsComputeShader.SetInt("positionsSize", LODtotalPlants);
-            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
             positionsComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
             positionsComputeShader.SetBuffer(0, "chunksPositions", LODchunksBuffer);
 
@@ -317,7 +316,7 @@ public class VegetationInstancer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!displayChunks || Application.isPlaying || normalChunksList == null)
+        if (!displayChunks || normalChunksList == null)
             return;
 
         Gizmos.color = Color.red;

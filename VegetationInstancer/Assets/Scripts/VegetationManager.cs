@@ -92,7 +92,10 @@ public class VegetationManager : MonoBehaviour
         // load data
         var data = SaveSystemInstancer.LoadData();
         if (data == null) // means there is no save
+        {
+            Debug.LogWarning("Terrain data was not loaded. Add your terrains and press the Reload Terrain Data checkbox to do so.");
             return;
+        }
 
         if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
             instance.terrainHeight.Dispose();
@@ -276,9 +279,11 @@ public class VegetationManager : MonoBehaviour
         var heightList = new float[HeightResolution * HeightResolution];
         float[,] arr = new float[HeightResolution, HeightResolution];
 
+        // get heightmap of each terrain
         List<float[,]> maps = new List<float[,]>();
         for(int i = 0; i < terrainsArray.Length; i++)
             maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
+
         // merge row by row
         for (int y = 0; y < HeightResolution; y++)
         {

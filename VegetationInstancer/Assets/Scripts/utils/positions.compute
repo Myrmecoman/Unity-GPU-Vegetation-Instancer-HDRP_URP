@@ -205,8 +205,8 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
 {
     float baseX = chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
     float baseZ = chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
-    float xDisplacement = GenerateRandom(baseX * 0.904735, -displacement, displacement);
-    float zDisplacement = GenerateRandom(baseX * 0.290374, -displacement, displacement);
+    float xDisplacement = GenerateRandom(baseX * 0.90935, -displacement, displacement);
+    float zDisplacement = GenerateRandom(baseX * 0.29574, -displacement, displacement);
     
     float x = baseX + xDisplacement;
     float z = baseZ + zDisplacement;
@@ -228,7 +228,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
         return trs(float3(x, y -10000, z), float4(0, 0, 0, 0), 1);
     
     // compute size
-    float newSize = GenerateRandom(baseX * 0.45729204, 1 / sizeChange, sizeChange);
+    float newSize = GenerateRandom(baseX * 0.45724, 1 / sizeChange, sizeChange);
     if (texValueAtPos >= falloff)
         newSize *= max(texValueAtPos, 0.1);
     
@@ -238,7 +238,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, float rotation)
         pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX * 0.0983633, 0, 360) + rotation, 0));
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX * 0.09833, 0, 360) + rotation, 0));
     
     // check if too far
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
