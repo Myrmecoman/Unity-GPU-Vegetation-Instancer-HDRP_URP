@@ -59,36 +59,74 @@ public struct PickVisibleChunksJob : IJob
         {
             for (int j = startZ; j < endZ; j += chunkSize)
             {
-                int height = (int)terrainData.SampleHeight(new float2(i, j));
-                int3 pos = new int3(i + halfChunk, height, j + halfChunk);
+                // get the lowest terrain corner of the chunk
+                float height1 = terrainData.SampleHeight(new float2(i + chunkSize, j + chunkSize));
+                float height2 = terrainData.SampleHeight(new float2(i + chunkSize, j));
+                float height3 = terrainData.SampleHeight(new float2(i, j + chunkSize));
+                float height4 = terrainData.SampleHeight(new float2(i, j));
+                int minHeight = (int)GetMinimum(height1, height2, height3, height4);
+                int maxHeight = (int)(GetMaximum(height1, height2, height3, height4) + 1f);
+                int heightDiff = maxHeight - minHeight;
+
+                int3 pos = new int3(i + halfChunk, minHeight, j + halfChunk);
                 float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
-                if (distance <= LODviewDistanceSq && isVisible(pos))
-                    normalChunks.Add(new int3(pos.x, height, pos.z));
-                else if (distance <= viewDistanceSq && isVisible(pos))
-                    LODChunks.Add(new int3(pos.x, height, pos.z));
+                if (distance <= LODviewDistanceSq && isVisible(pos, heightDiff))
+                    normalChunks.Add(new int3(pos.x, minHeight, pos.z));
+                else if (distance <= viewDistanceSq && isVisible(pos, heightDiff))
+                    LODChunks.Add(new int3(pos.x, minHeight, pos.z));
             }
         }
     }
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool isVisible(int3 pos)
+    private bool isVisible(int3 pos, float heightDiff)
     {
-        return isOnOrForwardPlane(frustrumPlanes.p1, pos) &&
-               isOnOrForwardPlane(frustrumPlanes.p2, pos) &&
-               isOnOrForwardPlane(frustrumPlanes.p3, pos) &&
-               isOnOrForwardPlane(frustrumPlanes.p4, pos) &&
-               isOnOrForwardPlane(frustrumPlanes.p5, pos) &&
-               isOnOrForwardPlane(frustrumPlanes.p6, pos);
+        return isOnOrForwardPlane(frustrumPlanes.p1, pos, heightDiff) &&
+               isOnOrForwardPlane(frustrumPlanes.p2, pos, heightDiff) &&
+               isOnOrForwardPlane(frustrumPlanes.p3, pos, heightDiff) &&
+               isOnOrForwardPlane(frustrumPlanes.p4, pos, heightDiff) &&
+               isOnOrForwardPlane(frustrumPlanes.p5, pos, heightDiff) &&
+               isOnOrForwardPlane(frustrumPlanes.p6, pos, heightDiff);
     }
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private bool isOnOrForwardPlane(Plane p, int3 pos)
+    private bool isOnOrForwardPlane(Plane p, int3 pos, float chunkHeight)
     {
         // Compute the projection interval radius of b onto L(t) = b.c + t * p.n
-        // size of bounding box is chunkSize, chunksize*10, chunksize
-        float r = chunkSize/2 * math.abs(p.normal.x) + chunkSize * 5 * math.abs(p.normal.y) + chunkSize/2 * math.abs(p.normal.z);
-        return -r <= p.GetDistanceToPoint(new float3(pos.x, pos.y, pos.z)); ;
+        // size of bounding box is chunkSize, (chunkHeight + 10f) / 2f, chunksize
+        // y here is the chunk highest corner point + 10f, where 10f is the supposed maximum plant height. We can increase this later if it is not sufficient
+        float yExtent = (chunkHeight + 10f) / 2f;
+        float r = chunkSize/2f * math.abs(p.normal.x) + yExtent * math.abs(p.normal.y) + chunkSize/2f * math.abs(p.normal.z);
+        return -r <= p.GetDistanceToPoint(new float3(pos.x, pos.y + yExtent, pos.z)); ;
+    }
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private float GetMinimum(float a, float b, float c, float d)
+    {
+        float min = a;
+        if (b < min)
+            min = b;
+        if (c < min)
+            min = c;
+        if (d < min)
+            min = d;
+        return min;
+    }
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private float GetMaximum(float a, float b, float c, float d)
+    {
+        float max = a;
+        if (b > max)
+            max = b;
+        if (c > max)
+            max = c;
+        if (d > max)
+            max = d;
+        return max;
     }
 }

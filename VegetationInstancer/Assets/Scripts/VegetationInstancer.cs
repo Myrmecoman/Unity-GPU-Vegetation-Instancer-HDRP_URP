@@ -114,7 +114,7 @@ public class VegetationInstancer : MonoBehaviour
 
         instancesPerChunk = plantDistanceInt * plantDistanceInt;
 
-        positionsComputeShader.SetFloat("randomSeed", 873.304f);
+        positionsComputeShader.SetFloat("randomSeed", 3.30482f);
         positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
         positionsComputeShader.SetFloat("chunkSize", chunkSize);
         positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
