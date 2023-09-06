@@ -4,7 +4,6 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.Rendering;
 
 
@@ -205,7 +204,7 @@ public class VegetationInstancer : MonoBehaviour
 
         // run compute shader for non LOD objects -----------------------------------------------------------
         int totalPlants = instancesPerChunk * normalChunksList.Count * billboardNb;
-        if (maxPositionsBufferInstances < totalPlants || positionsBuffer == null)
+        if (maxPositionsBufferInstances < totalPlants || positionsBuffer == null && totalPlants != 0)
         {
             // output buffer for objects positions, only increase size if needed
             maxPositionsBufferInstances = totalPlants;
@@ -214,21 +213,21 @@ public class VegetationInstancer : MonoBehaviour
             positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
         }
 
+        // reset args because the number of instances probably changed
+        var args = new uint[5];
+        args[0] = (uint)mesh.GetIndexCount(0);
+        args[1] = (uint)totalPlants;
+        args[2] = (uint)mesh.GetIndexStart(0);
+        args[3] = (uint)mesh.GetBaseVertex(0);
+        args[4] = (uint)0;
+
+        argsBuffer?.Release();
+        argsBuffer = null;
+        argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+        argsBuffer.SetData(args);
+
         if (totalPlants != 0)
         {
-            // reset args because the number of instances probably changed
-            var args = new uint[5];
-            args[0] = (uint)mesh.GetIndexCount(0);
-            args[1] = (uint)totalPlants;
-            args[2] = (uint)mesh.GetIndexStart(0);
-            args[3] = (uint)mesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            argsBuffer?.Release();
-            argsBuffer = null;
-            argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            argsBuffer.SetData(args);
-
             // readonly buffer containing chunks positions
             chunksBuffer?.Release();
             chunksBuffer = null;
@@ -247,7 +246,7 @@ public class VegetationInstancer : MonoBehaviour
 
         // run compute shader for LOD objects -----------------------------------------------------------
         int LODtotalPlants = instancesPerChunk * LODChunksList.Count * billboardNb;
-        if (LODmaxPositionsBufferInstances < LODtotalPlants || LODpositionsBuffer == null)
+        if (LODmaxPositionsBufferInstances < LODtotalPlants || LODpositionsBuffer == null && LODtotalPlants != 0)
         {
             // output buffer for objects positions, only increase size if needed
             LODmaxPositionsBufferInstances = LODtotalPlants;
@@ -256,21 +255,21 @@ public class VegetationInstancer : MonoBehaviour
             LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
         }
 
+        // reset args because the number of instances probably changed
+        args = new uint[5];
+        args[0] = (uint)mesh.GetIndexCount(0);
+        args[1] = (uint)LODtotalPlants;
+        args[2] = (uint)mesh.GetIndexStart(0);
+        args[3] = (uint)mesh.GetBaseVertex(0);
+        args[4] = (uint)0;
+
+        LODargsBuffer?.Release();
+        LODargsBuffer = null;
+        LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+        LODargsBuffer.SetData(args);
+
         if (LODtotalPlants != 0)
         {
-            // reset args because the number of instances probably changed
-            var args = new uint[5];
-            args[0] = (uint)mesh.GetIndexCount(0);
-            args[1] = (uint)LODtotalPlants;
-            args[2] = (uint)mesh.GetIndexStart(0);
-            args[3] = (uint)mesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            LODargsBuffer?.Release();
-            LODargsBuffer = null;
-            LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            LODargsBuffer.SetData(args);
-
             // readonly buffer containing chunks positions
             LODchunksBuffer?.Release();
             LODchunksBuffer = null;
