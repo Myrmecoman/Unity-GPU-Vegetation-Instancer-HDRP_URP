@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace UnityTemplateProjects
+namespace Myrmecoman
 {
     public class CamController : MonoBehaviour
     {

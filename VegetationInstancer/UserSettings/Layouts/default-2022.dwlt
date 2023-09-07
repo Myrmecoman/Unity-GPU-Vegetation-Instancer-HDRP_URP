@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -217,14 +217,14 @@ MonoBehaviour:
     height: 652
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
   - {fileID: 12}
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -244,14 +244,14 @@ MonoBehaviour:
     y: 652
     width: 1437
     height: 295
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -415,23 +415,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: fcfaffff
+      m_SelectedIDs: 6e860000
+      m_LastClickedID: 34414
+      m_ExpandedIDs: fcfaffff5a860000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Terrain_(-500.00, 0.00, -1500.00)
+        m_OriginalName: Terrain_(-500.00, 0.00, -1500.00)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 34368
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -850,9 +850,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -277.9679, y: 38.355225, z: 334.22906}
+    m_Target: {x: -77.32106, y: -7.8474426, z: 97.12515}
     speed: 2
-    m_Value: {x: -277.9679, y: 38.355225, z: 334.22906}
+    m_Value: {x: -77.32106, y: -7.8474426, z: 97.12515}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -898,20 +898,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.09704409, y: -0.89488745, z: 0.23797503, w: 0.36601138}
+    m_Target: {x: -0.16195631, y: 0.83800995, z: -0.37918496, w: -0.35860214}
     speed: 2
-    m_Value: {x: 0.09557448, y: -0.896692, z: 0.23845316, w: 0.36048457}
+    m_Value: {x: -0.16137622, y: 0.83824104, z: -0.37626365, w: -0.36018783}
   m_Size:
-    m_Target: 78.12105
+    m_Target: 50.516285
     speed: 2
-    m_Value: 74.75698
+    m_Value: 50.516285
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1.06047
-    m_SpeedNormalized: 0.53
+    m_Speed: 1.0005
+    m_SpeedNormalized: 0.49999997
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -2024,7 +2024,7 @@ MonoBehaviour:
   _targetCpu: 0
   _disasmKind: 0
   _oldDisasmKind: 0
-  _previousTargetIndex: 1
+  _previousTargetIndex: -1
   _safetyChecks: 0
   _showBranchMarkers: 1
   _enhancedDisassembly: 1
@@ -2034,11 +2034,11 @@ MonoBehaviour:
   _focusTargetJob: 1
   _searchFilterAssembly: 
   _sameTargetButDifferentAssemblyKind: 1
-  _scrollPos: {x: 0, y: 9219}
+  _scrollPos: {x: 0, y: 0}
   _searchBarVisible: 1
   _selectedItem: PickVisibleChunksJob - (IJob)
   targetNames:
-  - PickVisibleChunksJob - (IJob)
+  - Myrmecoman.PickVisibleChunksJob - (IJob)
   - TransformBakingSystem.BakedRuntimeTransformsJob - (IJobChunk)
   - TransformBakingSystem.BakedRuntimeTransformsJob.IsUniformScale(Unity.Mathematics.float3&)
   - Unity.Burst.Intrinsics.X86.DoGetCSRTrampoline()
@@ -2742,8 +2742,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: a4880000
-    m_LastClickedID: 34980
+    m_SelectedIDs: b8880000
+    m_LastClickedID: 35000
     m_ExpandedIDs: 00000000ee860000f0860000f2860000f4860000f6860000f8860000fa860000fc860000fe86000000870000028700000487000006870000088700000a8700000c8700000e87000010870000128700001487000016870000188700001a8700001c8700001e87000020870000228700002487000026870000288700002a8700002c8700002e87000030870000328700003487000036870000388700003a8700003c8700003e87000040870000428700004487000046870000488700004a8700004c8700004e87000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2797,9 +2797,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 36860000
+    m_LastClickedInstanceID: 34358
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000098aa0000c6e40000ec7f000058030000d2ac0000aef70000f0d8000040d90000c6b10000d0d8000000d90000d4b1000010d9000006b20000c0d8000030d9000020d90000e0d80000208b00005288000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

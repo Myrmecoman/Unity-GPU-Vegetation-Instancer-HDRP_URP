@@ -29,9 +29,9 @@ Triangle MakeTriangle(float3 v0, float3 v1, float3 v2)
 
 float TriSampleHeight(Triangle tri, float2 position)
 {
-// plane formula: a(x - x0) + b(y - y0) + c(z - z0) = 0
-// <a,b,c> is a normal vector for the plane
-// (x,y,z) and (x0,y0,z0) are any points on the plane
+    // plane formula: a(x - x0) + b(y - y0) + c(z - z0) = 0
+    // <a,b,c> is a normal vector for the plane
+    // (x,y,z) and (x0,y0,z0) are any points on the plane
     return (-tri.Normal.x * (position.x - tri.V0.x) - tri.Normal.z * (position.y - tri.V0.z)) / tri.Normal.y + tri.V0.y;
 }
 
@@ -58,12 +58,11 @@ float3 GetWorldVertex(int2 heightMapCrds)
 
 Triangle GetTriAtPosition(float2 worldPosition)
 {
-    float2 localPos =
-    float2(
+    float2 localPos = float2(
             worldPosition.x - AABBMin.x,
             worldPosition.y - AABBMin.z);
     float2 samplePos = localPos / sampleSize.xy;
-    int2 sampleFloor = int2(floor(samplePos.x), floor(samplePos.y));
+    int2 sampleFloor = int2((int)samplePos.x, (int)samplePos.y);
     float2 sampleDecimal = samplePos - sampleFloor;
     bool upperLeftTri = sampleDecimal.y > sampleDecimal.x;
     int2 v1Offset = upperLeftTri ? int2(0, 1) : int2(1, 1);
