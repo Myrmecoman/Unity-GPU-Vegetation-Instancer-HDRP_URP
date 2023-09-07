@@ -278,29 +278,21 @@ namespace Myrmecoman
 
             int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
             var heightList = new float[heightResolution * heightResolution];
-            float[,] arr = new float[heightResolution, heightResolution];
 
             // get heightmap of each terrain
             List<float[,]> maps = new List<float[,]>();
             for (int i = 0; i < terrainsArray.Length; i++)
                 maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
 
-            // merge row by row
+            // generate flattened array
             for (int y = 0; y < heightResolution; y++)
             {
                 int arrY = y / resolutionSingle;
                 for (int x = 0; x < heightResolution; x++)
                 {
                     int arrX = x / resolutionSingle;
-                    arr[x, y] = maps[arrX + D1Size * arrY][x % resolutionSingle, y % resolutionSingle];
+                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % resolutionSingle, y % resolutionSingle];
                 }
-            }
-
-            // flatten the array
-            for (int y = 0; y < heightResolution; y++)
-            {
-                for (int x = 0; x < heightResolution; x++)
-                    heightList[x * heightResolution + y] = arr[y, x];
             }
 
             return heightList;

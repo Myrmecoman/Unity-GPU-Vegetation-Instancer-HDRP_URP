@@ -102,7 +102,6 @@ namespace Myrmecoman
 
         float3 GetWorldVertex(int2 heightMapCrds)
         {
-            int i = heightMapCrds.x + heightMapCrds.y * resolution;
             float3 vertexPercentages = new float3(
                 (float)heightMapCrds.x / QuadCount,
                 heightMap[heightMapCrds.x * resolution + heightMapCrds.y],

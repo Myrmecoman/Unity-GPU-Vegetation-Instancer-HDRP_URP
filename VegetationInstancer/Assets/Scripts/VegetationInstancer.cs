@@ -315,7 +315,7 @@ namespace Myrmecoman
             //Debug.Log("Full loop time : " + totalTime);
         }
 
-
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             // display terrains combined mesh
@@ -347,7 +347,7 @@ namespace Myrmecoman
             }
         }
     }
-
+#endif
 
     public struct FrustrumPlanes
     {
