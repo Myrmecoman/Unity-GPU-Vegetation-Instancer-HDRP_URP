@@ -418,6 +418,7 @@
 0x3321db47a3c59704 -    3684467070902572804 - UnityEditor.VFX.Operator.Atan
 0x332c417638e98b81 -    3687394170926369665 - UnityEditor.EventSystems.PhysicsRaycasterEditor
 0x334661aaeacb44ce -    3694747931015595214 - UnityEngine.Rendering.HighDefinition.HDAdditionalReflectionData
+0x33b412155c9b7070 -    3725622674699546736 - Myrmecoman.VegetationManager
 0x33ec3cef9dd883b0 -    3741432390281102256 - UnityEditor.VFX.VFXDataSpawner
 0x341922c395aff061 -    3754069987815321697 - UnityEditor.PackageManager.UI.Internal.ServicesContainer
 0x3432c05adc85de08 -    3761280135287135752 - UnityEditor.VFX.Operator.DistanceToPlane
@@ -1103,11 +1104,9 @@
 0x87be6ba9f365a8a6 -    9781373818372466854 - UnityEditor.TerrainTools.BridgeTool
 0x87e6867eb75271fc -    9792662318563357180 - UnityEngine.Avatar
 0x882c763f0e1a1d26 -    9812347701325077798 - Unity.Physics.Systems.PhysicsAnalyticsSingleton
-0x8837b734c070c3c9 -    9815515350072083401 - UnityTemplateProjects.CamController
 0x884111efadbc6a63 -    9818148383754054243 - UnityEditor.TerrainTools.NoiseComponentEditor
 0x8865aa9136c6e3ab -    9828449302471959467 - UnityEditor.ClothInspector
 0x8869e066fdb725f4 -    9829634394660742644 - Unity.Physics.DummyColliderFakesComponent`1[[Unity.Physics.BoxCollider, Unity.Physics, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
-0x888558a73097f193 -    9837366436158763411 - VegetationManager
 0x88bef6b528d82672 -    9853584292667991666 - Unity.VisualScripting.UnityOnMouseDragMessageListener
 0x88e95e757cfa9f94 -    9865520317432766356 - UnityEditor.VFX.VFXSlotFloat4
 0x89098679c2be26a7 -    9874571515502929575 - UnityEditor.ProjectWindowCallback.DoCreateFolder
@@ -1270,6 +1269,7 @@
 0x9adf4b5d286d8ba9 -   11159721265129687977 - UnityEditor.VFX.VFXBasicSpawnerEditor
 0x9ae3740484e3f7df -   11160891864312444895 - Cinemachine.CinemachineFollowZoom
 0x9aed0f3b515e1a60 -   11163595798763936352 - UnityEditor.VFX.Operator.ProbabilitySampling
+0x9b15098085928ce8 -   11174848497991191784 - Myrmecoman.VegetationInstancer
 0x9b1798bae62b6f51 -   11175568928836120401 - UnityEditor.ManipulationToolCustomEditor
 0x9b71b053c039af35 -   11200927622000914229 - UnityEditor.UI.GridLayoutGroupEditor
 0x9baa8c5ea7146027 -   11216932160077586471 - Unity.VisualScripting.UnityOnTriggerEnter2DMessageListener
@@ -1451,7 +1451,6 @@
 0xb0bdb0e53ef8c1b0 -   12735529819924119984 - UnityEditor.Animations.AnimatorStateTransition
 0xb146ba78f1327d09 -   12774102421688450313 - UnityEngine.Cloth
 0xb15b53015bf5bf05 -   12779899632896818949 - UnityEngine.Timeline.AudioPlayableAssetInspector
-0xb15bac6801b4ab2b -   12779997930299108139 - VegetationInstancer
 0xb15c798cc83e220e -   12780223488132522510 - UnityEditor.TrueTypeFontImporterInspector
 0xb17689ed06f23be7 -   12787559843081894887 - Unity.Physics.Systems.DummySimulationData
 0xb19be550425c3805 -   12798074898976880645 - UnityEditor.Rendering.BuiltIn.AssetVersion
@@ -1589,6 +1588,7 @@
 0xc04f61e6785a087b -   13857402220931844219 - UnityEngine.AnimationClip
 0xc06720e22bef10bf -   13864086133655146687 - Unity.VisualScripting.GlobalMessageListenerEditor
 0xc06f9cd72ac07a6f -   13866474225646205551 - UnityEditor.Rendering.HighDefinition.HDRenderPipelineMenuItems+DoCreateNewAssetDiffusionProfileSettings
+0xc095198697fcb508 -   13877025892678284552 - Myrmecoman.CamController
 0xc0bb562d45ba85a0 -   13887788628370425248 - UnityEditor.Rendering.DebugWindow
 0xc0d01d9e20254377 -   13893637415419331447 - UnityEditor.AssetStoreWindow
 0xc0d4bd6d8e17c1f2 -   13894939028577829362 - Unity.Scenes.Editor.SubSceneInspector

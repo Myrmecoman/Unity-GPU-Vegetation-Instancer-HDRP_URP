@@ -84,7 +84,7 @@ namespace Myrmecoman
         private List<int3> normalChunksList;
         private List<int3> LODChunksList;
 
-        // variables to not recompute everyframe if we stand still
+        // variables to not recompute every frame if we stand still
         private Vector3 lastPosition;
         private Quaternion lastRotation;
 
@@ -346,8 +346,8 @@ namespace Myrmecoman
                     Gizmos.DrawWireCube(new float3(e.x, e.y, e.z), new float3(chunkSize, 1, chunkSize));
             }
         }
-    }
 #endif
+    }
 
     public struct FrustrumPlanes
     {

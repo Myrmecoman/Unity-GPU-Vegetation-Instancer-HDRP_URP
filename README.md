@@ -21,7 +21,7 @@ The VegetationManager is in charge of generating the data needed by the instance
 
 ## Code explanation
 
-VegetationInstancer generates the chunks positions every frame using burst (takes about 2ms). It then exclusively uses the GPU for grass positioning.   
+VegetationInstancer generates the chunks positions every frame using burst (takes about 0.2ms). It then exclusively uses the GPU for grass positioning.   
 TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers which are then passed to a compute shader to sample the positions of vegetation on the GPU.   
 
 All the code is commented and was made to be easily readable.   
