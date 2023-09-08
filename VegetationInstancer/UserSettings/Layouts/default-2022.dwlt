@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -346,7 +346,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -417,21 +417,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 6e860000
       m_LastClickedID: 34414
-      m_ExpandedIDs: fcfaffff5a860000
+      m_ExpandedIDs: fefaffff5a860000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Terrain_(-500.00, 0.00, -1500.00)
-        m_OriginalName: Terrain_(-500.00, 0.00, -1500.00)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 34368
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -850,9 +850,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -77.32106, y: -7.8474426, z: 97.12515}
+    m_Target: {x: 743.4513, y: 198.15602, z: -122.90173}
     speed: 2
-    m_Value: {x: -77.32106, y: -7.8474426, z: 97.12515}
+    m_Value: {x: 743.4513, y: 198.15602, z: -122.90173}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -898,13 +898,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.16195631, y: 0.83800995, z: -0.37918496, w: -0.35860214}
+    m_Target: {x: 0.003991971, y: 0.95060563, z: -0.31164604, w: 0.009291206}
     speed: 2
-    m_Value: {x: -0.16137622, y: 0.83824104, z: -0.37626365, w: -0.36018783}
+    m_Value: {x: 0.0044574817, y: 0.9501742, z: -0.3115032, w: 0.010712409}
   m_Size:
-    m_Target: 50.516285
+    m_Target: 855.05023
     speed: 2
-    m_Value: 50.516285
+    m_Value: 855.05023
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2727,7 +2727,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/utils
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -2735,15 +2735,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/utils
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: b8880000
-    m_LastClickedID: 35000
+    m_SelectedIDs: f2860000
+    m_LastClickedID: 34546
     m_ExpandedIDs: 00000000ee860000f0860000f2860000f4860000f6860000f8860000fa860000fc860000fe86000000870000028700000487000006870000088700000a8700000c8700000e87000010870000128700001487000016870000188700001a8700001c8700001e87000020870000228700002487000026870000288700002a8700002c8700002e87000030870000328700003487000036870000388700003a8700003c8700003e87000040870000428700004487000046870000488700004a8700004c8700004e87000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2797,9 +2797,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 36860000
-    m_LastClickedInstanceID: 34358
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 6e860000
+    m_LastClickedInstanceID: 34414
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000098aa0000c6e40000ec7f000058030000d2ac0000aef70000f0d8000040d90000c6b10000d0d8000000d90000d4b1000010d9000006b20000c0d8000030d9000020d90000e0d80000208b00005288000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

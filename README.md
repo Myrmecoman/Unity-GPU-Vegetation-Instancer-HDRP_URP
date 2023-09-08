@@ -35,5 +35,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 
 Support true GPU culling. Currently objects which are invalid (too far, on unwanted texture etc...) are hidden below the terrain instead of not being displayed at all.   
 Sometimes flickering happens near abrupt formations, the reason is still unknown.   
-Some objects are above, some below the surface. This could be due to floating point precision at some point in the code.   
 Support large objects with colliders ?   

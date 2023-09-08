@@ -273,7 +273,7 @@ namespace Myrmecoman
         // return a merged heightmap for all terrains
         private float[] BuildNewHeightMap(Terrain[] terrainsArray, int D1Size)
         {
-            heightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size;
+            heightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size - (D1Size - 1);
             sampleSize = new float2(terrainsArray[0].terrainData.heightmapScale.x, terrainsArray[0].terrainData.heightmapScale.z);
 
             int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
@@ -285,13 +285,14 @@ namespace Myrmecoman
                 maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
 
             // generate flattened array
-            for (int y = 0; y < heightResolution; y++)
+            for (int y = 0; y < heightResolution-1; y++)
             {
-                int arrY = y / resolutionSingle;
-                for (int x = 0; x < heightResolution; x++)
+                int res = resolutionSingle - 1;
+                int arrY = y / res;
+                for (int x = 0; x < heightResolution-1; x++)
                 {
-                    int arrX = x / resolutionSingle;
-                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % resolutionSingle, y % resolutionSingle];
+                    int arrX = x / res;
+                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];
                 }
             }
 
