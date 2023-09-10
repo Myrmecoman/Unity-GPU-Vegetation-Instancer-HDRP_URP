@@ -42,23 +42,23 @@ namespace Myrmecoman
             int halfChunk = chunkSize / 2;
 
             // this way instead of going through all chunks, we only check the ones in viewrange
-            int startX = camPos.x - (int)math.sqrt(viewDistanceSq) - camPos.x % chunkSize;
+            int startX = camPos.x - (int)math.sqrt(viewDistanceSq) - (camPos.x - (int)math.sqrt(viewDistanceSq)) % chunkSize;
             if (startX < terrainPos.x)
                 startX = terrainPos.x;
-            int startZ = camPos.z - (int)math.sqrt(viewDistanceSq) - camPos.z % chunkSize;
+            int startZ = camPos.z - (int)math.sqrt(viewDistanceSq) - (camPos.z - (int)math.sqrt(viewDistanceSq)) % chunkSize;
             if (startZ < terrainPos.z)
                 startZ = terrainPos.z;
-            int endX = camPos.x + (int)math.sqrt(viewDistanceSq) - camPos.x % chunkSize;
+            int endX = camPos.x + (int)math.sqrt(viewDistanceSq) + chunkSize;
             if (endX >= terrainPos.x + size1D)
                 endX = terrainPos.x + size1D;
-            int endZ = camPos.z + (int)math.sqrt(viewDistanceSq) - camPos.z % chunkSize;
+            int endZ = camPos.z + (int)math.sqrt(viewDistanceSq) + chunkSize;
             if (endZ >= terrainPos.z + size1D)
                 endZ = terrainPos.z + size1D;
 
             // add the visible chunks to the corresponding hashmap
             for (int i = startX; i <= endX; i += chunkSize)
             {
-                for (int j = startZ; j < endZ; j += chunkSize)
+                for (int j = startZ; j <= endZ; j += chunkSize)
                 {
                     // get the lowest terrain corner of the chunk
                     float height1 = terrainData.SampleHeight(new float2(i + chunkSize, j + chunkSize));

@@ -176,13 +176,14 @@ namespace Myrmecoman
                 normalChunks = new NativeList<int3>(Allocator.TempJob),
                 LODChunks = new NativeList<int3>(Allocator.TempJob),
                 frustrumPlanes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam)),
-                size1D = (int)VegetationManager.instance.terrainTex.terrainSize.x,
+                size1D = (int)VegetationManager.instance.terrainHeight.AABB.Max.x - (int)VegetationManager.instance.terrainHeight.AABB.Min.x,
                 camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
-                terrainPos = new int3(VegetationManager.instance.terrainTex.terrainPos.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, VegetationManager.instance.terrainTex.terrainPos.y),
+                terrainPos = new int3((int)VegetationManager.instance.terrainHeight.AABB.Min.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, (int)VegetationManager.instance.terrainHeight.AABB.Min.z),
                 chunkSize = chunkSize,
                 viewDistanceSq = viewDistance * viewDistance,
                 LODviewDistanceSq = LODviewDistance * LODviewDistance,
             };
+
             chunksSampler.Schedule().Complete();
 
             // add the chunks which appeared on view

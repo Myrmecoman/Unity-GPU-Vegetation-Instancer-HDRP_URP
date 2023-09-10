@@ -140,13 +140,13 @@ float ViewRangeSq;
 float positionOffset;
 float maxHeight;
 float minHeight;
-uint centeredMesh;
+int centeredMesh;
 
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
 {
-    float seed = randomSeed * index * 0.193728912263;
-    float fracVal = frac(sin(seed) * 43758.5453);
+    float seed = randomSeed * index * 0.1963;
+    float fracVal = frac(sin(seed) * 945.5);
     float minMaxDist = max - min;
     return min + fracVal * minMaxDist;
 }
@@ -204,8 +204,8 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
 {
     float baseX = chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
     float baseZ = chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
-    float xDisplacement = GenerateRandom(baseX * 0.90935, -displacement, displacement);
-    float zDisplacement = GenerateRandom(baseX * 0.29574, -displacement, displacement);
+    float xDisplacement = GenerateRandom(baseX, -displacement, displacement);
+    float zDisplacement = GenerateRandom(baseX * 0.2, -displacement, displacement);
     
     float x = baseX + xDisplacement;
     float z = baseZ + zDisplacement;
@@ -227,7 +227,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
         return trs(float3(x, y -10000, z), float4(0, 0, 0, 0), 1);
     
     // compute size
-    float newSize = GenerateRandom(baseX * 0.45724, 1 / sizeChange, sizeChange);
+    float newSize = GenerateRandom(baseX, 1 / sizeChange, sizeChange);
     if (texValueAtPos >= falloff)
         newSize *= max(texValueAtPos, 0.1);
     
@@ -237,11 +237,11 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
         pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX * 0.09833, 0, 360), 0));
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX, 0, 360), 0));
     
     // check if too far
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq || GenerateRandom(baseX * 0.34735, 0, 1) < dist / ViewRangeSq)
+    if (dist > ViewRangeSq || GenerateRandom(baseX, 0, 1) < dist / ViewRangeSq)
         return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
     return trs(pos, q, newSize * sizeBias);
@@ -296,7 +296,7 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat)
 
 // output
 uint positionsSize;
-uint plantsPerChunk;
+int plantsPerChunk;
 RWStructuredBuffer<ItemInstanceData> positions;
 
 [numthreads(1024,1,1)]

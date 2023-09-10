@@ -19,6 +19,8 @@ Note that this project only spawns vegetation objects without colliders, and is 
 Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
 The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld for example. Only one VegetationManager can exist so if you want severals instancers you need to put them on the same GameObject.   
 
+This project is provided with an example scene, feel free to play around with it to understand fully how to use this asset.   
+
 ## Code explanation
 
 VegetationInstancer generates the chunks positions every frame using burst (takes about 0.2ms). It then exclusively uses the GPU for grass positioning.   
@@ -34,5 +36,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 ## In the futur
 
 Support true GPU culling. Currently objects which are invalid (too far, on unwanted texture etc...) are hidden below the terrain instead of not being displayed at all.   
-Sometimes flickering happens near abrupt formations, the reason is still unknown.   
 Support large objects with colliders ?   
