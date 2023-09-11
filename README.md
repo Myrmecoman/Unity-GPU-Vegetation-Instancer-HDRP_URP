@@ -36,5 +36,5 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 
 ## In the futur
 
-GPU objects culling still needs optimisations.   
+GPU objects culling still needs optimisations as GetData() waits for too long. We should use a compute shader although it will work on 1 thread.   
 Support large objects with colliders ?   
