@@ -436,7 +436,7 @@ namespace Myrmecoman
             Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
 
             double totalTime = Time.realtimeSinceStartupAsDouble - t;
-            Debug.Log("Full loop time : " + totalTime);
+            //Debug.Log("Full loop time : " + totalTime);
         }
 
 #if UNITY_EDITOR

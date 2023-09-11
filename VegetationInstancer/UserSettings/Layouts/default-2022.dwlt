@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
-  m_Stats: 0
+  m_Stats: 1
   m_SelectedSizes: 03000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0
@@ -850,9 +850,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -22.555613, y: 4.0896626, z: 62.66446}
+    m_Target: {x: 6.41892, y: 10.008488, z: 60.025375}
     speed: 2
-    m_Value: {x: -22.555613, y: 4.0896626, z: 62.66446}
+    m_Value: {x: 6.41892, y: 10.008488, z: 60.025375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -898,13 +898,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.036864582, y: 0.9616456, z: -0.19662355, w: -0.19007683}
+    m_Target: {x: 0.008206817, y: 0.9833839, z: -0.18071303, w: 0.03383321}
     speed: 2
-    m_Value: {x: -0.037429158, y: 0.9606258, z: -0.19791977, w: -0.19137603}
+    m_Value: {x: 0.008203073, y: 0.98293525, z: -0.18063058, w: 0.03381777}
   m_Size:
-    m_Target: 44.925415
+    m_Target: 43.368996
     speed: 2
-    m_Value: 42.99083
+    m_Value: 43.368996
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2727,7 +2727,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/ComputeShaders
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -2735,15 +2735,15 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/ComputeShaders
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: a6880000
-    m_LastClickedID: 34982
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 50870000
+    m_LastClickedID: 34640
     m_ExpandedIDs: 00000000f0860000f2860000f4860000f6860000f8860000fa860000fc860000fe86000000870000028700000487000006870000088700000a8700000c8700000e87000010870000128700001487000016870000188700001a8700001c8700001e87000020870000228700002487000026870000288700002a8700002c8700002e87000030870000328700003487000036870000388700003a8700003c8700003e87000040870000428700004487000046870000488700004a8700004c8700004e8700005087000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2797,8 +2797,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 70860000
+    m_LastClickedInstanceID: 34416
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000098aa0000c6e40000ec7f000058030000d2ac0000aef70000f0d8000040d90000c6b10000d0d8000000d90000d4b1000010d9000006b20000c0d8000030d9000020d90000e0d80000208b00005288000000000000ce880000d4880000
     m_RenameOverlay:
