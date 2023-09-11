@@ -143,8 +143,8 @@ int centeredMesh;
 // generates random value between min and max
 float GenerateRandom(float index, float min, float max)
 {
-    float seed = randomSeed * index * 0.1963;
-    float fracVal = frac(sin(seed) * 945.5);
+    float seed = randomSeed * index;
+    float fracVal = frac(sin(seed) * 95.5);
     float minMaxDist = max - min;
     return min + fracVal * minMaxDist;
 }
@@ -198,8 +198,9 @@ float4 EulerToQuaternion(float3 euler)
     );
 }
 
-float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
+float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
 {
+    isValid = 0;
     float baseX = chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
     float baseZ = chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
     float xDisplacement = GenerateRandom(baseX, -displacement, displacement);
@@ -242,6 +243,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex)
     if (dist > ViewRangeSq || GenerateRandom(baseX, 0, 1) < dist / ViewRangeSq)
         return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
+    isValid = 1;
     return trs(pos, q, newSize * sizeBias);
 }
 // ------------------------------------------------------------------------
@@ -283,19 +285,20 @@ struct ItemInstanceData
     float4 infos;
 };
 
-ItemInstanceData MakeItemInstanceData(float4x4 mat)
+ItemInstanceData MakeItemInstanceData(float4x4 mat, uint isValid)
 {
     ItemInstanceData instanceItem;
     instanceItem.mat = mat;
     instanceItem.matInverse = inverse(mat);
-    instanceItem.infos = float4(0, 0, 0, 0);
+    instanceItem.infos = float4(isValid, 0, 0, 0);
     return instanceItem;
 }
 
 // output
 uint positionsSize;
-int plantsPerChunk;
+uint plantsPerChunk;
 RWStructuredBuffer<ItemInstanceData> positions;
+RWStructuredBuffer<uint> itemsPerBatch;
 
 [numthreads(1024,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
@@ -303,7 +306,14 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     if (id.x >= positionsSize)
         return;
     
-    float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk);
-    ItemInstanceData instanceItem = MakeItemInstanceData(mat);
+    uint isValid;
+    float4x4 mat = GeneratePosRotScale(id.x % plantsPerChunk, id.x / plantsPerChunk, isValid);
+    ItemInstanceData instanceItem = MakeItemInstanceData(mat, isValid);
     positions[id.x] = instanceItem;
+    
+    if (isValid == 1)
+    {
+        uint outValue;
+        InterlockedAdd(itemsPerBatch[id.x / 1024], 1, outValue);
+    }
 }

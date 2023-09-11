@@ -21,6 +21,8 @@ namespace Myrmecoman
         public bool displayTerrains = false;
         [Tooltip("The positions compute shader")]
         public ComputeShader positionsComputeShader;
+        [Tooltip("The culling compute shader")]
+        public ComputeShader cullingComputeShader;
 
         [Header("Procedural parameters")]
         [Tooltip("Random displacement")]
@@ -66,6 +68,7 @@ namespace Myrmecoman
         public int plantDistanceInt = 5;
 
 
+        // GPU items positioning
         private int instancesPerChunk;
         private int maxPositionsBufferInstances;
         private int LODmaxPositionsBufferInstances;
@@ -79,6 +82,20 @@ namespace Myrmecoman
         private ComputeBuffer LODchunksBuffer;
         private ComputeBuffer positionsBuffer;
         private ComputeBuffer LODpositionsBuffer;
+
+        // GPU frustrum culling
+        private int totalPlants;
+        private int groups;
+        private int LODtotalPlants;
+        private int LODgroups;
+        private ComputeBuffer batchItemsCountBuffer;
+        private ComputeBuffer LODbatchItemsCountBuffer;
+        private ComputeBuffer batchItemsCountAddedBuffer;
+        private ComputeBuffer LODbatchItemsCountAddedBuffer;
+        private ComputeBuffer culledPositionsBuffer;
+        private ComputeBuffer LODculledPositionsBuffer;
+        private ComputeBuffer batchCountersBuffer;
+        private ComputeBuffer LODbatchCountersBuffer;
 
         // lists of chunks
         private List<int3> normalChunksList;
@@ -116,7 +133,7 @@ namespace Myrmecoman
 
             instancesPerChunk = plantDistanceInt * plantDistanceInt;
 
-            positionsComputeShader.SetFloat("randomSeed", 3.30482f);
+            positionsComputeShader.SetFloat("randomSeed", 1f);
             positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
             positionsComputeShader.SetFloat("chunkSize", chunkSize);
             positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
@@ -163,6 +180,24 @@ namespace Myrmecoman
             argsBuffer = null;
             LODargsBuffer?.Release();
             LODargsBuffer = null;
+
+            batchItemsCountBuffer?.Release();
+            batchItemsCountBuffer = null;
+            LODbatchItemsCountBuffer?.Release();
+            LODbatchItemsCountBuffer = null;
+            batchItemsCountAddedBuffer?.Release();
+            batchItemsCountAddedBuffer = null;
+            LODbatchItemsCountAddedBuffer?.Release();
+            LODbatchItemsCountAddedBuffer = null;
+
+            culledPositionsBuffer?.Release();
+            culledPositionsBuffer = null;
+            LODculledPositionsBuffer?.Release();
+            LODculledPositionsBuffer = null;
+            batchCountersBuffer?.Release();
+            batchCountersBuffer = null;
+            LODbatchCountersBuffer?.Release();
+            LODbatchCountersBuffer = null;
         }
 
 
@@ -203,7 +238,8 @@ namespace Myrmecoman
         private void RunpositionsComputeShader()
         {
             // run compute shader for non LOD objects -----------------------------------------------------------
-            int totalPlants = instancesPerChunk * normalChunksList.Count;
+            totalPlants = instancesPerChunk * normalChunksList.Count;
+            groups = Mathf.CeilToInt(totalPlants / 1024f);
             if (maxPositionsBufferInstances < totalPlants || positionsBuffer == null && totalPlants != 0)
             {
                 // output buffer for objects positions, only increase size if needed
@@ -211,23 +247,15 @@ namespace Myrmecoman
                 positionsBuffer?.Release();
                 positionsBuffer = null;
                 positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                batchItemsCountBuffer?.Release();
+                batchItemsCountBuffer = null;
+                batchItemsCountBuffer = new ComputeBuffer(groups, sizeof(uint));
             }
-
-            // reset args because the number of instances probably changed
-            var args = new uint[5];
-            args[0] = (uint)mesh.GetIndexCount(0);
-            args[1] = (uint)totalPlants;
-            args[2] = (uint)mesh.GetIndexStart(0);
-            args[3] = (uint)mesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            argsBuffer?.Release();
-            argsBuffer = null;
-            argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            argsBuffer.SetData(args);
 
             if (totalPlants != 0)
             {
+                batchItemsCountBuffer.SetData(new uint[groups]);
+
                 // readonly buffer containing chunks positions
                 chunksBuffer?.Release();
                 chunksBuffer = null;
@@ -238,13 +266,14 @@ namespace Myrmecoman
                 positionsComputeShader.SetInt("positionsSize", totalPlants);
                 positionsComputeShader.SetBuffer(0, "positions", positionsBuffer);
                 positionsComputeShader.SetBuffer(0, "chunksPositions", chunksBuffer);
+                positionsComputeShader.SetBuffer(0, "itemsPerBatch", batchItemsCountBuffer);
 
-                int groups = Mathf.CeilToInt(totalPlants / 1024f);
                 positionsComputeShader.Dispatch(0, groups, 1, 1);
             }
 
             // run compute shader for LOD objects -----------------------------------------------------------
-            int LODtotalPlants = instancesPerChunk * LODChunksList.Count;
+            LODtotalPlants = instancesPerChunk * LODChunksList.Count;
+            LODgroups = Mathf.CeilToInt(LODtotalPlants / 1024f);
             if (LODmaxPositionsBufferInstances < LODtotalPlants || LODpositionsBuffer == null && LODtotalPlants != 0)
             {
                 // output buffer for objects positions, only increase size if needed
@@ -252,23 +281,15 @@ namespace Myrmecoman
                 LODpositionsBuffer?.Release();
                 LODpositionsBuffer = null;
                 LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                LODbatchItemsCountBuffer?.Release();
+                LODbatchItemsCountBuffer = null;
+                LODbatchItemsCountBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
             }
-
-            // reset args because the number of instances probably changed
-            args = new uint[5];
-            args[0] = (uint)mesh.GetIndexCount(0);
-            args[1] = (uint)LODtotalPlants;
-            args[2] = (uint)mesh.GetIndexStart(0);
-            args[3] = (uint)mesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            LODargsBuffer?.Release();
-            LODargsBuffer = null;
-            LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            LODargsBuffer.SetData(args);
 
             if (LODtotalPlants != 0)
             {
+                LODbatchItemsCountBuffer.SetData(new uint[LODgroups]);
+
                 // readonly buffer containing chunks positions
                 LODchunksBuffer?.Release();
                 LODchunksBuffer = null;
@@ -279,9 +300,111 @@ namespace Myrmecoman
                 positionsComputeShader.SetInt("positionsSize", LODtotalPlants);
                 positionsComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
                 positionsComputeShader.SetBuffer(0, "chunksPositions", LODchunksBuffer);
+                positionsComputeShader.SetBuffer(0, "itemsPerBatch", LODbatchItemsCountBuffer);
 
-                int LODgroups = Mathf.CeilToInt(LODtotalPlants / 1024f);
                 positionsComputeShader.Dispatch(0, LODgroups, 1, 1);
+            }
+        }
+
+
+        private void CullPositionsComputeShader()
+        {
+            // Items culling ---------------------------------------------------------------------------------------
+            uint[] nbs = new uint[groups];
+            uint[] nbsAdded = new uint[groups];
+            batchItemsCountBuffer.GetData(nbs, 0, 0, groups);
+            int totalCulledPlants = 0;
+            for (int i = 0; i < groups; i++)
+            {
+                nbsAdded[i] = (uint)totalCulledPlants;
+                totalCulledPlants += (int)nbs[i];
+            }
+
+            // reset args because the number of instances probably changed
+            var args = new uint[5];
+            args[0] = (uint)mesh.GetIndexCount(0);
+            args[1] = (uint)totalCulledPlants;
+            args[2] = (uint)mesh.GetIndexStart(0);
+            args[3] = (uint)mesh.GetBaseVertex(0);
+            args[4] = (uint)0;
+
+            argsBuffer?.Release();
+            argsBuffer = null;
+            argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+            argsBuffer.SetData(args);
+
+            if (totalCulledPlants != 0)
+            {
+                culledPositionsBuffer?.Release();
+                culledPositionsBuffer = null;
+                culledPositionsBuffer = new ComputeBuffer(totalCulledPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
+                batchItemsCountAddedBuffer?.Release();
+                batchItemsCountAddedBuffer = null;
+                batchItemsCountAddedBuffer = new ComputeBuffer(groups, sizeof(uint));
+                batchItemsCountAddedBuffer.SetData(nbsAdded);
+
+                batchCountersBuffer?.Release();
+                batchCountersBuffer = null;
+                batchCountersBuffer = new ComputeBuffer(groups, sizeof(uint));
+                batchCountersBuffer.SetData(new uint[groups]);
+
+                cullingComputeShader.SetInt("positionsSize", totalPlants);
+                cullingComputeShader.SetBuffer(0, "positions", positionsBuffer);
+                cullingComputeShader.SetBuffer(0, "itemsPerBatchAdded", batchItemsCountAddedBuffer);
+                cullingComputeShader.SetBuffer(0, "batchCounters", batchCountersBuffer);
+                cullingComputeShader.SetBuffer(0, "newPositions", culledPositionsBuffer);
+
+                cullingComputeShader.Dispatch(0, groups, 1, 1);
+            }
+
+            // LODs culling ---------------------------------------------------------------------------------------
+            uint[] LODnbs = new uint[LODgroups];
+            uint[] LODnbsAdded = new uint[LODgroups];
+            LODbatchItemsCountBuffer.GetData(LODnbs, 0, 0, LODgroups);
+            int LODtotalCulledPlants = 0;
+            for (int i = 0; i < LODgroups; i++)
+            {
+                LODnbsAdded[i] = (uint)LODtotalCulledPlants;
+                LODtotalCulledPlants += (int)LODnbs[i];
+            }
+
+            // reset args because the number of instances probably changed
+            args = new uint[5];
+            args[0] = (uint)LODmesh.GetIndexCount(0);
+            args[1] = (uint)LODtotalCulledPlants;
+            args[2] = (uint)LODmesh.GetIndexStart(0);
+            args[3] = (uint)LODmesh.GetBaseVertex(0);
+            args[4] = (uint)0;
+
+            LODargsBuffer?.Release();
+            LODargsBuffer = null;
+            LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
+            LODargsBuffer.SetData(args);
+
+            if (LODtotalCulledPlants != 0)
+            {
+                LODculledPositionsBuffer?.Release();
+                LODculledPositionsBuffer = null;
+                LODculledPositionsBuffer = new ComputeBuffer(LODtotalCulledPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
+                LODbatchItemsCountAddedBuffer?.Release();
+                LODbatchItemsCountAddedBuffer = null;
+                LODbatchItemsCountAddedBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
+                LODbatchItemsCountAddedBuffer.SetData(LODnbsAdded);
+
+                LODbatchCountersBuffer?.Release();
+                LODbatchCountersBuffer = null;
+                LODbatchCountersBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
+                LODbatchCountersBuffer.SetData(new uint[LODgroups]);
+
+                cullingComputeShader.SetInt("positionsSize", LODtotalPlants);
+                cullingComputeShader.SetBuffer(0, "positions", LODpositionsBuffer);
+                cullingComputeShader.SetBuffer(0, "itemsPerBatchAdded", LODbatchItemsCountAddedBuffer);
+                cullingComputeShader.SetBuffer(0, "batchCounters", LODbatchCountersBuffer);
+                cullingComputeShader.SetBuffer(0, "newPositions", LODculledPositionsBuffer);
+
+                cullingComputeShader.Dispatch(0, LODgroups, 1, 1);
             }
         }
 
@@ -300,20 +423,20 @@ namespace Myrmecoman
             {
                 UpdateChunks();
                 RunpositionsComputeShader();
+                CullPositionsComputeShader();
             }
             lastPosition = VegetationManager.instance.cam.transform.position;
             lastRotation = VegetationManager.instance.cam.transform.rotation;
 
             // draw objects
             var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);
-            mat.SetBuffer("GPUInstancedIndirectDataBuffer", positionsBuffer);
+            mat.SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
             Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
-
-            LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODpositionsBuffer);
+            LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
             Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
 
             double totalTime = Time.realtimeSinceStartupAsDouble - t;
-            //Debug.Log("Full loop time : " + totalTime);
+            Debug.Log("Full loop time : " + totalTime);
         }
 
 #if UNITY_EDITOR
