@@ -24,6 +24,7 @@ This project is provided with an example scene, feel free to play around with it
 ## Code explanation
 
 VegetationInstancer generates the chunks positions every frame using burst (takes about 0.2ms). It then exclusively uses the GPU for grass positioning.   
+In addition to this, GPU objects culling is performed to exclusively render what needs to be rendered.   
 TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers which are then passed to a compute shader to sample the positions of vegetation on the GPU.   
 
 All the code is commented and was made to be easily readable.   

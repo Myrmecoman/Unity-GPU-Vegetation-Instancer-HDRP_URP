@@ -11,6 +11,7 @@ struct ItemInstanceData
 uint positionsSize;
 RWStructuredBuffer<ItemInstanceData> positions;
 
+RWStructuredBuffer<uint> itemsPerBatch;
 RWStructuredBuffer<uint> itemsPerBatchAdded;
 RWStructuredBuffer<uint> batchCounters;
 RWStructuredBuffer<ItemInstanceData> newPositions;
@@ -19,7 +20,7 @@ RWStructuredBuffer<ItemInstanceData> newPositions;
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
     uint batchId = id.x / 1024;
-    if (id.x >= positionsSize)
+    if (id.x >= positionsSize || batchCounters[batchId] >= itemsPerBatch[batchId])
         return;
     
     if (positions[id.x].infos.x == 1)
