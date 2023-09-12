@@ -5,7 +5,6 @@ using Unity.Mathematics;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
-using static UnityEditor.Rendering.CameraUI;
 
 namespace Myrmecoman
 {

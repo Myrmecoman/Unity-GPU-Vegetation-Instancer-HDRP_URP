@@ -203,8 +203,8 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     isValid = 0;
     float baseX = chunksPositions[chunkIndex].x - chunkSize / 2 + (index / D1Size) * chunkSize / plantDistance;
     float baseZ = chunksPositions[chunkIndex].z - chunkSize / 2 + (index % D1Size) * chunkSize / plantDistance;
-    float xDisplacement = GenerateRandom(baseX, -displacement, displacement);
-    float zDisplacement = GenerateRandom(baseX * 0.2, -displacement, displacement);
+    float xDisplacement = GenerateRandom(baseX * baseZ, -displacement, displacement);
+    float zDisplacement = GenerateRandom(xDisplacement, -displacement, displacement);
     
     float x = baseX + xDisplacement;
     float z = baseZ + zDisplacement;
@@ -226,7 +226,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
         return trs(float3(x, y -10000, z), float4(0, 0, 0, 0), 1);
     
     // compute size
-    float newSize = GenerateRandom(baseX, 1 / sizeChange, sizeChange);
+    float newSize = GenerateRandom(xDisplacement * zDisplacement, 1 / sizeChange, sizeChange);
     if (texValueAtPos >= falloff)
         newSize *= max(texValueAtPos, 0.1);
     
@@ -236,11 +236,11 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
         pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(baseX, 0, 360), 0));
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(xDisplacement * zDisplacement, 0, 360), 0));
     
     // check if too far
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(baseX, 0, 1) < dist / ViewRangeSq))
+    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
         return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
     isValid = 1;
