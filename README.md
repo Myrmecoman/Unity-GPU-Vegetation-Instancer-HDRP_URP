@@ -17,7 +17,39 @@ Note that this project only spawns vegetation objects without colliders, and is 
 ## How to use
 
 Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
-The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld for example. Only one VegetationManager can exist so if you want severals instancers you need to put them on the same GameObject.   
+The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld (a unity asset store asset) for example. Only one VegetationManager must exist.   
+
+# Manager parameters
+
+![Manager](./manager.png?raw=true "Manager")
+
+- Terrains : the terrain chunks on which you want to instantiate. They must have the same parameters (texture resolution, heightmap resolution, etc...) and be disposed in a square.   
+- Reload Terrain Data : when checking this box, the manager regenerates the data necessary to instantiate on the terrains.   
+- Cam : the player camera. This camera is used to perform instantiation and frustrum culling.   
+
+# Instanter parameters
+
+![Instancer](./instancer.png?raw=true "Instancer")
+
+- Run In Editor : runs the instancer in editor.   
+- Display Chunks : displays the chunks of vegetation used to instanciate objects. Red is for LOD0, yellow for LOD1. Only 2 levels of LODs are supported for now.   
+- Display Terrains : displays the terrains mesh structure. Usefull to verify that the generated data fits correctly to your terrains.   
+- Max Displacement : the maximum offset distance from the spawn point of your object. If this is 0, all objects will be instantiated in a perfect grid without any random offsets.   
+- Y Position Offset : specify an additionnal height value to your objects. For example Unity's quad object is centered at the middle, so for it to be at the terrain level you have to set the offset to 0.5.   
+- Size Bias : multiply the size of your objects by the specified value. If it is 2 all objects will have twice their original size.   
+- Random Size : applies random size changes from 1/size to size.   
+- Max Slope : specifies the maximum slope until which objects are allowed to spawn.   
+- Falloff : allows objects on mapped on a texture to overextend on another texture.   
+- Max Height : the maximum allowed height to spawn the objects.   
+- Min Height : the minimum allowed height to spawn the ojbects.   
+- Plant : the object to spawn.   
+- LOD Plant : the LOD of the object.   
+- Textures Indexes : the texture on which the object is allowed to live. -1 spawns the object everywhere. Only one texture is supported for now.   
+- Centered Mesh : specify whether the object mesh is centered at its base or at its center.   
+- Chunk Size : the chunks size. The bigger the faster they are to compute, but they should not be too big else they can start to be visible.   
+- View Distance : the maximum distance to instanciate objects.   
+- LOD View Distance : the distance after which we spawn LOD objects.   
+- Plant Distance Int : the number of objects along the dimension of a chunk. 50 means there are 50*50 = 2500 objects in each chunk.   
 
 This project is provided with an example scene, feel free to play around with it to understand fully how to use this asset.   
 

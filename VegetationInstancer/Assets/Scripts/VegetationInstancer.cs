@@ -312,6 +312,9 @@ namespace Myrmecoman
 
         private void CullPositionsComputeShader()
         {
+            // the usage of ComputeBuffer.GetData in this function leads to a waiting time of almost 10ms. This tremendously slows us.
+            // It is however absolutely required to read at some point on the GPU if we want to know the number of elements to display.
+
             // Items culling ---------------------------------------------------------------------------------------
             var nbs = new uint[groups];
             batchItemsCountBuffer.GetData(nbs, 0, 0, groups);
