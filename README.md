@@ -69,3 +69,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 ## In the futur
 
 Support large objects with colliders ?   
+Better random function.   

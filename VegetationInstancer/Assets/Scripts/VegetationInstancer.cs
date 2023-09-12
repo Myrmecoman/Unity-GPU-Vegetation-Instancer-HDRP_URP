@@ -29,7 +29,7 @@ namespace Myrmecoman
 
         [Header("Procedural parameters")]
         [Tooltip("Random displacement")]
-        [Range(0, 5)]
+        [Range(0f, 50f)]
         public float maxDisplacement = 0.5f;
         [Tooltip("Offset objects upwards, usefull when their center does not corresponds to their base.")]
         [Range(0, 5)]
@@ -135,23 +135,6 @@ namespace Myrmecoman
                 LODviewDistance = viewDistance - 1;
 
             instancesPerChunk = plantDistanceInt * plantDistanceInt;
-
-            positionsComputeShader.SetFloat("randomSeed", 1f);
-            positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
-            positionsComputeShader.SetFloat("chunkSize", chunkSize);
-            positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
-            positionsComputeShader.SetFloat("maxSlope", maxSlope);
-            positionsComputeShader.SetFloat("sizeChange", randomSize);
-            positionsComputeShader.SetFloat("displacement", maxDisplacement);
-            positionsComputeShader.SetFloat("falloff", falloff);
-            positionsComputeShader.SetFloat("sizeBias", sizeBias);
-            positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
-            positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
-            positionsComputeShader.SetInt("centeredMesh", centeredMesh ? 1 : 0);
-            positionsComputeShader.SetFloat("positionOffset", yPositionOffset);
-            positionsComputeShader.SetFloat("maxHeight", maxHeight);
-            positionsComputeShader.SetFloat("minHeight", minHeight);
-            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
         }
 
 
@@ -245,6 +228,23 @@ namespace Myrmecoman
 
         private void RunpositionsComputeShader()
         {
+            positionsComputeShader.SetFloat("randomSeed", 1f);
+            positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
+            positionsComputeShader.SetFloat("chunkSize", chunkSize);
+            positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
+            positionsComputeShader.SetFloat("maxSlope", maxSlope);
+            positionsComputeShader.SetFloat("sizeChange", randomSize);
+            positionsComputeShader.SetFloat("displacement", maxDisplacement);
+            positionsComputeShader.SetFloat("falloff", falloff);
+            positionsComputeShader.SetFloat("sizeBias", sizeBias);
+            positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
+            positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
+            positionsComputeShader.SetInt("centeredMesh", centeredMesh ? 1 : 0);
+            positionsComputeShader.SetFloat("positionOffset", yPositionOffset);
+            positionsComputeShader.SetFloat("maxHeight", maxHeight);
+            positionsComputeShader.SetFloat("minHeight", minHeight);
+            positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
+
             // run compute shader for non LOD objects -----------------------------------------------------------
             totalPlants = instancesPerChunk * normalChunksList.Count;
             groups = Mathf.CeilToInt(totalPlants / 1024f);

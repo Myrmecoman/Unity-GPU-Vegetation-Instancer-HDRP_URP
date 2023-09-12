@@ -240,7 +240,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     
     // check if too far
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq || GenerateRandom(baseX, 0, 1) < dist / ViewRangeSq)
+    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(baseX, 0, 1) < dist / ViewRangeSq))
         return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
     isValid = 1;
