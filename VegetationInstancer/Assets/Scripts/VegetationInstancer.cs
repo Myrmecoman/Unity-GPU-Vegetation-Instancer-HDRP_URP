@@ -22,6 +22,8 @@ namespace Myrmecoman
         public bool displayTerrains = false;
         [Tooltip("The positions compute shader")]
         public ComputeShader positionsComputeShader;
+        [Tooltip("Compute shader preparing culling data")]
+        public ComputeShader prepareCullingComputeShader;
         [Tooltip("The culling compute shader")]
         public ComputeShader cullingComputeShader;
 
@@ -89,8 +91,6 @@ namespace Myrmecoman
         private int groups;
         private int LODtotalPlants;
         private int LODgroups;
-        private int maxNewPositionsBufferInstances;
-        private int LODmaxNewPositionsBufferInstances;
         private ComputeBuffer batchItemsCountBuffer;
         private ComputeBuffer LODbatchItemsCountBuffer;
         private ComputeBuffer batchItemsCountAddedBuffer;
@@ -179,6 +179,11 @@ namespace Myrmecoman
             LODpositionsBuffer?.Release();
             LODpositionsBuffer = null;
 
+            chunksBuffer?.Release();
+            chunksBuffer = null;
+            LODchunksBuffer?.Release();
+            LODchunksBuffer = null;
+
             argsBuffer?.Release();
             argsBuffer = null;
             LODargsBuffer?.Release();
@@ -247,9 +252,15 @@ namespace Myrmecoman
             {
                 // output buffer for objects positions, only increase size if needed
                 maxPositionsBufferInstances = totalPlants;
+
                 positionsBuffer?.Release();
                 positionsBuffer = null;
                 positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
+                culledPositionsBuffer?.Release();
+                culledPositionsBuffer = null;
+                culledPositionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
                 batchItemsCountBuffer?.Release();
                 batchItemsCountBuffer = null;
                 batchItemsCountBuffer = new ComputeBuffer(groups, sizeof(uint));
@@ -281,9 +292,15 @@ namespace Myrmecoman
             {
                 // output buffer for objects positions, only increase size if needed
                 LODmaxPositionsBufferInstances = LODtotalPlants;
+
                 LODpositionsBuffer?.Release();
                 LODpositionsBuffer = null;
                 LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
+                LODculledPositionsBuffer?.Release();
+                LODculledPositionsBuffer = null;
+                LODculledPositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+
                 LODbatchItemsCountBuffer?.Release();
                 LODbatchItemsCountBuffer = null;
                 LODbatchItemsCountBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
@@ -312,49 +329,25 @@ namespace Myrmecoman
 
         private void CullPositionsComputeShader()
         {
-            // the usage of ComputeBuffer.GetData in this function leads to a waiting time of almost 10ms. This tremendously slows us.
-            // It is however absolutely required to read at some point on the GPU if we want to know the number of elements to display.
-
             // Items culling ---------------------------------------------------------------------------------------
-            var nbs = new uint[groups];
-            batchItemsCountBuffer.GetData(nbs, 0, 0, groups);
-            var addJob = new AddVectorJob
+            if (totalPlants != 0)
             {
-                input = new NativeArray<uint>(nbs, Allocator.TempJob),
-                output = new NativeArray<uint>(groups, Allocator.TempJob, NativeArrayOptions.UninitializedMemory),
-                total = 0
-            };
-            addJob.Schedule().Complete();
-            if (groups > 0)
-                addJob.total = (int)(addJob.output[groups - 1] + addJob.input[groups - 1]);
-
-            // reset args because the number of instances probably changed
-            var args = new uint[5];
-            args[0] = (uint)mesh.GetIndexCount(0);
-            args[1] = (uint)addJob.total;
-            args[2] = (uint)mesh.GetIndexStart(0);
-            args[3] = (uint)mesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            argsBuffer?.Release();
-            argsBuffer = null;
-            argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            argsBuffer.SetData(args);
-
-            if (addJob.total != 0)
-            {
-                if (addJob.total > maxNewPositionsBufferInstances || culledPositionsBuffer == null)
-                {
-                    maxNewPositionsBufferInstances = addJob.total;
-                    culledPositionsBuffer?.Release();
-                    culledPositionsBuffer = null;
-                    culledPositionsBuffer = new ComputeBuffer(addJob.total, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
-                }
+                argsBuffer?.Release();
+                argsBuffer = null;
+                argsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
 
                 batchItemsCountAddedBuffer?.Release();
                 batchItemsCountAddedBuffer = null;
                 batchItemsCountAddedBuffer = new ComputeBuffer(groups, sizeof(uint));
-                batchItemsCountAddedBuffer.SetData(addJob.output);
+
+                prepareCullingComputeShader.SetInt("batchSize", groups);
+                prepareCullingComputeShader.SetInt("meshIndexCount", (int)mesh.GetIndexCount(0));
+                prepareCullingComputeShader.SetInt("meshIndexStart", (int)mesh.GetIndexStart(0));
+                prepareCullingComputeShader.SetInt("meshBaseVertex", (int)mesh.GetBaseVertex(0));
+                prepareCullingComputeShader.SetBuffer(0, "itemsPerBatch", batchItemsCountBuffer);
+                prepareCullingComputeShader.SetBuffer(0, "itemsPerBatchAdded", batchItemsCountAddedBuffer);
+                prepareCullingComputeShader.SetBuffer(0, "argsBuffer", argsBuffer);
+                prepareCullingComputeShader.Dispatch(0, 1, 1, 1);
 
                 batchCountersBuffer?.Release();
                 batchCountersBuffer = null;
@@ -370,49 +363,26 @@ namespace Myrmecoman
 
                 cullingComputeShader.Dispatch(0, groups, 1, 1);
             }
-            addJob.input.Dispose();
-            addJob.output.Dispose();
 
             // LODs culling ---------------------------------------------------------------------------------------
-            var LODnbs = new uint[LODgroups];
-            LODbatchItemsCountBuffer.GetData(LODnbs, 0, 0, LODgroups);
-            var LODaddJob = new AddVectorJob
+            if (LODtotalPlants != 0)
             {
-                input = new NativeArray<uint>(LODnbs, Allocator.TempJob),
-                output = new NativeArray<uint>(LODgroups, Allocator.TempJob, NativeArrayOptions.UninitializedMemory),
-                total = 0
-            };
-            LODaddJob.Schedule().Complete();
-            if (LODgroups > 0)
-                LODaddJob.total = (int)(LODaddJob.output[LODgroups - 1] + LODaddJob.input[LODgroups - 1]);
-
-            // reset args because the number of instances probably changed
-            args = new uint[5];
-            args[0] = (uint)LODmesh.GetIndexCount(0);
-            args[1] = (uint)LODaddJob.total;
-            args[2] = (uint)LODmesh.GetIndexStart(0);
-            args[3] = (uint)LODmesh.GetBaseVertex(0);
-            args[4] = (uint)0;
-
-            LODargsBuffer?.Release();
-            LODargsBuffer = null;
-            LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
-            LODargsBuffer.SetData(args);
-
-            if (LODaddJob.total != 0)
-            {
-                if (LODaddJob.total > LODmaxNewPositionsBufferInstances || LODculledPositionsBuffer == null)
-                {
-                    LODmaxNewPositionsBufferInstances = LODaddJob.total;
-                    LODculledPositionsBuffer?.Release();
-                    LODculledPositionsBuffer = null;
-                    LODculledPositionsBuffer = new ComputeBuffer(LODaddJob.total, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
-                }
+                LODargsBuffer?.Release();
+                LODargsBuffer = null;
+                LODargsBuffer = new ComputeBuffer(1, 5 * sizeof(uint), ComputeBufferType.IndirectArguments);
 
                 LODbatchItemsCountAddedBuffer?.Release();
                 LODbatchItemsCountAddedBuffer = null;
                 LODbatchItemsCountAddedBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
-                LODbatchItemsCountAddedBuffer.SetData(LODaddJob.output);
+
+                prepareCullingComputeShader.SetInt("batchSize", LODgroups);
+                prepareCullingComputeShader.SetInt("meshIndexCount", (int)LODmesh.GetIndexCount(0));
+                prepareCullingComputeShader.SetInt("meshIndexStart", (int)LODmesh.GetIndexStart(0));
+                prepareCullingComputeShader.SetInt("meshBaseVertex", (int)LODmesh.GetBaseVertex(0));
+                prepareCullingComputeShader.SetBuffer(0, "itemsPerBatch", LODbatchItemsCountBuffer);
+                prepareCullingComputeShader.SetBuffer(0, "itemsPerBatchAdded", LODbatchItemsCountAddedBuffer);
+                prepareCullingComputeShader.SetBuffer(0, "argsBuffer", LODargsBuffer);
+                prepareCullingComputeShader.Dispatch(0, 1, 1, 1);
 
                 LODbatchCountersBuffer?.Release();
                 LODbatchCountersBuffer = null;
@@ -428,8 +398,6 @@ namespace Myrmecoman
 
                 cullingComputeShader.Dispatch(0, LODgroups, 1, 1);
             }
-            LODaddJob.input.Dispose();
-            LODaddJob.output.Dispose();
         }
 
 
@@ -454,9 +422,20 @@ namespace Myrmecoman
 
             // draw objects
             var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);
+
             mat.SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
-            Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
             LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
+            if (totalPlants == 0)
+            {
+                var zeroArgsBuffer = new uint [mesh.GetIndexCount(0), 0, mesh.GetIndexStart(0), mesh.GetBaseVertex(0), 0];
+                argsBuffer.SetData(zeroArgsBuffer);
+            }
+            if (LODtotalPlants == 0)
+            {
+                var zeroArgsBuffer = new uint[LODmesh.GetIndexCount(0), 0, LODmesh.GetIndexStart(0), LODmesh.GetBaseVertex(0), 0];
+                LODargsBuffer.SetData(zeroArgsBuffer);
+            }
+            Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
             Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
 
             //Debug.Log("Full loop time : " + (Time.realtimeSinceStartupAsDouble - t));

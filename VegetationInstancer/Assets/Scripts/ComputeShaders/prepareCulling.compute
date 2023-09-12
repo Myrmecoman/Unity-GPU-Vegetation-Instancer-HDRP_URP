@@ -1,0 +1,27 @@
+#pragma kernel CSMain
+
+int batchSize;
+RWStructuredBuffer<uint> itemsPerBatch;
+RWStructuredBuffer<uint> itemsPerBatchAdded;
+uint total = 0;
+
+int meshIndexCount;
+int meshIndexStart;
+int meshBaseVertex;
+RWStructuredBuffer<uint> argsBuffer;
+
+[numthreads(1,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    for (int i = 0; i < batchSize; i++)
+    {
+        itemsPerBatchAdded[i] = total;
+        total += itemsPerBatch[i];
+    }
+    
+    argsBuffer[0] = meshIndexCount;
+    argsBuffer[1] = total;
+    argsBuffer[2] = meshIndexStart;
+    argsBuffer[3] = meshBaseVertex;
+    argsBuffer[4] = 0;
+}

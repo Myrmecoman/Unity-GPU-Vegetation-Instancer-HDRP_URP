@@ -4,7 +4,7 @@
 
 ## Overview
 
-HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools.   
+HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools. Although the provided shaders work with HDRP, this project can work with URP as long as you provide your own shaders. To generate your shaders, see "How to get GPU indirect instancing capable shaders ?".   
 
 It consists in 2 main scripts :   
 
@@ -68,5 +68,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 
 ## In the futur
 
-GPU objects culling still needs optimisations as GetData() waits for too long. We should use a compute shader although it will work on 1 thread.   
 Support large objects with colliders ?   
