@@ -19,7 +19,7 @@ Note that this project only spawns vegetation objects without colliders, and is 
 Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
 The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld (a unity asset store asset) for example. Only one VegetationManager must exist.   
 
-# Manager parameters
+### Manager parameters
 
 ![Manager](./manager.png?raw=true "Manager")
 
@@ -27,7 +27,7 @@ The VegetationManager is in charge of generating the data needed by the instance
 - Reload Terrain Data : when checking this box, the manager regenerates the data necessary to instantiate on the terrains.   
 - Cam : the player camera. This camera is used to perform instantiation and frustrum culling.   
 
-# Instancer parameters
+### Instancer parameters
 
 ![Instancer](./instancer.png?raw=true "Instancer")
 
