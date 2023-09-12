@@ -27,7 +27,7 @@ The VegetationManager is in charge of generating the data needed by the instance
 - Reload Terrain Data : when checking this box, the manager regenerates the data necessary to instantiate on the terrains.   
 - Cam : the player camera. This camera is used to perform instantiation and frustrum culling.   
 
-# Instanter parameters
+# Instancer parameters
 
 ![Instancer](./instancer.png?raw=true "Instancer")
 
