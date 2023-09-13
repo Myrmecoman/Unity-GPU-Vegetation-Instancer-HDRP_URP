@@ -132,7 +132,10 @@ float sizeChange;
 float displacement;
 float falloff;
 float sizeBias;
-int textureIndex;
+int textureIndex1;
+int textureIndex2;
+int textureIndex3;
+int textureIndex4;
 float4 camPos;
 float ViewRangeSq;
 float positionOffset;
@@ -217,35 +220,62 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
         return trs(float3(x, y - 10000, z), float4(0, 0, 0, 0), 1);
     
     // get max allowed texture value
-    float texValueAtPos = 1;
-    if (textureIndex >= 0)
-        texValueAtPos = GetTextureAtPos(float2(x, z), textureIndex);
+    float texValueAtPos = 0;
+    if (textureIndex1 == -1)
+        texValueAtPos = 1;
+    else
+    {
+        if (textureIndex1 >= 0)
+        {
+            float texVal = GetTextureAtPos(float2(x, z), textureIndex1);
+            if (texVal > texValueAtPos)
+                texValueAtPos = texVal;
+        }
+        if (textureIndex2 >= 0)
+        {
+            float texVal = GetTextureAtPos(float2(x, z), textureIndex2);
+            if (texVal > texValueAtPos)
+                texValueAtPos = texVal;
+        }
+        if (textureIndex3 >= 0)
+        {
+            float texVal = GetTextureAtPos(float2(x, z), textureIndex3);
+            if (texVal > texValueAtPos)
+                texValueAtPos = texVal;
+        }
+        if (textureIndex4 >= 0)
+        {
+            float texVal = GetTextureAtPos(float2(x, z), textureIndex4);
+            if (texVal > texValueAtPos)
+                texValueAtPos = texVal;
+        }
+    }
 
     // check slope and texture
-    if (texValueAtPos < falloff || normal.y < maxSlope)
-        return trs(float3(x, y -10000, z), float4(0, 0, 0, 0), 1);
+        if (texValueAtPos < falloff || normal.y < maxSlope)
+            return trs(float3(x, y - 10000, z), float4(0, 0, 0, 0), 1);
     
     // compute size
-    float newSize = GenerateRandom(xDisplacement * zDisplacement, 1 / sizeChange, sizeChange);
-    if (texValueAtPos >= falloff)
-        newSize *= max(texValueAtPos, 0.1);
+        float newSize = GenerateRandom(xDisplacement * zDisplacement, 1 / sizeChange, sizeChange);
+        if (texValueAtPos >= falloff)
+            newSize *= max(texValueAtPos, 0.1);
     
     // set position
-    float3 pos = float3(x, y + positionOffset * sizeBias, z);
-    if (centeredMesh == 1)
-        pos.y = y + positionOffset * newSize * sizeBias;
+        float3 pos = float3(x, y + positionOffset * sizeBias, z);
+        if (centeredMesh == 1)
+            pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
-    float4 q = EulerToQuaternion(float3(0, GenerateRandom(xDisplacement * zDisplacement, 0, 360), 0));
+        float4 q = EulerToQuaternion(float3(0, GenerateRandom(xDisplacement * zDisplacement, 0, 360), 0));
     
     // check if too far
-    float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
-        return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
+        float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
+        if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
+            return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
     
-    isValid = 1;
-    return trs(pos, q, newSize * sizeBias);
-}
+        isValid = 1;
+        return trs(pos, q, newSize * sizeBias);
+    }
 // ------------------------------------------------------------------------
 
 float4x4 inverse(float4x4 input)

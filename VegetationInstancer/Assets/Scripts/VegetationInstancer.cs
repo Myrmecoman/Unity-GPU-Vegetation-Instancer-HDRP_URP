@@ -53,7 +53,7 @@ namespace Myrmecoman
         [Header("Objects to spawn")]
         public GameObject plant;
         public GameObject LODPlant;
-        [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere.")]
+        [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere. Up to 4 values are supported.")]
         public int[] textureIndexes;
 
         [Header("Settings")]
@@ -132,6 +132,16 @@ namespace Myrmecoman
                 LODviewDistance = 1;
             if (LODviewDistance >= viewDistance)
                 LODviewDistance = viewDistance - 1;
+
+            if (textureIndexes.Length > 4)
+            {
+                var newTextureIndexes = new int[4];
+                newTextureIndexes[0] = textureIndexes[0];
+                newTextureIndexes[1] = textureIndexes[1];
+                newTextureIndexes[2] = textureIndexes[2];
+                newTextureIndexes[3] = textureIndexes[3];
+                textureIndexes = newTextureIndexes;
+            }
 
             instancesPerChunk = plantDistanceInt * plantDistanceInt;
         }
@@ -236,13 +246,30 @@ namespace Myrmecoman
             positionsComputeShader.SetFloat("displacement", maxDisplacement);
             positionsComputeShader.SetFloat("falloff", falloff);
             positionsComputeShader.SetFloat("sizeBias", sizeBias);
-            positionsComputeShader.SetInt("textureIndex", textureIndexes[0]); // for now only support first texture
             positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
             positionsComputeShader.SetInt("centeredMesh", centeredMesh ? 1 : 0);
             positionsComputeShader.SetFloat("positionOffset", yPositionOffset);
             positionsComputeShader.SetFloat("maxHeight", maxHeight);
             positionsComputeShader.SetFloat("minHeight", minHeight);
             positionsComputeShader.SetInt("plantsPerChunk", instancesPerChunk);
+
+            // only support up to 4 texture indexes
+            if (textureIndexes.Length > 0)
+                positionsComputeShader.SetInt("textureIndex1", textureIndexes[0]);
+            else
+                positionsComputeShader.SetInt("textureIndex1", -1);
+            if (textureIndexes.Length > 1)
+                positionsComputeShader.SetInt("textureIndex2", textureIndexes[1]);
+            else
+                positionsComputeShader.SetInt("textureIndex2", -1);
+            if (textureIndexes.Length > 2)
+                positionsComputeShader.SetInt("textureIndex3", textureIndexes[2]);
+            else
+                positionsComputeShader.SetInt("textureIndex3", -1);
+            if (textureIndexes.Length > 3)
+                positionsComputeShader.SetInt("textureIndex4", textureIndexes[3]);
+            else
+                positionsComputeShader.SetInt("textureIndex4", -1);
 
             // run compute shader for non LOD objects -----------------------------------------------------------
             totalPlants = instancesPerChunk * normalChunksList.Count;
@@ -407,8 +434,6 @@ namespace Myrmecoman
             if (!Application.isPlaying && runInEditor)
                 UpdateAllVariables();
 
-            double t = Time.realtimeSinceStartupAsDouble;
-
             // if we did not move, no need to recompute everything
             if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation || (!Application.isPlaying && runInEditor))
             {
@@ -436,8 +461,6 @@ namespace Myrmecoman
             }
             Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
             Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
-
-            //Debug.Log("Full loop time : " + (Time.realtimeSinceStartupAsDouble - t));
         }
 
 #if UNITY_EDITOR
