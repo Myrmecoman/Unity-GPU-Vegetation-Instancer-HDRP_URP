@@ -66,6 +66,12 @@ All the code is commented and was made to be easily readable.
 All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
 Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provided the generated shader to the Vegetation Instancer.   
 
+## Import Vegetation Instancer to your project
+
+- Download the repository.   
+- Copy the VegetationInstancer folder in your project.   
+- If you don't have MegaWorld installed, you also have to copy the VladislavTsurikov folder at the root of your project.   
+
 ## In the futur
 
 Fix multiple textures mapping.   
