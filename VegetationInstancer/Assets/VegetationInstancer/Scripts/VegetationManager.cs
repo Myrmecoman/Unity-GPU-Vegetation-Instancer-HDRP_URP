@@ -18,6 +18,8 @@ namespace Myrmecoman
         public Terrain[] terrains;
         [Tooltip("Reload terrain data and save it")]
         public bool reloadTerrainData = false;
+        [Tooltip("Display the terrains mesh for debug")]
+        public bool displayTerrainMesh = false;
 
         [Header("Common")]
         [Tooltip("Camera")]
@@ -279,6 +281,7 @@ namespace Myrmecoman
             heightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size - (D1Size - 1);
             sampleSize = new float2(terrainsArray[0].terrainData.heightmapScale.x, terrainsArray[0].terrainData.heightmapScale.z);
 
+            float baseTerrainHeight = terrainsArray[0].transform.position.y;
             int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
             var heightList = new NativeArray<float>(heightResolution * heightResolution, Allocator.Persistent);
 
@@ -295,7 +298,7 @@ namespace Myrmecoman
                 for (int x = 0; x < heightResolution-1; x++)
                 {
                     int arrX = x / res;
-                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];
+                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];// - 0.05f;
                 }
             }
 
@@ -386,6 +389,28 @@ namespace Myrmecoman
 
             SaveSystemInstancer.SaveData();
         }
+
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            // display terrains combined mesh
+            if (displayTerrainMesh && instance.terrainHeight.IsValid)
+            {
+                Gizmos.color = Color.cyan;
+                Vector3 camPos = instance.cam.transform.position;
+                for (int i = (int)camPos.x - 100; i < (int)camPos.x + 100; i++)
+                {
+                    for (int j = (int)camPos.z - 100; j < (int)camPos.z + 100; j++)
+                    {
+                        instance.terrainHeight.GetTriAtPosition(new float2(i, j), out Triangle tri);
+                        Gizmos.DrawLine(tri.V0, tri.V1);
+                        Gizmos.DrawLine(tri.V1, tri.V2);
+                    }
+                }
+            }
+        }
+#endif
     }
 
 

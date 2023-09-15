@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8176.331, g: 8898.7, b: 8551.462, a: 1}
+  m_IndirectSpecularColor: {r: 8297.751, g: 9055.919, b: 8458.642, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,7 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runInEditor: 1
   displayChunks: 0
-  displayTerrains: 0
   positionsComputeShader: {fileID: 7200000, guid: 5cf730554584e4c4fa8f3ca3fe3a7393,
     type: 3}
   prepareCullingComputeShader: {fileID: 7200000, guid: 1384c63ede96b87439f0ee87bc63b706,
@@ -556,7 +555,7 @@ Transform:
   m_GameObject: {fileID: 341930908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9280907, z: -0, w: 0.37235412}
-  m_LocalPosition: {x: -119.8, y: 7.7, z: 222.1}
+  m_LocalPosition: {x: -119.8, y: 21.1, z: 222.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -914,7 +913,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runInEditor: 1
   displayChunks: 0
-  displayTerrains: 0
   positionsComputeShader: {fileID: 7200000, guid: 5cf730554584e4c4fa8f3ca3fe3a7393,
     type: 3}
   prepareCullingComputeShader: {fileID: 7200000, guid: 1384c63ede96b87439f0ee87bc63b706,
@@ -984,7 +982,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runInEditor: 1
   displayChunks: 0
-  displayTerrains: 0
   positionsComputeShader: {fileID: 7200000, guid: 5cf730554584e4c4fa8f3ca3fe3a7393,
     type: 3}
   prepareCullingComputeShader: {fileID: 7200000, guid: 1384c63ede96b87439f0ee87bc63b706,
@@ -1266,6 +1263,7 @@ MonoBehaviour:
   - {fileID: 2034128186}
   - {fileID: 373027391}
   reloadTerrainData: 0
+  displayTerrainMesh: 0
   cam: {fileID: 1823688466}
   heightResolution: 1025
   sampleSize:

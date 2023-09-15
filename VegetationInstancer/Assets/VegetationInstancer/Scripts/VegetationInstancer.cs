@@ -17,8 +17,6 @@ namespace Myrmecoman
         public bool runInEditor = false;
         [Tooltip("Display the chunks. Chunks are only updated when runInEditor is true of the application is running.")]
         public bool displayChunks = false;
-        [Tooltip("Displays the terrain mesh")]
-        public bool displayTerrains = false;
         [Tooltip("The positions compute shader")]
         public ComputeShader positionsComputeShader;
         [Tooltip("Compute shader preparing culling data")]
@@ -466,23 +464,6 @@ namespace Myrmecoman
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            // display terrains combined mesh
-            if (displayTerrains && VegetationManager.instance.terrainHeight.IsValid)
-            {
-                Gizmos.color = Color.cyan;
-                Vector3 camPos = VegetationManager.instance.cam.transform.position;
-                for (int i = (int)camPos.x - 100; i < (int)camPos.x + 100; i++)
-                {
-                    for (int j = (int)camPos.z - 100; j < (int)camPos.z + 100; j++)
-                    {
-                        Triangle tri;
-                        VegetationManager.instance.terrainHeight.GetTriAtPosition(new float2(i, j), out tri);
-                        Gizmos.DrawLine(tri.V0, tri.V1);
-                        Gizmos.DrawLine(tri.V1, tri.V2);
-                    }
-                }
-            }
-
             // display chunks
             if (displayChunks && normalChunksList != null)
             {
