@@ -235,7 +235,7 @@ namespace Myrmecoman
                 }
                 if (textureCount != textureCountTemp)
                 {
-                    Debug.LogError("Terrains have different number of textures");
+                    Debug.LogError("Terrains have different number of textures : one has " + textureCount + " while another has " + textureCountTemp);
                     return false;
                 }
                 if (height != heightTemp)
