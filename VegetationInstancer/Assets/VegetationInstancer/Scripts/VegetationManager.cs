@@ -68,6 +68,8 @@ namespace Myrmecoman
             reloadTerrainData = false;
             ReloadTerrains();
             LoadTerrains();
+            heightmap = null;
+            textureMap = null;
         }
 
 
