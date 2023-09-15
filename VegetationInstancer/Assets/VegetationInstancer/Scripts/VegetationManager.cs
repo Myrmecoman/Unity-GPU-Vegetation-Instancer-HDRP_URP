@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Myrmecoman
         [HideInInspector] public int heightResolution;
         [HideInInspector] public float2 sampleSize;
         [HideInInspector] public CustomAABB aabb;
-        [HideInInspector] public float[] heightmap;
+        [HideInInspector] public NativeArray<float> heightmap;
 
         // variables for texturemap
         [HideInInspector] public int texResolution;
@@ -38,7 +39,7 @@ namespace Myrmecoman
         [HideInInspector] public int2 textureArraySize;
         [HideInInspector] public int2 terrainPos;
         [HideInInspector] public float2 terrainSize;
-        [HideInInspector] public float[] textureMap;
+        [HideInInspector] public NativeArray<float> textureMap;
 
         private ComputeBuffer heightBuffer;
         private ComputeBuffer texBuffer;
@@ -68,8 +69,6 @@ namespace Myrmecoman
             reloadTerrainData = false;
             ReloadTerrains();
             LoadTerrains();
-            heightmap = null;
-            textureMap = null;
         }
 
 
@@ -80,7 +79,7 @@ namespace Myrmecoman
 
             if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
                 instance.terrainHeight.Dispose();
-            if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
+            if (instance.terrainTex.textureMapAllTextures != null && instance.terrainTex.textureMapAllTextures.IsCreated)
                 instance.terrainTex.Dispose();
 
             heightBuffer?.Release();
@@ -102,11 +101,11 @@ namespace Myrmecoman
 
             if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
                 instance.terrainHeight.Dispose();
-            if (instance.terrainTex.textureMap != null && instance.terrainTex.textureMap.IsCreated)
+            if (instance.terrainTex.textureMapAllTextures != null && instance.terrainTex.textureMapAllTextures.IsCreated)
                 instance.terrainTex.Dispose();
 
-            instance.terrainHeight = new TerrainHeight(data.heightmap, data.heightResolution, data.sampleSize, data.aabb);
-            instance.terrainTex = new TerrainTextures(data.textureMap, data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
+            instance.terrainHeight = new TerrainHeight(new NativeArray<float>(data.heightmap, Allocator.Persistent), data.heightResolution, data.sampleSize, data.aabb);
+            instance.terrainTex = new TerrainTextures(new NativeArray<float>(data.textureMap, Allocator.Persistent), data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
 
             heightBuffer = new ComputeBuffer(instance.terrainHeight.heightMap.Length, sizeof(float));
             heightBuffer.SetData(instance.terrainHeight.heightMap.ToArray());
@@ -127,6 +126,9 @@ namespace Myrmecoman
             Shader.SetGlobalInteger("textureArraySizeY", instance.terrainTex.textureArraySize.y);
             Shader.SetGlobalInteger("resolutionTex", instance.terrainTex.resolution);
             Shader.SetGlobalInteger("textureCount", instance.terrainTex.textureCount);
+
+            data.heightmap = null;  // let the garbage collector free the memory
+            data.textureMap = null; // let the garbage collector free the memory
 
             Debug.Log("Terrains data loaded");
         }
@@ -155,8 +157,8 @@ namespace Myrmecoman
             D1Size = found;
 
             // order terrain by X then by Z
-            List<Terrain> terrainsList = new List<Terrain>(terrains);
-            List<Terrain> newterrainsList = new List<Terrain>();
+            List<Terrain> terrainsList = new(terrains);
+            List<Terrain> newterrainsList = new();
             while (terrainsList.Count > 0)
             {
                 int minX = (int)terrainsList[0].GetPosition().x;
@@ -176,8 +178,8 @@ namespace Myrmecoman
             }
 
             // get first line length
-            Dictionary<int, bool> xAxis = new Dictionary<int, bool>();
-            Dictionary<int, bool> zAxis = new Dictionary<int, bool>();
+            Dictionary<int, bool> xAxis = new();
+            Dictionary<int, bool> zAxis = new();
             for (int i = 1; i < newterrainsList.Count; i++)
             {
                 if (!xAxis.ContainsKey((int)newterrainsList[i].transform.position.x))
@@ -272,16 +274,16 @@ namespace Myrmecoman
 
 
         // return a merged heightmap for all terrains
-        private float[] BuildNewHeightMap(Terrain[] terrainsArray, int D1Size)
+        private NativeArray<float> BuildNewHeightMap(Terrain[] terrainsArray, int D1Size)
         {
             heightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size - (D1Size - 1);
             sampleSize = new float2(terrainsArray[0].terrainData.heightmapScale.x, terrainsArray[0].terrainData.heightmapScale.z);
 
             int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
-            var heightList = new float[heightResolution * heightResolution];
+            var heightList = new NativeArray<float>(heightResolution * heightResolution, Allocator.Persistent);
 
             // get heightmap of each terrain
-            List<float[,]> maps = new List<float[,]>();
+            List<float[,]> maps = new();
             for (int i = 0; i < terrainsArray.Length; i++)
                 maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
 
@@ -302,7 +304,7 @@ namespace Myrmecoman
 
 
         // return a merged texture map for all terrains
-        private float[] BuildNewTextureMap(Terrain[] terrainsArray, int D1Size)
+        private NativeArray<float> BuildNewTextureMap(Terrain[] terrainsArray, int D1Size)
         {
             int texResolutionSingle = terrainsArray[0].terrainData.alphamapWidth;
             texResolution = terrainsArray[0].terrainData.alphamapWidth * D1Size;
@@ -322,7 +324,7 @@ namespace Myrmecoman
 
             int resolutionX = terrainsArray[0].terrainData.alphamapWidth * D1Size;
             int resolutionY = terrainsArray[0].terrainData.alphamapHeight * D1Size;
-            List<float[,,]> maps = new List<float[,,]>();
+            List<float[,,]> maps = new();
             for (int i = 0; i < terrainsArray.Length; i++)
                 maps.Add(terrainsArray[i].terrainData.GetAlphamaps(0, 0, terrainsArray[0].terrainData.alphamapWidth, terrainsArray[0].terrainData.alphamapHeight));
 
@@ -338,7 +340,7 @@ namespace Myrmecoman
                 }
             }
 
-            var textureArray = new float[texResolution * texResolution * textureCount];
+            var textureArray = new NativeArray<float>(texResolution * texResolution * textureCount, Allocator.Persistent);
 
             // flatten
             for (int x = 0; x < resolutionX; x++)
@@ -408,14 +410,14 @@ namespace Myrmecoman
             heightResolution = VegetationManager.instance.heightResolution;
             sampleSize = VegetationManager.instance.sampleSize;
             aabb = VegetationManager.instance.aabb;
-            heightmap = VegetationManager.instance.heightmap;
+            heightmap = VegetationManager.instance.heightmap.ToArray();
 
             texResolution = VegetationManager.instance.texResolution;
             textureCount = VegetationManager.instance.textureCount;
             textureArraySize = VegetationManager.instance.textureArraySize;
             terrainPos = VegetationManager.instance.terrainPos;
             terrainSize = VegetationManager.instance.terrainSize;
-            textureMap = VegetationManager.instance.textureMap;
+            textureMap = VegetationManager.instance.textureMap.ToArray();
         }
     }
 
@@ -424,7 +426,7 @@ namespace Myrmecoman
     {
         public static void SaveData()
         {
-            BinaryFormatter formatter = new BinaryFormatter();
+            BinaryFormatter formatter = new();
             string path = Application.persistentDataPath + "/save.veg";
             FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -440,7 +442,7 @@ namespace Myrmecoman
             string path = Application.persistentDataPath + "/save.veg";
             if (File.Exists(path))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
+                BinaryFormatter formatter = new();
                 FileStream stream = new FileStream(path, FileMode.Open);
 
                 var data = formatter.Deserialize(stream) as InstancerData;

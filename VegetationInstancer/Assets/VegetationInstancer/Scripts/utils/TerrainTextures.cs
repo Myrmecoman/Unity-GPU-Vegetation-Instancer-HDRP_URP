@@ -10,7 +10,6 @@ namespace Myrmecoman
 
     public struct TerrainTextures
     {
-        public NativeArray<int> textureMap; // texture map is the array of most important textures at each index
         public NativeArray<float> textureMapAllTextures; // texture map all textures is the array of all textures, usefull for falloff
         public int resolution;
         public int textureCount;
@@ -26,15 +25,13 @@ namespace Myrmecoman
             terrainPos = new int2((int)terrain.transform.position.x, (int)terrain.transform.position.z);
             terrainSize = new float2(terrain.terrainData.size.x, terrain.terrainData.size.z);
             textureCount = terrain.terrainData.alphamapLayers;
-            textureMap = GetTextureMap(terrain, alloc);
             textureMapAllTextures = GetTextureMapAllTextures(terrain, alloc);
         }
 
 
-        public TerrainTextures(float[] textureMapAllTexturesT, int resolutionT, int textureCountT, int2 textureArraySizeT, int2 terrainPosT, float2 terrainSizeT)
+        public TerrainTextures(NativeArray<float> textureMapAllTexturesT, int resolutionT, int textureCountT, int2 textureArraySizeT, int2 terrainPosT, float2 terrainSizeT)
         {
-            textureMap = new NativeArray<int>(0, Allocator.Persistent, NativeArrayOptions.UninitializedMemory); // dummy initialize
-            textureMapAllTextures = new NativeArray<float>(textureMapAllTexturesT, Allocator.Persistent);
+            textureMapAllTextures = textureMapAllTexturesT;
             resolution = resolutionT;
             textureCount = textureCountT;
             textureArraySize = textureArraySizeT;
@@ -42,26 +39,6 @@ namespace Myrmecoman
             terrainSize = terrainSizeT;
         }
 
-
-        /*
-        public int GetTextureAtPos(float2 worldPos)
-        {
-            // terrains cannot be rotated, so we don't have to worry about rotation
-            float2 relativePosition = worldPos - new float2(terrainPos.x, terrainPos.y);
-            var pos = new int2
-            (
-                (int)math.round((relativePosition.x / terrainSize.x) * textureArraySize.x),
-                (int)math.round((relativePosition.y / terrainSize.y) * textureArraySize.y)
-            );
-
-            if (pos.x > textureArraySize.x)
-                pos.x = textureArraySize.x - 1;
-            if (pos.y > textureArraySize.y)
-                pos.y = textureArraySize.y - 1;
-
-            return textureMap[pos.x * resolution + pos.y];
-        }
-        */
 
         public float GetTextureAtPos(float2 worldPos, int texIndex)
         {
@@ -87,25 +64,7 @@ namespace Myrmecoman
 
         public void Dispose()
         {
-            textureMap.Dispose();
             textureMapAllTextures.Dispose();
-        }
-
-
-        static NativeArray<int> GetTextureMap(Terrain terrain, Allocator alloc)
-        {
-            int resolutionX = terrain.terrainData.alphamapWidth;
-            int resolutionY = terrain.terrainData.alphamapHeight;
-            var textureArray = new NativeArray<int>(resolutionX * resolutionY, alloc, NativeArrayOptions.UninitializedMemory);
-            var terrainAlphamapData = terrain.terrainData.GetAlphamaps(0, 0, resolutionX, resolutionY);
-
-            // get most important texture for all positions
-            for (int x = 0; x < resolutionX; x++)
-            {
-                for (int y = 0; y < resolutionY; y++)
-                    textureArray[x * resolutionX + y] = DominantTextureAt(terrainAlphamapData, terrain, new int2(x, y));
-            }
-            return textureArray;
         }
 
 
@@ -127,26 +86,6 @@ namespace Myrmecoman
                 }
             }
             return textureArray;
-        }
-
-
-        static int DominantTextureAt(float[,,] terrainAlphamapData, Terrain t, int2 alphaPosition)
-        {
-            int mostDominantTextureIndex = 0;
-            float greatestTextureWeight = float.MinValue;
-            int textureCount = t.terrainData.alphamapLayers;
-            for (int i = 0; i < textureCount; i++)
-            {
-                // not sure why the x and z coordinates are out of order here, Unity stuff
-                float textureWeight = terrainAlphamapData[alphaPosition.y, alphaPosition.x, i];
-                if (textureWeight > greatestTextureWeight)
-                {
-                    greatestTextureWeight = textureWeight;
-                    mostDominantTextureIndex = i;
-                }
-            }
-
-            return mostDominantTextureIndex;
         }
     }
 }

@@ -27,9 +27,9 @@ namespace Myrmecoman
         }
 
 
-        public TerrainHeight(float[] heightMapT, int resolutionT, float2 sampleSizeT, CustomAABB aabbT)
+        public TerrainHeight(NativeArray<float> heightMapT, int resolutionT, float2 sampleSizeT, CustomAABB aabbT)
         {
-            heightMap = new NativeArray<float>(heightMapT, Allocator.Persistent);
+            heightMap = heightMapT;
             resolution = resolutionT;
             sampleSize = sampleSizeT;
             AABB = aabbT;
