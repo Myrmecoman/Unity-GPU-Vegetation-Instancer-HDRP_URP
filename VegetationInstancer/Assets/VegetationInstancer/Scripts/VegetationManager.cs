@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Collections;
 using Unity.Mathematics;
@@ -160,34 +161,17 @@ namespace Myrmecoman
 
             // order terrain by X then by Z
             List<Terrain> terrainsList = new(terrains);
-            List<Terrain> newterrainsList = new();
-            while (terrainsList.Count > 0)
-            {
-                int minX = (int)terrainsList[0].GetPosition().x;
-                int minZ = (int)terrainsList[0].GetPosition().z;
-                int savedIndex = 0;
-                for (int i = 1; i < terrainsList.Count; i++)
-                {
-                    if (terrainsList[i].GetPosition().x <= minX && terrainsList[i].GetPosition().z <= minZ)
-                    {
-                        minX = (int)terrainsList[i].GetPosition().x;
-                        minZ = (int)terrainsList[i].GetPosition().z;
-                        savedIndex = i;
-                    }
-                }
-                newterrainsList.Add(terrainsList[savedIndex]);
-                terrainsList.RemoveAt(savedIndex);
-            }
+            terrainsList = terrainsList.OrderBy(a => a.transform.position.x).ThenBy(b => b.transform.position.z).ToList();
 
             // get first line length
             Dictionary<int, bool> xAxis = new();
             Dictionary<int, bool> zAxis = new();
-            for (int i = 1; i < newterrainsList.Count; i++)
+            for (int i = 1; i < terrainsList.Count; i++)
             {
-                if (!xAxis.ContainsKey((int)newterrainsList[i].transform.position.x))
-                    xAxis.Add((int)newterrainsList[i].transform.position.x, true);
-                if (!zAxis.ContainsKey((int)newterrainsList[i].transform.position.z))
-                    zAxis.Add((int)newterrainsList[i].transform.position.z, true);
+                if (!xAxis.ContainsKey((int)terrainsList[i].transform.position.x))
+                    xAxis.Add((int)terrainsList[i].transform.position.x, true);
+                if (!zAxis.ContainsKey((int)terrainsList[i].transform.position.z))
+                    zAxis.Add((int)terrainsList[i].transform.position.z, true);
             }
 
             if (xAxis.Count != zAxis.Count)
@@ -196,7 +180,7 @@ namespace Myrmecoman
                 return null;
             }
 
-            return newterrainsList.ToArray();
+            return terrainsList.ToArray();
         }
 
 
@@ -281,7 +265,6 @@ namespace Myrmecoman
             heightResolution = terrainsArray[0].terrainData.heightmapResolution * D1Size - (D1Size - 1);
             sampleSize = new float2(terrainsArray[0].terrainData.heightmapScale.x, terrainsArray[0].terrainData.heightmapScale.z);
 
-            float baseTerrainHeight = terrainsArray[0].transform.position.y;
             int resolutionSingle = terrainsArray[0].terrainData.heightmapResolution;
             var heightList = new NativeArray<float>(heightResolution * heightResolution, Allocator.Persistent);
 
@@ -298,7 +281,7 @@ namespace Myrmecoman
                 for (int x = 0; x < heightResolution-1; x++)
                 {
                     int arrX = x / res;
-                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];// - 0.05f;
+                    heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];
                 }
             }
 
