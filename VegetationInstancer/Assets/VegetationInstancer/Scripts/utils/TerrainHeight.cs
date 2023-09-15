@@ -13,7 +13,7 @@ namespace Myrmecoman
         public NativeArray<float> heightMap;
         public int resolution;
         public float2 sampleSize;
-        public AABB AABB { get; private set; }
+        public CustomAABB AABB { get; private set; }
         public bool IsValid => heightMap.IsCreated;
         int QuadCount => resolution - 1;
 
@@ -27,7 +27,7 @@ namespace Myrmecoman
         }
 
 
-        public TerrainHeight(float[] heightMapT, int resolutionT, float2 sampleSizeT, AABB aabbT)
+        public TerrainHeight(float[] heightMapT, int resolutionT, float2 sampleSizeT, CustomAABB aabbT)
         {
             heightMap = new NativeArray<float>(heightMapT, Allocator.Persistent);
             resolution = resolutionT;
@@ -110,12 +110,11 @@ namespace Myrmecoman
         }
 
 
-        static AABB GetTerrrainAABB(Terrain terrain)
+        static CustomAABB GetTerrrainAABB(Terrain terrain)
         {
             float3 min = terrain.transform.position;
             float3 max = min + (float3)terrain.terrainData.size;
-            float3 extents = (max - min) / 2;
-            return new AABB() { Center = min + extents, Extents = extents };
+            return new CustomAABB(min, max);
         }
 
 

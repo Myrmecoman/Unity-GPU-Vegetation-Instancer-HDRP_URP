@@ -29,7 +29,7 @@ namespace Myrmecoman
         // variables for heightmap
         [HideInInspector] public int heightResolution;
         [HideInInspector] public float2 sampleSize;
-        [HideInInspector] public AABB aabb;
+        [HideInInspector] public CustomAABB aabb;
         [HideInInspector] public float[] heightmap;
 
         // variables for texturemap
@@ -249,7 +249,7 @@ namespace Myrmecoman
         }
 
 
-        private AABB GetTerrainAABB(Terrain[] terrainsArray, int D1Size)
+        private CustomAABB GetTerrainAABB(Terrain[] terrainsArray, int D1Size)
         {
             float3 pos = terrainsArray[0].transform.position;
             float3 size = new float3(terrainsArray[0].terrainData.size.x * D1Size, terrainsArray[0].terrainData.size.y, terrainsArray[0].terrainData.size.z * D1Size);
@@ -265,8 +265,7 @@ namespace Myrmecoman
 
             float3 min = pos;
             float3 max = min + size;
-            float3 extents = (max - min) / 2f;
-            return new AABB() { Center = min + extents, Extents = extents };
+            return new CustomAABB(min, max);
         }
 
 
@@ -391,7 +390,7 @@ namespace Myrmecoman
     {
         public int heightResolution;
         public float2 sampleSize;
-        public AABB aabb;
+        public CustomAABB aabb;
         public float[] heightmap;
 
         public int texResolution;
