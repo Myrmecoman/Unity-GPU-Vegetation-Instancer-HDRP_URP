@@ -296,15 +296,7 @@ namespace Myrmecoman
             texResolution = terrainsArray[0].terrainData.alphamapWidth * D1Size;
             textureCount = terrainsArray[0].terrainData.alphamapLayers;
             textureArraySize = new int2(terrainsArray[0].terrainData.alphamapWidth * D1Size, terrainsArray[0].terrainData.alphamapHeight * D1Size);
-            float2 pos = new float2(0, 0);
-            for (int i = 0; i < terrainsArray.Length; i++)
-            {
-                if (terrainsArray[i].transform.position.x < pos.x)
-                    pos.x = terrainsArray[i].transform.position.x;
-                if (terrainsArray[i].transform.position.z < pos.y)
-                    pos.y = terrainsArray[i].transform.position.z;
-            }
-            terrainPos = new int2((int)pos.x, (int)pos.y);
+            terrainPos = new int2((int)aabb.Min.x, (int)aabb.Min.z);
             terrainSize = new float2(terrainsArray[0].terrainData.size.x * D1Size, terrainsArray[0].terrainData.size.z * D1Size);
 
             List<float[,,]> maps = new();
@@ -320,7 +312,7 @@ namespace Myrmecoman
                 {
                     int arrX = x / texResolutionSingle;
                     for (int z = 0; z < textureCount; z++)
-                        textureArray[y + texResolution * (x + textureCount * z)] = maps[arrX + D1Size * arrY][x % texResolutionSingle, y % texResolutionSingle, z];
+                        textureArray[y + (x * texResolution) + (z * texResolution * texResolution)] = maps[arrX + D1Size * arrY][x % texResolutionSingle, y % texResolutionSingle, z];
                 }
             }
 

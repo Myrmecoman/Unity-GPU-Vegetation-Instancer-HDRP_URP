@@ -117,7 +117,7 @@ float GetTextureAtPos(float2 worldPos, int texIndex)
     if (pos.y > textureArraySizeY)
         pos.y = textureArraySizeY - 1;
 
-    return textureMapAllTextures[pos.x + resolutionTex * (pos.y + textureCount * texIndex)];
+    return textureMapAllTextures[pos.x + (pos.y * resolutionTex) + (texIndex * resolutionTex * resolutionTex)];
 }
 // ---------------------------------------------------------------------
 
