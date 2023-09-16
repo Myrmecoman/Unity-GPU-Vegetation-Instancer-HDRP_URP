@@ -2043,7 +2043,7 @@ MonoBehaviour:
       y: 600
       z: 4000
   texResolution: 2048
-  textureCount: 3
+  textureCount: 2
   textureArraySize:
     x: 2048
     y: 2048
