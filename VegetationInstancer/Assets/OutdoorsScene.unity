@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8259.88, g: 9006.173, b: 8503.524, a: 1}
+  m_IndirectSpecularColor: {r: 8248.329, g: 8992.407, b: 8515.923, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2043,7 +2043,7 @@ MonoBehaviour:
       y: 600
       z: 4000
   texResolution: 2048
-  textureCount: 2
+  textureCount: 3
   textureArraySize:
     x: 2048
     y: 2048

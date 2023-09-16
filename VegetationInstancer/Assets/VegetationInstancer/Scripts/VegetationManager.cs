@@ -306,15 +306,13 @@ namespace Myrmecoman
             }
             terrainPos = new int2((int)pos.x, (int)pos.y);
             terrainSize = new float2(terrainsArray[0].terrainData.size.x * D1Size, terrainsArray[0].terrainData.size.z * D1Size);
-            float[,,] arr = new float[texResolution, texResolution, textureCount];
 
-            int resolutionX = terrainsArray[0].terrainData.alphamapWidth * D1Size;
-            int resolutionY = terrainsArray[0].terrainData.alphamapHeight * D1Size;
             List<float[,,]> maps = new();
             for (int i = 0; i < terrainsArray.Length; i++)
                 maps.Add(terrainsArray[i].terrainData.GetAlphamaps(0, 0, terrainsArray[0].terrainData.alphamapWidth, terrainsArray[0].terrainData.alphamapHeight));
 
             // merge row by row
+            var textureArray = new NativeArray<float>(texResolution * texResolution * textureCount, Allocator.Persistent);
             for (int y = 0; y < texResolution; y++)
             {
                 int arrY = y / texResolutionSingle;
@@ -322,19 +320,7 @@ namespace Myrmecoman
                 {
                     int arrX = x / texResolutionSingle;
                     for (int z = 0; z < textureCount; z++)
-                        arr[x, y, z] = maps[arrX + D1Size * arrY][x % texResolutionSingle, y % texResolutionSingle, z];
-                }
-            }
-
-            var textureArray = new NativeArray<float>(texResolution * texResolution * textureCount, Allocator.Persistent);
-
-            // flatten
-            for (int x = 0; x < resolutionX; x++)
-            {
-                for (int y = 0; y < resolutionY; y++)
-                {
-                    for (int z = 0; z < textureCount; z++)
-                        textureArray[x + resolutionX * (y + textureCount * z)] = arr[y, x, z];
+                        textureArray[y + texResolution * (x + textureCount * z)] = maps[arrX + D1Size * arrY][x % texResolutionSingle, y % texResolutionSingle, z];
                 }
             }
 
