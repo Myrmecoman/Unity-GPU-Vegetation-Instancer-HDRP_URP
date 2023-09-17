@@ -1,6 +1,6 @@
 #pragma kernel CSMain
 
-// check if in frustrum
+// check if in frustrum --------------------------------------------------
 float4 plane1;
 float4 plane2;
 float4 plane3;
@@ -11,7 +11,7 @@ float objectRadius;
 
 float getSignedDistanceToPlane(float4 plane, float3 po)
 {
-    return dot(plane.xyz, po) - plane.w;
+    return dot(plane.xyz, po) + plane.w;
 }
 
 bool isOnOrForwardPlane(float4 plane, float3 position, float scale)
@@ -289,7 +289,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
         return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
     // check if in frustrum
-    if (IsInFrustrum(pos, newSize * sizeBias))
+    if (!IsInFrustrum(pos, newSize * sizeBias))
         return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
     isValid = 1;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8267.89, g: 9016.946, b: 8499.345, a: 1}
+  m_IndirectSpecularColor: {r: 8265.317, g: 9013.661, b: 8500.571, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,7 +191,7 @@ MonoBehaviour:
   centeredMesh: 1
   chunkSize: 20
   viewDistance: 300
-  LODviewDistance: 50
+  LODViewDistance: 30
   plantDistanceInt: 50
 --- !u!1 &11593958
 GameObject:
@@ -648,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 341930908}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9280907, z: -0, w: 0.37235412}
-  m_LocalPosition: {x: -109.2, y: 247.2, z: 233.2}
+  m_LocalPosition: {x: -109.2, y: 239.7, z: 233.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1204,7 +1204,7 @@ MonoBehaviour:
   falloff: 0.5
   maxHeight: 10000
   minHeight: -10000
-  plantDiameter: 1
+  plantDiameter: 2
   plant: {fileID: 2085449277718671952, guid: 6ffdf5845c2dc624383c13322f5392ba, type: 3}
   LODPlant: {fileID: 2085449277718671952, guid: 6ffdf5845c2dc624383c13322f5392ba,
     type: 3}
@@ -1212,7 +1212,7 @@ MonoBehaviour:
   centeredMesh: 0
   chunkSize: 20
   viewDistance: 300
-  LODviewDistance: 50
+  LODViewDistance: 30
   plantDistanceInt: 1
 --- !u!1 &878007515
 GameObject:
@@ -1281,7 +1281,7 @@ MonoBehaviour:
   centeredMesh: 0
   chunkSize: 20
   viewDistance: 50
-  LODviewDistance: 30
+  LODViewDistance: 30
   plantDistanceInt: 20
 --- !u!1 &991007489
 GameObject:

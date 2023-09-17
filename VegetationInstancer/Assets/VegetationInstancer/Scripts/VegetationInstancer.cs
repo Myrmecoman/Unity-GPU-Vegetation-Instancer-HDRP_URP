@@ -49,7 +49,7 @@ namespace Myrmecoman
         public float minHeight = -10000f;
 
         [Header("Objects to spawn")]
-        [Tooltip("Object diameter. This is used by frustrum culling, use a larger value to make sure objects which still cast visible shadows remain rendered.")]
+        [Tooltip("Object diameter used by frustrum culling. Use a larger value to make sure objects which cast shadows remain rendered even when they are out of view.")]
         public float plantDiameter = 1;
         [Tooltip("Object to spawn")]
         public GameObject plant;
@@ -66,7 +66,7 @@ namespace Myrmecoman
         [Tooltip("Maximum display range")]
         public int viewDistance = 50;
         [Tooltip("Distance at which LODs start")]
-        public int LODviewDistance = 30;
+        public int LODViewDistance = 30;
         [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
         [Range(1, 300)]
         public int plantDistanceInt = 5;
@@ -131,10 +131,10 @@ namespace Myrmecoman
             if (viewDistance > 1000)
                 viewDistance = 1000;
 
-            if (LODviewDistance <= 0)
-                LODviewDistance = 1;
-            if (LODviewDistance >= viewDistance)
-                LODviewDistance = viewDistance - 1;
+            if (LODViewDistance <= 0)
+                LODViewDistance = 1;
+            if (LODViewDistance >= viewDistance)
+                LODViewDistance = viewDistance - 1;
 
             if (textureIndexes.Length > 4)
             {
@@ -220,7 +220,7 @@ namespace Myrmecoman
                 chunkSize = chunkSize,
                 maxDisplacement = maxDisplacement,
                 viewDistanceSq = viewDistance * viewDistance,
-                LODviewDistanceSq = LODviewDistance * LODviewDistance,
+                LODviewDistanceSq = LODViewDistance * LODViewDistance,
             };
 
             chunksSampler.Schedule().Complete();
@@ -493,6 +493,7 @@ namespace Myrmecoman
 #endif
     }
 
+    [Serializable]
     public struct FrustrumPlanes
     {
         public Plane p1;

@@ -114,9 +114,9 @@ namespace Myrmecoman
             heightBuffer.SetData(instance.terrainHeight.heightMap.ToArray());
             Shader.SetGlobalBuffer("heightMap", heightBuffer);
             Shader.SetGlobalInteger("resolution", instance.terrainHeight.resolution);
-            Shader.SetGlobalVector("sampleSize", new Vector4(instance.terrainHeight.sampleSize.x, instance.terrainHeight.sampleSize.y, 0, 0));
-            Shader.SetGlobalVector("AABBMin", new Vector4(instance.terrainHeight.AABB.Min.x, instance.terrainHeight.AABB.Min.y, instance.terrainHeight.AABB.Min.z, 0));
-            Shader.SetGlobalVector("AABBMax", new Vector4(instance.terrainHeight.AABB.Max.x, instance.terrainHeight.AABB.Max.y, instance.terrainHeight.AABB.Max.z, 0));
+            Shader.SetGlobalVector("sampleSize", new float4(instance.terrainHeight.sampleSize.x, instance.terrainHeight.sampleSize.y, 0, 0));
+            Shader.SetGlobalVector("AABBMin", new float4(instance.terrainHeight.AABB.Min.x, instance.terrainHeight.AABB.Min.y, instance.terrainHeight.AABB.Min.z, 0));
+            Shader.SetGlobalVector("AABBMax", new float4(instance.terrainHeight.AABB.Max.x, instance.terrainHeight.AABB.Max.y, instance.terrainHeight.AABB.Max.z, 0));
 
             texBuffer = new ComputeBuffer(instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
             texBuffer.SetData(instance.terrainTex.textureMapAllTextures.ToArray());
