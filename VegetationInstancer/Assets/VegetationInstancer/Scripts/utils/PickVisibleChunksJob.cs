@@ -31,6 +31,8 @@ namespace Myrmecoman
         [ReadOnly]
         public int chunkSize;
         [ReadOnly]
+        public float maxDisplacement; // objects, because of displacement, can end up outside of a chunk. This is here to not have disappearing objects
+        [ReadOnly]
         public int viewDistanceSq;
         [ReadOnly]
         public int LODviewDistanceSq;
@@ -39,8 +41,6 @@ namespace Myrmecoman
         // find new visible chunks, but also remove the ones which are not visible anymore
         public void Execute()
         {
-            int halfChunk = chunkSize / 2;
-
             // this way instead of going through all chunks, we only check the ones in viewrange
             int startX = camPos.x - (int)math.sqrt(viewDistanceSq) - (camPos.x - (int)math.sqrt(viewDistanceSq)) % chunkSize;
             if (startX < terrainPos.x)
@@ -65,11 +65,11 @@ namespace Myrmecoman
                     float height2 = terrainData.SampleHeight(new float2(i + chunkSize, j));
                     float height3 = terrainData.SampleHeight(new float2(i, j + chunkSize));
                     float height4 = terrainData.SampleHeight(new float2(i, j));
-                    int minHeight = (int)GetMinimum(height1, height2, height3, height4);
-                    int maxHeight = (int)(GetMaximum(height1, height2, height3, height4) + 1f);
+                    int minHeight = (int)(GetMinimum(height1, height2, height3, height4) - maxDisplacement);
+                    int maxHeight = (int)(GetMaximum(height1, height2, height3, height4) + 1f + maxDisplacement);
                     int heightDiff = maxHeight - minHeight;
 
-                    int3 pos = new int3(i + halfChunk, minHeight, j + halfChunk);
+                    int3 pos = new int3(i + chunkSize/2, minHeight, j + chunkSize/2);
                     float distance = (camPos.x - pos.x) * (camPos.x - pos.x) + (camPos.y - pos.y) * (camPos.y - pos.y) + (camPos.z - pos.z) * (camPos.z - pos.z);
                     if (distance <= LODviewDistanceSq && isVisible(pos, heightDiff))
                         normalChunks.Add(new int3(pos.x, minHeight, pos.z));
@@ -99,7 +99,8 @@ namespace Myrmecoman
             // size of bounding box is chunkSize, (chunkHeight + 10f) / 2f, chunksize
             // y here is the chunk highest corner point + 10f, where 10f is the supposed maximum plant height. We can increase this later if it is not sufficient
             float yExtent = (chunkHeight + 10f) / 2f;
-            float r = chunkSize / 2f * math.abs(p.normal.x) + yExtent * math.abs(p.normal.y) + chunkSize / 2f * math.abs(p.normal.z);
+            float newChunkSize = chunkSize + 2 * maxDisplacement; // increase size of chunk by the max displacement
+            float r = newChunkSize / 2f * math.abs(p.normal.x) + yExtent * math.abs(p.normal.y) + newChunkSize / 2f * math.abs(p.normal.z);
             return -r <= p.GetDistanceToPoint(new float3(pos.x, pos.y + yExtent, pos.z)); ;
         }
 

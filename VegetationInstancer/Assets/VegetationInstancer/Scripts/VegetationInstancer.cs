@@ -49,7 +49,11 @@ namespace Myrmecoman
         public float minHeight = -10000f;
 
         [Header("Objects to spawn")]
+        [Tooltip("Object diameter. This is used by frustrum culling, use a larger value to make sure objects which still cast visible shadows remain rendered.")]
+        public float plantDiameter = 1;
+        [Tooltip("Object to spawn")]
         public GameObject plant;
+        [Tooltip("LOD object to spawn")]
         public GameObject LODPlant;
         [Tooltip("The texture index to spawn the corresponding plant on. Set -1 to spawn everywhere. Up to 4 values are supported.")]
         public int[] textureIndexes;
@@ -104,6 +108,7 @@ namespace Myrmecoman
         // variables to not recompute every frame if we stand still
         private Vector3 lastPosition;
         private Quaternion lastRotation;
+        private FrustrumPlanes planes;
 
 
         private void UpdateAllVariables()
@@ -208,11 +213,12 @@ namespace Myrmecoman
                 terrainData = VegetationManager.instance.terrainHeight,
                 normalChunks = new NativeList<int3>(Allocator.TempJob),
                 LODChunks = new NativeList<int3>(Allocator.TempJob),
-                frustrumPlanes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam)),
+                frustrumPlanes = planes,
                 size1D = (int)VegetationManager.instance.terrainHeight.AABB.Max.x - (int)VegetationManager.instance.terrainHeight.AABB.Min.x,
                 camPos = new int3((int)VegetationManager.instance.cam.transform.position.x, (int)VegetationManager.instance.cam.transform.position.y, (int)VegetationManager.instance.cam.transform.position.z),
                 terrainPos = new int3((int)VegetationManager.instance.terrainHeight.AABB.Min.x, (int)VegetationManager.instance.terrainHeight.AABB.Min.y, (int)VegetationManager.instance.terrainHeight.AABB.Min.z),
                 chunkSize = chunkSize,
+                maxDisplacement = maxDisplacement,
                 viewDistanceSq = viewDistance * viewDistance,
                 LODviewDistanceSq = LODviewDistance * LODviewDistance,
             };
@@ -235,6 +241,14 @@ namespace Myrmecoman
 
         private void RunpositionsComputeShader()
         {
+            positionsComputeShader.SetVector("plane1", new float4(planes.p1.normal.x, planes.p1.normal.y, planes.p1.normal.z, planes.p1.distance));
+            positionsComputeShader.SetVector("plane2", new float4(planes.p2.normal.x, planes.p2.normal.y, planes.p2.normal.z, planes.p2.distance));
+            positionsComputeShader.SetVector("plane3", new float4(planes.p3.normal.x, planes.p3.normal.y, planes.p3.normal.z, planes.p3.distance));
+            positionsComputeShader.SetVector("plane4", new float4(planes.p4.normal.x, planes.p4.normal.y, planes.p4.normal.z, planes.p4.distance));
+            positionsComputeShader.SetVector("plane5", new float4(planes.p5.normal.x, planes.p5.normal.y, planes.p5.normal.z, planes.p5.distance));
+            positionsComputeShader.SetVector("plane6", new float4(planes.p6.normal.x, planes.p6.normal.y, planes.p6.normal.z, planes.p6.distance));
+            positionsComputeShader.SetFloat("objectRadius", plantDiameter);
+
             positionsComputeShader.SetFloat("randomSeed", 1f);
             positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
             positionsComputeShader.SetFloat("chunkSize", chunkSize);
@@ -435,6 +449,7 @@ namespace Myrmecoman
             // if we did not move, no need to recompute everything
             if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation || (!Application.isPlaying && runInEditor))
             {
+                planes = new FrustrumPlanes(GeometryUtility.CalculateFrustumPlanes(VegetationManager.instance.cam));
                 UpdateChunks();
                 RunpositionsComputeShader();
                 CullPositionsComputeShader();

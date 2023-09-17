@@ -1,12 +1,43 @@
 #pragma kernel CSMain
 
+// check if in frustrum
+float4 plane1;
+float4 plane2;
+float4 plane3;
+float4 plane4;
+float4 plane5;
+float4 plane6;
+float objectRadius;
+
+float getSignedDistanceToPlane(float4 plane, float3 po)
+{
+    return dot(plane.xyz, po) - plane.w;
+}
+
+bool isOnOrForwardPlane(float4 plane, float3 position, float scale)
+{
+    return getSignedDistanceToPlane(plane, position) > -(objectRadius * scale / 2.0);
+}
+
+bool IsInFrustrum(float3 position, float scale)
+{
+    return (isOnOrForwardPlane(plane1, position, scale) &&
+            isOnOrForwardPlane(plane2, position, scale) &&
+            isOnOrForwardPlane(plane3, position, scale) &&
+            isOnOrForwardPlane(plane4, position, scale) &&
+            isOnOrForwardPlane(plane5, position, scale) &&
+            isOnOrForwardPlane(plane6, position, scale));
+
+}
+// ------------------------------------------------------------------------
+
 // terrain height related variables and functions -------------------------
 uniform StructuredBuffer<float> heightMap;
 uniform int resolution;
 uniform float4 sampleSize;
 uniform float4 AABBMin;
 uniform float4 AABBMax;
-            
+
 struct Triangle
 {
     float3 V0;
@@ -217,7 +248,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     
     // check height is authorized
     if (y < minHeight || y > maxHeight)
-        return trs(float3(x, y - 10000, z), float4(0, 0, 0, 0), 1);
+        return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
     // get max allowed texture value
     float texValueAtPos = 0;
@@ -226,56 +257,44 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     else
     {
         if (textureIndex1 >= 0)
-        {
-            float texVal = GetTextureAtPos(float2(x, z), textureIndex1);
-            if (texVal > texValueAtPos)
-                texValueAtPos = texVal;
-        }
+            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex1);
         if (textureIndex2 >= 0)
-        {
-            float texVal = GetTextureAtPos(float2(x, z), textureIndex2);
-            if (texVal > texValueAtPos)
-                texValueAtPos = texVal;
-        }
+            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex2);
         if (textureIndex3 >= 0)
-        {
-            float texVal = GetTextureAtPos(float2(x, z), textureIndex3);
-            if (texVal > texValueAtPos)
-                texValueAtPos = texVal;
-        }
+            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex3);
         if (textureIndex4 >= 0)
-        {
-            float texVal = GetTextureAtPos(float2(x, z), textureIndex4);
-            if (texVal > texValueAtPos)
-                texValueAtPos = texVal;
-        }
+            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex4);
     }
 
     // check slope and texture
-        if (texValueAtPos < falloff || normal.y < maxSlope)
-            return trs(float3(x, y - 10000, z), float4(0, 0, 0, 0), 1);
+    if (texValueAtPos < falloff || normal.y < maxSlope)
+        return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
     // compute size
-        float newSize = GenerateRandom(xDisplacement * zDisplacement, 1 / sizeChange, sizeChange);
-        if (texValueAtPos >= falloff)
-            newSize *= max(texValueAtPos, 0.1);
+    float newSize = GenerateRandom(xDisplacement * zDisplacement, 1 / sizeChange, sizeChange);
+    if (texValueAtPos >= falloff)
+        newSize *= max(texValueAtPos, 0.1);
     
     // set position
-        float3 pos = float3(x, y + positionOffset * sizeBias, z);
-        if (centeredMesh == 1)
-            pos.y = y + positionOffset * newSize * sizeBias;
+    float3 pos = float3(x, y + positionOffset * sizeBias, z);
+    if (centeredMesh == 1)
+        pos.y = y + positionOffset * newSize * sizeBias;
     
     // set rotation
-        float4 q = EulerToQuaternion(float3(0, GenerateRandom(xDisplacement * zDisplacement, 0, 360), 0));
+    float4 q = EulerToQuaternion(float3(0, GenerateRandom(xDisplacement * zDisplacement, 0, 360), 0));
     
     // check if too far
-        float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-        if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
-            return trs(float3(x, -10000, z), float4(0, 0, 0, 0), 1);
+    float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
+    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
+        return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
-        isValid = 1;
-        return trs(pos, q, newSize * sizeBias);
-    }
+    // check if in frustrum
+    if (IsInFrustrum(pos, newSize * sizeBias))
+        return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    
+    isValid = 1;
+    return trs(pos, q, newSize * sizeBias);
+}
 // ------------------------------------------------------------------------
 
 float4x4 inverse(float4x4 input)
