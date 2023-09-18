@@ -25,6 +25,8 @@ namespace Myrmecoman
         public ComputeShader cullingComputeShader;
 
         [Header("Procedural parameters")]
+        [Tooltip("The seed should be different for each instancer, otherwise objects can end up at the exact same position.")]
+        public float seed = 1f;
         [Tooltip("Random displacement")]
         [Range(0f, 50f)]
         public float maxDisplacement = 0.5f;
@@ -249,7 +251,7 @@ namespace Myrmecoman
             positionsComputeShader.SetVector("plane6", new float4(planes.p6.normal.x, planes.p6.normal.y, planes.p6.normal.z, planes.p6.distance));
             positionsComputeShader.SetFloat("objectRadius", plantDiameter);
 
-            positionsComputeShader.SetFloat("randomSeed", 1f);
+            positionsComputeShader.SetFloat("randomSeed", seed);
             positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
             positionsComputeShader.SetFloat("chunkSize", chunkSize);
             positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);

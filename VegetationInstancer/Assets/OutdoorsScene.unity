@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8265.317, g: 9013.661, b: 8500.571, a: 1}
+  m_IndirectSpecularColor: {r: 8270.54, g: 9020.2705, b: 8495.407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,6 +175,7 @@ MonoBehaviour:
     type: 3}
   cullingComputeShader: {fileID: 7200000, guid: 85980c91a6fc85c4a977b370a51cb2b9,
     type: 3}
+  seed: 1
   maxDisplacement: 0.4
   yPositionOffset: 0.5
   sizeBias: 1
@@ -1196,6 +1197,7 @@ MonoBehaviour:
     type: 3}
   cullingComputeShader: {fileID: 7200000, guid: 85980c91a6fc85c4a977b370a51cb2b9,
     type: 3}
+  seed: 3
   maxDisplacement: 12.9
   yPositionOffset: 0
   sizeBias: 3.21
@@ -1266,6 +1268,7 @@ MonoBehaviour:
     type: 3}
   cullingComputeShader: {fileID: 7200000, guid: 85980c91a6fc85c4a977b370a51cb2b9,
     type: 3}
+  seed: 2
   maxDisplacement: 0.74
   yPositionOffset: 0
   sizeBias: 3.21
