@@ -75,5 +75,4 @@ Any shader can be converted by MegaWorld to a GPU indirect instancing capable sh
 
 ## In the futur
 
-Fix multiple textures mapping.   
 Support large objects with colliders ?   
