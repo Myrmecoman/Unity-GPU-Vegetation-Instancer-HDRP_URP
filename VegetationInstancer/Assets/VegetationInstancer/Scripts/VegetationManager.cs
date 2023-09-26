@@ -412,8 +412,11 @@ namespace Myrmecoman
     {
         public static void SaveData()
         {
+            if (!Directory.Exists(Application.dataPath + "/Resources/"))
+                Directory.CreateDirectory(Application.dataPath + "/Resources/");
+
             BinaryFormatter formatter = new();
-            string path = Application.persistentDataPath + "/save.veg";
+            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
             FileStream stream = new FileStream(path, FileMode.Create);
 
             var data = new InstancerData();
@@ -425,7 +428,10 @@ namespace Myrmecoman
 
         public static InstancerData LoadData()
         {
-            string path = Application.persistentDataPath + "/save.veg";
+            if (!Directory.Exists(Application.dataPath + "/Resources/"))
+                Directory.CreateDirectory(Application.dataPath + "/Resources/");
+
+            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
             if (File.Exists(path))
             {
                 BinaryFormatter formatter = new();
@@ -445,7 +451,10 @@ namespace Myrmecoman
 
         public static void DeleteData()
         {
-            string path = Application.persistentDataPath + "/save.veg";
+            if (!Directory.Exists(Application.dataPath + "/Resources/"))
+                Directory.CreateDirectory(Application.dataPath + "/Resources/");
+
+            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
             if (File.Exists(path))
                 File.Delete(path);
         }
