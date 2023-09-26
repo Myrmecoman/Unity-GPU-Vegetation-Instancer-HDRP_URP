@@ -415,48 +415,22 @@ namespace Myrmecoman
             if (!Directory.Exists(Application.dataPath + "/Resources/"))
                 Directory.CreateDirectory(Application.dataPath + "/Resources/");
 
-            BinaryFormatter formatter = new();
-            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
-            FileStream stream = new FileStream(path, FileMode.Create);
-
-            var data = new InstancerData();
-
-            formatter.Serialize(stream, data);
-            stream.Close();
+            string path = Application.dataPath + "/Resources/vegetationInstancerSave.bytes";
+            using (Stream stream = File.Open(path, FileMode.Create))
+            {
+                new BinaryFormatter().Serialize(stream, new InstancerData());
+            }
         }
 
 
         public static InstancerData LoadData()
         {
-            if (!Directory.Exists(Application.dataPath + "/Resources/"))
-                Directory.CreateDirectory(Application.dataPath + "/Resources/");
-
-            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
-            if (File.Exists(path))
+            TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
+            Debug.Log(dataFile == null);
+            using (var stream = new MemoryStream(dataFile.bytes))
             {
-                BinaryFormatter formatter = new();
-                FileStream stream = new FileStream(path, FileMode.Open);
-
-                var data = formatter.Deserialize(stream) as InstancerData;
-                stream.Close();
-                return data;
+                return (InstancerData)new BinaryFormatter().Deserialize(stream);
             }
-            else
-            {
-                Debug.Log("No save yet");
-                return null;
-            }
-        }
-
-
-        public static void DeleteData()
-        {
-            if (!Directory.Exists(Application.dataPath + "/Resources/"))
-                Directory.CreateDirectory(Application.dataPath + "/Resources/");
-
-            string path = Application.dataPath + "/Resources/vegetationInstancerSave.veg";
-            if (File.Exists(path))
-                File.Delete(path);
         }
     }
 }
