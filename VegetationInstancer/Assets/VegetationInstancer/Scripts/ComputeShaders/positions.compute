@@ -257,13 +257,13 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     else
     {
         if (textureIndex1 >= 0)
-            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex1);
+            texValueAtPos += GetTextureAtPos(float2(baseX, baseZ), textureIndex1);
         if (textureIndex2 >= 0)
-            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex2);
+            texValueAtPos += GetTextureAtPos(float2(baseX, baseZ), textureIndex2);
         if (textureIndex3 >= 0)
-            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex3);
+            texValueAtPos += GetTextureAtPos(float2(baseX, baseZ), textureIndex3);
         if (textureIndex4 >= 0)
-            texValueAtPos += GetTextureAtPos(float2(x, z), textureIndex4);
+            texValueAtPos += GetTextureAtPos(float2(baseX, baseZ), textureIndex4);
     }
 
     // check slope and texture
