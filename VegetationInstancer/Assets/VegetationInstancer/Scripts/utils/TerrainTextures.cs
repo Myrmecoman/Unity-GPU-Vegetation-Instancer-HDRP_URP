@@ -58,7 +58,7 @@ namespace Myrmecoman
             if (pos.y > textureArraySize.y)
                 pos.y = textureArraySize.y - 1;
 
-            return textureMapAllTextures[pos.x + resolution * (pos.y + textureCount * texIndex)];
+            return textureMapAllTextures[pos.x + (pos.y * resolution) + (texIndex * resolution * resolution)];
         }
 
 
