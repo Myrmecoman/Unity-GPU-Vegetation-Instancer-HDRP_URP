@@ -57,7 +57,9 @@ namespace Myrmecoman
                 LoadTerrains();
             }
             else
+            {
                 Destroy(gameObject);
+            }
         }
 
 
@@ -77,18 +79,20 @@ namespace Myrmecoman
 
         private void OnDestroy()
         {
-            if (instance == null)
-                return;
-
-            if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
-                instance.terrainHeight.Dispose();
-            if (instance.terrainTex.textureMapAllTextures != null && instance.terrainTex.textureMapAllTextures.IsCreated)
-                instance.terrainTex.Dispose();
-
             heightBuffer?.Release();
             heightBuffer = null;
             texBuffer?.Release();
             texBuffer = null;
+
+            if (terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated)
+                terrainHeight.Dispose();
+            if (terrainTex.textureMapAllTextures != null && terrainTex.textureMapAllTextures.IsCreated)
+                terrainTex.Dispose();
+
+            if (heightmap.IsCreated)
+                heightmap.Dispose();
+            if (textureMap.IsCreated)
+                textureMap.Dispose();
         }
 
 
@@ -102,33 +106,30 @@ namespace Myrmecoman
                 return;
             }
 
-            if (instance.terrainHeight.heightMap != null && instance.terrainHeight.heightMap.IsCreated)
-                instance.terrainHeight.Dispose();
-            if (instance.terrainTex.textureMapAllTextures != null && instance.terrainTex.textureMapAllTextures.IsCreated)
-                instance.terrainTex.Dispose();
+            OnDestroy();
 
-            instance.terrainHeight = new TerrainHeight(new NativeArray<float>(data.heightmap, Allocator.Persistent), data.heightResolution, data.sampleSize, data.aabb);
-            instance.terrainTex = new TerrainTextures(new NativeArray<float>(data.textureMap, Allocator.Persistent), data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
+            terrainHeight = new TerrainHeight(new NativeArray<float>(data.heightmap, Allocator.Persistent), data.heightResolution, data.sampleSize, data.aabb);
+            terrainTex = new TerrainTextures(new NativeArray<float>(data.textureMap, Allocator.Persistent), data.texResolution, data.textureCount, data.textureArraySize, data.terrainPos, data.terrainSize);
 
-            heightBuffer = new ComputeBuffer(instance.terrainHeight.heightMap.Length, sizeof(float));
-            heightBuffer.SetData(instance.terrainHeight.heightMap.ToArray());
+            heightBuffer = new ComputeBuffer(terrainHeight.heightMap.Length, sizeof(float));
+            heightBuffer.SetData(terrainHeight.heightMap.ToArray());
             Shader.SetGlobalBuffer("heightMap", heightBuffer);
-            Shader.SetGlobalInteger("resolution", instance.terrainHeight.resolution);
-            Shader.SetGlobalVector("sampleSize", new float4(instance.terrainHeight.sampleSize.x, instance.terrainHeight.sampleSize.y, 0, 0));
-            Shader.SetGlobalVector("AABBMin", new float4(instance.terrainHeight.AABB.Min.x, instance.terrainHeight.AABB.Min.y, instance.terrainHeight.AABB.Min.z, 0));
-            Shader.SetGlobalVector("AABBMax", new float4(instance.terrainHeight.AABB.Max.x, instance.terrainHeight.AABB.Max.y, instance.terrainHeight.AABB.Max.z, 0));
+            Shader.SetGlobalInteger("resolution", terrainHeight.resolution);
+            Shader.SetGlobalVector("sampleSize", new float4(terrainHeight.sampleSize.x, terrainHeight.sampleSize.y, 0, 0));
+            Shader.SetGlobalVector("AABBMin", new float4(terrainHeight.AABB.Min.x, terrainHeight.AABB.Min.y, terrainHeight.AABB.Min.z, 0));
+            Shader.SetGlobalVector("AABBMax", new float4(terrainHeight.AABB.Max.x, terrainHeight.AABB.Max.y, terrainHeight.AABB.Max.z, 0));
 
-            texBuffer = new ComputeBuffer(instance.terrainTex.textureMapAllTextures.Length, sizeof(float));
-            texBuffer.SetData(instance.terrainTex.textureMapAllTextures.ToArray());
+            texBuffer = new ComputeBuffer(terrainTex.textureMapAllTextures.Length, sizeof(float));
+            texBuffer.SetData(terrainTex.textureMapAllTextures.ToArray());
             Shader.SetGlobalBuffer("textureMapAllTextures", texBuffer);
-            Shader.SetGlobalInteger("terrainPosX", instance.terrainTex.terrainPos.x);
-            Shader.SetGlobalInteger("terrainPosY", instance.terrainTex.terrainPos.y);
-            Shader.SetGlobalFloat("terrainSizeX", instance.terrainTex.terrainSize.x);
-            Shader.SetGlobalFloat("terrainSizeY", instance.terrainTex.terrainSize.y);
-            Shader.SetGlobalInteger("textureArraySizeX", instance.terrainTex.textureArraySize.x);
-            Shader.SetGlobalInteger("textureArraySizeY", instance.terrainTex.textureArraySize.y);
-            Shader.SetGlobalInteger("resolutionTex", instance.terrainTex.resolution);
-            Shader.SetGlobalInteger("textureCount", instance.terrainTex.textureCount);
+            Shader.SetGlobalInteger("terrainPosX", terrainTex.terrainPos.x);
+            Shader.SetGlobalInteger("terrainPosY", terrainTex.terrainPos.y);
+            Shader.SetGlobalFloat("terrainSizeX", terrainTex.terrainSize.x);
+            Shader.SetGlobalFloat("terrainSizeY", terrainTex.terrainSize.y);
+            Shader.SetGlobalInteger("textureArraySizeX", terrainTex.textureArraySize.x);
+            Shader.SetGlobalInteger("textureArraySizeY", terrainTex.textureArraySize.y);
+            Shader.SetGlobalInteger("resolutionTex", terrainTex.resolution);
+            Shader.SetGlobalInteger("textureCount", terrainTex.textureCount);
 
             data.heightmap = null;  // let the garbage collector free the memory
             data.textureMap = null; // let the garbage collector free the memory
@@ -274,11 +275,11 @@ namespace Myrmecoman
                 maps.Add(terrainsArray[i].terrainData.GetHeights(0, 0, resolutionSingle, resolutionSingle));
 
             // generate flattened array
-            for (int y = 0; y < heightResolution-1; y++)
+            for (int y = 0; y < heightResolution - 1; y++)
             {
                 int res = resolutionSingle - 1;
                 int arrY = y / res;
-                for (int x = 0; x < heightResolution-1; x++)
+                for (int x = 0; x < heightResolution - 1; x++)
                 {
                     int arrX = x / res;
                     heightList[y * heightResolution + x] = maps[arrX + D1Size * arrY][x % res, y % res];
@@ -356,15 +357,15 @@ namespace Myrmecoman
         private void OnDrawGizmos()
         {
             // display terrains combined mesh
-            if (displayTerrainMesh && instance.terrainHeight.IsValid)
+            if (displayTerrainMesh && terrainHeight.IsValid)
             {
                 Gizmos.color = Color.cyan;
-                Vector3 camPos = instance.cam.transform.position;
+                Vector3 camPos = cam.transform.position;
                 for (int i = (int)camPos.x - 100; i < (int)camPos.x + 100; i++)
                 {
                     for (int j = (int)camPos.z - 100; j < (int)camPos.z + 100; j++)
                     {
-                        instance.terrainHeight.GetTriAtPosition(new float2(i, j), out Triangle tri);
+                        terrainHeight.GetTriAtPosition(new float2(i, j), out Triangle tri);
                         Gizmos.DrawLine(tri.V0, tri.V1);
                         Gizmos.DrawLine(tri.V1, tri.V2);
                     }
@@ -426,7 +427,6 @@ namespace Myrmecoman
         public static InstancerData LoadData()
         {
             TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
-            Debug.Log(dataFile == null);
             using (var stream = new MemoryStream(dataFile.bytes))
             {
                 return (InstancerData)new BinaryFormatter().Deserialize(stream);
