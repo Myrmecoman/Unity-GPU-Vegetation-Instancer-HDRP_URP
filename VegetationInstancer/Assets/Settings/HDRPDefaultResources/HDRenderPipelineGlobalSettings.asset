@@ -105,9 +105,9 @@ MonoBehaviour:
       hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: 8124e5870f4fd4c779e7a5f994e84ad1
-      profile: {fileID: 11400000, guid: 907181346df736144bd5cd696094a1ad, type: 2}
+      profile: {fileID: 11400000, guid: 8080688807f515d48825c00f7459f97a, type: 2}
     - sceneGUID: 73affe76c0bae5244b274703cc1ce2b4
-      profile: {fileID: 11400000, guid: 907181346df736144bd5cd696094a1ad, type: 2}
+      profile: {fileID: 11400000, guid: 8080688807f515d48825c00f7459f97a, type: 2}
     serializedBakeSettings:
     - sceneGUID: 8124e5870f4fd4c779e7a5f994e84ad1
       settings:
@@ -167,7 +167,7 @@ MonoBehaviour:
           collisionMask:
             serializedVersion: 2
             m_Bits: 4294967291
-      profile: {fileID: 11400000, guid: 907181346df736144bd5cd696094a1ad, type: 2}
+      profile: {fileID: 11400000, guid: 8080688807f515d48825c00f7459f97a, type: 2}
       lightingScenarios:
       - Default
     m_LightingScenario: Default

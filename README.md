@@ -1,8 +1,8 @@
 # HDRP-Vegetation-Instancer
 
-![Presentation](./presentation.png?raw=true "Presentation")
-![Presentation2](./presentation2.png?raw=true "Presentation2")
-![Presentation3](./gif.gif?raw=true "Presentation3")
+![Presentation](./ReadmeImages/presentation.png?raw=true "Presentation")
+![Presentation2](./ReadmeImages/presentation2.png?raw=true "Presentation2")
+![Presentation3](./ReadmeImages/gif.gif?raw=true "Presentation3")
 
 ## Overview
 
@@ -16,6 +16,21 @@ It consists in 2 main scripts :
 
 Note that this project only spawns vegetation objects without colliders, and is reserved for small objects to populate your world.   
 
+## Import Vegetation Instancer to your project
+
+Import in a new HDRP project :    
+
+- Download the VegetationInstancer.unitypackage.   
+- Create an empty HDRP project.   
+- Drag the VegetationInstancer.unitypackage file inside the new HDRP project.   
+- Make sure to install the **Burst** package and the **Collections** package if they are not installed already.    
+
+Import in an existing project with megaworld (only works for megaworld 2.3 and later version) :    
+
+- Download the repository.   
+- Drag the folder VegetationInstancer/Assets/VegetationInstancer in your project.    
+- Make sure to install the **Burst** package and the **Collections** package if they are not installed already.   
+
 ## How to use
 
 Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
@@ -23,7 +38,7 @@ The VegetationManager is in charge of generating the data needed by the instance
 
 ### Manager parameters
 
-![Manager](./manager.png?raw=true "Manager")
+![Manager](./ReadmeImages/manager.png?raw=true "Manager")
 
 - Terrains : the terrain chunks on which you want to instantiate. They must have the same parameters (texture resolution, heightmap resolution, etc...) and be disposed in a square.   
 - Reload Terrain Data : when checking this box, the manager regenerates the data necessary to instantiate on the terrains.   
@@ -31,7 +46,7 @@ The VegetationManager is in charge of generating the data needed by the instance
 
 ### Instancer parameters
 
-![Instancer](./instancer.png?raw=true "Instancer")
+![Instancer](./ReadmeImages/instancer.png?raw=true "Instancer")
 
 - Run In Editor : runs the instancer in editor.   
 - Display Chunks : displays the chunks of vegetation used to instanciate objects. Red is for LOD0, yellow for LOD1. Only 2 levels of LODs are supported for now.   
@@ -67,12 +82,6 @@ All the code is commented and was made to be easily readable.
 
 All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
 Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provided the generated shader to the Vegetation Instancer.   
-
-## Import Vegetation Instancer to your project
-
-- Download the repository.   
-- Copy the VegetationInstancer folder in your project.   
-- If you don't have MegaWorld installed, you also have to copy the VladislavTsurikov folder at the root of your project.   
 
 ## In the futur
 

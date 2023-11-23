@@ -15,7 +15,7 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-52467
+52602
 Successfully changed project path to: D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [8064] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2954120963 [EditorId] 2954120963 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [18708] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1474858316 [EditorId] 1474858316 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [8064] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2954120963 [EditorId] 2954120963 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [18708] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1474858316 [EditorId] 1474858316 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 25.49 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 23.82 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.7f1 (b16b3b16c7a0)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/Resources/UnitySubsystems
@@ -69,44 +69,44 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56196
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56640
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005193 seconds.
-- Loaded All Assemblies, in  0.368 seconds
+Registered in 0.003282 seconds.
+- Loaded All Assemblies, in  0.288 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.225 seconds
-Domain Reload Profiling: 593ms
-	BeginReloadAssembly (107ms)
+- Finished resetting the current domain, in  0.215 seconds
+Domain Reload Profiling: 502ms
+	BeginReloadAssembly (83ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (34ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (60ms)
-	LoadAllAssembliesAndSetupDomain (154ms)
-		LoadAssemblies (106ms)
+	RebuildCommonClasses (29ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (119ms)
+		LoadAssemblies (83ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (151ms)
-			TypeCache.Refresh (150ms)
-				TypeCache.ScanAssembly (136ms)
+		AnalyzeDomain (117ms)
+			TypeCache.Refresh (116ms)
+				TypeCache.ScanAssembly (104ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (225ms)
+	FinalizeReload (215ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (174ms)
+		SetupLoadedEditorAssemblies (157ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (6ms)
 			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (114ms)
-			ProcessInitializeOnLoadMethodAttributes (45ms)
+			ProcessInitializeOnLoadAttributes (104ms)
+			ProcessInitializeOnLoadMethodAttributes (38ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -118,57 +118,57 @@ Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Pro
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.830 seconds
-Refreshing native plugins compatible for Editor in 5.10 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.711 seconds
+Refreshing native plugins compatible for Editor in 4.79 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Properties/Unity.Properties.Internals.asmref has no target assembly definition
-TypeManager.Initialize took: 357ms
+TypeManager.Initialize took: 296ms
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.088 seconds
-Domain Reload Profiling: 2918ms
-	BeginReloadAssembly (143ms)
+- Finished resetting the current domain, in  1.953 seconds
+Domain Reload Profiling: 2664ms
+	BeginReloadAssembly (124ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
+		DisableScriptedObjects (4ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (22ms)
-	RebuildCommonClasses (40ms)
-	RebuildNativeTypeToScriptingClass (11ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (10ms)
 	initialDomainReloadingComplete (25ms)
-	LoadAllAssembliesAndSetupDomain (610ms)
-		LoadAssemblies (319ms)
+	LoadAllAssembliesAndSetupDomain (521ms)
+		LoadAssemblies (285ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (376ms)
-			TypeCache.Refresh (332ms)
-				TypeCache.ScanAssembly (312ms)
-			ScanForSourceGeneratedMonoScriptInfo (31ms)
+		AnalyzeDomain (303ms)
+			TypeCache.Refresh (262ms)
+				TypeCache.ScanAssembly (244ms)
+			ScanForSourceGeneratedMonoScriptInfo (30ms)
 			ResolveRequiredComponents (10ms)
-	FinalizeReload (2088ms)
+	FinalizeReload (1953ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1888ms)
+		SetupLoadedEditorAssemblies (1769ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (4ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (91ms)
-			ProcessInitializeOnLoadAttributes (865ms)
-			ProcessInitializeOnLoadMethodAttributes (921ms)
+			BeforeProcessingInitializeOnLoad (82ms)
+			ProcessInitializeOnLoadAttributes (754ms)
+			ProcessInitializeOnLoadMethodAttributes (924ms)
 			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 5.07 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 5.17 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 8415 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 169 unused Assets / (3.8 MB). Loaded Objects now: 8869.
-Memory consumption went from 346.6 MB to 342.8 MB.
-Total: 7.944200 ms (FindLiveObjects: 0.698600 ms CreateObjectMapping: 0.229200 ms MarkObjects: 5.553900 ms  DeleteObjects: 1.461000 ms)
+Memory consumption went from 347.4 MB to 343.6 MB.
+Total: 7.444900 ms (FindLiveObjects: 0.726700 ms CreateObjectMapping: 0.259100 ms MarkObjects: 5.427000 ms  DeleteObjects: 1.030800 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEditor.Snap.SnapSettingsWindow: 5fb792d44d0bbc465fb792d44d0bbc46 -> 
@@ -2206,12 +2206,12 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.HDRP.VFXHDRPSubOutput: 5665f73fd0c521065665f73fd0c52106 -> 
 ========================================================================
 Received Prepare
-Refreshing native plugins compatible for Editor in 5.59 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 4.86 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 26 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 26 unused Assets / (3.7 MB). Loaded Objects now: 8869.
-Memory consumption went from 177.1 MB to 173.4 MB.
-Total: 6.490800 ms (FindLiveObjects: 0.818500 ms CreateObjectMapping: 0.313400 ms MarkObjects: 4.511400 ms  DeleteObjects: 0.846700 ms)
+Memory consumption went from 177.8 MB to 174.1 MB.
+Total: 6.278600 ms (FindLiveObjects: 0.711900 ms CreateObjectMapping: 0.223000 ms MarkObjects: 4.575000 ms  DeleteObjects: 0.768100 ms)
 
 Prepare: number of updated asset objects reloaded= 0
 AssetImportParameters requested are different than current active one (requested -> active):
@@ -4250,3 +4250,824 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Rendering.HighDefinition.HDReflectionProbeEditor: 6688f143bb3ba4e96688f143bb3ba4e9 -> 
   custom:DOTSType/UnityEditor.Search.ASIEI05: 443471f4b46f9067443471f4b46f9067 -> 
   custom:DOTSType/UnityEditor.VFX.HDRP.VFXHDRPSubOutput: 5665f73fd0c521065665f73fd0c52106 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 431851.220015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Editor/RenderPipelineResources/DefaultLookDevProfile.asset
+  artifactKey: Guid(254c4fe87beb7be4fa72e1681edbed02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Editor/RenderPipelineResources/DefaultLookDevProfile.asset using Guid(254c4fe87beb7be4fa72e1681edbed02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53c08348ecc1cc0ae1613111b47a1f4a') in 0.011015 seconds
+Number of updated asset objects reloaded before import = 1
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Editor/RenderPipelineResources/Texture/HDRenderPipelineResourcesAsset.png
+  artifactKey: Guid(cbde4e6bb982f1b47b724dc1271391c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Editor/RenderPipelineResources/Texture/HDRenderPipelineResourcesAsset.png using Guid(cbde4e6bb982f1b47b724dc1271391c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1f6ce75df8126fc6203f39dbbc4aac5') in 0.001545 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Core/CoreResources/ClearBuffer2D.compute
+  artifactKey: Guid(fa9b66253270e9c47a67ae142f669eb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Core/CoreResources/ClearBuffer2D.compute using Guid(fa9b66253270e9c47a67ae142f669eb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcc7a878135ee9e63693d20dfc78eb28') in 0.000713 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.355454 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Core/CoreResources/GPUCopy.compute
+  artifactKey: Guid(a4d45eda75e8e474dbe24a31f741f3b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Core/CoreResources/GPUCopy.compute using Guid(a4d45eda75e8e474dbe24a31f741f3b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b1aa8ea64e5feaa7872dc1fdc27470b') in 0.000855 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/ColorGradient.png
+  artifactKey: Guid(4ea52e665573c1644bf05dd9b11fd2a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/ColorGradient.png using Guid(4ea52e665573c1644bf05dd9b11fd2a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '380e6f39e5f5378e7c06bf34639bf469') in 0.000697 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/builddispatchindirect.compute
+  artifactKey: Guid(4eb1b418be7044c40bb5200496c50f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/builddispatchindirect.compute using Guid(4eb1b418be7044c40bb5200496c50f14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef7cf9ced4191519fd141f9ae15852cd') in 0.000793 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/DebugWaveform.compute
+  artifactKey: Guid(62b785f79355903428a21d5d8f8aeabe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/DebugWaveform.compute using Guid(62b785f79355903428a21d5d8f8aeabe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc3521d604a7d24c6956f254d02c3662') in 0.000823 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/DebugLightVolumes.compute
+  artifactKey: Guid(f5d5d21faef5cf445ac2c5d8ff9c4184) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/DebugLightVolumes.compute using Guid(f5d5d21faef5cf445ac2c5d8ff9c4184) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '295fdf1b679426956fa296fb0fd73ac7') in 0.000854 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.041738 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/Deferred.compute
+  artifactKey: Guid(0b64f79746d2daf4198eaf6eab9af259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/Deferred.compute using Guid(0b64f79746d2daf4198eaf6eab9af259) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1202aa5aa6a97e154de2d4819022403') in 0.000860 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/scrbound.compute
+  artifactKey: Guid(728dce960f8a9c44bbc3abb3b851d8f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/scrbound.compute using Guid(728dce960f8a9c44bbc3abb3b851d8f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ce9c4cb8e08caa9a581fe54a738981e') in 0.001212 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/materialflags.compute
+  artifactKey: Guid(fb3eda953cd6e634e877fb777be2cd08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/materialflags.compute using Guid(fb3eda953cd6e634e877fb777be2cd08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '618a3dde251ca934dc1b4c0328223838') in 0.000800 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000066 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ProbeVolume/ProbeVolumeBlendStates.compute
+  artifactKey: Guid(a3f7b8c99de28a94684cb1daebeccf5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ProbeVolume/ProbeVolumeBlendStates.compute using Guid(a3f7b8c99de28a94684cb1daebeccf5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a82723e41557b03d3794ceb747c46365') in 0.000798 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/lightlistbuild.compute
+  artifactKey: Guid(65af3444cbf4b3747a4dead7ee00cfee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/lightlistbuild.compute using Guid(65af3444cbf4b3747a4dead7ee00cfee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '701e71c4a16b6deb8faaf1ea533ace98') in 0.000853 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000055 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/GTAOBlurAndUpsample.compute
+  artifactKey: Guid(9eb1abde882538a4ea46fa23e49ab9fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/GTAOBlurAndUpsample.compute using Guid(9eb1abde882538a4ea46fa23e49ab9fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dd0629c9e3753e47e97a2ef03a2a4aa') in 0.000818 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/lightlistbuild-bigtile.compute
+  artifactKey: Guid(5ee1f9d6e09abe045b2f5e0b784b9072) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/lightlistbuild-bigtile.compute using Guid(5ee1f9d6e09abe045b2f5e0b784b9072) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf669b0dcd837e05d72158c82caf3358') in 0.000738 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.165745 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/GTAOTemporalDenoise.compute
+  artifactKey: Guid(31e0ca4c210f97c468037d11a5b832bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/GTAOTemporalDenoise.compute using Guid(31e0ca4c210f97c468037d11a5b832bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfc39b80da12411dad4f3a0c2e1778c7') in 0.000813 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceGlobalIllumination.compute
+  artifactKey: Guid(96170a954eb538b40a5ff369552c3629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceGlobalIllumination.compute using Guid(96170a954eb538b40a5ff369552c3629) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80c5d4d0addcf2d317ccd0e4d2cebe5a') in 0.001037 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceReflections.compute
+  artifactKey: Guid(d1de9ac7d9016204da289affe9677942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceReflections.compute using Guid(d1de9ac7d9016204da289affe9677942) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98fde3062ba565d54faa30f37d705e46') in 0.000894 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/Shadow/MomentShadows.compute
+  artifactKey: Guid(4dea53e2ff15ed0448817c2aa4246e53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/Shadow/MomentShadows.compute using Guid(4dea53e2ff15ed0448817c2aa4246e53) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2a36a9384f40625738a3eb93075ab34') in 0.000882 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.357484 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/VolumetricLighting/VolumetricLighting.compute
+  artifactKey: Guid(b4901a10df2d1e24282725e9fbc77c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/VolumetricLighting/VolumetricLighting.compute using Guid(b4901a10df2d1e24282725e9fbc77c97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '081737c88b1d53b3f00f5781e506f4d0') in 0.001161 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/VolumetricLighting/VolumetricLightingFiltering.compute
+  artifactKey: Guid(ef9a910d0ec6ebb41ae3f5c7a69daf46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/VolumetricLighting/VolumetricLightingFiltering.compute using Guid(ef9a910d0ec6ebb41ae3f5c7a69daf46) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e070d0c956a3e4886501cac255e709e') in 0.000901 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Material/GGXConvolution/ComputeGgxIblSampleData.compute
+  artifactKey: Guid(764a24bb47ef5ba4781d9ae82ca07445) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Material/GGXConvolution/ComputeGgxIblSampleData.compute using Guid(764a24bb47ef5ba4781d9ae82ca07445) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4ab80d2e276361eeab33479c4e72265') in 0.000837 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Material/VolumetricMaterial/VolumetricMaterial.compute
+  artifactKey: Guid(26f18c9cb0bccbf4481f8c84579affb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Material/VolumetricMaterial/VolumetricMaterial.compute using Guid(26f18c9cb0bccbf4481f8c84579affb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14940c33d1b08654a5e3d1719c120e30') in 0.000907 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/AlphaCopy.compute
+  artifactKey: Guid(c2c7eb6611725264187721ef9df0354b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/AlphaCopy.compute using Guid(c2c7eb6611725264187721ef9df0354b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f0aa051128cb46bd45c44ef0bb5ef9f') in 0.001115 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldClearIndirectArgs.compute
+  artifactKey: Guid(69905045e1d0a65458b205d6ab55502b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldClearIndirectArgs.compute using Guid(69905045e1d0a65458b205d6ab55502b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8913d8aa50ecf6f0e949eaac30192731') in 0.000926 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/BloomPrefilter.compute
+  artifactKey: Guid(243b24008041aaa4a91800690f63c684) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/BloomPrefilter.compute using Guid(243b24008041aaa4a91800690f63c684) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82090a973e7f64a20c7967e6efdfc6c3') in 0.000952 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/BloomBlur.compute
+  artifactKey: Guid(133a68380d324de4ea8d3ff8657b02d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/BloomBlur.compute using Guid(133a68380d324de4ea8d3ff8657b02d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddf947e98eba103222f0192f525c83af') in 0.000828 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/ApplyExposure.compute
+  artifactKey: Guid(1a6fea1dc099b984d8f2b27d504dc096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/ApplyExposure.compute using Guid(1a6fea1dc099b984d8f2b27d504dc096) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20d9ad6e01dc498285f9170c4291d890') in 0.001169 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.223631 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldCoCReproject.compute
+  artifactKey: Guid(4980decaa3878d6448569489f5fc7931) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldCoCReproject.compute using Guid(4980decaa3878d6448569489f5fc7931) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69bd1ce2c2e627ac71e811ca3c8b69b9') in 0.001019 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFGather.compute
+  artifactKey: Guid(1e6b16a7970a1494db74b1d3d007d1cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFGather.compute using Guid(1e6b16a7970a1494db74b1d3d007d1cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '531af356b3144ffc3ced98c522c925d8') in 0.001046 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.006757 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldPrefilter.compute
+  artifactKey: Guid(f2b89d19910854346b792fe7177ce634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldPrefilter.compute using Guid(f2b89d19910854346b792fe7177ce634) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f88d2023a7c92841c9772318e65d5ad7') in 0.001228 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/LensFlareMergeOcclusionDataDriven.compute
+  artifactKey: Guid(07492750f384d9a4da9aaf5d2feeed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/LensFlareMergeOcclusionDataDriven.compute using Guid(07492750f384d9a4da9aaf5d2feeed4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '711ebd03d893c2d23c648bc21124f463') in 0.000932 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/HistogramExposure.compute
+  artifactKey: Guid(222da48299136f34b8e3fb75ae9f8ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/HistogramExposure.compute using Guid(222da48299136f34b8e3fb75ae9f8ac7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73c1d0ccc70107724d92b341b0779c8d') in 0.000732 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Accumulation/Shaders/BlitAndExpose.compute
+  artifactKey: Guid(4b9a355e064de034dbfafe4583ba766b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Accumulation/Shaders/BlitAndExpose.compute using Guid(4b9a355e064de034dbfafe4583ba766b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2a1fffb76bee9745c20e59250fd023f') in 0.000736 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Material/DefaultHDTerrainMaterial.mat
+  artifactKey: Guid(22ff8771d87ef27429e670136399094b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Material/DefaultHDTerrainMaterial.mat using Guid(22ff8771d87ef27429e670136399094b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f1ff460ff66f7bac40241fc2d8a2228') in 0.000710 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/Denoising/DiffuseDenoiser.compute
+  artifactKey: Guid(b4ed2382141619f40af1f743a84ccaea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/Denoising/DiffuseDenoiser.compute using Guid(b4ed2382141619f40af1f743a84ccaea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '783e5b7cf772454190decccbe114e301') in 0.000739 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/MotionBlurNeighborhoodTilePass.compute
+  artifactKey: Guid(5ea9865df3e53b448856785b88f8e7b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/MotionBlurNeighborhoodTilePass.compute using Guid(5ea9865df3e53b448856785b88f8e7b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1e246616b45b2d4976b886f814e8cd7') in 0.000665 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/PaniniProjection.compute
+  artifactKey: Guid(0ddbf72c8fbb6e44b983f470c8384ef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/PaniniProjection.compute using Guid(0ddbf72c8fbb6e44b983f470c8384ef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eccb78f08e2bed5854b082944a410368') in 0.000784 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000060 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/LutBuilder3D.compute
+  artifactKey: Guid(37f2b1b0ecd6f1c439e4c1b4f2fdb524) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/LutBuilder3D.compute using Guid(37f2b1b0ecd6f1c439e4c1b4f2fdb524) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c91250cb3ea9d2a607c8e03c7835737d') in 0.000708 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldKernel.compute
+  artifactKey: Guid(7869415cc3e4eaa4d82ac21a752a2780) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldKernel.compute using Guid(7869415cc3e4eaa4d82ac21a752a2780) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cad3f7cdb1b4592ea7ececbd2380cebc') in 0.001052 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/FXAA.compute
+  artifactKey: Guid(1535d29f35ea86b4282b6ca652002e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/FXAA.compute using Guid(1535d29f35ea86b4282b6ca652002e2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c25be7247521682c0ac0709fc819c1a1') in 0.000777 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFMinMaxDilate.compute
+  artifactKey: Guid(757a3f81b35177b44b2b178909b49172) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFMinMaxDilate.compute using Guid(757a3f81b35177b44b2b178909b49172) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8642b299b618fdaf05d189d3047a1144') in 0.000969 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000092 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldTileMax.compute
+  artifactKey: Guid(84f84585ea8a7a849bea4a581adb93a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldTileMax.compute using Guid(84f84585ea8a7a849bea4a581adb93a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b66b61dbda5b391eac1129843b0076f') in 0.000964 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFCircleOfConfusion.compute
+  artifactKey: Guid(75332b7b315c80d4babe506820aa0bfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DoFCircleOfConfusion.compute using Guid(75332b7b315c80d4babe506820aa0bfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee211d7d2edc1865882f5b14736b67de') in 0.000939 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldMipSafe.compute
+  artifactKey: Guid(2d24ee7b2c804d947a5c371c12ed46bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/DepthOfFieldMipSafe.compute using Guid(2d24ee7b2c804d947a5c371c12ed46bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '354b4f8081efaa08f7e1635e0da93781') in 0.000990 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Mesh/Cylinder.fbx
+  artifactKey: Guid(accb6d90f0d50fe4ca0f68159b4323de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Mesh/Cylinder.fbx using Guid(accb6d90f0d50fe4ca0f68159b4323de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8df0f7cc89e2483e645e9053b5e74039') in 0.002003 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Accumulation/Shaders/Accumulation.compute
+  artifactKey: Guid(ed80add7a217efa468d137d6f7c668f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Accumulation/Shaders/Accumulation.compute using Guid(ed80add7a217efa468d137d6f7c668f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9aa5e77e0aac0bdf1b9d63d8a95822ba') in 0.000747 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Material/DefaultHDMaterial.mat
+  artifactKey: Guid(73c176f402d2c2f4d929aa5da7585d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Material/DefaultHDMaterial.mat using Guid(73c176f402d2c2f4d929aa5da7585d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9af094478116d6dc72dbe1baaaa0a79a') in 0.000763 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/ShaderGraph/Subgraph/WaterSurfaceGradients.shadersubgraph
+  artifactKey: Guid(efa611c041828934a8d5914a4e7aac69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/ShaderGraph/Subgraph/WaterSurfaceGradients.shadersubgraph using Guid(efa611c041828934a8d5914a4e7aac69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f632360a0ee422947ce85626d3192e9c') in 0.002195 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_7.png
+  artifactKey: Guid(8b7bdf66a62cb51409d47548bb0d542f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_7.png using Guid(8b7bdf66a62cb51409d47548bb0d542f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e73e93ac9c1c9f32b15ce4019ba835b6') in 0.000765 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_13.png
+  artifactKey: Guid(c6c47a7f59293a847a8471bb74b9a262) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_13.png using Guid(c6c47a7f59293a847a8471bb74b9a262) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '513b18cea85f4673a89018d8142f0644') in 0.000796 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_24.png
+  artifactKey: Guid(08e7f74e876f85247ad1104f35322e19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_24.png using Guid(08e7f74e876f85247ad1104f35322e19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13875e334b534ee57f5ebb954559576b') in 0.000718 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_1.png
+  artifactKey: Guid(fe6c6d7fed228ae4c9034639926613ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_1.png using Guid(fe6c6d7fed228ae4c9034639926613ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '149e6342f88607c24497c5d43144dbcb') in 0.000735 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_20.png
+  artifactKey: Guid(f8c387db83f623d4c875b355974b1398) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_20.png using Guid(f8c387db83f623d4c875b355974b1398) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bec5f94ec71a9ab3392fac34c796fe1f') in 0.000727 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_9.png
+  artifactKey: Guid(eaf67a58951a945428cb394e81ed3765) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_9.png using Guid(eaf67a58951a945428cb394e81ed3765) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfccb326e920bfc8950ec7f59fc06c00') in 0.000683 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_17.png
+  artifactKey: Guid(b75a320b602f27c4ab28904a10142a98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_17.png using Guid(b75a320b602f27c4ab28904a10142a98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '308fd8e6eea36340cdd005f777a1ce6b') in 0.000748 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_2.png
+  artifactKey: Guid(8a51abfa06f36a24e8621796aa6cd4b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_2.png using Guid(8a51abfa06f36a24e8621796aa6cd4b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '180a697716b70274de532dc6cac6910a') in 0.000669 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_27.png
+  artifactKey: Guid(4cf893d4f07705d40a404330fb6694d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_27.png using Guid(4cf893d4f07705d40a404330fb6694d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64833d81ccc74dccafa7f6a4db5ebd3f') in 0.000655 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_20.png
+  artifactKey: Guid(9dee14979276d81489a17afa605f3030) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_20.png using Guid(9dee14979276d81489a17afa605f3030) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4324ef0e3e25e8922a5cde42864d504f') in 0.000706 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_12.png
+  artifactKey: Guid(a75de30c08d74744c9e973e42c2e00e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_12.png using Guid(a75de30c08d74744c9e973e42c2e00e5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d5a435be4e4be8409850c4f7272f049') in 0.000759 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Mesh/ProbeDebugSphere.fbx
+  artifactKey: Guid(b979359990531a2489ebd7a0ef0f9f01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Mesh/ProbeDebugSphere.fbx using Guid(b979359990531a2489ebd7a0ef0f9f01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8423078dfd1b511220a83939cb7e1d7f') in 0.001263 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_9.png
+  artifactKey: Guid(3c2108b42cf27e3479d8587367508c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_9.png using Guid(3c2108b42cf27e3479d8587367508c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f42c350e2b96d485c0e6d28b5689c3db') in 0.000779 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_17.png
+  artifactKey: Guid(5e40f3339a0a5be4ea4442562c53575a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_17.png using Guid(5e40f3339a0a5be4ea4442562c53575a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2ef43e0f0e5f3141a51c0fd36854c7c') in 0.000902 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_21.png
+  artifactKey: Guid(ba5d54ee870713c41a40c8435ad4fdea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_21.png using Guid(ba5d54ee870713c41a40c8435ad4fdea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b5e14e4fbd4a6cc974ebbd058b78db4') in 0.000841 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_15.png
+  artifactKey: Guid(b987ab952dc89bc439eebfaf7b977f51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_15.png using Guid(b987ab952dc89bc439eebfaf7b977f51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65e5d51a214784234a81b7cfc2591f89') in 0.000859 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_5.png
+  artifactKey: Guid(f3767acdf061ed14380a360366ffe91c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_5.png using Guid(f3767acdf061ed14380a360366ffe91c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb3e96336715b00aac89d6a517f14404') in 0.001203 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_4.png
+  artifactKey: Guid(a3a352512b3774b44aeeb7414aafce58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_4.png using Guid(a3a352512b3774b44aeeb7414aafce58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1eee96e7cd455df7cdd23b6184c3673c') in 0.000833 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/RenderPass/DepthPyramid.compute
+  artifactKey: Guid(64a553bb564274041906f78ffba955e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/RenderPass/DepthPyramid.compute using Guid(64a553bb564274041906f78ffba955e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0eeb6dffda79bee4a2d726dd0001c96') in 0.000770 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_18.png
+  artifactKey: Guid(6f6e861d2ff8cd641b424245a18393a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_18.png using Guid(6f6e861d2ff8cd641b424245a18393a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26dfd1cf562a7c092ca46be829cb28d0') in 0.000783 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_23.png
+  artifactKey: Guid(b5fa2a735b9278349a91f3dbb77691c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_23.png using Guid(b5fa2a735b9278349a91f3dbb77691c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '321cd265c10e7164d4bd91601bdcd1d2') in 0.000826 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/RankingTile1SPP.png
+  artifactKey: Guid(f2fe0251f704c4c478a8063775cffedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/RankingTile1SPP.png using Guid(f2fe0251f704c4c478a8063775cffedb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93e8ee1c069c2cbb95b324f44ad77726') in 0.000737 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_26.png
+  artifactKey: Guid(daa405d7e1e253a40952bed9e9ca63cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_26.png using Guid(daa405d7e1e253a40952bed9e9ca63cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34de29db5fae5380d8a3563ce676dc24') in 0.000827 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000089 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_30.png
+  artifactKey: Guid(c6a5e40e6746fef4fa486e8f620ee8d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_30.png using Guid(c6a5e40e6746fef4fa486e8f620ee8d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ff68a97a70fcdf566fbffcd30d0b95d') in 0.001114 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_22.png
+  artifactKey: Guid(a96a5d146fa164d4ebd67318a957a75a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_22.png using Guid(a96a5d146fa164d4ebd67318a957a75a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9aa17bc775080fb0382067906c61547') in 0.000866 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/OwenScrambledNoise256.png
+  artifactKey: Guid(2a205358e67aa9e4a94a128ac9362f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/OwenScrambledNoise256.png using Guid(2a205358e67aa9e4a94a128ac9362f4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78a4391ce80516148eb41179dc5d8c77') in 0.000909 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_15.png
+  artifactKey: Guid(17165acde01c02f4bb45d0ffd25d5158) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_15.png using Guid(17165acde01c02f4bb45d0ffd25d5158) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e2b9c8bdc7ea6318d93bbf82acdf30c') in 0.000766 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/DefaultCloudMap.png
+  artifactKey: Guid(57a33fc2476a01644865bfde5f06e2f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/DefaultCloudMap.png using Guid(57a33fc2476a01644865bfde5f06e2f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be157be0a234c25377b93141ea046c0e') in 0.000855 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium03.png
+  artifactKey: Guid(e4d8303457ba4854090965d854a7a741) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium03.png using Guid(e4d8303457ba4854090965d854a7a741) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bcb6dab4acdd3c95562c6315765e23e') in 0.000995 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/ScramblingTile1SPP.png
+  artifactKey: Guid(6185473f62ad3e74da4acac5d482917a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/ScramblingTile1SPP.png using Guid(6185473f62ad3e74da4acac5d482917a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a90e094f4bf19460de6af0c67dc519af') in 0.000732 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium02.png
+  artifactKey: Guid(bdc6fb6e37de5824bb06e17ac19a8a1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium02.png using Guid(bdc6fb6e37de5824bb06e17ac19a8a1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ad847f7bd4cf06b9e5e7c085713ed69') in 0.000787 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_14.png
+  artifactKey: Guid(ba3b2a48f5297c74eb3b4b2771629d60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_14.png using Guid(ba3b2a48f5297c74eb3b4b2771629d60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20b87006aa72b334fd623a76e690d52d') in 0.000886 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_22.png
+  artifactKey: Guid(98de916e94bbf4541981fe7c1bd7008f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_22.png using Guid(98de916e94bbf4541981fe7c1bd7008f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba65d1e479072b5adbf6bb76a362c7bd') in 0.001017 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000082 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium04.png
+  artifactKey: Guid(75e19bf5d3ef41d489aa05586243b58b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium04.png using Guid(75e19bf5d3ef41d489aa05586243b58b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6980d32ec1a30c26e903cb6388eb993') in 0.000699 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/DefaultHDRISky.exr
+  artifactKey: Guid(8253d41e6e8b11a4cbe77a4f8f82934d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/DefaultHDRISky.exr using Guid(8253d41e6e8b11a4cbe77a4f8f82934d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c9336c5fca0bf69dba1941951ccc5baa') in 0.000959 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_25.png
+  artifactKey: Guid(eaed38d1a2336e14b8fd351f65d3eddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/L/LDR_LLL1_25.png using Guid(eaed38d1a2336e14b8fd351f65d3eddb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1209410e77480b89827eb9da1caf2532') in 0.001027 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_21.png
+  artifactKey: Guid(3963568f414ac1545b64e5f1ff5daf5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_21.png using Guid(3963568f414ac1545b64e5f1ff5daf5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff4dbac609556b40ff20ed955df83a09') in 0.000777 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Large02.png
+  artifactKey: Guid(a35bdcb2008832646b3c8d2eb11e38a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Large02.png using Guid(a35bdcb2008832646b3c8d2eb11e38a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07f1c446f59e3727322ed74c531469b3') in 0.000821 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_16.png
+  artifactKey: Guid(280a79ac7e2b6e940a7199b8f7e10407) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_16.png using Guid(280a79ac7e2b6e940a7199b8f7e10407) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bd0b3a05ffe840d7c7c7295d354fd4c3') in 0.000966 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/SkinDiffusionProfile.asset
+  artifactKey: Guid(404820c4cf36ad944862fa59c56064f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/SkinDiffusionProfile.asset using Guid(404820c4cf36ad944862fa59c56064f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39a16bd69d28f5a9f83868ae3b24c767') in 0.000761 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_18.png
+  artifactKey: Guid(226149deca448e745a7c377133e6ca7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/BlueNoise16/RGB/LDR_RGB1_18.png using Guid(226149deca448e745a7c377133e6ca7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b044152ac5bc61406dd91d630f8ca9b') in 0.001018 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/OwenScrambledNoise4.png
+  artifactKey: Guid(b0fe077c1ee7d80428f3d8dfa28a027d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/CoherentNoise/OwenScrambledNoise4.png using Guid(b0fe077c1ee7d80428f3d8dfa28a027d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'badd4620df9a05ab5ec3f33a5a9d4cb3') in 0.000652 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/EyeCausticLUT16R.exr
+  artifactKey: Guid(d4ec12283a044584794485916f4142a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/EyeCausticLUT16R.exr using Guid(d4ec12283a044584794485916f4142a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77776e6c1747525199931fed8bc1c351') in 0.000785 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/UberPost.compute
+  artifactKey: Guid(f1bf52f7c71bffd4f91e6cd90d12a4f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/PostProcessing/Shaders/UberPost.compute using Guid(f1bf52f7c71bffd4f91e6cd90d12a4f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd085f975149cf95ddbebc55a6ea84309') in 0.000892 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.227623 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium06.png
+  artifactKey: Guid(a187955d1d88a954cb32c3c4e5f0aeda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Medium06.png using Guid(a187955d1d88a954cb32c3c4e5f0aeda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dd87b7833257eb1da64675353fe952e') in 0.001053 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/SMAA/AreaTex.tga
+  artifactKey: Guid(92e0d85ab4eca874098e7fcf6f8f674e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/SMAA/AreaTex.tga using Guid(92e0d85ab4eca874098e7fcf6f8f674e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22e7c82859f7a675936724b37248f9d1') in 0.001191 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/Matcap/DefaultMatcap.png
+  artifactKey: Guid(e655445a13b501944a2641ea144edda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/Matcap/DefaultMatcap.png using Guid(e655445a13b501944a2641ea144edda5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd84826c156763b65a6d86fe9a4ec11fd') in 0.001047 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/VolumetricClouds/PerlinNoise32RGB.png
+  artifactKey: Guid(d1aae012f8a4f23478471851f17ff915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/VolumetricClouds/PerlinNoise32RGB.png using Guid(d1aae012f8a4f23478471851f17ff915) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b30d562bfd6008dd2c70dbef427515d3') in 0.001034 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Thin01.png
+  artifactKey: Guid(284a1ac236869fa4eacf377d73c7dff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Thin01.png using Guid(284a1ac236869fa4eacf377d73c7dff8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '317b7b932bd0694c3b0d0cc76a75e4ee') in 0.001774 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Thin02.png
+  artifactKey: Guid(bd74961b009b93145a998ae93a5fc186) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipelineResources/Texture/FilmGrain/Thin02.png using Guid(bd74961b009b93145a998ae93a5fc186) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f82ccaaa5835b9d496a9bf3bfc74faf') in 0.001280 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.570612 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/Sky/CloudSystem/CloudLayer/BakeCloudShadows.compute
+  artifactKey: Guid(3e7317e0800c066448ee07a3e47f102b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/Sky/CloudSystem/CloudLayer/BakeCloudShadows.compute using Guid(3e7317e0800c066448ee07a3e47f102b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da19d3700ca677185cd3867c9b8792f0') in 0.000979 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.070723 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Runtime/VirtualTexturing/Shaders/DownsampleVTFeedback.compute
+  artifactKey: Guid(32d963548086c2c439aeb23a93e9a00a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Runtime/VirtualTexturing/Shaders/DownsampleVTFeedback.compute using Guid(32d963548086c2c439aeb23a93e9a00a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecfedef05b3e862f1f302eff05fb60c5') in 0.000660 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Packages/com.unity.render-pipelines.high-definition/Tests/Editor/Utilities/FurnaceTests.compute
+  artifactKey: Guid(9c19385e40e70ea41811a942a46b04a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.render-pipelines.high-definition/Tests/Editor/Utilities/FurnaceTests.compute using Guid(9c19385e40e70ea41811a942a46b04a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '811794593255e0398dac9ce076ba7bd4') in 0.001003 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: L’opération d’entrée/sortie a été abandonnée en raison de l’arrêt d’un thread ou à la demande d’une application.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
