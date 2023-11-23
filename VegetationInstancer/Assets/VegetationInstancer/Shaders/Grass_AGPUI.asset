@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DiffusionProfileReferences:
-  - {fileID: 11400000, guid: 8ae28b9a19c36784280380e4799243cb, type: 2}
+  - {fileID: 11400000, guid: 16c7c1d43c1734b4b9fd6e420650bca0, type: 2}
   m_MaterialReferences: []
 --- !u!21 &2100000
 Material:
@@ -128,7 +128,7 @@ Material:
     - _CullMode: 0
     - _CullModeForward: 0
     - _DepthOffsetEnable: 0
-    - _DiffusionProfileHash: 3.128872
+    - _DiffusionProfileHash: 3.780309
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 2
     - _DoubleSidedNormalMode: 1
@@ -178,8 +178,8 @@ Material:
     - Terrain_Origin: {r: 0, g: 0, b: 0, a: 0}
     - Terrain_Scale: {r: 0, g: 0, b: 0, a: 0}
     - _BlendScale: {r: 2, g: 2, b: 0, a: 0}
-    - _DiffusionProfileAsset: {r: -5.7855046e-23, g: -2.7243504e-36, b: -1.8891285e+22,
-        a: -12817017}
+    - _DiffusionProfileAsset: {r: -6.6581504e+12, g: -0.00000016772259, b: 59.747776,
+        a: -3.1901394e-19}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Thickness_Remap: {r: 0, g: 1, b: 0, a: 0}
