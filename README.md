@@ -18,13 +18,14 @@ Note that this project only spawns vegetation objects without colliders, and is 
 
 ## Import Vegetation Instancer to your project
 
-Import in a new HDRP project :    
+Import in a new HDRP project (advised before importing to an existing project) :    
 
 - Download the VegetationInstancer.unitypackage.   
 - Create an empty HDRP project.   
 - Drag the VegetationInstancer.unitypackage file inside the new HDRP project.   
 - Make sure to install the **Burst** package and the **Collections** package if they are not installed already.    
 - Open the testScene scene and double click the playerCamera object to see the example scene.
+- If errors repeatedly appear, the terrain data was probably not generated properly on startup. To resolve this, disable the VegetationManager script on the VegetationManager object in the test scene, tick the reload terrain data checkbox, and re-enable the VegetationManager script.    
 
 Import in an existing project with megaworld (only works for megaworld 2.3 and later version) :    
 
