@@ -1,4 +1,4 @@
-# HDRP-Vegetation-Instancer
+# Unity GPU Vegetation Instancer for HDRP and URP
 
 ![Presentation](./ReadmeImages/presentation.png?raw=true "Presentation")
 ![Presentation2](./ReadmeImages/presentation2.png?raw=true "Presentation2")
@@ -6,7 +6,7 @@
 
 ## Overview
 
-HDRP vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools. Although the provided shaders work with HDRP, this project can work with URP as long as you provide your own shaders. To generate your shaders, see "How to get GPU indirect instancing capable shaders ?".   
+The vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools. Although the provided shaders work with HDRP, this project can work with URP as long as you provide your own shaders. To generate your shaders, see "How to get GPU indirect instancing capable shaders ?".   
 
 It consists in 2 main scripts :   
 
@@ -83,7 +83,9 @@ All the code is commented and was made to be easily readable.
 ## How to get GPU indirect instancing capable shaders ?
 
 All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
-Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provided the generated shader to the Vegetation Instancer.   
+Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provide the generated shader to the Vegetation Instancer.   
+
+To generate the shader using megaworld, go to the Renderer Stack tab and drop your object prefab in. The generated shader will be located in the folder Resources/VladislavTsurikov/RendererStack/Shaders.
 
 ## In the futur
 
