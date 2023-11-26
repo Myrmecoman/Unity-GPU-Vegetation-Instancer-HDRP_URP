@@ -295,15 +295,18 @@ namespace Myrmecoman
 
                 positionsBuffer?.Release();
                 positionsBuffer = null;
-                positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                if (totalPlants > 0)
+                    positionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
                 culledPositionsBuffer?.Release();
                 culledPositionsBuffer = null;
-                culledPositionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                if (totalPlants > 0)
+                    culledPositionsBuffer = new ComputeBuffer(totalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
                 batchItemsCountBuffer?.Release();
                 batchItemsCountBuffer = null;
-                batchItemsCountBuffer = new ComputeBuffer(groups, sizeof(uint));
+                if (totalPlants > 0)
+                    batchItemsCountBuffer = new ComputeBuffer(groups, sizeof(uint));
             }
 
             if (totalPlants != 0)
@@ -335,15 +338,18 @@ namespace Myrmecoman
 
                 LODpositionsBuffer?.Release();
                 LODpositionsBuffer = null;
-                LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                if (LODtotalPlants > 0)
+                    LODpositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
                 LODculledPositionsBuffer?.Release();
                 LODculledPositionsBuffer = null;
-                LODculledPositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
+                if (LODtotalPlants > 0)
+                    LODculledPositionsBuffer = new ComputeBuffer(LODtotalPlants, 16 * sizeof(float) + 16 * sizeof(float) + 4 * sizeof(float));
 
                 LODbatchItemsCountBuffer?.Release();
                 LODbatchItemsCountBuffer = null;
-                LODbatchItemsCountBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
+                if (LODtotalPlants > 0)
+                    LODbatchItemsCountBuffer = new ComputeBuffer(LODgroups, sizeof(uint));
             }
 
             if (LODtotalPlants != 0)
@@ -464,18 +470,10 @@ namespace Myrmecoman
 
             mat.SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
             LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
-            if (totalPlants == 0)
-            {
-                var zeroArgsBuffer = new uint [mesh.GetIndexCount(0), 0, mesh.GetIndexStart(0), mesh.GetBaseVertex(0), 0];
-                argsBuffer.SetData(zeroArgsBuffer);
-            }
-            if (LODtotalPlants == 0)
-            {
-                var zeroArgsBuffer = new uint[LODmesh.GetIndexCount(0), 0, LODmesh.GetIndexStart(0), LODmesh.GetBaseVertex(0), 0];
-                LODargsBuffer.SetData(zeroArgsBuffer);
-            }
-            Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
-            Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
+            if (totalPlants != 0)
+                Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
+            if (LODtotalPlants != 0)
+                Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
         }
 
 #if UNITY_EDITOR

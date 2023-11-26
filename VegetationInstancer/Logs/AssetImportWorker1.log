@@ -15,7 +15,7 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-63520
+59447
 Successfully changed project path to: D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,11 +49,11 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [21020] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2709389776 [EditorId] 2709389776 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [15284] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2363090431 [EditorId] 2363090431 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [21020] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2709389776 [EditorId] 2709389776 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [15284] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2363090431 [EditorId] 2363090431 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 19.13 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 17.92 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.7f1 (b16b3b16c7a0)
 [Subsystems] Discovering subsystems at path D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/Resources/UnitySubsystems
@@ -69,17 +69,17 @@ Initialize mono
 Mono path[0] = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/Managed'
 Mono path[1] = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56240
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56692
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/UnityEditors/Unity 2022.3.7f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003479 seconds.
-- Loaded All Assemblies, in  0.299 seconds
+Registered in 0.003332 seconds.
+- Loaded All Assemblies, in  0.283 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.208 seconds
-Domain Reload Profiling: 507ms
-	BeginReloadAssembly (97ms)
+- Finished resetting the current domain, in  0.228 seconds
+Domain Reload Profiling: 511ms
+	BeginReloadAssembly (85ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
@@ -87,26 +87,26 @@ Domain Reload Profiling: 507ms
 		CreateAndSetChildDomain (1ms)
 	RebuildCommonClasses (30ms)
 	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (43ms)
-	LoadAllAssembliesAndSetupDomain (118ms)
-		LoadAssemblies (97ms)
+	initialDomainReloadingComplete (41ms)
+	LoadAllAssembliesAndSetupDomain (116ms)
+		LoadAssemblies (84ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (117ms)
-			TypeCache.Refresh (116ms)
-				TypeCache.ScanAssembly (104ms)
+		AnalyzeDomain (114ms)
+			TypeCache.Refresh (113ms)
+				TypeCache.ScanAssembly (102ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (209ms)
+	FinalizeReload (229ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (161ms)
+		SetupLoadedEditorAssemblies (168ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (6ms)
-			SetLoadedEditorAssemblies (6ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (7ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (108ms)
-			ProcessInitializeOnLoadMethodAttributes (39ms)
+			ProcessInitializeOnLoadAttributes (112ms)
+			ProcessInitializeOnLoadMethodAttributes (40ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -118,57 +118,57 @@ Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Pro
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  0.748 seconds
-Refreshing native plugins compatible for Editor in 4.61 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.750 seconds
+Refreshing native plugins compatible for Editor in 4.53 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Properties/Unity.Properties.Internals.asmref has no target assembly definition
-TypeManager.Initialize took: 280ms
+TypeManager.Initialize took: 293ms
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.967 seconds
-Domain Reload Profiling: 2715ms
-	BeginReloadAssembly (127ms)
+- Finished resetting the current domain, in  2.013 seconds
+Domain Reload Profiling: 2762ms
+	BeginReloadAssembly (144ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (4ms)
+		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (21ms)
-	RebuildCommonClasses (30ms)
+	RebuildCommonClasses (29ms)
 	RebuildNativeTypeToScriptingClass (10ms)
 	initialDomainReloadingComplete (25ms)
-	LoadAllAssembliesAndSetupDomain (555ms)
-		LoadAssemblies (313ms)
+	LoadAllAssembliesAndSetupDomain (541ms)
+		LoadAssemblies (311ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (313ms)
-			TypeCache.Refresh (272ms)
-				TypeCache.ScanAssembly (254ms)
-			ScanForSourceGeneratedMonoScriptInfo (30ms)
+		AnalyzeDomain (305ms)
+			TypeCache.Refresh (262ms)
+				TypeCache.ScanAssembly (244ms)
+			ScanForSourceGeneratedMonoScriptInfo (32ms)
 			ResolveRequiredComponents (9ms)
-	FinalizeReload (1967ms)
+	FinalizeReload (2013ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1793ms)
+		SetupLoadedEditorAssemblies (1838ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (4ms)
 			SetLoadedEditorAssemblies (3ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (82ms)
-			ProcessInitializeOnLoadAttributes (726ms)
-			ProcessInitializeOnLoadMethodAttributes (975ms)
-			AfterProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (756ms)
+			ProcessInitializeOnLoadMethodAttributes (990ms)
+			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
 		AwakeInstancesAfterBackupRestoration (5ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 5.44 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 5.58 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 8413 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 169 unused Assets / (3.8 MB). Loaded Objects now: 8853.
 Memory consumption went from 347.3 MB to 343.5 MB.
-Total: 7.245500 ms (FindLiveObjects: 1.024000 ms CreateObjectMapping: 0.207700 ms MarkObjects: 4.934000 ms  DeleteObjects: 1.078600 ms)
+Total: 7.053100 ms (FindLiveObjects: 0.745200 ms CreateObjectMapping: 0.223500 ms MarkObjects: 4.905300 ms  DeleteObjects: 1.178200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:DOTSType/UnityEditor.Snap.SnapSettingsWindow: 5fb792d44d0bbc465fb792d44d0bbc46 -> 
@@ -407,6 +407,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.VFXBasicUpdateEditor: 32cff4998bcd9db732cff4998bcd9db7 -> 
   custom:DOTSType/UnityEditor.Rendering.BuiltIn.ShaderGraph.BuiltInMetadata: 78d56c74584cef1178d56c74584cef11 -> 
   custom:DOTSType/UnityEditor.Graphs.ParameterControllerEditor: 8d1df144f0236d1c8d1df144f0236d1c -> 
+  custom:DOTSType/UnityEngine.Timeline.AnimationTrack: e804b62f712e753be804b62f712e753b -> 
   custom:DOTSType/UnityEngine.Rendering.HighDefinition.PaniniProjection: fc8267d958fac3ccfc8267d958fac3cc -> 
   custom:DOTSType/UnityEditor.LightAnchorEditorTool: 759a7ffb3ca61ef6759a7ffb3ca61ef6 -> 
   custom:DOTSType/UnityEditor.VFX.Block.PositionDepth: efd024e224421adbefd024e224421adb -> 
@@ -414,7 +415,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.Block.SubpixelAA: 4f41ed06a95a3aa34f41ed06a95a3aa3 -> 
   custom:DOTSType/UnityEditor.Search.ASIEI03: ae6d523238e8a9bbae6d523238e8a9bb -> 
   custom:DOTSType/UnityEditor.VFX.Block.ConformToSDF: cd68bd7d74da2dcccd68bd7d74da2dcc -> 
-  custom:DOTSType/UnityEngine.Timeline.AnimationTrack: e804b62f712e753be804b62f712e753b -> 
   custom:DOTSType/Unity.Burst.Editor.BurstInspectorGUI: 075603ac3632f647075603ac3632f647 -> 
   custom:DOTSType/UnityEditor.CustomRenderTextureEditor: 2beac6136de0b0242beac6136de0b024 -> 
   custom:DOTSType/Cinemachine.CinemachineSameAsFollowTarget: 85056980c8aedf6985056980c8aedf69 -> 
@@ -1395,7 +1395,6 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/Unity.VisualScripting.LudiqScriptableObjectEditor: 2f0d5c6374dc068a2f0d5c6374dc068a -> 
   custom:DOTSType/Cinemachine.Editor.CinemachineConfinerEditor: a8ba97c8a5f5c6a0a8ba97c8a5f5c6a0 -> 
   custom:DOTSType/UnityEditor.SkinnedMeshRendererEditor: 03cb7f760ffe9fc603cb7f760ffe9fc6 -> 
-  custom:DOTSType/UnityEditor.ShaderInclude: 71f97f23f9a5290b71f97f23f9a5290b -> 
   custom:DOTSType/UnityEngine.VFX.Utility.VFXAudioSpectrumBinder: e501360fe84638eee501360fe84638ee -> 
   custom:DOTSType/UnityEngine.TargetJoint2D: cfd927f96d1b6648cfd927f96d1b6648 -> 
   custom:DOTSType/UnityEngine.VFX.Utility.VFXPlaneBinder: 74acf64a5ec30d0974acf64a5ec30d09 -> 
@@ -1404,6 +1403,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.Block.KillAABox: eafadce2f38df784eafadce2f38df784 -> 
   custom:DOTSType/Unity.Scenes.LiveConversionPatcher+LiveConvertedSceneCleanup: a307d8d8afde4687a307d8d8afde4687 -> 
   custom:DOTSType/TimelinePreferences: ea1d70a38f95dd70ea1d70a38f95dd70 -> 
+  custom:DOTSType/UnityEditor.ShaderInclude: 71f97f23f9a5290b71f97f23f9a5290b -> 
   custom:DOTSType/UnityEngine.MeshCollider: 19912da8d179768419912da8d1797684 -> 
   custom:DOTSType/UnityEditor.ShaderGraph.ShaderGraphMetadata: 4f508d0cd7b488254f508d0cd7b48825 -> 
   custom:DOTSType/UnityEditor.VFX.Operator.Rotate2D: bba8a96919daad19bba8a96919daad19 -> 
@@ -1507,10 +1507,10 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.Snap.SnapIncrementSettingsWindow: fc1d9794ca51b341fc1d9794ca51b341 -> 
   custom:DOTSType/UnityEditor.VFX.UI.VFXAttachPanel: b5c8a0e6a8651e7cb5c8a0e6a8651e7c -> 
   custom:DOTSType/UnityEngine.Camera: 05394a3ae19adf4305394a3ae19adf43 -> 
+  custom:DOTSType/UnityEngine.VFX.Utility.VFXEnabledBinder: 9d6a2a2de9f93dfd9d6a2a2de9f93dfd -> 
   custom:DOTSType/Unity.VisualScripting.UnityOnInputFieldValueChangedMessageListener: 0e850322c46e2ffa0e850322c46e2ffa -> 
   custom:DOTSType/UnityEditor.VFX.Block.PositionLine: 2a4d345fe051df972a4d345fe051df97 -> 
   custom:DOTSType/UnityEditor.AvatarMaskInspector: 9866127dd3f3402c9866127dd3f3402c -> 
-  custom:DOTSType/UnityEngine.VFX.Utility.VFXEnabledBinder: 9d6a2a2de9f93dfd9d6a2a2de9f93dfd -> 
   custom:DOTSType/UnityEngine.Rendering.HighDefinition.Compositor.AlphaInjection: ae68041af49b30e5ae68041af49b30e5 -> 
   custom:DOTSType/Cinemachine.CinemachineFreeLookEditor: fe801d44ca279d54fe801d44ca279d54 -> 
   custom:DOTSType/UnityEditor.TerrainColliderEditor: 6210a698fc2301946210a698fc230194 -> 
@@ -2208,9 +2208,9 @@ AssetImportParameters requested are different than current active one (requested
   custom:DOTSType/UnityEditor.VFX.HDRP.VFXHDRPSubOutput: 5665f73fd0c521065665f73fd0c52106 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 538573.467428 seconds.
-  path: Assets/Resources 1
-  artifactKey: Guid(d0d66730a0a4bbc458192f0debfb94c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources 1 using Guid(d0d66730a0a4bbc458192f0debfb94c8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57122d44551eaee862c804111ec41a31') in 0.002360 seconds
+  Time since last request: 2274.189646 seconds.
+  path: Assets/VegetationInstancer/Scripts/VegetationInstancer.cs
+  artifactKey: Guid(d65d9a73565b4694083365c439dce000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Scripts/VegetationInstancer.cs using Guid(d65d9a73565b4694083365c439dce000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1dd97049eceb08980b6793bdfa12ba79') in 0.001804 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 0
