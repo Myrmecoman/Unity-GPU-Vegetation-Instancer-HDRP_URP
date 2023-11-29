@@ -20,7 +20,7 @@ Note that this project only spawns vegetation objects without colliders, and is 
 
 Import in a new HDRP project (advised before importing to an existing project) :    
 
-- Download the VegetationInstancer.unitypackage.   
+- Download the .unitypackage file.   
 - Create an empty HDRP project.   
 - Drag the VegetationInstancer.unitypackage file inside the new HDRP project.   
 - Make sure to install the **Burst** package and the **Collections** package if they are not installed already.    
@@ -90,3 +90,10 @@ To generate the shader using megaworld, go to the Renderer Stack tab and drop yo
 ## In the futur
 
 Support large objects with colliders ?   
+
+
+## Show appreciation
+
+If you are satisfied with this asset and would like to support me, I have setup a patreon at this link : https://patreon.com/UnityGPUProceduralVegetationInstancer?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link
+
+Thanks !
