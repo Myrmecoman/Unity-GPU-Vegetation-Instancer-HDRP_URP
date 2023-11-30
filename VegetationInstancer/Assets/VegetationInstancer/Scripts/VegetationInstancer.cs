@@ -453,6 +453,8 @@ namespace Myrmecoman
                 return;
             if (!Application.isPlaying && runInEditor)
                 UpdateAllVariables();
+            if (VegetationManager.instance == null || !VegetationManager.instance.ReadyToGo())
+                return;
 
             // if we did not move, no need to recompute everything
             if (VegetationManager.instance.cam.transform.position != lastPosition || VegetationManager.instance.cam.transform.rotation != lastRotation || (!Application.isPlaying && runInEditor))

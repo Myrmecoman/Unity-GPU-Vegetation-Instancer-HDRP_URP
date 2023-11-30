@@ -102,7 +102,7 @@ namespace Myrmecoman
             var data = SaveSystemInstancer.LoadData();
             if (data == null) // means there is no save
             {
-                Debug.LogWarning("Terrain data was not loaded. Add your terrains and press the Reload Terrain Data checkbox to do so.");
+                Debug.LogWarning("Terrain data was not loaded. If you just downloaded the asset and did not have a Resources folder, simply wait for it to appear.");
                 return;
             }
 
@@ -353,6 +353,15 @@ namespace Myrmecoman
         }
 
 
+        public bool ReadyToGo()
+        {
+            return heightBuffer != null &&
+                texBuffer != null &&
+                terrainHeight.heightMap != null && terrainHeight.heightMap.IsCreated &&
+                terrainTex.textureMapAllTextures != null && terrainTex.textureMapAllTextures.IsCreated;
+        }
+
+
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
@@ -427,6 +436,8 @@ namespace Myrmecoman
         public static InstancerData LoadData()
         {
             TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
+            if (dataFile == null)
+                return null;
             using (var stream = new MemoryStream(dataFile.bytes))
             {
                 return (InstancerData)new BinaryFormatter().Deserialize(stream);
