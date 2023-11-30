@@ -46,6 +46,7 @@ namespace Myrmecoman
 
         private ComputeBuffer heightBuffer;
         private ComputeBuffer texBuffer;
+        private bool loadedTerrainData = false;
 
 
         private void Awake()
@@ -54,7 +55,8 @@ namespace Myrmecoman
             if (instance == null)
             {
                 instance = this;
-                LoadTerrains();
+                ReloadTerrains();
+                loadedTerrainData = LoadTerrains();
             }
             else
             {
@@ -65,6 +67,8 @@ namespace Myrmecoman
 
         private void Update()
         {
+            if (!loadedTerrainData)
+                loadedTerrainData = LoadTerrains();
             if ((!reloadTerrainData || Application.isPlaying) && instance != null)
                 return;
 
@@ -73,7 +77,7 @@ namespace Myrmecoman
 
             reloadTerrainData = false;
             ReloadTerrains();
-            LoadTerrains();
+            loadedTerrainData = LoadTerrains();
         }
 
 
@@ -96,14 +100,14 @@ namespace Myrmecoman
         }
 
 
-        private void LoadTerrains()
+        private bool LoadTerrains()
         {
             // load data
             var data = SaveSystemInstancer.LoadData();
             if (data == null) // means there is no save
             {
-                Debug.LogWarning("Terrain data was not loaded. If you just downloaded the asset and did not have a Resources folder, simply wait for it to appear.");
-                return;
+                Debug.LogWarning("Terrain data was not loaded. If you did not have a Resources folder, simply wait for it to appear (this can take up to a minute).");
+                return false;
             }
 
             OnDestroy();
@@ -135,6 +139,7 @@ namespace Myrmecoman
             data.textureMap = null; // let the garbage collector free the memory
 
             Debug.Log("Terrains data loaded");
+            return true;
         }
 
 
