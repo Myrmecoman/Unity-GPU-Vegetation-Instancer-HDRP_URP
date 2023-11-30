@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Asset Store Uploader
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: AssetStoreUploader
+  m_Name: AssetStoreValidator
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -271,15 +271,15 @@ MonoBehaviour:
     y: 0
     width: 400
     height: 947
-  m_MinSize: {x: 401, y: 451}
+  m_MinSize: {x: 351, y: 371}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 21}
   - {fileID: 13}
   - {fileID: 12}
-  m_Selected: 2
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -485,9 +485,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ce890000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2243ffff0e44fffffe44ffffea45ffffd646ffffc247ffff0cfbffff
+      m_ExpandedIDs: 1205fffff605ffffde06ffffc207ffffa608ffff8a09ffffe014ffffc415ffffac16ffff9017ffff7418ffff5819ffffe432ffffd033ffffc034ffffac35ffff9836ffff8437ffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -920,9 +920,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -134.05663, y: 245.92429, z: 232.53427}
+    m_Target: {x: -135.02168, y: 246.23027, z: 231.03352}
     speed: 2
-    m_Value: {x: -134.05663, y: 245.92429, z: 232.53427}
+    m_Value: {x: -135.02168, y: 246.23027, z: 231.03352}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -968,9 +968,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.018050704, y: -0.973183, z: 0.21250781, w: 0.09190969}
+    m_Target: {x: -0.0038233255, y: -0.9814436, z: 0.19413564, w: -0.009202932}
     speed: 2
-    m_Value: {x: -0.018041529, y: 0.9726881, z: -0.21239975, w: -0.09186297}
+    m_Value: {x: -0.0035303193, y: -0.9809565, z: 0.19404228, w: -0.0077268197}
   m_Size:
     m_Target: 17.255335
     speed: 2
@@ -2956,9 +2956,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1431
+    x: 1520
     y: 73
-    width: 488
+    width: 399
     height: 926
   m_SerializedDataModeController:
     m_DataMode: 0
