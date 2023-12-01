@@ -72,6 +72,14 @@ namespace Myrmecoman
         [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
         [Range(1, 300)]
         public int plantDistanceInt = 5;
+        [Tooltip("Display shadows for LOD0 objects ?")]
+        public ShadowCastingMode LOD0ShadowCastingMode = ShadowCastingMode.On;
+        [Tooltip("Display shadows for LOD1 objects ?")]
+        public ShadowCastingMode LOD1ShadowCastingMode = ShadowCastingMode.On;
+        [Tooltip("Receive shadows for LOD0 objects ?")]
+        public bool receiveLOD0Shadows = true;
+        [Tooltip("Receive shadows for LOD1 objects ?")]
+        public bool receiveLOD1Shadows = true;
 
 
         // GPU items positioning
@@ -473,9 +481,9 @@ namespace Myrmecoman
             mat.SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
             LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
             if (totalPlants != 0)
-                Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, ShadowCastingMode.On, true);
+                Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, LOD0ShadowCastingMode, receiveLOD0Shadows);
             if (LODtotalPlants != 0)
-                Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, ShadowCastingMode.On, true);
+                Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, LOD1ShadowCastingMode, receiveLOD1Shadows);
         }
 
 #if UNITY_EDITOR

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 8269.218, g: 9018.876, b: 8498.423, a: 1}
+  m_IndirectSpecularColor: {r: 8270.864, g: 9020.595, b: 8494.954, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,6 +194,10 @@ MonoBehaviour:
   viewDistance: 300
   LODViewDistance: 30
   plantDistanceInt: 50
+  LOD0ShadowCastingMode: 1
+  LOD1ShadowCastingMode: 1
+  receiveLOD0Shadows: 1
+  receiveLOD1Shadows: 1
 --- !u!1 &11593958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1220,10 @@ MonoBehaviour:
   viewDistance: 300
   LODViewDistance: 30
   plantDistanceInt: 1
+  LOD0ShadowCastingMode: 1
+  LOD1ShadowCastingMode: 1
+  receiveLOD0Shadows: 1
+  receiveLOD1Shadows: 1
 --- !u!1 &878007515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1294,10 @@ MonoBehaviour:
   viewDistance: 50
   LODViewDistance: 30
   plantDistanceInt: 20
+  LOD0ShadowCastingMode: 1
+  LOD1ShadowCastingMode: 1
+  receiveLOD0Shadows: 1
+  receiveLOD1Shadows: 1
 --- !u!1 &991007489
 GameObject:
   m_ObjectHideFlags: 0
