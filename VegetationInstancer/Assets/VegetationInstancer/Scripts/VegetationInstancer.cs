@@ -87,9 +87,9 @@ namespace Myrmecoman
         private int maxPositionsBufferInstances;
         private int LODmaxPositionsBufferInstances;
         private Mesh mesh;
-        private Material mat;
+        private Material[] mat;
         private Mesh LODmesh;
-        private Material LODmat;
+        private Material[] LODmat;
         private ComputeBuffer argsBuffer;
         private ComputeBuffer LODargsBuffer;
         private ComputeBuffer chunksBuffer;
@@ -129,9 +129,9 @@ namespace Myrmecoman
             LODChunksList = new List<int3>(1024);
 
             mesh = plant.GetComponent<MeshFilter>().sharedMesh;
-            mat = new Material(plant.GetComponent<MeshRenderer>().sharedMaterial);
+            mat = plant.GetComponent<MeshRenderer>().sharedMaterials;
             LODmesh = LODPlant.GetComponent<MeshFilter>().sharedMesh;
-            LODmat = new Material(LODPlant.GetComponent<MeshRenderer>().sharedMaterial);
+            LODmat = LODPlant.GetComponent<MeshRenderer>().sharedMaterials;
 
             if (chunkSize < 2)
                 chunkSize = 2;
@@ -478,12 +478,20 @@ namespace Myrmecoman
             // draw objects
             var bounds = new Bounds(VegetationManager.instance.cam.transform.position, Vector3.one * VegetationManager.instance.cam.farClipPlane);
 
-            mat.SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
-            LODmat.SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
+            for (int i = 0; i < mat.Length; i++)
+                mat[i].SetBuffer("GPUInstancedIndirectDataBuffer", culledPositionsBuffer);
+            for (int i = 0; i < LODmat.Length; i++)
+                LODmat[i].SetBuffer("GPUInstancedIndirectDataBuffer", LODculledPositionsBuffer);
             if (totalPlants != 0)
-                Graphics.DrawMeshInstancedIndirect(mesh, 0, mat, bounds, argsBuffer, 0, null, LOD0ShadowCastingMode, receiveLOD0Shadows);
+            {
+                for (int i = 0; i < mat.Length; i++)
+                    Graphics.DrawMeshInstancedIndirect(mesh, 0, mat[i], bounds, argsBuffer, 0, null, LOD0ShadowCastingMode, receiveLOD0Shadows);
+            }
             if (LODtotalPlants != 0)
-                Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat, bounds, LODargsBuffer, 0, null, LOD1ShadowCastingMode, receiveLOD1Shadows);
+            {
+                for (int i = 0; i < LODmat.Length; i++)
+                    Graphics.DrawMeshInstancedIndirect(LODmesh, 0, LODmat[i], bounds, LODargsBuffer, 0, null, LOD1ShadowCastingMode, receiveLOD1Shadows);
+            }
         }
 
 #if UNITY_EDITOR

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Asset Store Uploader
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -279,7 +279,7 @@ MonoBehaviour:
   - {fileID: 13}
   - {fileID: 12}
   m_Selected: 2
-  m_LastSelected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -487,7 +487,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: ce44ffffb645ffffa246ffff8a47ffff7248ffff5a49ffff0cfbffff
+      m_ExpandedIDs: f844ffffe045ffffc846ffffb047ffff9848ffff8049ffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -920,9 +920,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -198.80054, y: 195.77907, z: 223.00893}
+    m_Target: {x: -138.10167, y: 213.98361, z: 185.33673}
     speed: 2
-    m_Value: {x: -198.80054, y: 195.77907, z: 223.00893}
+    m_Value: {x: -138.10167, y: 213.98361, z: 185.33673}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -968,13 +968,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.0830239, y: -0.9191425, z: 0.26304165, w: -0.283046}
+    m_Target: {x: 0.02733405, y: -0.9651468, z: 0.23214804, w: 0.121963374}
     speed: 2
-    m_Value: {x: 0.0830239, y: 0.9191425, z: -0.26304165, w: 0.283046}
+    m_Value: {x: -0.027320074, y: 0.9646533, z: -0.23202935, w: -0.12190103}
   m_Size:
-    m_Target: 13.829463
+    m_Target: 38.47657
     speed: 2
-    m_Value: 13.829463
+    m_Value: 38.47657
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2871,7 +2871,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000098aa0000c6e40000ec7f000058030000d2ac0000aef70000f0d8000040d90000c6b10000d0d8000000d90000d4b1000010d9000006b20000c0d8000030d9000020d90000e0d80000208b00005288000000000000ce880000d4880000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
