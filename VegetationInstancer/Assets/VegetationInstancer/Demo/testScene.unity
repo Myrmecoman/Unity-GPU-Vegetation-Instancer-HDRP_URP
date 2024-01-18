@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7338.292, g: 4955.487, b: 4139.0864, a: 1}
+  m_IndirectSpecularColor: {r: 7337.964, g: 4955.4556, b: 4140.1177, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,7 +182,7 @@ MonoBehaviour:
   minHeight: -10000
   plantDiameter: 1
   plant: {fileID: 5968184052160299819, guid: 2e56ccf1e77159d4da2dd352918588b8, type: 3}
-  LODPlant: {fileID: 5968184052160299819, guid: 3f118532421289b46b2e8c4edd8eef91,
+  LODPlant: {fileID: 5968184052160299819, guid: 2e56ccf1e77159d4da2dd352918588b8,
     type: 3}
   textureIndexes: 00000000
   centeredMesh: 1
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   minHeight: -10000
   plantDiameter: 1
   plant: {fileID: 5968184052160299819, guid: ab00994869ab06e4e85db8fea26a5b2f, type: 3}
-  LODPlant: {fileID: 5968184052160299819, guid: ed02a4063aebe0a4589288e727dca3f1,
+  LODPlant: {fileID: 5968184052160299819, guid: ab00994869ab06e4e85db8fea26a5b2f,
     type: 3}
   textureIndexes: 00000000
   centeredMesh: 0

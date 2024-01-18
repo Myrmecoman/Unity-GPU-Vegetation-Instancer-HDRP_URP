@@ -15,7 +15,7 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-63940
+54500
 -job-worker-count
 11
 -background-job-worker-count
@@ -58,12 +58,12 @@ D:/GitHub/HDRP-Vegetation-Instancer/VegetationInstancer
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [53192] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3222013388 [EditorId] 3222013388 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
-Player connection [53192] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 3222013388 [EditorId] 3222013388 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [17396] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1058840762 [EditorId] 1058840762 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [17396] Host "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 1058840762 [EditorId] 1058840762 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-JI7KIAC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 11
 [Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
 Library Redirect Path: Library/
-Refreshing native plugins compatible for Editor in 1.57 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 1.31 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2023.2.5f1 (381b4941466e)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity 2023.2.5f1/Editor/Data/Resources/UnitySubsystems
@@ -79,7 +79,7 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity 2023.2.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity 2023.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity 2023.2.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56344
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56964
 Begin MonoManager ReloadAssembly
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
@@ -93,41 +93,41 @@ C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity 2023.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003549 seconds.
-- Loaded All Assemblies, in  0.394 seconds
+Registered in 0.003370 seconds.
+- Loaded All Assemblies, in  0.385 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
-- Finished resetting the current domain, in  0.342 seconds
-Domain Reload Profiling: 733ms
-	BeginReloadAssembly (127ms)
+- Finished resetting the current domain, in  0.303 seconds
+Domain Reload Profiling: 686ms
+	BeginReloadAssembly (128ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (38ms)
+	RebuildCommonClasses (37ms)
 	RebuildNativeTypeToScriptingClass (13ms)
-	initialDomainReloadingComplete (51ms)
-	LoadAllAssembliesAndSetupDomain (162ms)
-		LoadAssemblies (123ms)
+	initialDomainReloadingComplete (47ms)
+	LoadAllAssembliesAndSetupDomain (158ms)
+		LoadAssemblies (124ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (160ms)
-			TypeCache.Refresh (158ms)
-				TypeCache.ScanAssembly (145ms)
+		AnalyzeDomain (155ms)
+			TypeCache.Refresh (154ms)
+				TypeCache.ScanAssembly (140ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (343ms)
+	FinalizeReload (304ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (278ms)
+		SetupLoadedEditorAssemblies (243ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (9ms)
+			InitializePlatformSupportModulesInManaged (8ms)
 			SetLoadedEditorAssemblies (4ms)
 			BeforeProcessingInitializeOnLoad (7ms)
-			ProcessInitializeOnLoadAttributes (206ms)
-			ProcessInitializeOnLoadMethodAttributes (52ms)
+			ProcessInitializeOnLoadAttributes (181ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -153,122 +153,94 @@ C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 C:\build\output\Unity-Technologies\mono\mono\metadata\icall.c:1842:
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image D:\GitHub\HDRP-Vegetation-Instancer\VegetationInstancer\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-- Loaded All Assemblies, in  1.212 seconds
+- Loaded All Assemblies, in  1.021 seconds
 Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Properties/Unity.Properties.Internals.asmref has no target assembly definition
 'Packages/com.unity.render-pipelines.high-definition/Editor/Wizard/HDWizard.UIElement.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.render-pipelines.high-definition/Editor/Wizard/HDWizard.Configuration.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
 'Packages/com.unity.render-pipelines.high-definition/Editor/Wizard/HDWizard.Window.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
-Refreshing native plugins compatible for Editor in 0.76 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.79 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Assembly reference Packages/com.unity.entities/Unity.Scenes.Editor/Internals/Properties/Unity.Properties.Internals.asmref has no target assembly definition
-TypeManager.Initialize took: 372ms
+TypeManager.Initialize took: 348ms
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  2.577 seconds
-Domain Reload Profiling: 3784ms
-	BeginReloadAssembly (342ms)
+- Finished resetting the current domain, in  2.208 seconds
+Domain Reload Profiling: 3225ms
+	BeginReloadAssembly (322ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (34ms)
-	RebuildCommonClasses (47ms)
-	RebuildNativeTypeToScriptingClass (17ms)
-	initialDomainReloadingComplete (31ms)
-	LoadAllAssembliesAndSetupDomain (769ms)
-		LoadAssemblies (404ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (36ms)
+	RebuildNativeTypeToScriptingClass (13ms)
+	initialDomainReloadingComplete (28ms)
+	LoadAllAssembliesAndSetupDomain (618ms)
+		LoadAssemblies (374ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (480ms)
-			TypeCache.Refresh (409ms)
-				TypeCache.ScanAssembly (386ms)
-			BuildScriptInfoCaches (44ms)
-			ResolveRequiredComponents (22ms)
-	FinalizeReload (2578ms)
+		AnalyzeDomain (345ms)
+			TypeCache.Refresh (288ms)
+				TypeCache.ScanAssembly (268ms)
+			BuildScriptInfoCaches (43ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (2209ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1194ms)
+		SetupLoadedEditorAssemblies (1053ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (2ms)
 			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (124ms)
-			ProcessInitializeOnLoadAttributes (915ms)
-			ProcessInitializeOnLoadMethodAttributes (140ms)
-			AfterProcessingInitializeOnLoad (8ms)
+			BeforeProcessingInitializeOnLoad (81ms)
+			ProcessInitializeOnLoadAttributes (825ms)
+			ProcessInitializeOnLoadMethodAttributes (133ms)
+			AfterProcessingInitializeOnLoad (7ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (944ms)
+		AwakeInstancesAfterBackupRestoration (766ms)
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.40 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.92 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 416 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 8461 unused Assets / (10.6 MB). Loaded Objects now: 9320.
-Memory consumption went from 279.8 MB to 269.2 MB.
-Total: 29.544000 ms (FindLiveObjects: 3.071100 ms CreateObjectMapping: 2.282500 ms MarkObjects: 13.620500 ms  DeleteObjects: 10.566700 ms)
+Unloading 8461 unused Assets / (10.1 MB). Loaded Objects now: 9320.
+Memory consumption went from 281.7 MB to 271.7 MB.
+Total: 13.483100 ms (FindLiveObjects: 1.336100 ms CreateObjectMapping: 0.482500 ms MarkObjects: 6.972500 ms  DeleteObjects: 4.690900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 449401.037720 seconds.
-  path: Assets/VegetationInstancer/Demo/TerrainLayers/Textures
-  artifactKey: Guid(403f503485f141040ad4a96e37fbf98b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Demo/TerrainLayers/Textures using Guid(403f503485f141040ad4a96e37fbf98b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '585cb8e703a00cdb5c3facfda9c69787') in 0.0134813 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 459470.703261 seconds.
+  path: Assets/VegetationInstancer/Demo/Prefabs/grass.prefab
+  artifactKey: Guid(2e56ccf1e77159d4da2dd352918588b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Demo/Prefabs/grass.prefab using Guid(2e56ccf1e77159d4da2dd352918588b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8f858adde9525dad89e58c5352947427') in 1.092202 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 87
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000429 seconds.
-  path: Assets/VegetationInstancer/Scripts/ComputeShaders/culling.compute
-  artifactKey: Guid(85980c91a6fc85c4a977b370a51cb2b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Scripts/ComputeShaders/culling.compute using Guid(85980c91a6fc85c4a977b370a51cb2b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '57059a723d370e88b8ccdcd69b4b6546') in 0.0263548 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+  Time since last request: 1.145929 seconds.
+  path: Assets/VegetationInstancer/Demo/Prefabs/Materials/grassA.mat
+  artifactKey: Guid(cc799caf516ab2c42b95c2477da4ad02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Demo/Prefabs/Materials/grassA.mat using Guid(cc799caf516ab2c42b95c2477da4ad02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd3464c5e839c1e692a12c1e7ae356c56') in 0.0379859 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 50
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/VegetationInstancer/Demo/TerrainsData
-  artifactKey: Guid(527e58b27b2ecf04ba00e1abfdeb488d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Demo/TerrainsData using Guid(527e58b27b2ecf04ba00e1abfdeb488d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c053b4acb2b75e8a2dc6d3f7b9d4f473') in 0.0012351 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 2.743236 seconds.
+  path: Assets/VegetationInstancer/Demo/Prefabs/Materials/grass.mat
+  artifactKey: Guid(cc799caf516ab2c42b95c2477da4ad02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Demo/Prefabs/Materials/grass.mat using Guid(cc799caf516ab2c42b95c2477da4ad02) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1fbd48c36620b99410ae4ce2c8e5635c') in 0.0171046 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 50
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000141 seconds.
-  path: Assets/VegetationInstancer/Scripts/utils
-  artifactKey: Guid(e820a53b69a9a0e4286738e7f79b50e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Scripts/utils using Guid(e820a53b69a9a0e4286738e7f79b50e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5aefe09dabf447a42c409ad3cf42d685') in 0.0011651 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 3.141454 seconds.
+  path: Assets/VegetationInstancer/Demo/Prefabs/Materials/BerryPlant.mat
+  artifactKey: Guid(f61a733fae5903145862e37c134fc0b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Demo/Prefabs/Materials/BerryPlant.mat using Guid(f61a733fae5903145862e37c134fc0b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ddd2addef2f37eb55ecbb57851d66b2f') in 0.0159979 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 51
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000200 seconds.
-  path: Assets/VegetationInstancer/Scripts/VegetationManager.cs
-  artifactKey: Guid(224f238543db0cd448fcbb3d42e25e51) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Scripts/VegetationManager.cs using Guid(224f238543db0cd448fcbb3d42e25e51) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cf47cb56009f4ffb61c59c28fe01af48') in 0.001233 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
+  Time since last request: 1.802222 seconds.
+  path: Assets/VegetationInstancer/Demo/Prefabs/grass.prefab
+  artifactKey: Guid(2e56ccf1e77159d4da2dd352918588b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/VegetationInstancer/Demo/Prefabs/grass.prefab using Guid(2e56ccf1e77159d4da2dd352918588b8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ac2e0f9dbbba0d6e79caee3e2c4a876a') in 0.0203446 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 56
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/VegetationInstancer/Demo/TerrainLayers/Textures/Grass_A
-  artifactKey: Guid(a3152493089347f4b9c9d728111b2631) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Demo/TerrainLayers/Textures/Grass_A using Guid(a3152493089347f4b9c9d728111b2631) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5ec82c713dd70a728e15bd97adfbf819') in 0.0013992 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000403 seconds.
-  path: Assets/VegetationInstancer/Scripts/ComputeShaders
-  artifactKey: Guid(0d57a962e9fe6e44ba3af1cc1cea466f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Scripts/ComputeShaders using Guid(0d57a962e9fe6e44ba3af1cc1cea466f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '78e1a7d8ed4d9bb0565aad2e07a3b927') in 0.0011652 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000426 seconds.
-  path: Assets/VegetationInstancer/Demo/TerrainLayers/Textures/Heather_A
-  artifactKey: Guid(642246c16f83223418b78cd85145c847) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/VegetationInstancer/Demo/TerrainLayers/Textures/Heather_A using Guid(642246c16f83223418b78cd85145c847) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a71f3dea1d94ac0186c4e00c57c8fa82') in 0.0011632 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 0
-
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0

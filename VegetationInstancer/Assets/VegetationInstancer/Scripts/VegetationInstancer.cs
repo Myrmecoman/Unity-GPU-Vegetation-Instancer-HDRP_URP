@@ -134,6 +134,12 @@ namespace Myrmecoman
             mat = plant.GetComponent<MeshRenderer>().sharedMaterials;
             LODmat = LODPlant.GetComponent<MeshRenderer>().sharedMaterials;
 
+            // deep copy the materials
+            for (int i = 0; i < mat.Length; i++)
+                mat[i] = new Material(mat[i]);
+            for (int i = 0; i < LODmat.Length; i++)
+                LODmat[i] = new Material(LODmat[i]);
+
             if (chunkSize < 2)
                 chunkSize = 2;
 
