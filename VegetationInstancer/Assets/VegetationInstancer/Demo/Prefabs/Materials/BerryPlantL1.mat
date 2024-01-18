@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BerryPlant
+  m_Name: BerryPlantL1
   m_Shader: {fileID: 4800000, guid: bb30324b7988bdd4398a77e9f2e3b7fd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

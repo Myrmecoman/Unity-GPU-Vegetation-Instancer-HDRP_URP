@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5878217387168984403}
   - component: {fileID: 5728728315300317796}
   m_Layer: 0
-  m_Name: plantLOD
+  m_Name: grassL2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5968184052160299819}
-  m_Mesh: {fileID: -6062578164958778753, guid: b85bab78dc6a00e4ab4d188944f2a01f, type: 3}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5728728315300317796
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4e99d07831999144792b6f3038aa27d4, type: 2}
+  - {fileID: 2100000, guid: a5349a168302c9a4b86cc461d1c52d6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
