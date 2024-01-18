@@ -81,3 +81,21 @@ The following packages were updated:
   com.unity.ide.rider from version 3.0.21 to 3.0.24
   com.unity.render-pipelines.high-definition from version 14.0.7 to 14.0.8
   com.unity.timeline from version 1.7.4 to 1.7.5
+
+=== Thu Jan 18 13:08:04 2024
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.modules.accessibility@1.0.0
+The following packages were updated:
+  com.unity.collab-proxy from version 2.0.7 to 2.2.0
+  com.unity.feature.development from version 1.0.1 to 1.0.2
+  com.unity.ide.rider from version 3.0.26 to 3.0.27
+  com.unity.render-pipelines.high-definition from version 14.0.8 to 16.0.5
+  com.unity.test-framework from version 1.1.33 to 1.3.9
+  com.unity.timeline from version 1.7.6 to 1.8.6
+  com.unity.ugui from version 1.0.0 to 2.0.0
+The following packages were removed:
+  com.unity.textmeshpro@3.0.6

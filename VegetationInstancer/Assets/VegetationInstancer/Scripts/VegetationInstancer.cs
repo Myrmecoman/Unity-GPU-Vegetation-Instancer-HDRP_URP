@@ -129,8 +129,9 @@ namespace Myrmecoman
             LODChunksList = new List<int3>(1024);
 
             mesh = plant.GetComponent<MeshFilter>().sharedMesh;
-            mat = plant.GetComponent<MeshRenderer>().sharedMaterials;
             LODmesh = LODPlant.GetComponent<MeshFilter>().sharedMesh;
+
+            mat = plant.GetComponent<MeshRenderer>().sharedMaterials;
             LODmat = LODPlant.GetComponent<MeshRenderer>().sharedMaterials;
 
             if (chunkSize < 2)
