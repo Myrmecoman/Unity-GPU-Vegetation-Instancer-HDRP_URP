@@ -8,11 +8,13 @@
 
 The vegetation instancer is a unity project whose goal is to bring vegetation details into unity terrains. All objects are proceduraly placed on the terrain without requiring any data saving. This makes the project very lightweight. Assets (like ferns) come from the Unity HDRP Terrain tools. Although the provided shaders work with HDRP, this project can work with URP as long as you provide your own shaders. To generate your shaders, see "How to get GPU indirect instancing capable shaders ?".   
 
-It consists in 2 main scripts :   
+It consists in 3 main scripts :   
 
 - VegetationManager.cs : this script sets up the terrain data required for full GPU positioning. There can only be one instance of it, and is used by all the VegetationInstancers.   
 
 - VegetationInstancer.cs : in charge of displaying large amounts of vegetation (up to millions) using any shader implementing GPU indirect instancing rendering. Everything from positioning, texture mapping, slope etc, is done on the GPU, leading to almost 0 CPU charge.   
+
+- ShaderConverter.cs : allows to convert any shader into a GPU instancing capable shader. Attention : this only works with .shader files, not with shader graphs. However you can generate such file with your shader graph by selecting it, clicking "Copy Shader", and pasting this code into an empty .shader file.    
 
 Note that this project only spawns vegetation objects without colliders, and is reserved for small objects to populate your world.   
 
@@ -80,10 +82,12 @@ All the code is commented and was made to be easily readable.
 
 ## How to get GPU indirect instancing capable shaders ?
 
-All shaders used in the sample scene were generated using MegaWorld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
+The shader used in this asset was generated using the provided ShaderConverter script. Simply provide the path of your shader in the editor and tick the "convert" checkbox. The generated shader will be placed in the VegetationInstancer/Shaders folder, and can be used directly for GPU indirect instancing by the asset.    
+
+Another way to get such special shaders is to use Megaworld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
 Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provide the generated shader to the Vegetation Instancer.   
 
-To generate the shader using megaworld, go to the Renderer Stack tab and drop your object prefab in. The generated shader will be located in the folder Resources/VladislavTsurikov/RendererStack/Shaders.
+To generate the shader using megaworld, go to the Renderer Stack tab and drop your object prefab in. The generated shader will be located in the folder Resources/VladislavTsurikov/RendererStack/Shaders. Be careful to also have the include .cginc file required by the shader for this method to work.
 
 ## In the futur
 
