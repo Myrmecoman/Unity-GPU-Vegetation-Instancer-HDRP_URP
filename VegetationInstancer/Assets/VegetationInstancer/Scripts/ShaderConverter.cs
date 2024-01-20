@@ -8,6 +8,7 @@ namespace Myrmecoman
     [ExecuteInEditMode]
     public class ShaderConverter : MonoBehaviour
     {
+#if UNITY_EDITOR
         [Header("The path to the shader. To obtain the shader path, right click on it and click \"Copy Path\"")]
         public string path;
         public bool convert = false;
@@ -59,5 +60,6 @@ namespace Myrmecoman
             byte[] newByteArray = Encoding.ASCII.GetBytes(res);
             File.WriteAllBytes("Assets/VegetationInstancer/Shaders/" + name, newByteArray);
         }
+#endif
     }
 }
