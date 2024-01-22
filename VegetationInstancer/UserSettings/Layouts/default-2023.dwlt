@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Asset Store Uploader
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -278,7 +278,7 @@ MonoBehaviour:
   - {fileID: 12}
   - {fileID: 20}
   m_Selected: 2
-  m_LastSelected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 19
+    y: 73
     width: 268
     height: 631
   m_SerializedDataModeController:
@@ -458,7 +458,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 3845ffff1e46ffff0447ffffea47ffffd048ffffb649ffffecfaffff
+      m_ExpandedIDs: 5645ffff3c46ffff2247ffff0848ffffee48ffffd449ffffecfaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -505,8 +505,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 270
-    y: 19
+    x: 269
+    y: 73
     width: 1242
     height: 631
   m_SerializedDataModeController:
@@ -1035,9 +1035,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -125.16608, y: 234.37085, z: 224.32559}
+    m_Target: {x: -111.213684, y: 241.09332, z: 225.7339}
     speed: 2
-    m_Value: {x: -125.16608, y: 234.37085, z: 224.32559}
+    m_Value: {x: -111.213684, y: 241.09332, z: 225.7339}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1083,13 +1083,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.009013026, y: -0.9868068, z: 0.1509666, w: -0.058674544}
+    m_Target: {x: 0.0058660344, y: -0.9924627, z: 0.110931255, w: 0.052757926}
     speed: 2
-    m_Value: {x: 0.009013026, y: 0.9868068, z: -0.1509666, w: 0.05867454}
+    m_Value: {x: -0.0058660344, y: 0.9924627, z: -0.110931255, w: -0.05275793}
   m_Size:
-    m_Target: 8.998447
+    m_Target: 6.225791
     speed: 2
-    m_Value: 8.998447
+    m_Value: 6.225791
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2243,7 +2243,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 671
+    y: 725
     width: 1512
     height: 274
   m_SerializedDataModeController:
@@ -2284,10 +2284,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fad10000
-    m_LastClickedID: 53754
-    m_ExpandedIDs: 000000002ed1000030d1000032d1000034d1000036d1000038d100003ad100003cd100003ed1000040d1000042d1000044d1000046d1000048d100004ad100004cd100004ed1000050d1000052d1000054d1000056d1000058d100005ad100005cd100005ed1000060d1000062d1000064d1000066d1000068d100006ad100006cd100006ed1000070d1000072d1000074d1000076d1000078d100007ad100007cd100007ed1000080d1000082d1000084d1000086d1000088d100008ad10000
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 90d10000
+    m_LastClickedID: 53648
+    m_ExpandedIDs: 0000000032d1000034d1000036d1000038d100003ad100003cd100003ed1000040d1000042d1000044d1000046d1000048d100004ad100004cd100004ed1000050d1000052d1000054d1000056d1000058d100005ad100005cd100005ed1000060d1000062d1000064d1000066d1000068d100006ad100006cd100006ed1000070d1000072d1000074d1000076d1000078d100007ad100007cd100007ed1000080d1000082d1000084d1000086d1000088d100008ad100008cd100008ed1000090d1000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2316,7 +2316,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002ed1000030d1000032d1000034d1000036d1000038d100003ad100003cd100003ed1000040d1000042d1000044d1000046d1000048d100004ad100004cd100004ed1000050d1000052d1000054d1000056d1000058d100005ad100005cd100005ed1000060d1000062d1000064d1000066d1000068d100006ad100006cd100006ed1000070d1000072d1000074d1000076d1000078d100007ad100007cd100007ed1000080d1000082d1000084d1000086d1000088d100008ad10000
+    m_ExpandedIDs: 0000000032d1000034d1000036d1000038d100003ad100003cd100003ed1000040d1000042d1000044d1000046d1000048d100004ad100004cd100004ed1000050d1000052d1000054d1000056d1000058d100005ad100005cd100005ed1000060d1000062d1000064d1000066d1000068d100006ad100006cd100006ed1000070d1000072d1000074d1000076d1000078d100007ad100007cd100007ed1000080d1000082d1000084d1000086d1000088d100008ad100008cd100008ed1000090d10000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2482,8 +2482,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Asset Store Uploader\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1514
-    y: 19
+    x: 1513
+    y: 73
     width: 406
     height: 926
   m_SerializedDataModeController:
