@@ -55,7 +55,8 @@ namespace Myrmecoman
             if (instance == null)
             {
                 instance = this;
-                ReloadTerrains();
+                if (!SaveSystemInstancer.FileExists())
+                    ReloadTerrains();
                 loadedTerrainData = LoadTerrains();
             }
             else
@@ -447,6 +448,17 @@ namespace Myrmecoman
             {
                 return (InstancerData)new BinaryFormatter().Deserialize(stream);
             }
+        }
+
+
+        public static bool FileExists()
+        {
+            if (!Directory.Exists(Application.dataPath + "/Resources/"))
+                return false;
+            TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
+            if (dataFile == null)
+                return false;
+            return true;
         }
     }
 }
