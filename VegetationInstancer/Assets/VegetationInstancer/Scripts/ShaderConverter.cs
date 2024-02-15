@@ -9,8 +9,9 @@ namespace Myrmecoman
     public class ShaderConverter : MonoBehaviour
     {
 #if UNITY_EDITOR
-        [Header("The path to the shader. To obtain the shader path, right click on it and click \"Copy Path\"")]
+        [Tooltip("The path to the shader. To obtain the shader path, right click on it and click \"Copy Path\"")]
         public string path;
+        [Tooltip("Click here to start converting")]
         public bool convert = false;
 
 

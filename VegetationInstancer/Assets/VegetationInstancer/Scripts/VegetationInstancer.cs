@@ -69,9 +69,9 @@ namespace Myrmecoman
         public int viewDistance = 50;
         [Tooltip("Distance at which LODs start")]
         public int LODViewDistance = 30;
-        [Tooltip("Number of plants in a chunk length. 5 means 5*5 plants per chunk")]
+        [Tooltip("Number of plants in a chunk length. 5 means 5x5 plants per chunk")]
         [Range(1, 300)]
-        public int plantDistanceInt = 5;
+        public int plantDensity = 5;
         [Tooltip("Display shadows for LOD0 objects ?")]
         public ShadowCastingMode LOD0ShadowCastingMode = ShadowCastingMode.On;
         [Tooltip("Display shadows for LOD1 objects ?")]
@@ -163,7 +163,7 @@ namespace Myrmecoman
                 textureIndexes = newTextureIndexes;
             }
 
-            instancesPerChunk = plantDistanceInt * plantDistanceInt;
+            instancesPerChunk = plantDensity * plantDensity;
         }
 
 
@@ -267,9 +267,9 @@ namespace Myrmecoman
             positionsComputeShader.SetFloat("objectRadius", plantDiameter);
 
             positionsComputeShader.SetFloat("randomSeed", seed);
-            positionsComputeShader.SetFloat("D1Size", plantDistanceInt);
+            positionsComputeShader.SetFloat("D1Size", plantDensity);
             positionsComputeShader.SetFloat("chunkSize", chunkSize);
-            positionsComputeShader.SetFloat("plantDistance", plantDistanceInt);
+            positionsComputeShader.SetFloat("plantDistance", plantDensity);
             positionsComputeShader.SetFloat("maxSlope", maxSlope);
             positionsComputeShader.SetFloat("sizeChange", randomSize);
             positionsComputeShader.SetFloat("displacement", maxDisplacement);
