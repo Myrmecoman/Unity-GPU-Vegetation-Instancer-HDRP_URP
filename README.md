@@ -35,67 +35,15 @@ Import in an existing project with megaworld (only works for megaworld 2.3 and l
 
 ## How to use
 
-Put the VegetationManager.cs and any kind of the provided instancers on an empty GameObject and fill in the parameters.   
-The VegetationManager is in charge of generating the data needed by the instancers. It was made to support multiple terrains chunks, which allows this project to work on truly large projects, and can also be used in addition with MegaWorld (a unity asset store asset) for example. Only one VegetationManager must exist.   
-
-### Manager parameters
-
-![Manager](./ReadmeImages/manager.png?raw=true "Manager")
-
-- Terrains : the terrain chunks on which you want to instantiate. They must have the same parameters (texture resolution, heightmap resolution, etc...) and be disposed in a square.   
-- Reload Terrain Data : when checking this box, the manager regenerates the data necessary to instantiate on the terrains.   
-- Cam : the player camera. This camera is used to perform instantiation and frustrum culling.   
-
-### Instancer parameters
-
-![Instancer](./ReadmeImages/instancer.png?raw=true "Instancer")
-
-- Run In Editor : runs the instancer in editor.   
-- Display Chunks : displays the chunks of vegetation used to instanciate objects. Red is for LOD0, yellow for LOD1. Only 2 levels of LODs are supported for now.   
-- Display Terrains : displays the terrains mesh structure. Usefull to verify that the generated data fits correctly to your terrains.   
-- Max Displacement : the maximum offset distance from the spawn point of your object. If this is 0, all objects will be instantiated in a perfect grid without any random offsets.   
-- Y Position Offset : specify an additionnal height value to your objects. For example Unity's quad object is centered at the middle, so for it to be at the terrain level you have to set the offset to 0.5.   
-- Size Bias : multiply the size of your objects by the specified value. If it is 2 all objects will have twice their original size.   
-- Random Size : applies random size changes from 1/size to size.   
-- Max Slope : specifies the maximum slope until which objects are allowed to spawn.   
-- Falloff : allows objects on mapped on a texture to overextend on another texture.   
-- Max Height : the maximum allowed height to spawn the objects.   
-- Min Height : the minimum allowed height to spawn the ojbects.   
-- Plant : the object to spawn.   
-- LOD Plant : the LOD of the object.   
-- Textures Indexes : the texture on which the object is allowed to live. -1 spawns the object everywhere. Only one texture is supported for now.   
-- Centered Mesh : specify whether the object mesh is centered at its base or at its center.   
-- Chunk Size : the chunks size. The bigger the faster they are to compute, but they should not be too big else they can start to be visible.   
-- View Distance : the maximum distance to instanciate objects.   
-- LOD View Distance : the distance after which we spawn LOD objects.   
-- Plant Distance Int : the number of objects along the dimension of a chunk. 50 means there are 50*50 = 2500 objects in each chunk.   
-
-This project is provided with an example scene, feel free to play around with it to understand fully how to use this asset.   
-
-## Code explanation
-
-VegetationInstancer generates the chunks positions every frame using burst (takes about 0.2ms). It then exclusively uses the GPU for grass positioning.   
-In addition to this, GPU objects culling is performed to exclusively render what needs to be rendered.   
-TerrainHeight.cs and TerrainsTextures.cs are used to sample the terrain efficiently using Native unmanaged containers which are then passed to a compute shader to sample the positions of vegetation on the GPU.   
-
-All the code is commented and was made to be easily readable.   
-
-## How to get GPU indirect instancing capable shaders ?
-
-The shader used in this asset was generated using the provided ShaderConverter script. Simply provide the path of your shader in the editor and tick the "convert" checkbox. The generated shader will be placed in the VegetationInstancer/Shaders folder, and can be used directly for GPU indirect instancing by the asset.    
-
-Another way to get such special shaders is to use Megaworld. This Unity asset allows to procedurally generate and render large landscapes using GPU instancing and data streaming, along with texture mapping your terrains. It currently does not support small objects instancing such as grass, which is the reason of this project.   
-Any shader can be converted by MegaWorld to a GPU indirect instancing capable shader, which means you can even give it your customs ShaderGraph shaders and provide the generated shader to the Vegetation Instancer.   
-
-To generate the shader using megaworld, go to the Renderer Stack tab and drop your object prefab in. The generated shader will be located in the folder Resources/VladislavTsurikov/RendererStack/Shaders. Be careful to also have the include .cginc file required by the shader for this method to work.
+The documentation PDF file is included in the project.    
+Additionaly you can see it on this page : https://docs.google.com/document/d/1z-tnjB9TRnWCRJ2o-AAlGLZsNXd_zbJwtEbFgVhQEaw/edit?usp=sharing    
 
 ## In the futur
 
 Support large objects with colliders ?   
 
-
 ## Show appreciation
 
 If you are satisfied with this asset and would like to support me, I have setup a patreon at this link : https://patreon.com/UnityGPUProceduralVegetationInstancer?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link
 
-Thanks !
+Thanks !    
