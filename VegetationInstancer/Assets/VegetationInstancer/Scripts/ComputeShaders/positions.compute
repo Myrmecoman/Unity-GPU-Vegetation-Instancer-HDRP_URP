@@ -338,7 +338,10 @@ ItemInstanceData MakeItemInstanceData(float4x4 mat, uint isValid)
 {
     ItemInstanceData instanceItem;
     instanceItem.mat = mat;
-    instanceItem.matInverse = inverse(mat);
+    if (isValid) // don't calcul the inverse if it's already invalid
+        instanceItem.matInverse = inverse(mat);
+    else
+        instanceItem.matInverse = mat;
     instanceItem.infos = float4(isValid, 0, 0, 0);
     return instanceItem;
 }
