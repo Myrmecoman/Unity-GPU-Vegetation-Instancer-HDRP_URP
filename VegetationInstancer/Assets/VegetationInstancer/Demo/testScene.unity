@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7338.0986, g: 4955.432, b: 4139.4224, a: 1}
+  m_IndirectSpecularColor: {r: 7338.4033, g: 4955.3755, b: 4138.36, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,6 +187,7 @@ MonoBehaviour:
   textureIndexes: 00000000
   centeredMesh: 1
   chunkSize: 20
+  cullDistance: 0
   viewDistance: 300
   LODViewDistance: 30
   plantDensity: 50
@@ -1067,6 +1068,7 @@ MonoBehaviour:
   textureIndexes: 00000000
   centeredMesh: 0
   chunkSize: 20
+  cullDistance: 0
   viewDistance: 300
   LODViewDistance: 30
   plantDensity: 5
@@ -2021,6 +2023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224f238543db0cd448fcbb3d42e25e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: testScene
   terrains:
   - {fileID: 1417499759}
   - {fileID: 389796874}

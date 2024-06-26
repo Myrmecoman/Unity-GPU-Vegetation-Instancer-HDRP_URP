@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Myrmecoman
 {
@@ -13,6 +14,7 @@ namespace Myrmecoman
     public class VegetationManager : MonoBehaviour
     {
         public static VegetationManager instance;
+        [HideInInspector] public string sceneName; // used to name the file
 
         [Header("Terrain")]
         [Tooltip("The terrains on which vegetation needs to be instanciated")]
@@ -55,6 +57,7 @@ namespace Myrmecoman
             if (instance == null)
             {
                 instance = this;
+                sceneName = SceneManager.GetActiveScene().name;
                 if (!SaveSystemInstancer.FileExists())
                     ReloadTerrains();
                 loadedTerrainData = LoadTerrains();
@@ -431,7 +434,7 @@ namespace Myrmecoman
             if (!Directory.Exists(Application.dataPath + "/Resources/"))
                 Directory.CreateDirectory(Application.dataPath + "/Resources/");
 
-            string path = Application.dataPath + "/Resources/vegetationInstancerSave.bytes";
+            string path = Application.dataPath + "/Resources/" + VegetationManager.instance.sceneName + "_VI.bytes";
             using (Stream stream = File.Open(path, FileMode.Create))
             {
                 new BinaryFormatter().Serialize(stream, new InstancerData());
@@ -441,7 +444,7 @@ namespace Myrmecoman
 
         public static InstancerData LoadData()
         {
-            TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
+            TextAsset dataFile = Resources.Load(VegetationManager.instance.sceneName + "_VI") as TextAsset;
             if (dataFile == null)
                 return null;
             using (var stream = new MemoryStream(dataFile.bytes))
@@ -455,7 +458,7 @@ namespace Myrmecoman
         {
             if (!Directory.Exists(Application.dataPath + "/Resources/"))
                 return false;
-            TextAsset dataFile = Resources.Load("vegetationInstancerSave") as TextAsset;
+            TextAsset dataFile = Resources.Load(VegetationManager.instance.sceneName + "_VI") as TextAsset;
             if (dataFile == null)
                 return false;
             return true;
