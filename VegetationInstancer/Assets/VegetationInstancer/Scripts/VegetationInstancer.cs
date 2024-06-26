@@ -34,7 +34,7 @@ namespace Myrmecoman
         [Range(0, 5)]
         public float yPositionOffset = 0f;
         [Tooltip("Changes the medium size of the objects")]
-        [Range(0.01f, 5f)]
+        [Range(0.01f, 20f)]
         public float sizeBias = 1f;
         [Tooltip("Random size difference, 5 means it can go from size/5 to size*5")]
         [Range(1, 5)]
@@ -65,6 +65,8 @@ namespace Myrmecoman
         public bool centeredMesh = false;
         [Tooltip("The X and Z size of the chunks. Y is determined as chunkSize * 4")]
         public int chunkSize = 20;
+        [Tooltip("Minimum display range. Objects closer than this value will not be displayed.")]
+        public int cullDistance = 0;
         [Tooltip("Maximum display range")]
         public int viewDistance = 50;
         [Tooltip("Distance at which LODs start")]
@@ -275,6 +277,7 @@ namespace Myrmecoman
             positionsComputeShader.SetFloat("displacement", maxDisplacement);
             positionsComputeShader.SetFloat("falloff", falloff);
             positionsComputeShader.SetFloat("sizeBias", sizeBias);
+            positionsComputeShader.SetFloat("CullRangeSq", cullDistance * cullDistance);
             positionsComputeShader.SetFloat("ViewRangeSq", (viewDistance - chunkSize / 2) * (viewDistance - chunkSize / 2));
             positionsComputeShader.SetInt("centeredMesh", centeredMesh ? 1 : 0);
             positionsComputeShader.SetFloat("positionOffset", yPositionOffset);

@@ -168,6 +168,7 @@ int textureIndex2;
 int textureIndex3;
 int textureIndex4;
 float4 camPos;
+float CullRangeSq;
 float ViewRangeSq;
 float positionOffset;
 float maxHeight;
@@ -285,7 +286,7 @@ float4x4 GeneratePosRotScale(uint index, uint chunkIndex, out uint isValid)
     
     // check if too far
     float dist = (pos.x - camPos.x) * (pos.x - camPos.x) + (pos.y - camPos.y) * (pos.y - camPos.y) + (pos.z - camPos.z) * (pos.z - camPos.z);
-    if (dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
+    if (dist < CullRangeSq || dist > ViewRangeSq || (dist > 2500 && GenerateRandom(xDisplacement * zDisplacement, 0, 1) < dist / ViewRangeSq))
         return float4x4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     
     // check if in frustrum
